@@ -1,53 +1,46 @@
 .app-header {
-    background-color: $clr4;
-    padding: 10px;
+    background-color: $clr1;
+    padding: 0.585em 0;
+    color: $clr6;
 
+    h1 {
+        margin: 0;
+        font-size: 1.35rem;
+    }
 
-    .user-info {
-        // background-color: $clr2;
-        // padding: 2px 8px;
-        padding-left: 100px;
-        color: $clr1;
+    a {
+        color: $clr6;
+        font-size: 0.9rem;
 
-        .score {
-            background-color: $clr2;
-            color: $clr6;
-            padding: 8px;
-            margin: 10px;
-            border-radius: 50%;
-        }
-
-        img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            object-fit: cover;
+        &:hover {
+            text-decoration: none;
         }
     }
 
-    .user-info .btn-link {
+    nav>*:not(:last-of-type) {
+        margin-inline-end: 1.5em;
+    }
+}
+
+.homepage-header {
+    background-color: $clr6;
+    padding: 0.78em 0;
+
+    h1 {
+        margin: 0;
+        font-size: 2rem;
+    }
+
+    a {
         color: $clr2;
+        font-size: 1.1rem;
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 
-    nav {
-        font-size: .8em;
-        background-color: $clr5;
-        padding: 5px;
-
+    nav>*:not(:last-of-type) {
+        margin-inline-end: 1.5em;
     }
-
-    nav a:first-child {
-        margin-right: 30px;
-    }
-
-    nav a:not(:first-child) {
-        border-top: 1px solid $clr1;
-        padding: 0 5px;
-        margin: 10px;
-    }
-
-    nav .active {
-        color: $clr1;
-    }
-
 }
