@@ -1,6 +1,6 @@
 @font-face {
     font-family: fa;
-    src: url(../fonts/font-awsome/fa-solid-900.ttf)
+    src: url(../../fonts/font-awsome/fa-solid-900.ttf)
 }
 
 .fa::before {
@@ -8,6 +8,21 @@
 }
 
 // @font-face {
-    // font-family: montserrat;
-    // src: url(../../fonts/Montserrat/Montserrat-Regular.ttf);
+//     font-family: Helvetica Neue;
+//     src: url(../../fonts/Helvetica-Neue/Helvetica-neue-medium.ttf)
 // }
+
+@font-face {
+    font-family: noto-sans;
+    src: url(../../fonts/Noto-Sans/NotoSans-Light.ttf)
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(../../fonts/Roboto/Roboto-Regular.ttf)
+}
+
+@font-face {
+    font-family: ubuntu;
+    src: url(../../fonts/Ubuntu/Ubuntu-Light.ttf)
+}
