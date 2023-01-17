@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { UserLittlePreview } from "../cmps/user-little-preview"
 import { cardService } from "../services/card.service.local"
 
 
@@ -43,11 +44,22 @@ export function CardDetails() {
                 <p>in group: Testing</p>
             </div>
         </div>
-        <div>
-
+        <div className="flex">
+            <div className="main-content">
+                <section className="card-details">
+                    {card.members.length &&
+                        <> 
+                        <h3>members</h3>
+                        <UserLittlePreview users={card.members} /> </>}
+                    <h3>{card.label.length && card.label}</h3>
+                    <h3>{card.checklist}</h3>
+                </section>
+            </div>
+            <div className="side-bar">
+                label
+                members
+            </div>
         </div>
-        <h3>{card.members}</h3>
-        <h3>{card.label}</h3>
-        <h3>{card.checklist}</h3>
+
     </section>
 }
