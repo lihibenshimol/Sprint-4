@@ -15,6 +15,7 @@ export function BoardIndex() {
 
 
     async function loadBoard() {
+        console.log('looping');
         try {
             const board = await boardService.getById(boardId)
             setBoard(board)
@@ -62,7 +63,7 @@ export function BoardIndex() {
     return (
         <>
             <div className="group-container">
-                {board && <GroupList groups={board.groups} />}
+                {board && <GroupList groups={board.groups} board={board}/>}
             </div>
             {/* {board &&<pre>{JSON.stringify(board.groups, null, 2)}</pre>} */}
         </>

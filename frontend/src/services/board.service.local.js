@@ -12,6 +12,8 @@ export const boardService = {
     getById,
     save,
     remove,
+    getEmptyCard,
+    addNewCard
     // getEmptyBoard,
     // addBoardMsg
 }
@@ -51,6 +53,10 @@ async function save(board) {
     return savedBoard
 }
 
+function getEmptyCard() {
+    return { title: '' }
+}
+
 // async function addBoardMsg(boardId, txt) {
 //     // Later, this is all done by the backend
 //     const board = await getById(boardId)
@@ -74,6 +80,20 @@ async function save(board) {
 //     }
 // }
 
+async function addNewCard(group, card, board) {
+    try {
+        card.id = utilService.makeId()
+        group.cards.push(card)
+        save(board)
+        // const collection = await dbService.getCollection('toy')
+        // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
+        return card
+    } catch (err) {
+        console.log('failed');
+        // logger.error(`cannot add toy msg ${toyId}`, err)
+        throw err
+    }
+}
 
 function _createDemoBoards() {
     let boards = utilService.loadFromStorage(STORAGE_KEY)

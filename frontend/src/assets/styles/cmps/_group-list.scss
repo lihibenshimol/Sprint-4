@@ -1,5 +1,6 @@
 .group-container {
     position: relative;
+    margin-top: 60px;
     flex-basis: 1;
     height: 85vh;
 
@@ -22,9 +23,9 @@
     
         .group-header {
             bottom: 0;
-            cursor: pointer;
+            // cursor: pointer;
             left: 15px;
-            position: absolute;
+            // position: absolute;
             right: 0;
             top: 0;
         }
