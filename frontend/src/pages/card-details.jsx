@@ -37,7 +37,7 @@ export function CardDetails() {
     return <section className="card">
         <button onClick={lgg} className="close-btn">X</button>
         <div className="card-header">
-            <span className="icon">V</span>
+            <span className="icon fa card-icon"></span>
             <h2 className="title">{card.title}</h2>
             <div>
                 <p>in group: Testing</p>

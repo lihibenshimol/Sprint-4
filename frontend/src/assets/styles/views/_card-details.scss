@@ -30,16 +30,21 @@
     z-index: 1;
 
     .icon {
-      left: 16px;
+      left: 24px;
       position: absolute;
-      top: 20px;
+      top: 20px; 
+      height: 32px;
+      line-height: 32px;
+      width: 32px;
+      font-size: 18px
     }
 
     h2 {
       padding: 12px 0 0;
       margin-right: 4px;
       font-size: 20px;
-      line-height: 24px
+      line-height: 24px;
+      font-weight: 600;
     }
 
     p {
