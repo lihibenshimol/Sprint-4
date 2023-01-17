@@ -1,9 +1,14 @@
 import { CardPreview } from "./card-preview";
 
-export function GroupPreview() {
+export function GroupPreview({ group }) {
     return (
-        <section>
-            <CardPreview />
-        </section>
+        <>
+        <div className="group-content">
+            <div className="group-header" contentEditable>
+            {group.title}
+            </div>
+            <CardPreview cards={group.cards} />
+        </div>
+        </>
     )
 }

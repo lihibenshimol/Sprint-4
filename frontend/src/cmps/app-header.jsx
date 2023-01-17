@@ -1,6 +1,4 @@
 import { Link, NavLink } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import routes from '../routes'
 
 export function AppHeader() {
     // const user = useSelector(storeState => storeState.userModule.user)
@@ -29,29 +27,14 @@ export function AppHeader() {
     //         showErrorMsg('Cannot logout')
     //     }
     // }
-    return <h1>Header</h1>
-    // return (
-    //     <header className="app-header">
-    //         <nav>
-    //             {routes.map(route => <NavLink key={route.path} to={route.path}>{route.label}</NavLink>)}
+    return (
+        <header className="app-header full flex space-between align-center main-container">
 
-    //             {user &&
-    //                 <span className="user-info">
-    //                     <Link to={`user/${user._id}`}>
-    //                         {user.imgUrl && <img src={user.imgUrl} />}
-    //                         {user.fullname}
-    //                     </Link>
-    //                     <span className="score">{user.score?.toLocaleString()}</span>
-    //                     <button onClick={onLogout}>Logout</button>
-    //                 </span>
-    //             }
-    //             {!user &&
-    //                 <section className="user-info">
-    //                     <LoginSignup onLogin={onLogin} onSignup={onSignup} />
-    //                 </section>
-    //             }
-    //         </nav>
-    //         <h1>My App</h1>
-    //     </header>
-    // )
+            <nav className='flex align-center'>
+                <Link to="/"><h1>Trello</h1></Link>
+                <NavLink to="/board">Boards</NavLink>
+            </nav>
+
+        </header>
+    )
 }

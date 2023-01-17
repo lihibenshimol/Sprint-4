@@ -1,27 +1,29 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 import { GroupList } from '../cmps/group-list.jsx'
 import { boardService } from '../services/board.service.local.js'
 
 export function BoardIndex() {
-    const [boards, setBoards] = useState()
+    const { boardId } = useParams()
+    const [board, setBoard] = useState()
     // const groups = useSelector(storeState => storeState.groupModule.groups)
 
     useEffect(() => {
-        loadBoards()
+        loadBoard()
     }, [])
 
 
-    async function loadBoards() {
+    async function loadBoard() {
         try {
-            const boards = await boardService.query()
-            setBoards(boards)
+            const board = await boardService.getById(boardId)
+            setBoard(board)
         } catch (err) {
-            console.log('cannot load')
+            console.log('Cannot load board')
             throw err
         }
     }
+
     // async function onRemoveGroup(groupId) {
     //     try {
     //         await removeGroup(groupId)
@@ -57,11 +59,12 @@ export function BoardIndex() {
     //     console.log(`TODO Adding msg to group`)
     // }
 
-    return (<>
-        <pre>
-            {JSON.stringify(boards, null, 2)}
-        </pre>
-    </>
-        // <GroupList />
+    return (
+        <>
+            <div className="group-container">
+                {board && <GroupList groups={board.groups} />}
+            </div>
+            {/* {board &&<pre>{JSON.stringify(board.groups, null, 2)}</pre>} */}
+        </>
     )
 }

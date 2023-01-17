@@ -1,5 +1,13 @@
-export function CardPreview(){
+
+
+export function CardPreview({cards}){
     return (
-        <section></section>
+        
+        <section className="cards-list">
+            {cards.map(card => <div className="card" key={card.id}>
+                {card.title}
+            </div>)}
+
+        </section>
     )
 }
