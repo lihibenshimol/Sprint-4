@@ -3,10 +3,10 @@ import { createStore, combineReducers } from 'redux'
 import { systemReducer } from './system.reducer'
 
 const rootReducer = combineReducers({
-    carModule: carReducer,
-    userModule: userReducer,
+    // carModule: carReducer,
+    // userModule: userReducer,
     systemModule: systemReducer,
-    reviewModule: reviewReducer,
+    // reviewModule: reviewReducer,
 })
 
 

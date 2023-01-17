@@ -1,59 +1,50 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { loadCars, addCar, updateCar, removeCar, addToCart } from '../store/car.actions.js'
 
-import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { carService } from '../services/board.service.js'
 import { GroupList } from '../cmps/group-list.jsx'
 
 export function BoardIndex() {
 
-    const cars = useSelector(storeState => storeState.carModule.cars)
+    // const groups = useSelector(storeState => storeState.groupModule.groups)
 
-    useEffect(() => {
-        loadCars()
-    }, [])
+    // useEffect(() => {
+    //     loadGroups()
+    // }, [])
 
-    async function onRemoveCar(carId) {
-        try {
-            await removeCar(carId)
-            showSuccessMsg('Car removed')
-        } catch (err) {
-            showErrorMsg('Cannot remove car')
-        }
-    }
+    // async function onRemoveGroup(groupId) {
+    //     try {
+    //         await removeGroup(groupId)
+    //         showSuccessMsg('Group removed')
+    //     } catch (err) {
+    //         showErrorMsg('Cannot remove group')
+    //     }
+    // }
 
-    async function onAddCar() {
-        const car = carService.getEmptyCar()
-        car.vendor = prompt('Vendor?')
-        try {
-            const savedCar = await addCar(car)
-            showSuccessMsg(`Car added (id: ${savedCar._id})`)
-        } catch (err) {
-            showErrorMsg('Cannot add car')
-        }
-    }
+    // async function onAddGroup() {
+    //     const group = groupService.getEmptyGroup()
+    //     group.vendor = prompt('Vendor?')
+    //     try {
+    //         const savedGroup = await addGroup(group)
+    //         showSuccessMsg(`Group added (id: ${savedGroup._id})`)
+    //     } catch (err) {
+    //         showErrorMsg('Cannot add group')
+    //     }
+    // }
 
-    async function onUpdateCar(car) {
-        const price = +prompt('New price?')
-        const carToSave = { ...car, price }
-        try {
-            const savedCar = await updateCar(carToSave)
-            showSuccessMsg(`Car updated, new price: ${savedCar.price}`)
-        } catch (err) {
-            showErrorMsg('Cannot update car')
-        }
-    }
+    // async function onUpdateGroup(group) {
+    //     const price = +prompt('New price?')
+    //     const groupToSave = { ...group, price }
+    //     try {
+    //         const savedGroup = await updateGroup(groupToSave)
+    //         showSuccessMsg(`Group updated, new price: ${savedGroup.price}`)
+    //     } catch (err) {
+    //         showErrorMsg('Cannot update group')
+    //     }
+    // }
 
-    function onAddToCart(car) {
-        console.log(`Adding ${car.vendor} to Cart`)
-        addToCart(car)
-        showSuccessMsg('Added to Cart')
-    }
-
-    function onAddCarMsg(car) {
-        console.log(`TODO Adding msg to car`)
-    }
+    // function onAddGroupMsg(group) {
+    //     console.log(`TODO Adding msg to group`)
+    // }
 
     return (
         <GroupList />
