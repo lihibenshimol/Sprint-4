@@ -2,6 +2,8 @@ import { BoardList } from "../cmps/board-list";
 
 export function Boards() {
     return (
-        <BoardList />
+        <section className="boards">
+            <BoardList />
+        </section>
     )
 }
