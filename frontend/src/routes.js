@@ -1,6 +1,6 @@
 import { HomePage } from './pages/home-page.jsx'
 import { AboutUs } from './pages/about-us.jsx'
-import { BoardIndex } from './pages/board-index.jsx'
+import { Boards } from './pages/boards.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -11,7 +11,7 @@ const routes = [
     },
     {
         path: 'board',
-        component: <BoardIndex />,
+        component: <Boards />,
         label: 'Boards'
     },
     {
