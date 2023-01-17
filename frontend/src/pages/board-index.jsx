@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { loadCars, addCar, updateCar, removeCar, addToCart } from '../store/car.actions.js'
 
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { carService } from '../services/car.service.js'
+import { carService } from '../services/board.service.js'
 import { GroupList } from '../cmps/group-list.jsx'
 
 export function BoardIndex() {

@@ -15,11 +15,17 @@
 // Views
 @import "views/about-us";
 @import "views/home-page";
-@import "views/car-app";
+@import "views/board-index";
+@import "views/card-details";
 
 // Components
 @import "cmps/app-header";
 @import "cmps/app-footer";
+@import "cmps/board-list";
+@import "cmps/card-preview";
+@import "cmps/group-list";
+@import "cmps/group-preview";
+
 
 
 
