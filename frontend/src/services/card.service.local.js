@@ -54,47 +54,45 @@ async function save(card) {
 function _createDemoBoards() {
     let cards = utilService.loadFromStorage(STORAGE_KEY)
     if (!cards || !cards.length) {
-        cards =
-            [
+        cards = [{
+            _id: 'c103',
+            title: 'Test groups',
+            label: ['funny'],
+            members: ['Aviad', 'Shay', 'Lihi'],
+            checklists: [
                 {
-                    id: 'c103',
-                    title: 'Test groups',
-                    label: [],
-                    members: [],
-                    checklists: [
+                    id: 'YEhmF',
+                    title: 'Checklist',
+                    todos: [
                         {
-                            id: 'YEhmF',
-                            title: 'Checklist',
-                            todos: [
-                                {
-                                    id: '212jX',
-                                    title: 'To Do 1',
-                                    isDone: false
-                                }
-                            ]
+                            id: '212jX',
+                            title: 'To Do 1',
+                            isDone: false
                         }
-                    ],
-                },
+                    ]
+                }
+            ],
+        },
+        {
+            _id: 'c102',
+            title: 'Test groups number 2',
+            label: ['funny'],
+            members: ['Lihi', 'Shay'],
+            checklists: [
                 {
-                    id: 'c102',
-                    title: 'Test groups number 2',
-                    label: [],
-                    members: [],
-                    checklists: [
+                    id: 'f11f123',
+                    title: 'Todos',
+                    todos: [
                         {
-                            id: 'f11f123',
-                            title: 'Todos',
-                            todos: [
-                                {
-                                    id: '213jX',
-                                    title: 'To Do 2',
-                                    isDone: false
-                                }
-                            ]
+                            id: '213jX',
+                            title: 'To Do 2',
+                            isDone: false
                         }
-                    ],
-                },
-            ]
+                    ]
+                }
+            ],
+        },
+        ]
 
         utilService.saveToStorage(STORAGE_KEY, cards)
     }

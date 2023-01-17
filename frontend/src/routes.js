@@ -22,7 +22,7 @@ const routes = [
         label: 'About us'
     },
     {
-        path: 'card/:id',
+        path: 'card/:cardId',
         component: <CardDetails />,
         label: 'Card'
     }
