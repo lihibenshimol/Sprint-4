@@ -1,0 +1,52 @@
+.board-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(145px, 206.25px));
+
+    > * {
+        border-radius: 0.2em;
+        background-color: $clr8;
+        min-width: 136px;
+        max-width: 194px;
+        padding: rem(8px);
+        min-height: 96px;
+        cursor: pointer;
+        position: relative;
+
+        h3 {
+            margin: 0;
+            font-size: 1.15rem;
+            text-transform: capitalize;
+            color: $clr6;
+            position: relative;
+            z-index: 1;
+        }
+
+        &:hover::before {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .add-board {
+        background-color: $clr8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $clr9;
+        font-size: 1rem;
+
+        &:hover::before {
+            display: none;
+        }
+
+        &:hover {
+            background-color: #091e4214;
+        }
+    }
+}
