@@ -1,5 +1,5 @@
 
-export function UserLittlePreview({ users }) {
+export function UserAvatarPreview({ users }) {
     console.log('user from little preview: ', users)
 
     return <article className="members-container">

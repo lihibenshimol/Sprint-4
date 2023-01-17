@@ -1,7 +1,7 @@
 .members-container {
     display: flex;
     flex-wrap: wrap;
-    
+    max-width: fit-content;
     .group & {
         margin: 0 -2px 0 0;
     }

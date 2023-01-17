@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { UserLittlePreview } from "../cmps/user-little-preview"
+import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 import { cardService } from "../services/card.service.local"
 
 
@@ -50,7 +50,7 @@ export function CardDetails() {
                     {card.members.length &&
                         <> 
                         <h3>members</h3>
-                        <UserLittlePreview users={card.members} /> </>}
+                        <UserAvatarPreview users={card.members} /> </>}
                     <h3>{card.label.length && card.label}</h3>
                     <h3>{card.checklist}</h3>
                 </section>
