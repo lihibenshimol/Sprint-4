@@ -1,8 +1,13 @@
 @font-face {
-    // font-family: caveat;
-    // src: url(../../fonts/Caveat/Caveat-Regular.ttf);
+    font-family: fa;
+    src: url(../../fonts/font-awsome/fa-solid-900.ttf);
 }
-@font-face {
+
+.fa::before {
+    font-family: fa;
+}
+
+// @font-face {
     // font-family: montserrat;
     // src: url(../../fonts/Montserrat/Montserrat-Regular.ttf);
-}
+// }
