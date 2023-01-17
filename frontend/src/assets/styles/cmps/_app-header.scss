@@ -1,6 +1,6 @@
 .app-header {
     background-color: $clr1;
-    padding: 0.585em 0;
+    padding: 0.8em 0;
     color: $clr6;
 
     h1 {
@@ -10,7 +10,8 @@
 
     a {
         color: $clr6;
-        font-size: 0.9rem;
+        font-size: rem(14px);
+        line-height: 1;
 
         &:hover {
             text-decoration: none;
@@ -24,7 +25,7 @@
 
 .homepage-header {
     background-color: $clr6;
-    padding: 0.78em 0;
+    padding: 1em 0;
 
     h1 {
         margin: 0;
