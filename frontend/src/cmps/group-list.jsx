@@ -31,6 +31,7 @@ export function GroupList() {
         try {
             await boardService.addNewItem(board, groupToEdit, 'groups')
             updateBoard(board)
+            groupToEdit.title = ''
         } catch (err) {
             console.log('Cannot add group = ', err)
             throw err
@@ -41,6 +42,7 @@ export function GroupList() {
         try {
             await boardService.addNewItem(group, card, 'cards')
             updateBoard(board)
+            card.title = ''
         } catch (err) {
             throw err
         }

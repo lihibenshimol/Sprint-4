@@ -64,7 +64,7 @@ export function GroupPreview({ group, addCard, removeGroup }) {
 
                 </div>
 
-                {group.cards && <CardList group={group} addCard={addCard} cards={group.cards} />}
+                {group.cards && <CardList cards={group.cards} />}
 
                 <form onSubmit={onSaveCard}>
                     <input type="text"

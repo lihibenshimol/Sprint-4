@@ -1,19 +1,20 @@
 .board-index {
     height: 100%;
+    padding-bottom: 10px;
     /* width */
     ::-webkit-scrollbar {
-        // width: 80px;
-        height: 15px;
+        height: rem(12px);
+        overflow-y: hidden;
+        padding: 20px;
+       
     }
-
-    /* Track */
+    
     ::-webkit-scrollbar-track {
         background: none;
     }
-
-    /* Handle */
+    
     ::-webkit-scrollbar-thumb {
-        background: #555;
-        border-radius: 0.5em;
+        background: rgba(85, 85, 85, 0.545);
+        border-radius: 0.4em;
     }
 }
