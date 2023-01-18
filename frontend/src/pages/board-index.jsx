@@ -10,6 +10,7 @@ import { setCurrBoard } from '../store/board.actions.js'
 export function BoardIndex() {
     const { boardId } = useParams()
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+    // const bgColor = board.style.backgroundColor
 
     // const groups = useSelector(storeState => storeState.groupModule.groups)
 
@@ -67,10 +68,13 @@ export function BoardIndex() {
     if (!board) return <h1>loading</h1>
     return (
         <>
+        <section className='board-index' style={{backgroundColor: board.style.backgroundColor}}>
+
         <BoardHeader />
             <div className="group-container">
                  <GroupList groups={board.groups}/>
             </div>
+        </section>
         </>
     )
 }
