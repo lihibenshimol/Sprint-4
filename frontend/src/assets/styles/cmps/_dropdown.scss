@@ -8,5 +8,7 @@
     left: 0;
     top: 2.65rem;
     z-index: 2;
-    cursor: initial;
+    cursor: default;
+    user-select: text;
+    text-align: initial;
 }

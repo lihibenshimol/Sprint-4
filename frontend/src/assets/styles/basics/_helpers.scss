@@ -46,3 +46,9 @@
 .portrait-ratio {
     @include aspect-ratio(9, 16);
 }
+
+.clean-list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
