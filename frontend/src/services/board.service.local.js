@@ -80,11 +80,10 @@ function getEmptyCard() {
 //     }
 // }
 
-async function addNewCard(group, card, board) {
+async function addNewCard(group, card) {
     try {
         card.id = utilService.makeId()
         group.cards.push(card)
-        save(board)
         // const collection = await dbService.getCollection('toy')
         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
         return card

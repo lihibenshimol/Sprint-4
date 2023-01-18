@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { BoardHeader } from '../cmps/board-header.jsx'
 
 import { GroupList } from '../cmps/group-list.jsx'
 import { boardService } from '../services/board.service.local.js'
+import { setCurrBoard } from '../store/board.actions.js'
 
 export function BoardIndex() {
     const { boardId } = useParams()
-    const [board, setBoard] = useState()
+    const board = useSelector(storeState => storeState.boardModule.currBoard)
+
     // const groups = useSelector(storeState => storeState.groupModule.groups)
 
     useEffect(() => {
@@ -15,10 +19,10 @@ export function BoardIndex() {
 
 
     async function loadBoard() {
-        console.log('looping');
         try {
             const board = await boardService.getById(boardId)
-            setBoard(board)
+            console.log('board loading = ', board)
+            setCurrBoard(board)
         } catch (err) {
             console.log('Cannot load board')
             throw err
@@ -60,10 +64,12 @@ export function BoardIndex() {
     //     console.log(`TODO Adding msg to group`)
     // }
 
+    if (!board) return <h1>loading</h1>
     return (
         <>
+        <BoardHeader />
             <div className="group-container">
-                {board && <GroupList groups={board.groups} board={board}/>}
+                 <GroupList groups={board.groups}/>
             </div>
             {/* {board &&<pre>{JSON.stringify(board.groups, null, 2)}</pre>} */}
         </>

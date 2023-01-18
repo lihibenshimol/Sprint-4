@@ -1,0 +1,29 @@
+
+
+.board-header {
+    padding: 8px 4px 4px 12px;
+    position: relative;
+    min-height: 44px;
+    max-height: 44px;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 400px;
+    height: 36px;
+    padding-left: 32px;
+    width: 100vw;
+
+
+    .board-header-btn-text {
+        cursor: pointer;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-size: 18px;
+        font-weight: 700;
+        // line-height: 32px;
+        padding: 0 12px;
+        text-size-adjust: 100%;
+        margin-block-end: 12px;
+        float: left;
+    }
+}
