@@ -48,7 +48,7 @@ export function CardDetails() {
             <div className="main-content">
                 <section className="card-details">
                     {card.members.length &&
-                        <div className="members">
+                        <div className="details">
                             <h5>Members</h5>
                             <article className="members-container">
                                 <UserAvatarPreview users={card.members} />
@@ -57,22 +57,49 @@ export function CardDetails() {
                         </div>}
 
                     {card.label.length &&
-                        <div className="members">
+                        <div className="details">
                             <h5>labels</h5>
                             <article className="labels-container">
-                                {card.label.map(label => {
-                                    return <div className="label fa add" key={label}>
+                                <div className="label" >
+                                    <span className=" circle-label"></span>
+                                    label
+                                </div>
+                                <div className="label">
+                                    <span className=" circle-label"></span>
+                                </div>
+                                <div className="label">
+                                    <span className=" circle-label"></span>
+                                </div>
+                                <div className="label">
+                                    <span className=" circle-label"></span>
+                                </div>
+                                <div className="label">
+                                    <span className=" circle-label"></span>
+                                    Import!
+                                </div>
+                                {/* {card.label.mp(label => {
+                                    return <div className="label" key={label}>
+                                        <span className=" circle-label"></span>
                                         {label}
                                     </div>
-                                })}
+                                })} */}
                             </article>
                         </div>}
                     <h3>{card.checklist && card.checklist}</h3>
                 </section>
             </div >
             <div className="side-bar">
-                label
-                members
+                <section className="card-utils">
+                    <h5>Add to card</h5>
+                    <button className="label-btn">
+                        <span className="fa user-group tag-label"></span>
+                        <span>member</span>
+                    </button>
+                    <button className="label-btn">
+                        <span className="fa tag tag-label"></span>
+                        <span>label</span>
+                    </button>
+                </section>
             </div>
         </div >
 
