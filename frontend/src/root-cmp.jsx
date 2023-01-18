@@ -19,7 +19,7 @@ export function RootCmp() {
         <>
          <Provider store={store}>
             {location.pathname === '/' ? <HomepageHeader /> : <AppHeader />}
-            <main className='full main-container'>
+            <main className='full'>
                 <Routes>
                     {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
                     <Route element={<BoardIndex />} path='/board/:boardId' />
