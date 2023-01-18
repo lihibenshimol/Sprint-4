@@ -1,10 +1,23 @@
+import { useEffect } from 'react'
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { DropDown } from './dropdown'
 
 export function AppHeader() {
 
     const [dropdown, setDropDown] = useState({})
+
+    useEffect(() => {
+        document.body.onclick = ({target}) => {
+            // weird solution which i don't like to be fairy honest
+            if(target.parentElement.classList.contains('main-nav') || target.parentElement.parentElement.classList.contains('main-nav')) return
+            setDropDown({})
+        }
+
+        return () => {
+            document.body.onclick = () => { }
+        }
+    }, [])
     // const user = useSelector(storeState => storeState.userModule.user)
 
     // async function onLogin(credentials) {
@@ -42,7 +55,7 @@ export function AppHeader() {
     return (
         <header className="app-header full flex space-between align-center main-container">
 
-            <nav className='flex align-center'>
+            <nav className='flex align-center main-nav'>
                 <Link to="/board"><h1>Trello</h1></Link>
                 <button className={dropdown.type === 'boards' ? 'active' : ''} onClick={() => onShowDropdown('boards')}>Boards<i className="fa down-arrow"></i>
                     {dropdown.type === 'boards' && <DropDown type={dropdown.type} />}
