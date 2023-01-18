@@ -15,7 +15,7 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
         try {
             const savedBoard = await addBoard(board)
             setAddingBoard(false)
-            setDropDown({})
+            if(setDropDown) setDropDown({})
             navigate(`/board/${savedBoard._id}`)
         } catch (err) {
             console.log('Had issues creating a board; ', err)
