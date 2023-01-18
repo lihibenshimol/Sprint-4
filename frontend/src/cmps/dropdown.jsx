@@ -7,5 +7,21 @@ export function DropDown({ type }) {
             return (
                 <DropdownBoards />
             )
+        case 'recent':
+            return (
+                <DropdownBoards />
+            )
+        case 'starred':
+            return (
+                <DropdownBoards />
+            )
+        case 'templates':
+            return (
+                <DropdownBoards />
+            )
+        case 'create':
+            return (
+                <DropdownBoards />
+            )
     }
 }
