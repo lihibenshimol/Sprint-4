@@ -1,3 +1,10 @@
 .fa.card-icon::before {
     content: "\f0ce";
 }
+
+.fa.add::before {
+    content: "\2b"
+}
+.fa.down-arrow::before {
+    content: "\f078";
+}
