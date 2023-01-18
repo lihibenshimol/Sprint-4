@@ -8,7 +8,6 @@
     position: relative;
     min-height: 44px;
 
-    // .board-header .left input {}
 
     .left {
         display: flex;
@@ -25,21 +24,36 @@
             border-radius: 3px;
             background-color: rgba(255, 255, 255, 0.2);
             padding: 17px;
-
         }
 
+        .board-header-icon{
+            width: 20px;
+         }
+
         .board-header-text {
+            // display: block;
             font-size: 20px;
             font-weight: 700;
             line-height: 32px;
             padding: 0 12px;
-            width: 100px;
+            color: whitesmoke;
+            margin: 0 4px 4px 0;
+        }
+
+        .board-header-text.edit-mode {
+            display: none;
         }
 
         .board-name-input {
-            background-color: var(--ds-background-input, #fff);
-            border: 0;
             display: none;
+        }
+
+        .board-name-input.edit-mode{
+            background-color: rgba(245, 245, 245, 0.553);
+            border: 0;
+            display: block;
+            width: 100px;
+            border-radius: 3px;
             font-size: 18px;
             font-weight: 700;
             height: 32px;
@@ -68,12 +82,25 @@
         }
     }
 
+    .right {
+        display: flex;
+        margin: 0 4px 5px auto;
+        padding-inline-start: 5px;
+        transition: margin .12s ease-in;
 
-    .board-header-text {
-        color: whitesmoke;
-        margin: 0 4px 4px 0;
-        width: 85px;
+        button {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            border-radius: 3px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 6px 12px;
+
+        }
+
+        .board-header-icon{
+            width: 20px;
+         }
     }
-
 
 }

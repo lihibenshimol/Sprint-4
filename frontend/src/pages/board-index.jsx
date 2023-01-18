@@ -68,7 +68,7 @@ export function BoardIndex() {
     if (!board) return <h1>loading</h1>
     return (
         <>
-        <section className='board-index' style={{backgroundColor: board.style.backgroundColor}}>
+        <section className='board-index' style={(board.style.backgroundColor) ? {backgroundColor: board.style.backgroundColor} : '#023047'}>
 
         <BoardHeader />
             <div className="group-container">
