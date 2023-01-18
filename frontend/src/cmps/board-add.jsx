@@ -21,7 +21,7 @@ export function BoardAdd() {
 
     return (
         <article onClick={() => setAddingBoard(prevAddingBoard => !prevAddingBoard)} className="board-add"><span>Create new board</span>
-            {isAddingBoard && <DropDown type={'create'} />}
+            {isAddingBoard && <DropDown setAddingBoard={setAddingBoard} type={'create'} />}
         </article>
     )
 }

@@ -8,7 +8,9 @@
         font-size: 1.35rem;
     }
 
-    a, button {
+    a,
+    button,
+    .create-btn {
         color: $clr6;
         font-size: rem(14px);
         line-height: 1;
@@ -19,6 +21,7 @@
         background: none;
         margin: 0;
         position: relative;
+        cursor: pointer;
 
         &:not(:first-child):hover {
             background-color: darken($clr1, 6%);
@@ -26,10 +29,10 @@
 
         .fa.down-arrow {
             margin-inline-start: 0.6em;
-            
+
             &::before {
                 font-style: normal;
-                font-size: rem(12px);
+                font-size: rem(14px);
             }
         }
 
@@ -46,7 +49,7 @@
         padding-left: 0;
     }
 
-    nav>*:not(:last-of-type) {
+    nav>* {
         margin-inline-end: 0.8em;
     }
 
