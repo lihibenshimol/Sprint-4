@@ -14,7 +14,9 @@ export const boardService = {
     remove,
     getEmptyCard,
     addNewCard,
-    getEmptyBoard
+    getEmptyBoard,
+    addNewItem,
+    getEmptyGroup
     // addBoardMsg
 }
 window.cs = boardService
@@ -57,6 +59,10 @@ function getEmptyCard() {
     return { title: '' }
 }
 
+function getEmptyGroup() {
+    return  { title: '' }
+}
+
 // async function addBoardMsg(boardId, txt) {
 //     // Later, this is all done by the backend
 //     const board = await getById(boardId)
@@ -80,13 +86,39 @@ function getEmptyCard() {
 //     }
 // }
 
-async function addNewCard(group, card) {
+async function addNewCard(group, card, arr) {
     try {
         card.id = utilService.makeId()
         group.cards.push(card)
         // const collection = await dbService.getCollection('toy')
         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
         return card
+    } catch (err) {
+        console.log('failed');
+        // logger.error(`cannot add toy msg ${toyId}`, err)
+        throw err
+    }
+}
+
+async function addNewItem(parent, entityToAdd, entityType) {
+console.log('entityToAdd = ', entityToAdd)
+    
+    try {
+        entityToAdd.id = utilService.makeId()
+        parent[entityType].push(entityToAdd)
+
+        // switch (entityType) {
+        //     case 'card':
+        //         parent.cards.push(entityToAdd)
+        //         return
+        //     case 'group':
+        //         parent.groups.push(entityToAdd)
+        //         return
+        // }
+       
+        // const collection = await dbService.getCollection('toy')
+        // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
+        return entityToAdd
     } catch (err) {
         console.log('failed');
         // logger.error(`cannot add toy msg ${toyId}`, err)

@@ -75,10 +75,8 @@ export async function addBoard(board) {
 }
 
 export async function updateBoard(board) {
-    console.log('board from actions= ', board)
     try {
         const savedBoard = await boardService.save(board);
-        // console.log('Updated Board:', savedBoard);
         store.dispatch(getActionUpdateBoard(savedBoard))
         return savedBoard
     } catch (err) {
@@ -86,22 +84,3 @@ export async function updateBoard(board) {
         throw err;
     }
 }
-
-// export function updateBoard(board) {
-//     return boardService.save(board)
-//         .then(savedBoard => {
-//             console.log('Updated Board:', savedBoard)
-//             store.dispatch(getActionUpdateBoard(savedBoard))
-//             return savedBoard
-//         })
-//         .catch(err => {
-//             console.log('Cannot save board', err)
-//             throw err
-//         })
-// }
-
-
-
-// Demo for Optimistic Mutation
-// (IOW - Assuming the server call will work, so updating the UI first)
-

@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux"
+import { useState } from "react"
 import filterIcon from '../assets/img/filter.svg'
 import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
-import { useState } from "react"
 import { updateBoard } from "../store/board.actions";
 
 
