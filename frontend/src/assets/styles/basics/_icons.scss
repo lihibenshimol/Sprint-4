@@ -5,6 +5,19 @@
 .fa.add::before {
     content: "\2b"
 }
+
 .fa.down-arrow::before {
     content: "\f078";
+}
+
+.fa.circle::before {
+    content: "\f111";
+}
+
+.fa.tag::before {
+    content: "\f02b";
+}
+
+.fa.user-group::before {
+    content: "\f500";
 }
