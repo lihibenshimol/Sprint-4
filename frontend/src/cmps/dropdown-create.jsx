@@ -3,7 +3,7 @@ import { boardService } from "../services/board.service.local"
 import groupsImg from '../assets/img/groups-img.svg'
 import { useNavigate } from 'react-router-dom'
 
-export function DropdownCreate() {
+export function DropdownCreate({ setAddingBoard }) {
 
     const [board, setBoard] = useState(boardService.getEmptyBoard())
     const navigate = useNavigate()
@@ -26,7 +26,8 @@ export function DropdownCreate() {
 
     return (
         <section onClick={(ev) => ev.stopPropagation()} className="dropdown dropdown-create">
-            <h3>Create board</h3>
+
+            <h3>Create board<i onClick={() => setAddingBoard(prevAddingBoard => !prevAddingBoard)} className='fa xmark'></i></h3>
 
             <section className="img-container">
                 <div className="img-background">

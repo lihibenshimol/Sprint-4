@@ -25,3 +25,8 @@
 .fa.star-icon::before {
     content: "\f005";
 }
+
+.fa.xmark::before {
+    content: "\f00d";
+    font-style: normal;
+}
