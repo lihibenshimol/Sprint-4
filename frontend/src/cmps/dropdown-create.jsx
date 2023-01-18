@@ -35,8 +35,9 @@ export function DropdownCreate() {
             </section>
 
             <form onSubmit={onAddBoard}>
-                <input name='title' value={board.title} onChange={handleChange} type="text" />
-                <button>Create</button>
+                <label htmlFor="title">Board title <span className='required'>*</span></label>
+                <input className={board.title ? '' : 'input-required'} autoFocus name='title' value={board.title} onChange={handleChange} type="text" />
+                <button className={board.title ? '' : 'btn-disabled'}>Create</button>
             </form>
         </section>
     )
