@@ -44,22 +44,37 @@ export function CardDetails() {
                 <p>in group: Testing</p>
             </div>
         </div>
-        <div className="flex">
+        <div className="card-content flex">
             <div className="main-content">
                 <section className="card-details">
                     {card.members.length &&
-                        <> 
-                        <h3>members</h3>
-                        <UserAvatarPreview users={card.members} /> </>}
-                    <h3>{card.label.length && card.label}</h3>
-                    <h3>{card.checklist}</h3>
+                        <div className="members">
+                            <h5>Members</h5>
+                            <article className="members-container">
+                                <UserAvatarPreview users={card.members} />
+                                <div className="member add-btn fa add"></div>
+                            </article>
+                        </div>}
+
+                    {card.label.length &&
+                        <div className="members">
+                            <h5>labels</h5>
+                            <article className="labels-container">
+                                {card.label.map(label => {
+                                    return <div className="label fa add" key={label}>
+                                        {label}
+                                    </div>
+                                })}
+                            </article>
+                        </div>}
+                    <h3>{card.checklist && card.checklist}</h3>
                 </section>
-            </div>
+            </div >
             <div className="side-bar">
                 label
                 members
             </div>
-        </div>
+        </div >
 
-    </section>
+    </section >
 }
