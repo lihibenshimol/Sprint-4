@@ -12,7 +12,7 @@ export function BoardHeader() {
     if (!board) return <h1>Loading...</h1>
     return (
         <>
-            <div className="board-header">
+            <div className="board-header full">
 
                 <section className="left">
                     <h1 onClick={() => setEditMode(!editMode)} className={"board-header-text" + (editMode ? 'editMode' : '')}>Sprint 4</h1>
