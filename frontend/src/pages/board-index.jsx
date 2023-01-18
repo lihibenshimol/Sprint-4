@@ -15,7 +15,7 @@ export function BoardIndex() {
 
     useEffect(() => {
         loadBoard()
-    }, [])
+    }, [boardId])
 
 
     async function loadBoard() {
@@ -71,7 +71,6 @@ export function BoardIndex() {
             <div className="group-container">
                  <GroupList groups={board.groups}/>
             </div>
-            {/* {board &&<pre>{JSON.stringify(board.groups, null, 2)}</pre>} */}
         </>
     )
 }
