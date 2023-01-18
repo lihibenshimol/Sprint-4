@@ -1,6 +1,23 @@
-import { Link, NavLink } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { DropDown } from './dropdown'
 
 export function AppHeader() {
+
+    const [dropdown, setDropDown] = useState({})
+
+    useEffect(() => {
+        document.body.onclick = ({target}) => {
+            // weird solution which i don't like to be fairy honest
+            if(target.parentElement.classList.contains('main-nav') || target.parentElement.parentElement.classList.contains('main-nav') && !target.classList.contains('brand')) return
+            setDropDown({})
+        }
+
+        return () => {
+            document.body.onclick = () => { }
+        }
+    }, [])
     // const user = useSelector(storeState => storeState.userModule.user)
 
     // async function onLogin(credentials) {
@@ -27,16 +44,36 @@ export function AppHeader() {
     //         showErrorMsg('Cannot logout')
     //     }
     // }
+
+    function onShowDropdown(type) {
+        if (dropdown.type === type) setDropDown({})
+        else setDropDown({ type })
+    }
+
     return (
         <header className="app-header full flex space-between align-center main-container">
 
-            <nav className='flex align-center'>
-                <Link to="/board"><h1>Trello</h1></Link>
-                <button>Boards<i class="fa down-arrow"></i></button>
-                <button>Recent<i class="fa down-arrow"></i></button>
-                <button>Starred<i class="fa down-arrow"></i></button>
-                <button>Templates<i class="fa down-arrow"></i></button>
-                <button className='create-btn'>Create</button>
+            <nav className='flex align-center main-nav'>
+                <Link to="/board"><h1 className='brand'>Trello</h1></Link>
+                <button className={dropdown.type === 'boards' ? 'active' : ''} onClick={() => onShowDropdown('boards')}>Boards<i className="fa down-arrow"></i>
+                    {dropdown.type === 'boards' && <DropDown type={dropdown.type} />}
+                </button>
+
+                <button onClick={() => onShowDropdown('recent')} className={dropdown.type === 'recent' ? 'active' : ''}>Recent<i className="fa down-arrow"></i>
+                    {dropdown.type === 'recent' && <DropDown type={dropdown.type} />}
+                </button>
+
+                <button onClick={() => onShowDropdown('starred')} className={dropdown.type === 'starred' ? 'active' : ''}>Starred<i className="fa down-arrow"></i>
+                    {dropdown.type === 'starred' && <DropDown type={dropdown.type} />}
+                </button>
+
+                <button onClick={() => onShowDropdown('templates')} className={dropdown.type === 'templates' ? 'active' : ''}>Templates<i className="fa down-arrow"></i>
+                    {dropdown.type === 'templates' && <DropDown type={dropdown.type} />}
+                </button>
+
+                <button onClick={() => onShowDropdown('create-list')} className={dropdown.type === 'create-list' ? 'create-btn active' : 'create-btn'}>Create
+                    {dropdown.type === 'create-list' && <DropDown type={dropdown.type} />}
+                </button>
             </nav>
 
         </header>

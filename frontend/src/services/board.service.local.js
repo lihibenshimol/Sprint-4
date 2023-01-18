@@ -80,11 +80,10 @@ function getEmptyCard() {
 //     }
 // }
 
-async function addNewCard(group, card, board) {
+async function addNewCard(group, card) {
     try {
         card.id = utilService.makeId()
         group.cards.push(card)
-        save(board)
         // const collection = await dbService.getCollection('toy')
         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
         return card
@@ -131,7 +130,7 @@ function _createDemoBoards() {
             //     "fullname": "Abi Abambi",
             //     "imgUrl": "http://some-img"
             // },
-            // "style": {},
+            "style": { backgroundColor: '#1d3557' },
             "labels": [
                 {
                     "id": "l101",
@@ -144,13 +143,23 @@ function _createDemoBoards() {
                     "color": "#61bd33"
                 }
             ],
-            // "members": [
-            //     {
-            //         "_id": "u101",
-            //         "fullname": "Tal Tarablus",
-            //         "imgUrl": "https://www.google.com"
-            //     }
-            // ],
+            "members": [
+                {
+                    "_id": "u101",
+                    "fullname": "Lihi Ben Shimol",
+                    "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512"
+                },
+                {
+                    "_id": "u102",
+                    "fullname": "Aviad Malikan",
+                    "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512"
+                },
+                {
+                    "_id": "u103",
+                    "fullname": "Shay Skitel",
+                    "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512"
+                },
+            ],
             "groups": [
                 {
                     "id": "g101",

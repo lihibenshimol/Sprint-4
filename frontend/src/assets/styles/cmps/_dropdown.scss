@@ -1,0 +1,15 @@
+.dropdown {
+    background-color: $clr6;
+    min-width: 304px;
+    min-height: fit-content;
+    border-radius: 0.2em;
+    box-shadow: 0 0 2px 0px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    left: 0;
+    top: 2.65rem;
+    z-index: 2;
+    cursor: default;
+    user-select: text;
+    text-align: initial;
+    padding: 1em 0.5em;
+}
