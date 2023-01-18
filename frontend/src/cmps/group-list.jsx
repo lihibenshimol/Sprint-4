@@ -13,6 +13,18 @@ export function GroupList() {
     const [editMode, setEditMode] = useState(false)
     const [groupToEdit, setGroupToEdit] = useState(boardService.getEmptyGroup())
 
+
+    async function removeGroup(groupId) {
+        try {
+            const idx = board.groups.findIndex(g => g.id === groupId)
+            board.groups.splice(idx, 1)
+            updateBoard(board)
+
+        } catch (err) {
+            console.log('Cannot remove group = ', err)
+        }
+    }
+
     async function addGroup(ev) {
         ev.preventDefault()
         setEditMode(!editMode)
@@ -43,7 +55,7 @@ export function GroupList() {
         <>
             <div className="group-list" >
                 {board.groups.map(group => <section className="group-wrapper flex" key={group.id}>
-                    <GroupPreview group={group} addCard={addCard} />
+                    <GroupPreview group={group} addCard={addCard} removeGroup={removeGroup}/>
                 </section>)}
 
                 <section className="add-group-section">
