@@ -72,7 +72,7 @@ export function AppHeader() {
                 </button>
 
                 <button onClick={() => onShowDropdown('create-list')} className={dropdown.type === 'create-list' ? 'create-btn active' : 'create-btn'}>Create
-                    {dropdown.type === 'create-list' && <DropDown type={dropdown.type} />}
+                    {dropdown.type === 'create-list' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </button>
             </nav>
 

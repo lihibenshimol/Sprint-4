@@ -1,0 +1,17 @@
+.dropdown-create-list {
+    padding: 1em 0em;
+
+    article {
+        color: $clr12;
+        padding: 0.5em;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $clr8;
+        }
+
+        h4 {
+            color: $clr9;
+        }
+    }
+}

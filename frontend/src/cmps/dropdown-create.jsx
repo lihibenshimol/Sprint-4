@@ -4,7 +4,7 @@ import groupsImg from '../assets/img/groups-img.svg'
 import { useNavigate } from 'react-router-dom'
 import { addBoard } from '../store/board.actions'
 
-export function DropdownCreate({ setAddingBoard }) {
+export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
 
     const [board, setBoard] = useState(boardService.getEmptyBoard())
     const navigate = useNavigate()
@@ -14,6 +14,8 @@ export function DropdownCreate({ setAddingBoard }) {
         if (!board.title) return
         try {
             const savedBoard = await addBoard(board)
+            setAddingBoard(false)
+            setDropDown({})
             navigate(`/board/${savedBoard._id}`)
         } catch (err) {
             console.log('Had issues creating a board; ', err)
@@ -26,9 +28,11 @@ export function DropdownCreate({ setAddingBoard }) {
     }
 
     return (
-        <section onClick={(ev) => ev.stopPropagation()} className="dropdown dropdown-create">
+        <section onClick={(ev) => ev.stopPropagation()} className={fromNavbar ? 'dropdown dropdown-create-navbar' : 'dropdown dropdown-create'}>
 
-            <h3>Create board<i onClick={() => setAddingBoard(prevAddingBoard => !prevAddingBoard)} className='fa xmark'></i></h3>
+            <h3>Create board
+                {!fromNavbar && <i onClick={() => setAddingBoard(prevAddingBoard => !prevAddingBoard)} className='fa xmark'></i>}
+            </h3>
 
             <section className="img-container">
                 <div className="img-background">
