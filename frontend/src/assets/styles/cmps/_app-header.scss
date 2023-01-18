@@ -17,6 +17,7 @@
         border-radius: 0.25em;
         transition: background-color 0.1s ease-in-out;
         margin: 0;
+        position: relative;
 
         &:not(:first-child):hover {
             background-color: darken($clr1, 6%);
@@ -28,6 +29,14 @@
             &::before {
                 font-style: normal;
                 font-size: rem(12px);
+            }
+        }
+
+        &.active {
+            background-color: $clr10;
+
+            &:hover {
+                background-color: $clr10;
             }
         }
     }
