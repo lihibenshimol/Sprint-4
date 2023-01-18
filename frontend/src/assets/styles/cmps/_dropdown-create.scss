@@ -1,5 +1,8 @@
 .dropdown-create {
     padding: 1em;
+    left: 105%;
+    top: 0;
+
     .img-container {
         display: flex;
         justify-content: center;
@@ -21,10 +24,28 @@
     }
 
     input {
+        outline: none;
         width: 100%;
+        font-size: rem(14px);
+        padding: 0.55em 0.85em;
+        color: $clr9;
+        border: none;
+        border-radius: 0.2em;
+        border: rem(2px) solid rgba(9, 30, 66, 0.12);
 
         &:hover {
             background-color: $clr8;
         }
+
+        &:focus {
+            border: rem(2px) solid $clr1;
+        }
+    }
+
+    button {
+        background-color: rgba(9, 30, 66, 0.08);
+        color: $clr9;
+        width: 100%;
+        border-radius: 0.2em;
     }
 }
