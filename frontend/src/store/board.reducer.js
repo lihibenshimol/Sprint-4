@@ -1,54 +1,45 @@
-export const SET_CARS = 'SET_CARS'
-export const REMOVE_CAR = 'REMOVE_CAR'
-export const ADD_CAR = 'ADD_CAR'
-export const UPDATE_CAR = 'UPDATE_CAR'
-export const ADD_TO_CART = 'ADD_TO_CART'
-export const CLEAR_CART = 'CLEAR_CART'
-export const UNDO_REMOVE_CAR = 'UNDO_REMOVE_CAR'
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+export const SET_BOARD = 'SET_BOARD'
+export const SET_BOARDS = 'SET_BOARDS'
+export const REMOVE_BOARD = 'REMOVE_BOARD'
+export const ADD_BOARD = 'ADD_BOARD'
+export const UPDATE_BOARD = 'UPDATE_BOARD'
+export const UNDO_REMOVE_BOARD = 'UNDO_REMOVE_BOARD'
 
 const initialState = {
-    cars: [],
-    cart: [],
-    lastRemovedCar: null
+    boards: [],
+    currBoard: null,
+    lastRemovedBoard: null
 }
 
-export function carReducer(state = initialState, action) {
-    var newState = state
-    var cars
-    var cart
+export function boardReducer(state = initialState, action) {
+    let boards
+    let lastRemovedBoard
+
     switch (action.type) {
-        case SET_CARS:
-            newState = { ...state, cars: action.cars }
-            break
-        case REMOVE_CAR:
-            const lastRemovedCar = state.cars.find(car => car._id === action.carId)
-            cars = state.cars.filter(car => car._id !== action.carId)
-            newState = { ...state, cars, lastRemovedCar }
-            break
-        case ADD_CAR:
-            newState = { ...state, cars: [...state.cars, action.car] }
-            break
-        case UPDATE_CAR:
-            cars = state.cars.map(car => (car._id === action.car._id) ? action.car : car)
-            newState = { ...state, cars }
-            break
-        case ADD_TO_CART:
-            newState = { ...state, cart: [...state.cart, action.car] }
-            break
-        case REMOVE_FROM_CART:
-            cart = state.cart.filter(car => car._id !== action.carId)
-            newState = { ...state, cart }
-            break
-        case CLEAR_CART:
-            newState = { ...state, cart: [] }
-            break
-        case UNDO_REMOVE_CAR:
-            if (state.lastRemovedCar) {
-                newState = { ...state, cars: [...state.cars, state.lastRemovedCar], lastRemovedCar: null }
-            }
-            break
+        case SET_BOARD:
+            return { ...state, currBoard: action.board }
+
+        case SET_BOARDS:
+            return { ...state, boards: action.boards }
+
+        case REMOVE_BOARD:
+            lastRemovedBoard = state.boards.find(b => b._id === action.boardId)
+            boards = state.boards.filter(b => b._id !== action.boardId)
+            return { ...state, boards, lastRemovedBoard }
+
+        case UNDO_REMOVE_BOARD:
+            ({ lastRemovedBoard } = state)
+            boards = [lastRemovedBoard, ...state.boards]
+            return { ...state, boards, lastRemovedBoard: null }
+
+        case ADD_BOARD:
+            boards = [...state.boards, action.board]
+            return { ...state, boards }
+
+        case UPDATE_BOARD:
+            return {...state, currBoard: action.board}
+
         default:
+            return state
     }
-    return newState
 }

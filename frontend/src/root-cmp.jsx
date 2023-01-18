@@ -8,6 +8,8 @@ import { AppHeader } from './cmps/app-header'
 import { AppFooter } from './cmps/app-footer'
 import { BoardIndex } from './pages/board-index'
 import { HomepageHeader } from './cmps/homepage-header'
+import { Provider } from 'react-redux'
+import { store } from './store/store'
 
 export function RootCmp() {
 
@@ -15,6 +17,7 @@ export function RootCmp() {
 
     return (
         <>
+         <Provider store={store}>
             {location.pathname === '/' ? <HomepageHeader /> : <AppHeader />}
             <main className='full main-container'>
                 <Routes>
@@ -23,6 +26,7 @@ export function RootCmp() {
                 </Routes>
             </main>
             {location.pathname === '/' && <AppFooter />}
+         </Provider>
         </>
     )
 }
