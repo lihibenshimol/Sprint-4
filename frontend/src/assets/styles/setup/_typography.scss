@@ -7,6 +7,15 @@
     font-family: fa;
 }
 
+@font-face {
+    font-family: fa-regular;
+    src: url(../../fonts/font-awsome/fa-regular-400.ttf)
+}
+
+.fa-regular::before {
+    font-family: fa-regular;
+}
+
 // @font-face {
 //     font-family: Helvetica Neue;
 //     src: url(../../fonts/Helvetica-Neue/Helvetica-neue-medium.ttf)

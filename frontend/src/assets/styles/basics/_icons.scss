@@ -4,5 +4,7 @@
 
 .fa.add::before {
     content: "\2b"
-
+}
+.fa.down-arrow::before {
+    content: "\f078";
 }

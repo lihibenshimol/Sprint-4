@@ -31,8 +31,12 @@ export function AppHeader() {
         <header className="app-header full flex space-between align-center main-container">
 
             <nav className='flex align-center'>
-                <Link to="/"><h1>Trello</h1></Link>
-                <NavLink to="/board">Boards</NavLink>
+                <Link to="/board"><h1>Trello</h1></Link>
+                <button>Boards<i class="fa down-arrow"></i></button>
+                <button>Recent<i class="fa down-arrow"></i></button>
+                <button>Starred<i class="fa down-arrow"></i></button>
+                <button>Templates<i class="fa down-arrow"></i></button>
+                <button className='create-btn'>Create</button>
             </nav>
 
         </header>

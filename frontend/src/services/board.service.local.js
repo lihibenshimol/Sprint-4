@@ -13,8 +13,8 @@ export const boardService = {
     save,
     remove,
     getEmptyCard,
-    addNewCard
-    // getEmptyBoard,
+    addNewCard,
+    getEmptyBoard
     // addBoardMsg
 }
 window.cs = boardService
@@ -92,6 +92,30 @@ async function addNewCard(group, card, board) {
         console.log('failed');
         // logger.error(`cannot add toy msg ${toyId}`, err)
         throw err
+    }
+}
+
+function getEmptyBoard() {
+    return {
+        title: "",
+        isStarred: false,
+        // "createdBy": {
+        //     "_id": "u101",
+        //     "fullname": "Abi Abambi",
+        //     "imgUrl": "http://some-img"
+        // },
+        // "style": {},
+        labels: [
+        ],
+        // "members": [
+        //     {
+        //         "_id": "u101",
+        //         "fullname": "Tal Tarablus",
+        //         "imgUrl": "https://www.google.com"
+        //     }
+        // ],
+        groups: [
+        ]
     }
 }
 
