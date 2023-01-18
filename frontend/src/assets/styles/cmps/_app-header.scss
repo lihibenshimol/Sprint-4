@@ -1,6 +1,6 @@
 .app-header {
     background-color: $clr1;
-    padding: 0.8em 0;
+    padding: 0.101em 0;
     color: $clr6;
 
     h1 {
@@ -12,14 +12,27 @@
         color: $clr6;
         font-size: rem(14px);
         line-height: 1;
+        padding: 0.7em 0.72em;
+        text-decoration: none;
+        border-radius: 0.25em;
 
-        &:hover {
-            text-decoration: none;
+        &:not(:first-of-type):hover {
+            background-color: darken($clr1, 6%);
+        }
+
+        .fa.down-arrow {
+            margin-inline-start: 0.7em;
+            
+            &::before {
+                font-style: normal;
+                font-size: rem(12px);
+                font-weight: 400;
+            }
         }
     }
 
     nav>*:not(:last-of-type) {
-        margin-inline-end: 1.5em;
+        margin-inline-end: 0.4em;
     }
 }
 

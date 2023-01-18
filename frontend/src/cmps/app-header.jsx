@@ -32,7 +32,7 @@ export function AppHeader() {
 
             <nav className='flex align-center'>
                 <Link to="/"><h1>Trello</h1></Link>
-                <NavLink to="/board">Boards</NavLink>
+                <NavLink to="/board">Boards<i class="fa down-arrow"></i></NavLink>
             </nav>
 
         </header>
