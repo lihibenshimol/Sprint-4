@@ -9,7 +9,8 @@ export function AppHeader() {
 
     useEffect(() => {
         document.body.onclick = ({target}) => {
-            if(target.parentElement.classList.contains('main-nav')) return
+            // weird solution which i don't like to be fairy honest
+            if(target.parentElement.classList.contains('main-nav') || target.parentElement.parentElement.classList.contains('main-nav')) return
             setDropDown({})
         }
 
