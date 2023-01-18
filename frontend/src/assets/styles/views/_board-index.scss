@@ -1,19 +1,22 @@
 .board-index {
     height: 100%;
+
     /* width */
     ::-webkit-scrollbar {
         // width: 80px;
-        height: 15px;
+        height: 20px;
     }
 
     /* Track */
     ::-webkit-scrollbar-track {
-        background: none;
+        background: red;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     /* Handle */
     ::-webkit-scrollbar-thumb {
-        background: #555;
+        background: rgba(85, 85, 85, 0.555);
         border-radius: 0.5em;
     }
 }
