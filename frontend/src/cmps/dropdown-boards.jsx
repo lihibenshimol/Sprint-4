@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { boardService } from "../services/board.service.local"
+import { loadBoards } from "../store/board.actions"
 import { BoardPreview } from "./board-preview"
 
 export function DropdownBoards() {
 
-    const [boards, setBoards] = useState([])
+    const boards = useSelector(storeState => storeState.boardModule.boards)
 
     useEffect(() => {
-        loadBoards()
+        getBoards()
     }, [])
 
-    async function loadBoards() {
+    async function getBoards() {
         try {
-            const boards = await boardService.query()
-            setBoards(boards)
+            const boards = await loadBoards()
         } catch (err) {
             console.log('Had error fetching boards; ', err)
         }

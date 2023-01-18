@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { boardService } from "../services/board.service.local"
 import groupsImg from '../assets/img/groups-img.svg'
 import { useNavigate } from 'react-router-dom'
+import { addBoard } from '../store/board.actions'
 
 export function DropdownCreate({ setAddingBoard }) {
 
@@ -12,7 +13,7 @@ export function DropdownCreate({ setAddingBoard }) {
         ev.preventDefault()
         if (!board.title) return
         try {
-            const savedBoard = await boardService.save(board)
+            const savedBoard = await addBoard(board)
             navigate(`/board/${savedBoard._id}`)
         } catch (err) {
             console.log('Had issues creating a board; ', err)

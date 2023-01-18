@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
-import { boardService } from "../services/board.service.local";
+import { useEffect } from "react";
+import { useSelector } from 'react-redux'
+import { loadBoards } from "../store/board.actions";
 import { BoardAdd } from "./board-add";
 import { BoardPreview } from "./board-preview";
 
 
 export function BoardList({ addNew = false }) {
 
-    const [boards, setBoards] = useState([])
+    const boards = useSelector(storeState => storeState.boardModule.boards)
 
     useEffect(() => {
-        loadBoards()
+        getBoards()
     }, [])
 
-    async function loadBoards() {
+    async function getBoards() {
         try {
-            const boards = await boardService.query()
-            setBoards(boards)
+            const boards = await loadBoards()
         } catch (err) {
             console.log('Had error fetching boards; ', err)
         }
