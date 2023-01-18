@@ -76,7 +76,7 @@ function _createDemoBoards() {
         {
             _id: 'c102',
             title: 'Test groups number 2',
-            label: ['funny'],
+            label: ['funny', 'important', 'suggested'],
             members: ['Lihi', 'Shay'],
             checklists: [
                 {
