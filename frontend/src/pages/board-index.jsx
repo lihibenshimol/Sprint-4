@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { BoardHeader } from '../cmps/board-header.jsx'
 
 import { GroupList } from '../cmps/group-list.jsx'
 import { boardService } from '../services/board.service.local.js'
@@ -66,6 +67,7 @@ export function BoardIndex() {
     if (!board) return <h1>loading</h1>
     return (
         <>
+        <BoardHeader />
             <div className="group-container">
                  <GroupList groups={board.groups}/>
             </div>
