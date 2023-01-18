@@ -5,4 +5,26 @@
         font-size: rem(14px);
         font-weight: 700;
     }
+
+    a {
+        padding: 0;
+    }
+
+    li {
+        height: initial;
+    }
+
+    li:not(:last-of-type) {
+        margin-block-end: 1em;
+    }
+
+    article {
+        padding: 1em 0.5em;
+        cursor: pointer;
+        border-radius: 0.2em;
+
+        &:hover {
+            background-color: rgba(9, 30, 66, 0.08);
+        }
+    }
 }

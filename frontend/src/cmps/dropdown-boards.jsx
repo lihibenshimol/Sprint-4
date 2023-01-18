@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { boardService } from "../services/board.service.local"
 import { BoardPreview } from "./board-preview"
 
@@ -25,7 +26,9 @@ export function DropdownBoards() {
                 {boards[0] &&
                     boards.map(board => (
                         <li key={board._id}>
-                            <article><h3>{board.title}</h3></article>
+                            <Link to={`/board/${board._id}`}>
+                                <article><h3>{board.title}</h3></article>
+                            </Link>
                         </li>
                     ))
                 }
