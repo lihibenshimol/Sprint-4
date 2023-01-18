@@ -1,16 +1,27 @@
 .board-list {
+    // display: flex;
+    // flex-wrap: wrap;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(145px, 206.25px));
+    grid-template-columns: 1fr 1fr;
+    gap: rem(16px);
+
+    @include for-normal-layout {
+        grid-template-columns: repeat(3, 194px);
+    }
+
+    @include for-wide-layout {
+        grid-template-columns: repeat(4, 1fr);
+    }
 
     > * {
         border-radius: 0.2em;
         background-color: $clr8;
         min-width: 136px;
-        max-width: 194px;
         padding: rem(8px);
         min-height: 96px;
         cursor: pointer;
         position: relative;
+        
 
         h3 {
             margin: 0;
@@ -20,9 +31,10 @@
             color: $clr6;
             position: relative;
             z-index: 1;
+            text-shadow: 0 0 1px black;
         }
 
-        &:hover::before {
+        &::before {
             content: '';
             display: block;
             position: absolute;
@@ -30,6 +42,10 @@
             height: 100%;
             top: 0;
             left: 0;
+            // background: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        &:hover::before {
             background-color: rgba(0, 0, 0, 0.1);
         }
     }
@@ -41,6 +57,10 @@
         align-items: center;
         color: $clr9;
         font-size: rem(14px);
+
+        &::before {
+            background: none;
+        }
 
         &:hover::before {
             display: none;

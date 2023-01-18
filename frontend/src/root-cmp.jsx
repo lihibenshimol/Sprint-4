@@ -12,7 +12,6 @@ import { HomepageHeader } from './cmps/homepage-header'
 export function RootCmp() {
 
     const location = useLocation()
-    console.log(location)
 
     return (
         <>
