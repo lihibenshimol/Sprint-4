@@ -16,6 +16,7 @@
         text-decoration: none;
         border-radius: 0.25em;
         transition: background-color 0.1s ease-in-out;
+        margin: 0;
 
         &:not(:first-child):hover {
             background-color: darken($clr1, 6%);
