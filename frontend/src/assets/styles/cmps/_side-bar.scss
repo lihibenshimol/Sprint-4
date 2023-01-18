@@ -33,6 +33,10 @@
             color: black;
             text-align: left;
 
+            .labels {
+                transform: scaleY(-1);
+            }
+
             &>.tag-label {
                 display: inline-block;
                 width: 25px;

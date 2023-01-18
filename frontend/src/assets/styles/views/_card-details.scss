@@ -161,17 +161,14 @@
 
     }
 
-    .card-description {
 
-      margin-bottom: 24px
-    }
 
 
     .description-header {
-      // align-items: center;
-      // display: flex;
+      align-items: center;
+      display: flex;
       min-height: 32px;
-      margin: 6px 0 4px 40px;
+      margin: 0px 0 4px 40px;
       padding: 8px 0;
       position: relative;
 
@@ -183,7 +180,7 @@
         line-height: 32px;
         width: 32px;
         font-size: 22px;
-        top: 4px
+        top: 9px
       }
 
       h3 {
@@ -197,6 +194,21 @@
         font-weight: 600
       }
 
+      button {
+        margin: 0;
+        background-color: #EAEBEF;
+        color: black;
+        margin-inline-start: 9px;
+        border-radius: 3px;
+        padding: 6px 12px;
+        display: inline-flex;
+        font-size: 14px;
+        font-weight: 100;
+        font-weight: 400;
+        justify-content: center;
+        line-height: 20px;
+        align-items: center;
+      }
     }
 
     p {

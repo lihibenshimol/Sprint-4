@@ -1,0 +1,48 @@
+.card .card-description {
+    margin-bottom: 24px;
+
+    form.description-editor {
+        margin-left: 40px;
+
+        &>* {
+            width: auto;
+            display: inline-block;
+        }
+
+        textarea {
+            font-family: system-ui, "Segoe UI", "roboto", "ubuntu", "Open Sans", "Helvetica Neue", sans-serif;
+            resize: none;
+            height: 108px;
+            border: 0;
+            border-radius: 2px;
+            padding-bottom: 9px;
+            width: 100%;
+            padding: 8px 12px;
+        }
+
+        textarea:focus {
+            outline: rgb(0, 119, 255) solid 2px;
+        }
+
+
+        button {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 400;
+            justify-content: center;
+            line-height: 20px;
+            padding: 6px 12px;
+            border-radius: 3px;
+        }
+
+        .cancel-btn {
+            color: black;
+            background-color: rgba(0, 121, 191, 0);
+        }
+
+        .save-btn {
+            margin-inline-end: 4px;
+            background-color: #0079bf;
+        }
+    }
+}

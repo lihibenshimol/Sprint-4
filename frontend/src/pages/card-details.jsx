@@ -5,39 +5,16 @@ import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 import { cardService } from "../services/card.service.local"
 import { BsTextLeft } from 'react-icons/bs';
 import { RxActivityLog } from 'react-icons/rx';
+import { CardDescription } from "../cmps/card/card-description"
+import { Loader } from "../cmps/loader"
 
 
 export function CardDetails() {
     const { cardId } = useParams()
     const [card, setCard] = useState(null)
-    const [isDescriptionEdit, setIsDescriptionEdit] = useState('')
+    const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const navigate = useNavigate()
-    console.log('cardId: ', cardId)
 
-    // cards = [{
-    //     _id: 'c103',
-    //     title: 'Test groups',
-    //     label: ['funny'],
-    //     members: ['Aviad', 'Shay', 'Lihi'],
-    //     describe: '',
-    //     checklists: [
-    //         {
-    //             id: 'YEhmF',
-    //             title: 'Checklist',
-    //             todos: [
-    //                 {
-    //                     id: '212jX',
-    //                     title: 'To Do 1',
-    //                     isDone: false
-    //                 }
-    //             ]
-    //         }
-    //     ]}]
-
-
-    useEffect(() => {
-        // if (card.describe) setIsDescriptionEdit(card.describe)
-    }, [])
 
     useEffect(() => {
         loadCard()
@@ -46,7 +23,6 @@ export function CardDetails() {
     async function loadCard() {
         try {
             const card = await cardService.getById(cardId)
-
             setCard(card)
         } catch (err) {
             console.log('Cant load card')
@@ -55,12 +31,22 @@ export function CardDetails() {
         }
     }
 
+    async function submitDetail(describe) {
+        console.log('describe: ', describe)
 
-    if (!card) return <div className="loader"></div>
+        console.log('***Save***')
+        try {
 
+        } catch (err) {
+            console.log('Cant edit the description ', err)
+        }
+    }
 
+    if (!card) return <Loader />
     return <div className="window full">
+
         <section className="card">
+            <Loader />
             <button className="close-btn">X</button>
             <div className="card-header">
                 <span className="icon fa card-icon"></span>
@@ -102,18 +88,22 @@ export function CardDetails() {
                         <div className="description-header">
                             <span><BsTextLeft /></span>
                             <h3>Description</h3>
+                            <button>Edit</button>
                         </div>
-                        {card.describe && <p>{card.describe}</p>}
-                        {!card.describe && <input></input>}
+                        <CardDescription card={card}
+                            submitDetail={submitDetail}
+                            isDescriptionEdit={isDescriptionEdit}
+                            setIsDescriptionEdit={setIsDescriptionEdit} />
                     </section>
 
-                    {card.checklist && (<section className="card-checklist">
-                        <div className="checklist-header">
-                            <span><BsTextLeft /></span>
-                            <h3>Description</h3>
-                        </div>
-                        {card.describe && <p>{card.describe}</p>}
-                    </section>)}
+                    {card.checklist && (
+                        <section className="card-checklist">
+                            <div className="checklist-header">
+                                <span><BsTextLeft /></span>
+                                <h3>Description</h3>
+                            </div>
+                            {card.describe && <p>{card.describe}</p>}
+                        </section>)}
 
                     <section className="card-activity">
                         <div className="activity-header">
@@ -128,3 +118,24 @@ export function CardDetails() {
         </section >
     </div>
 }
+
+
+   // cards = [{
+    //     _id: 'c103',
+    //     title: 'Test groups',
+    //     label: ['funny'],
+    //     members: ['Aviad', 'Shay', 'Lihi'],
+    //     describe: '',
+    //     checklists: [
+    //         {
+    //             id: 'YEhmF',
+    //             title: 'Checklist',
+    //             todos: [
+    //                 {
+    //                     id: '212jX',
+    //                     title: 'To Do 1',
+    //                     isDone: false
+    //                 }
+    //             ]
+    //         }
+    //     ]}]

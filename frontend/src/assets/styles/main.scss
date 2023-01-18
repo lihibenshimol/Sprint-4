@@ -11,6 +11,7 @@
 @import "basics/links";
 @import "basics/forms";
 @import "basics/icons";
+@import "basics/loader";
 
 
 // Views
@@ -19,6 +20,7 @@
 @import "views/board-index";
 @import "views/card-details";
 @import "views/boards";
+
 
 // Components
 @import "cmps/app-header";
@@ -32,7 +34,8 @@
 @import "cmps/dropdown-boards";
 @import "cmps/board-header";
 @import "cmps/dropdown-create";
-@import "cmps/_side-bar";
+@import "cmps/side-bar";
+@import "cmps/card-description";
 @import "cmps/dropdown-create-list";
 
 

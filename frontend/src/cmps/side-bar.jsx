@@ -14,7 +14,7 @@ export function SideBar() {
                 <span>members</span>
             </button>
             <button className="label-btn">
-                <span className="tag-label"><TbTag /></span>
+                <span className="tag-label labels"><TbTag /></span>
                 <span>labels</span>
             </button>
             <button className="label-btn">
@@ -26,7 +26,7 @@ export function SideBar() {
                 <span>Date</span>
             </button>
             <button className="label-btn">
-                <span className="fa tag-label"><BiWindow /></span>
+                <span className="tag-label"><BiWindow /></span>
                 <span>Cover</span>
             </button>
         </section>
