@@ -1,8 +1,13 @@
 .dropdown-create {
-    padding: 1em;
+    padding: 0 1em 1em;
+    left: 105%;
+    top: 0;
+
     .img-container {
         display: flex;
         justify-content: center;
+        margin-block-end: 1.5em;
+        right: 0;
     }
 
     .img-background {
@@ -21,10 +26,196 @@
     }
 
     input {
+        outline: none;
         width: 100%;
+        font-size: rem(14px);
+        padding: 0.55em 0.85em;
+        color: $clr9;
+        border: none;
+        border-radius: 0.2em;
+        border: rem(2px) solid rgba(9, 30, 66, 0.12);
+        margin-block-end: 1em;
 
         &:hover {
             background-color: $clr8;
         }
+
+        &:focus {
+            border: rem(2px) solid $clr1;
+        }
+
+        &.input-required {
+            border: rem(2px) solid $clr13;
+
+            &:focus {
+                border: rem(2px) solid $clr1;
+            }
+        }
+    }
+
+    button {
+        background-color: $clr1;
+        color: $clr6;
+        width: 100%;
+        border-radius: 0.2em;
+        margin: 0;
+        padding: 0.64em 1em;
+        transition: background-color 0.1s ease-in-out;
+
+        &:hover {
+            background-color: darken($clr1, 6%);
+        }
+
+        &.btn-disabled {
+            background-color: $clr8;
+            color: lighten($clr2, 65%);
+            font-weight: 600;
+            cursor: not-allowed;
+        }
+    }
+
+    h3 {
+        color: $clr12;
+        font-weight: normal;
+        letter-spacing: rem(0.5px);
+        font-size: rem(14px);
+        text-align: center;
+        padding: 1em;
+        margin-block-end: 0.5em;
+        border-bottom: rem(1px) solid rgba(9, 30, 66, 0.12);
+        position: relative;
+        text-shadow: none;
+    }
+
+    .xmark {
+        position: absolute;
+        right: 0;
+        font-size: rem(14px);
+        color: inherit;
+        cursor: pointer;
+
+        &:hover {
+            color: darken($clr12, 25%);
+        }
+    }
+
+    label {
+        margin: 0;
+        color: $clr12;
+        font-size: rem(14px);
+        font-weight: 500;
+        letter-spacing: rem(-0.2px);
+    }
+}
+
+.dropdown-create-navbar {
+    padding: 0 1em 1em;
+
+    .img-container {
+        display: flex;
+        justify-content: center;
+        margin-block-end: 1.5em;
+        right: 0;
+    }
+
+    .img-background {
+        width: 200px;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $clr1;
+        border-radius: 0.2em;
+
+        img {
+            width: 186px;
+            height: 103px;
+        }
+    }
+
+    input {
+        outline: none;
+        width: 100%;
+        font-size: rem(14px);
+        padding: 0.55em 0.85em;
+        color: $clr9;
+        border: none;
+        border-radius: 0.2em;
+        border: rem(2px) solid rgba(9, 30, 66, 0.12);
+        margin-block-end: 1em;
+
+        &:hover {
+            background-color: $clr8;
+        }
+
+        &:focus {
+            border: rem(2px) solid $clr1;
+        }
+
+        &.input-required {
+            border: rem(2px) solid $clr13;
+
+            &:focus {
+                border: rem(2px) solid $clr1;
+            }
+        }
+    }
+
+    button {
+        background-color: $clr1;
+        color: $clr6;
+        width: 100%;
+        border-radius: 0.2em;
+        margin: 0;
+        padding: 0.64em 1em;
+        transition: background-color 0.1s ease-in-out;
+
+        &:hover {
+            background-color: darken($clr1, 6%);
+        }
+
+        &.btn-disabled {
+            background-color: $clr8;
+            color: lighten($clr2, 65%);
+            font-weight: 600;
+            cursor: not-allowed;
+
+            &:hover {
+                background-color: $clr8;
+            }
+        }
+    }
+
+    h3 {
+        color: $clr12;
+        font-weight: normal;
+        letter-spacing: rem(0.5px);
+        font-size: rem(14px);
+        text-align: center;
+        padding: 1em;
+        margin-block-end: 0.5em;
+        border-bottom: rem(1px) solid rgba(9, 30, 66, 0.12);
+        position: relative;
+    }
+
+    .xmark {
+        position: absolute;
+        right: 0;
+        font-size: rem(14px);
+        color: inherit;
+        cursor: pointer;
+
+        &:hover {
+            color: darken($clr12, 25%);
+        }
+    }
+
+    label {
+        margin: 0;
+        color: $clr12;
+        font-size: rem(14px);
+        font-weight: 600;
+        letter-spacing: rem(-0.2px);
+        margin-block-end: 0.25em;
     }
 }

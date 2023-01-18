@@ -13,9 +13,10 @@ export const boardService = {
     save,
     remove,
     getEmptyCard,
-    addNewCard,
-    getEmptyBoard
-    // addBoardMsg
+    getEmptyBoard,
+    addNewItem,
+    getEmptyGroup
+
 }
 window.cs = boardService
 
@@ -41,6 +42,7 @@ async function remove(boardId) {
     await storageService.remove(STORAGE_KEY, boardId)
 }
 
+
 async function save(board) {
     let savedBoard
     if (board._id) {
@@ -57,36 +59,34 @@ function getEmptyCard() {
     return { title: '' }
 }
 
-// async function addBoardMsg(boardId, txt) {
-//     // Later, this is all done by the backend
-//     const board = await getById(boardId)
-//     if (!board.msgs) board.msgs = []
+function getEmptyGroup() {
+    return  { title: '', cards: [], style: {} }
+}
 
-//     const msg = {
-//         id: utilService.makeId(),
-//         // by: userService.getLoggedinUser(),
-//         txt
-//     }
-//     board.msgs.push(msg)
-//     await storageService.put(STORAGE_KEY, board)
-
-//     return msg
-// }
-
-// function getEmptyBoard() {
-//     return {
-//         vendor: 'Susita-' + (Date.now() % 1000),
-//         price: utilService.getRandomIntInclusive(1000, 9000),
+// async function addNewCard(group, card, arr) {
+//     try {
+//         card.id = utilService.makeId()
+//         group.cards.push(card)
+//         // const collection = await dbService.getCollection('toy')
+//         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
+//         return card
+//     } catch (err) {
+//         console.log('failed');
+//         // logger.error(`cannot add toy msg ${toyId}`, err)
+//         throw err
 //     }
 // }
 
-async function addNewCard(group, card) {
+async function addNewItem(parent, entityToAdd, entityType) {
+console.log('entityToAdd = ', entityToAdd)
+    
     try {
-        card.id = utilService.makeId()
-        group.cards.push(card)
+        entityToAdd.id = utilService.makeId()
+        parent[entityType].push(entityToAdd)
+       
         // const collection = await dbService.getCollection('toy')
         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
-        return card
+        return entityToAdd
     } catch (err) {
         console.log('failed');
         // logger.error(`cannot add toy msg ${toyId}`, err)
@@ -98,6 +98,7 @@ function getEmptyBoard() {
     return {
         title: "",
         isStarred: false,
+        style: { backgroundColor: '#026aa7' },
         // "createdBy": {
         //     "_id": "u101",
         //     "fullname": "Abi Abambi",
@@ -123,7 +124,7 @@ function _createDemoBoards() {
     if (!boards || !boards.length) {
         boards = [{
             "_id": "b101",
-            "title": "First board",
+            "title": "Sprint 4",
             "isStarred": false,
             // "createdBy": {
             //     "_id": "u101",
@@ -198,10 +199,6 @@ function _createDemoBoards() {
         utilService.saveToStorage(STORAGE_KEY, boards)
     }
 }
-
-// TEST DATA
-// storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
-
 
 
 

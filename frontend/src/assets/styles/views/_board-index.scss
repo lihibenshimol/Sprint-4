@@ -1,28 +1,22 @@
-// .borad-index {
-
-// }
-
-
-.card-list {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-
-    li {
-        background-color: $clr2;
-        color: $clr6;
-        padding: 5px;
-        margin: 5px;
+.board-index {
+    height: 100%;
+    padding-bottom: 10px;
+    /* width */
+    ::-webkit-scrollbar {
+        height: rem(12px);
+        overflow-y: hidden;
+        padding: 20px;
+       
     }
-
-    a {
-        color: $clr1;
-        padding: 10px;
+    
+    ::-webkit-scrollbar-track {
+        background: none;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
-
-    h3 {
-        background-color: #ddd;
-        padding: 10px 5px;
-        margin: 5px;
+    
+    ::-webkit-scrollbar-thumb {
+        background: rgba(85, 85, 85, 0.545);
+        border-radius: 0.4em;
     }
 }

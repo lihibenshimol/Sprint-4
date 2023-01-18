@@ -10,10 +10,7 @@ import { setCurrBoard } from '../store/board.actions.js'
 export function BoardIndex() {
     const { boardId } = useParams()
     const board = useSelector(storeState => storeState.boardModule.currBoard)
-    // const bgColor = board.style.backgroundColor
-
-    // const groups = useSelector(storeState => storeState.groupModule.groups)
-
+   
     useEffect(() => {
         loadBoard()
     }, [boardId])
@@ -22,7 +19,6 @@ export function BoardIndex() {
     async function loadBoard() {
         try {
             const board = await boardService.getById(boardId)
-            console.log('board loading = ', board)
             setCurrBoard(board)
         } catch (err) {
             console.log('Cannot load board')
@@ -68,13 +64,12 @@ export function BoardIndex() {
     if (!board) return <h1>loading</h1>
     return (
         <>
-        <section className='board-index' style={{backgroundColor: board.style.backgroundColor}}>
-
-        <BoardHeader />
-            <div className="group-container">
-                 <GroupList groups={board.groups}/>
-            </div>
-        </section>
+            <section className='board-index main-container' style={(board.style.backgroundColor) ? { backgroundColor: board.style.backgroundColor } : '#023047'}>
+                <BoardHeader />
+                <div className="group-container">
+                    <GroupList groups={board.groups} />
+                </div>
+            </section>
         </>
     )
 }

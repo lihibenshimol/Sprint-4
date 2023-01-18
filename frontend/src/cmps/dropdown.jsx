@@ -1,7 +1,8 @@
 import { DropdownBoards } from "./dropdown-boards";
 import { DropdownCreate } from "./dropdown-create";
+import { DropdownCreateList } from "./dropdown-create-list";
 
-export function DropDown({ type }) {
+export function DropDown({ type, setAddingBoard, setDropDown }) {
 
     switch (type) {
         case 'boards':
@@ -22,11 +23,11 @@ export function DropDown({ type }) {
             )
         case 'create-list':
             return (
-                <DropdownBoards />
+                <DropdownCreateList setDropDown={setDropDown} />
             )
         case 'create':
             return (
-                <DropdownCreate />
+                <DropdownCreate setAddingBoard={setAddingBoard} />
             )
     }
 }
