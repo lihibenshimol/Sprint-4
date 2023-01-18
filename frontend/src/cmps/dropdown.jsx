@@ -1,4 +1,5 @@
 import { DropdownBoards } from "./dropdown-boards";
+import { DropdownCreate } from "./dropdown-create";
 
 export function DropDown({ type }) {
 
@@ -19,9 +20,13 @@ export function DropDown({ type }) {
             return (
                 <DropdownBoards />
             )
-        case 'create':
+        case 'create-list':
             return (
                 <DropdownBoards />
+            )
+        case 'create':
+            return (
+                <DropdownCreate />
             )
     }
 }

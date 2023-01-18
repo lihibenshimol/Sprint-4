@@ -1,0 +1,30 @@
+.dropdown-create {
+    padding: 1em;
+    .img-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .img-background {
+        width: 200px;
+        height: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $clr1;
+        border-radius: 0.2em;
+
+        img {
+            width: 186px;
+            height: 103px;
+        }
+    }
+
+    input {
+        width: 100%;
+
+        &:hover {
+            background-color: $clr8;
+        }
+    }
+}

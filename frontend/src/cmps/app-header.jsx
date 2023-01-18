@@ -71,8 +71,8 @@ export function AppHeader() {
                     {dropdown.type === 'templates' && <DropDown type={dropdown.type} />}
                 </button>
 
-                <button onClick={() => onShowDropdown('create')} className={dropdown.type === 'create' ? 'create-btn active' : 'create-btn'}>Create
-                    {dropdown.type === 'create' && <DropDown type={dropdown.type} />}
+                <button onClick={() => onShowDropdown('create-list')} className={dropdown.type === 'create-list' ? 'create-btn active' : 'create-btn'}>Create
+                    {dropdown.type === 'create-list' && <DropDown type={dropdown.type} />}
                 </button>
             </nav>
 
