@@ -21,7 +21,7 @@ export function BoardHeader() {
                         <button className="board-header-btn-icon" ><img className="board-header-icon star" width="20px" src={starIcon} alt="favorites" /></button>
                     </span>
                     {board && <div className="board-members">
-                        {board.members.map(member =>
+                        {board.members?.map(member =>
                             <div key={member._id} className="member-img"> <img src={member.imgUrl} alt={member.fullname} /></div>
                         )}
                     </div>}

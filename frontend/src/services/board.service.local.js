@@ -98,6 +98,7 @@ function getEmptyBoard() {
     return {
         title: "",
         isStarred: false,
+        style: { backgroundColor: '#026aa7' },
         // "createdBy": {
         //     "_id": "u101",
         //     "fullname": "Abi Abambi",
