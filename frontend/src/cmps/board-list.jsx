@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { boardService } from "../services/board.service.local";
+import { BoardAdd } from "./board-add";
 import { BoardPreview } from "./board-preview";
 
 
@@ -22,9 +23,7 @@ export function BoardList({ addNew = false }) {
 
     return (
         <section className="board-list">
-            {addNew && 
-                <article className="add-board"><span>Create new board</span></article>
-            }
+            {addNew && <BoardAdd />}
             {boards[0] && boards.map(board => (
                 <BoardPreview board={board} key={board._id} />
             ))}

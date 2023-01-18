@@ -14,7 +14,8 @@
 
         h3 {
             margin: 0;
-            font-size: 1.15rem;
+            font-size: rem(16px);
+            font-weight: 700;
             text-transform: capitalize;
             color: $clr6;
             position: relative;
@@ -33,13 +34,13 @@
         }
     }
 
-    .add-board {
+    .board-add {
         background-color: $clr8;
         display: flex;
         justify-content: center;
         align-items: center;
         color: $clr9;
-        font-size: 1rem;
+        font-size: rem(14px);
 
         &:hover::before {
             display: none;
