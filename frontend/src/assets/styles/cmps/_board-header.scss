@@ -30,6 +30,10 @@
             width: 20px;
          }
 
+         .board-header-text.edit-mode {
+             display: none;
+         }
+
         .board-header-text {
             // display: block;
             font-size: 20px;
@@ -40,9 +44,6 @@
             margin: 0 4px 4px 0;
         }
 
-        .board-header-text.edit-mode {
-            display: none;
-        }
 
         .board-name-input {
             display: none;

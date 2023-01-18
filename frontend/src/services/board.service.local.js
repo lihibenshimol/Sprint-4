@@ -123,7 +123,7 @@ function _createDemoBoards() {
     if (!boards || !boards.length) {
         boards = [{
             "_id": "b101",
-            "title": "First board",
+            "title": "Sprint 4",
             "isStarred": false,
             // "createdBy": {
             //     "_id": "u101",

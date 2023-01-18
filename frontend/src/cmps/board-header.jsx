@@ -3,11 +3,27 @@ import filterIcon from '../assets/img/filter.svg'
 import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
 import { useState } from "react"
+import { updateBoard } from "../store/board.actions";
 
 
 export function BoardHeader() {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [editMode, setEditMode] = useState(false)
+    const [boardNewTitle, setBoardNewTitle] = useState(board.title)
+
+
+
+    function changeBoardTitle(ev) {
+        ev.preventDefault()
+        setEditMode(!editMode)
+        board.title = boardNewTitle
+        updateBoard(board)
+    }
+
+    function handleChange({target}) {
+        let {value} = target
+        setBoardNewTitle(value)
+    }
 
     if (!board) return <h1>Loading...</h1>
     return (
@@ -15,8 +31,10 @@ export function BoardHeader() {
             <div className="board-header">
 
                 <section className="left">
-                    <h1 onClick={() => setEditMode(!editMode)} className={"board-header-text" + (editMode ? 'editMode' : '')}>Sprint 4</h1>
-                    <input className={"board-name-input"+ (editMode ? 'editMode' : '')} aria-label="Sprint 4" spellCheck="false" dir="auto" value="Sprint 4" />
+                    <h1 onClick={() => setEditMode(!editMode)} className={"board-header-text" + (editMode ? ' edit-mode' : '')}>{board.title}</h1>
+                    <form onSubmit={changeBoardTitle}>
+                    <input onChange={handleChange} className={"board-name-input"+ (editMode ? ' edit-mode' : '')} aria-label="Sprint 4" spellCheck="false" dir="auto" value={boardNewTitle} />
+                    </form>
                     <span className="star-icon-box">
                         <button className="board-header-btn-icon" ><img className="board-header-icon star" width="20px" src={starIcon} alt="favorites" /></button>
                     </span>
