@@ -6,7 +6,7 @@ import { CardPreview } from "./card-preview";
 import dotsIcon from '../assets/img/dots.svg'
 import { boardService } from "../services/board.service.local";
 
-export function GroupPreview({ group, addCard }) {
+export function GroupPreview({ group, addCard, removeGroup }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [editMode, setEditMode] = useState(false)
     const [extrasMenu, openExtraMenu] = useState(false)
@@ -43,7 +43,7 @@ export function GroupPreview({ group, addCard }) {
             <div className="group-content">
                 <div className="group-header" >
                     <h1 onClick={() => setEditMode(!editMode)} className={"group-title-text" + (editMode ? ' edit-mode' : '')}>{group.title}</h1>
-                    
+
                     <form onSubmit={changeGroupTitle}>
                         <input onChange={handleGroupChange} className={"group-title-input" + (editMode ? ' edit-mode' : '')} aria-label={groupNewTitle} spellCheck="false" dir="auto" value={groupNewTitle} />
                     </form>
@@ -52,10 +52,15 @@ export function GroupPreview({ group, addCard }) {
                         <button onClick={() => openExtraMenu(!extrasMenu)}><img src={dotsIcon} alt="" />
                         </button>
 
-                       { extrasMenu && <div className="extras-menu">
-                            <span>delete group</span>
+                        {extrasMenu && <div className="extras-menu flex">
+                            <span className="title-container">
+                                <p>
+                                    List actions
+                                </p>
+                            </span>
+                            <span className="action-btn delete-btn" onClick={() => removeGroup(group.id)}>Delete this list</span>
                         </div>}
-                        </span>
+                    </span>
 
                 </div>
 

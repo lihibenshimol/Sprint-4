@@ -13,11 +13,10 @@ export const boardService = {
     save,
     remove,
     getEmptyCard,
-    addNewCard,
     getEmptyBoard,
     addNewItem,
     getEmptyGroup
-    // addBoardMsg
+
 }
 window.cs = boardService
 
@@ -43,6 +42,7 @@ async function remove(boardId) {
     await storageService.remove(STORAGE_KEY, boardId)
 }
 
+
 async function save(board) {
     let savedBoard
     if (board._id) {
@@ -60,45 +60,22 @@ function getEmptyCard() {
 }
 
 function getEmptyGroup() {
-    return  { title: '' }
+    return  { title: '', cards: [], style: {} }
 }
 
-// async function addBoardMsg(boardId, txt) {
-//     // Later, this is all done by the backend
-//     const board = await getById(boardId)
-//     if (!board.msgs) board.msgs = []
-
-//     const msg = {
-//         id: utilService.makeId(),
-//         // by: userService.getLoggedinUser(),
-//         txt
-//     }
-//     board.msgs.push(msg)
-//     await storageService.put(STORAGE_KEY, board)
-
-//     return msg
-// }
-
-// function getEmptyBoard() {
-//     return {
-//         vendor: 'Susita-' + (Date.now() % 1000),
-//         price: utilService.getRandomIntInclusive(1000, 9000),
+// async function addNewCard(group, card, arr) {
+//     try {
+//         card.id = utilService.makeId()
+//         group.cards.push(card)
+//         // const collection = await dbService.getCollection('toy')
+//         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
+//         return card
+//     } catch (err) {
+//         console.log('failed');
+//         // logger.error(`cannot add toy msg ${toyId}`, err)
+//         throw err
 //     }
 // }
-
-async function addNewCard(group, card, arr) {
-    try {
-        card.id = utilService.makeId()
-        group.cards.push(card)
-        // const collection = await dbService.getCollection('toy')
-        // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
-        return card
-    } catch (err) {
-        console.log('failed');
-        // logger.error(`cannot add toy msg ${toyId}`, err)
-        throw err
-    }
-}
 
 async function addNewItem(parent, entityToAdd, entityType) {
 console.log('entityToAdd = ', entityToAdd)
@@ -106,15 +83,6 @@ console.log('entityToAdd = ', entityToAdd)
     try {
         entityToAdd.id = utilService.makeId()
         parent[entityType].push(entityToAdd)
-
-        // switch (entityType) {
-        //     case 'card':
-        //         parent.cards.push(entityToAdd)
-        //         return
-        //     case 'group':
-        //         parent.groups.push(entityToAdd)
-        //         return
-        // }
        
         // const collection = await dbService.getCollection('toy')
         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
@@ -231,10 +199,6 @@ function _createDemoBoards() {
         utilService.saveToStorage(STORAGE_KEY, boards)
     }
 }
-
-// TEST DATA
-// storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 980}).then(x => console.log(x))
-
 
 
 
