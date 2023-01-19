@@ -92,6 +92,7 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
                                 value={groupToEdit.title}
                                 onChange={handleChange}
                                 placeholder="Enter list title..."
+                                autoFocus
                             >
                             </textarea>
 
