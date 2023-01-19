@@ -49,6 +49,7 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
             <form onSubmit={onAddBoard}>
                 <label htmlFor="title">Board title <span className='required'>*</span></label>
                 <input className={board.title ? '' : 'input-required'} autoFocus name='title' value={board.title} onChange={handleChange} type="text" />
+                <p><span>👋</span>Board title is required</p>
                 <button className={board.title ? '' : 'btn-disabled'}>Create</button>
             </form>
         </section>
