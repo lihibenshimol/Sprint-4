@@ -219,7 +219,30 @@ function _createDemoBoards() {
                             },
                             {
                                 "id": "c104",
-                                "title": "Test Cards"
+                                "title": "Test Cards",
+                                checklists: [
+                                    {
+                                        id: 'YEhmF',
+                                        title: 'Checklist',
+                                        todos: [
+                                            {
+                                                id: '212jX',
+                                                title: 'To Do 1',
+                                                isDone: false
+                                            },
+                                            {
+                                                id: '213jX',
+                                                title: 'To Do 1',
+                                                isDone: true
+                                            },
+                                            {
+                                                id: '214jX',
+                                                title: 'To Do 1',
+                                                isDone: false
+                                            },
+                                        ]
+                                    },
+                                ]
                             }
                         ],
                         "style": {}
