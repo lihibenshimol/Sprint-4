@@ -47,6 +47,10 @@
     content: "\f036";
 }
 
+.fa.arrow-left::before {
+    content: "\f104";
+}
+
 // BRANDS
 .fa-brands.trello::before {
     content: "\f181";

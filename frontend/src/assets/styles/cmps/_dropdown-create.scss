@@ -210,6 +210,18 @@
         }
     }
 
+    .arrow-left {
+        position: absolute;
+        left: 0;
+        font-size: rem(14px);
+        color: inherit;
+        cursor: pointer;
+
+        &:hover {
+            color: darken($clr12, 25%);
+        }
+    }
+
     label {
         margin: 0;
         color: $clr12;

@@ -15,7 +15,7 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
         try {
             const savedBoard = await addBoard(board)
             setAddingBoard(false)
-            if(setDropDown) setDropDown({})
+            if (setDropDown) setDropDown({})
             navigate(`/board/${savedBoard._id}`)
         } catch (err) {
             console.log('Had issues creating a board; ', err)
@@ -27,11 +27,17 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
         setBoard(prevBoard => ({ ...prevBoard, [field]: value }))
     }
 
+    function handleClosingDropdown() {
+        if (setDropDown) setDropDown({})
+        setAddingBoard(prevAddingBoard => !prevAddingBoard)
+    }
+
     return (
         <section onClick={(ev) => ev.stopPropagation()} className={fromNavbar ? 'dropdown dropdown-create-navbar' : 'dropdown dropdown-create'}>
 
             <h3>Create board
-                {!fromNavbar && <i onClick={() => setAddingBoard(prevAddingBoard => !prevAddingBoard)} className='fa xmark'></i>}
+                <i onClick={handleClosingDropdown} className='fa xmark'></i>
+                {fromNavbar && <i onClick={() => setAddingBoard(prevAddingBoard => !prevAddingBoard)} className='fa arrow-left'></i>}
             </h3>
 
             <section className="img-container">
