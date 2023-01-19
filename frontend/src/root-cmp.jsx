@@ -18,18 +18,18 @@ export function RootCmp() {
 
     return (
         <>
-         <Provider store={store}>
-            {location.pathname === '/' ? <HomepageHeader /> : <AppHeader />}
-            <main className='full'>
-                <Routes>
-                    {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
-                    <Route element={<BoardDetails />} path='/board/:boardId'>
-                        <Route element= {<CardDetails />} path='/board/:boardId/c/:cardId' />
-                    </Route>
-                </Routes>
-            </main>
-            {location.pathname === '/' && <AppFooter />}
-         </Provider>
+            <Provider store={store}>
+                {location.pathname === '/' ? <HomepageHeader /> : <AppHeader />}
+                <main className='full'>
+                    <Routes>
+                        {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
+                        <Route element={<BoardDetails />} path='/board/:boardId'>
+                            <Route element={<CardDetails />} path='/board/:boardId/g/:groupId/c/:cardId' />
+                        </Route>
+                    </Routes>
+                </main>
+                {location.pathname === '/' && <AppFooter />}
+            </Provider>
 
         </>
     )

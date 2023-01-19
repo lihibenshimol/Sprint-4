@@ -73,7 +73,7 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
 
                 </div>
 
-                {group.cards && <CardList cards={group.cards} />}
+                {group.cards && <CardList cards={group.cards} groupId={group.id} />}
 
                 <h1 onClick={() => setAddMode(!addMode)} className={"area-add-card" + (addMode ? ' edit-mode' : '')}>   <img src={addIcon} /> Add a card</h1>
                 <form onSubmit={onSaveCard} className={"new-card-input" + (addMode ? ' edit-mode' : '')}>

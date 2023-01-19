@@ -1,3 +1,4 @@
+import { updateCard } from '../store/board.actions.js'
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 // import { userService } from './user.service.js'
@@ -14,7 +15,12 @@ export const boardService = {
     getEmptyCard,
     getEmptyBoard,
     addNewItem,
-    getEmptyGroup
+    getEmptyGroup,
+
+    //Cards
+    getCardById,
+    saveCard,
+
 
 }
 window.cs = boardService
@@ -32,7 +38,9 @@ async function query() {
 }
 
 function getById(boardId) {
-    return storageService.get(STORAGE_KEY, boardId)
+    const board = storageService.get(STORAGE_KEY, boardId)
+
+    return board
 }
 
 async function remove(boardId) {
@@ -120,83 +128,105 @@ function getEmptyBoard() {
     }
 }
 
+
+//Card service
+
+async function getCardById(board, groupId, cardId) {
+    const group = board.groups.find(g => g.id === groupId)
+    const card = group.cards.find(c => c.id === cardId)
+    return card
+}
+
+async function saveCard(board, groupId, updatedCard) {
+    const group = board.groups.find(g => g.id === groupId)
+    const newCards = group.cards.map(card => (card.id === updatedCard.id) ? updatedCard : card)
+    group.cards = newCards
+
+    board.groups = board.groups.map(g => (g.id === group.id) ? group : g)
+
+    save(board)
+}
+
+
 function _createDemoBoards() {
     let boards = utilService.loadFromStorage(STORAGE_KEY)
     if (!boards || !boards.length) {
-        boards = [{
-            "_id": "b101",
-            "title": "Sprint 4",
-            "isStarred": false,
-            // "createdBy": {
-            //     "_id": "u101",
-            //     "fullname": "Abi Abambi",
-            //     "imgUrl": "http://some-img"
-            // },
-            "style": { backgroundColor: '#1d3557' },
-            "labels": [
-                {
-                    "id": "l101",
-                    "title": "Done",
-                    "color": "#61bd4f"
-                },
-                {
-                    "id": "l102",
-                    "title": "Progress",
-                    "color": "#61bd33"
-                }
-            ],
-            "members": [
-                {
-                    "_id": "u101",
-                    "fullname": "Lihi Ben Shimol",
-                    "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512"
-                },
-                {
-                    "_id": "u102",
-                    "fullname": "Aviad Malikan",
-                    "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512"
-                },
-                {
-                    "_id": "u103",
-                    "fullname": "Shay Skitel",
-                    "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512"
-                },
-            ],
-            "groups": [
-                {
-                    "id": "g101",
-                    "title": "Group 1",
-                    // "archivedAt": 1589983468418,
-                    "cards": [
-                        {
-                            "id": "c101",
-                            "title": "Replace logo"
-                        },
-                        {
-                            "id": "c102",
-                            "title": "Add Samples"
-                        }
-                    ],
-                    "style": {}
-                },
-                {
-                    "id": "g102",
-                    "title": "Group 2",
-                    // "archivedAt": 1589983468418,
-                    "cards": [
-                        {
-                            "id": "c103",
-                            "title": "Test groups"
-                        },
-                        {
-                            "id": "c104",
-                            "title": "Test Cards"
-                        }
-                    ],
-                    "style": {}
-                },
-            ]
-        }]
+        boards = [
+            {
+                "_id": "b101",
+                "title": "Sprint 4",
+                "isStarred": false,
+                // "createdBy": {
+                //     "_id": "u101",
+                //     "fullname": "Abi Abambi",
+                //     "imgUrl": "http://some-img"
+                // },
+                "style": { backgroundColor: '#1d3557' },
+                "labels": [
+                    {
+                        "id": "l101",
+                        "title": "Done",
+                        "color": "#61bd4f"
+                    },
+                    {
+                        "id": "l102",
+                        "title": "Progress",
+                        "color": "#61bd33"
+                    }
+                ],
+                "members": [
+                    {
+                        "_id": "u101",
+                        "fullname": "Lihi Ben Shimol",
+                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512"
+                    },
+                    {
+                        "_id": "u102",
+                        "fullname": "Aviad Malikan",
+                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512"
+                    },
+                    {
+                        "_id": "u103",
+                        "fullname": "Shay Skitel",
+                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512"
+                    },
+                ],
+                "groups": [
+                    {
+                        "id": "g101",
+                        "title": "Group 1",
+                        // "archivedAt": 1589983468418,
+                        "cards": [
+                            {
+                                "id": "c101",
+                                "title": "Replace logo"
+                            },
+                            {
+                                "id": "c102",
+                                "title": "Add Samples"
+                            }
+                        ],
+                        "style": {}
+                    },
+                    {
+                        "id": "g102",
+                        "title": "Group 2",
+                        // "archivedAt": 1589983468418,
+                        "cards": [
+                            {
+                                "id": "c103",
+                                "title": "Test groups"
+                            },
+                            {
+                                "id": "c104",
+                                "title": "Test Cards"
+                            }
+                        ],
+                        "style": {}
+                    },
+                ]
+            }
+        ]
         utilService.saveToStorage(STORAGE_KEY, boards)
     }
 }

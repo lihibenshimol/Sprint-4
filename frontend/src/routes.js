@@ -2,7 +2,7 @@ import { HomePage } from './pages/home-page.jsx'
 import { AboutUs } from './pages/about-us.jsx'
 // import { BoardIndex } from './pages/board-index.jsx'
 import { CardDetails } from './pages/card-details.jsx'
-import { Boards } from './pages/boards.jsx'
+import { BoardIndex } from './pages/board-index.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -13,7 +13,7 @@ const routes = [
     },
     {
         path: 'board',
-        component: <Boards />,
+        component: <BoardIndex />,
         label: 'Boards'
     },
     {
@@ -21,11 +21,6 @@ const routes = [
         component: <AboutUs />,
         label: 'About us'
     },
-    {
-        path: 'board/:boardId/card/:cardId',
-        component: <CardDetails />,
-        label: 'Card'
-    }
 ]
 
 export default routes
