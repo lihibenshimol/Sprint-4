@@ -3,7 +3,9 @@ import { useEffect, useState } from "react"
 import filterIcon from '../assets/img/filter.svg'
 import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
-import { updateBoard } from "../store/board.actions";
+import { updateBoard } from "../store/board.actions"
+import { AiFillStar } from 'react-icons/ai'
+
 
 export function BoardHeader() {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
@@ -37,7 +39,9 @@ export function BoardHeader() {
                         <input onChange={handleChange} className={"board-name-input" + (editMode ? ' edit-mode' : '')} aria-label="hello" spellCheck="false" dir="auto" value={boardNewTitle} />
                     </form>
                     <span className="star-icon-box">
-                        <button className="board-header-btn-icon" ><img className="board-header-icon star" width="20px" src={starIcon} alt="favorites" /></button>
+                        <button className="board-header-star-btn" >
+                       < AiFillStar />
+                            </button>
                     </span>
                     {board && <div className="board-members">
                         {board.members?.map(member =>
