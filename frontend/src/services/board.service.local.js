@@ -232,12 +232,12 @@ function _createDemoBoards() {
                                             },
                                             {
                                                 id: '213jX',
-                                                title: 'To Do 1',
+                                                title: 'To Do 2',
                                                 isDone: true
                                             },
                                             {
                                                 id: '214jX',
-                                                title: 'To Do 1',
+                                                title: 'To Do 3',
                                                 isDone: false
                                             },
                                         ]
