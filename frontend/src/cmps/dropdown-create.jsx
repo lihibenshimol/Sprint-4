@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { boardService } from "../services/board.service.local"
-import groupsImg from '../assets/img/groups-img.svg'
 import { useNavigate } from 'react-router-dom'
 import { addBoard } from '../store/board.actions'
+import groupsImg from '../assets/img/groups-img.svg'
 
 export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
 

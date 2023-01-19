@@ -11,14 +11,11 @@ import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 import { RxActivityLog } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
 
-
-
 export function CardDetails() {
     const { cardId } = useParams()
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const navigate = useNavigate()
-
 
     useEffect(() => {
         loadCard()

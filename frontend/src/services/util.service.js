@@ -35,7 +35,6 @@ function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min //The maximum is inclusive and the minimum is inclusive 
 }
 
-
 function randomPastTime() {
     const HOUR = 1000 * 60 * 60
     const DAY = 1000 * 60 * 60 * 24
@@ -45,11 +44,11 @@ function randomPastTime() {
     return Date.now() - pastTime
 }
 
-function debounce(func, timeout = 300){
+function debounce(func, timeout = 300) {
     let timer
     return (...args) => {
-      clearTimeout(timer)
-      timer = setTimeout(() => { func.apply(this, args) }, timeout)
+        clearTimeout(timer)
+        timer = setTimeout(() => { func.apply(this, args) }, timeout)
     }
 }
 

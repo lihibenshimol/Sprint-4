@@ -1,4 +1,3 @@
-
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 // import { userService } from './user.service.js'
@@ -19,7 +18,6 @@ export const boardService = {
 
 }
 window.cs = boardService
-
 
 async function query() {
     const boards = await storageService.query(STORAGE_KEY)
@@ -42,7 +40,6 @@ async function remove(boardId) {
     await storageService.remove(STORAGE_KEY, boardId)
 }
 
-
 async function save(board) {
     let savedBoard
     if (board._id) {
@@ -60,7 +57,7 @@ function getEmptyCard() {
 }
 
 function getEmptyGroup() {
-    return  { title: '', cards: [], style: {} }
+    return { title: '', cards: [], style: {} }
 }
 
 // async function addNewCard(group, card, arr) {
@@ -78,12 +75,12 @@ function getEmptyGroup() {
 // }
 
 async function addNewItem(parent, entityToAdd, entityType) {
-console.log('entityToAdd = ', entityToAdd)
-    
+    console.log('entityToAdd = ', entityToAdd)
+
     try {
         entityToAdd.id = utilService.makeId()
         parent[entityType].push(entityToAdd)
-       
+
         // const collection = await dbService.getCollection('toy')
         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
         return entityToAdd

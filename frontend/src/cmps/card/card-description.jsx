@@ -1,6 +1,5 @@
 import { useState } from "react"
 
-
 export function CardDescription({ card, submitDetail, isDescriptionEdit, setIsDescriptionEdit }) {
     const [describe, setDescribe] = useState(card.describe)
 

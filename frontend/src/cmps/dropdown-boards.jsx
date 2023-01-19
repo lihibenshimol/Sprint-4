@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
-import { boardService } from "../services/board.service.local"
+import { Link, useNavigate } from "react-router-dom"
 import { loadBoards } from "../store/board.actions"
-import { BoardPreview } from "./board-preview"
 
-export function DropdownBoards() {
+export function DropdownBoards({ setDropDown }) {
 
     const boards = useSelector(storeState => storeState.boardModule.boards)
+    const navigate = useNavigate()
 
     useEffect(() => {
         getBoards()
@@ -21,13 +20,19 @@ export function DropdownBoards() {
         }
     }
 
+    function handleLinkClick(ev, boardId) {
+        ev.preventDefault()
+        navigate(`/board/${boardId}`)
+        setDropDown({})
+    }
+
     return (
         <section onClick={(ev) => ev.stopPropagation()} className="dropdown dropdown-boards">
             <ul className="clean-list">
                 {boards[0] &&
                     boards.map(board => (
                         <li key={board._id}>
-                            <Link to={`/board/${board._id}`}>
+                            <Link to={`/board/${board._id}`} onClick={(ev) => handleLinkClick(ev, board._id)}>
                                 <article><h3>{board.title}</h3></article>
                             </Link>
                         </li>

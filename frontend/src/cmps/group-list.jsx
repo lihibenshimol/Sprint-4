@@ -2,17 +2,13 @@ import { boardService } from "../services/board.service.local";
 import { updateBoard } from "../store/board.actions";
 import { GroupPreview } from "./group-preview";
 import { useSelector } from "react-redux";
-import addIcon from '../assets/img/add.svg';
 import { useState } from "react";
-
-
-
+import addIcon from '../assets/img/add.svg';
 
 export function GroupList() {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [editMode, setEditMode] = useState(false)
     const [groupToEdit, setGroupToEdit] = useState(boardService.getEmptyGroup())
-
 
     async function removeGroup(groupId) {
         try {
@@ -57,7 +53,7 @@ export function GroupList() {
         <>
             <div className="group-list" >
                 {board.groups.map(group => <section className="group-wrapper flex" key={group.id}>
-                    <GroupPreview group={group} addCard={addCard} removeGroup={removeGroup}/>
+                    <GroupPreview group={group} addCard={addCard} removeGroup={removeGroup} />
                 </section>)}
 
                 <section className="add-group-section">

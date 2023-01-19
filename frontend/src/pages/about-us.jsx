@@ -64,7 +64,6 @@ function SplitPane(props) {
     )
 }
 
-
 export function AboutUs() {
     const [count, setCount] = useState(100)
 

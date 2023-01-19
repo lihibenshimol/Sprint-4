@@ -3,7 +3,6 @@ import { TbTag } from 'react-icons/tb';
 import { AiOutlineClockCircle, AiOutlineUser } from 'react-icons/ai';
 import { IoMdCheckboxOutline } from 'react-icons/io';
 
-
 export function SideBar() {
 
     return (<div className="side-bar">
@@ -32,5 +31,4 @@ export function SideBar() {
         </section>
     </div>
     )
-
 }

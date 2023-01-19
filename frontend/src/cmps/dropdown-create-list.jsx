@@ -1,12 +1,11 @@
 import { useState } from "react"
 import { DropdownCreate } from "./dropdown-create"
 
-export function DropdownCreateList({setDropDown}) {
+export function DropdownCreateList({ setDropDown }) {
 
     const [isAddingBoard, setAddingBoard] = useState(false)
 
-
-    if (isAddingBoard) return <DropdownCreate setDropDown={setDropDown} setAddingBoard={setAddingBoard} fromNavbar={true}/>
+    if (isAddingBoard) return <DropdownCreate setDropDown={setDropDown} setAddingBoard={setAddingBoard} fromNavbar={true} />
     return (
         <section onClick={(ev) => ev.stopPropagation()} className="dropdown dropdown-create-list">
             <article onClick={() => setAddingBoard(prevAddingBoard => !prevAddingBoard)}>

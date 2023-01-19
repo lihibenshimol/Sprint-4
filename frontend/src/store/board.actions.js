@@ -11,20 +11,20 @@ export function getActionRemoveBoard(boardId) {
         boardId
     }
 }
+
 export function getActionAddBoard(board) {
     return {
         type: ADD_BOARD,
         board
     }
 }
+
 export function getActionUpdateBoard(board) {
     return {
         type: UPDATE_BOARD,
         board
     }
 }
-
-
 
 export function setCurrBoard(board) {
     store.dispatch({

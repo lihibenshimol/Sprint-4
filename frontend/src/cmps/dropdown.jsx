@@ -7,7 +7,7 @@ export function DropDown({ type, setAddingBoard, setDropDown }) {
     switch (type) {
         case 'boards':
             return (
-                <DropdownBoards />
+                <DropdownBoards setDropDown={setDropDown}/>
             )
         case 'recent':
             return (

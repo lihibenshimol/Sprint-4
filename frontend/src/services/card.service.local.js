@@ -17,7 +17,6 @@ export const cardService = {
 }
 window.cs = cardService
 
-
 // async function query() {
 // const cards = await storageService.query(STORAGE_KEY)
 // if (filterBy.txt) {

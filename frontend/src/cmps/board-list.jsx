@@ -4,7 +4,6 @@ import { loadBoards } from "../store/board.actions";
 import { BoardAdd } from "./board-add";
 import { BoardPreview } from "./board-preview";
 
-
 export function BoardList({ addNew = false }) {
 
     const boards = useSelector(storeState => storeState.boardModule.boards)

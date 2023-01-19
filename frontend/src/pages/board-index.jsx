@@ -10,11 +10,10 @@ import { setCurrBoard } from '../store/board.actions.js'
 export function BoardIndex() {
     const { boardId } = useParams()
     const board = useSelector(storeState => storeState.boardModule.currBoard)
-   
+
     useEffect(() => {
         loadBoard()
     }, [boardId])
-
 
     async function loadBoard() {
         try {

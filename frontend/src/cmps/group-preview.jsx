@@ -2,9 +2,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { updateBoard } from "../store/board.actions";
 import { CardList } from "./card-list";
-import { CardPreview } from "./card-preview";
-import dotsIcon from '../assets/img/dots.svg'
 import { boardService } from "../services/board.service.local";
+import dotsIcon from '../assets/img/dots.svg'
 
 export function GroupPreview({ group, addCard, removeGroup }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
@@ -12,8 +11,6 @@ export function GroupPreview({ group, addCard, removeGroup }) {
     const [extrasMenu, openExtraMenu] = useState(false)
     const [groupNewTitle, setGroupNewTitle] = useState(group.title)
     const [cardToEdit, setCardToEdit] = useState(boardService.getEmptyCard())
-
-
 
     function changeGroupTitle(ev) {
         ev.preventDefault()
@@ -36,7 +33,6 @@ export function GroupPreview({ group, addCard, removeGroup }) {
         let { value } = target
         setCardToEdit((prevCard) => ({ ...prevCard, title: value }))
     }
-
 
     return (
         <>

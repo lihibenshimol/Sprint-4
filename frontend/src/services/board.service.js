@@ -4,7 +4,6 @@ import { httpService } from './http.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 
-
 const STORAGE_KEY = 'car'
 
 export const carService = {
@@ -16,7 +15,6 @@ export const carService = {
     addCarMsg
 }
 window.cs = carService
-
 
 async function query(filterBy = { txt: '', price: 0 }) {
     return httpService.get(STORAGE_KEY, filterBy)
@@ -31,6 +29,7 @@ async function remove(carId) {
     // await storageService.remove(STORAGE_KEY, carId)
     return httpService.delete(`car/${carId}`)
 }
+
 async function save(car) {
     var savedCar
     if (car._id) {
@@ -47,7 +46,7 @@ async function save(car) {
 }
 
 async function addCarMsg(carId, txt) {
-    const savedMsg = await httpService.post(`car/${carId}/msg`, {txt})
+    const savedMsg = await httpService.post(`car/${carId}/msg`, { txt })
     return savedMsg
 }
 

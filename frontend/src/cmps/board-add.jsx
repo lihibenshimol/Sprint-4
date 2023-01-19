@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { DropDown } from "./dropdown"
 
 export function BoardAdd() {
-    
+
     const [isAddingBoard, setAddingBoard] = useState(false)
 
     useEffect(() => {
@@ -14,7 +13,7 @@ export function BoardAdd() {
         }
     }, [])
 
-    function handleBodyClick({target}) {
+    function handleBodyClick({ target }) {
         if (target.classList.contains('board-add') || target.parentElement.classList.contains('board-add')) return
         setAddingBoard(false)
     }
