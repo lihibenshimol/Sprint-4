@@ -21,11 +21,6 @@ const routes = [
         component: <AboutUs />,
         label: 'About us'
     },
-    {
-        path: 'board/:boardId/card/:cardId',
-        component: <CardDetails />,
-        label: 'Card'
-    }
 ]
 
 export default routes

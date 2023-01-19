@@ -10,23 +10,26 @@ import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 
 import { RxActivityLog } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
+import { boardService } from "../services/board.service.local"
+import { useSelector } from "react-redux"
 
 
 
 export function CardDetails() {
-    const { cardId, boardId } = useParams()
+    const { cardId, groupId } = useParams()
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const navigate = useNavigate()
+    const board = useSelector(storeState => storeState.boardModule.currBoard)
 
 
     useEffect(() => {
         loadCard()
-    }, [cardId])
+    }, [cardId, isDescriptionEdit])
 
     async function loadCard() {
         try {
-            const card = await cardService.getById(cardId)
+            const card = await boardService.getCardById(board, groupId, cardId)
             setCard(card)
         } catch (err) {
             console.log('Cant load card')
@@ -35,9 +38,13 @@ export function CardDetails() {
         }
     }
 
-    async function submitDetail(describe) {
-        console.log('describe: ', describe)
+    async function onSaveDesc(desc) {
         try {
+            // const card = await boardService.getCardById(board, groupId, cardId)
+            const updateCard = { ...card, desc }
+            boardService.saveCard(board, groupId, updateCard)
+            setIsDescriptionEdit(!isDescriptionEdit)
+            // navigate(`/board/${board._id}/g/${groupId}/c/${cardId}`)
 
         } catch (err) {
             console.log('Cant edit the description ', err)
@@ -47,7 +54,7 @@ export function CardDetails() {
     return <div className="window full">
         {!card && <Loader className="flex align-center" />}
         <section className="card">
-            {card && (<><button onClick={() => navigate(`/board/${boardId}`)} className="close-btn">X</button>
+            {card && (<><button onClick={() => navigate(`/board/${board._id}`)} className="close-btn">X</button>
                 <div className="card-header">
                     <span className="icon fa card-icon"></span>
                     <h2 className="title">{card.title}</h2>
@@ -58,7 +65,7 @@ export function CardDetails() {
                 <div className="card-content flex">
                     <div className="main-content">
                         <section className="card-details">
-                            {card.members.length &&
+                            {(card.members && card.members.length) &&
                                 <div className="details">
                                     <h5>Members</h5>
                                     <article className="members-container">
@@ -67,7 +74,7 @@ export function CardDetails() {
                                     </article>
                                 </div>}
 
-                            {card.label.length &&
+                            {(card.label && card.label.length) &&
                                 <div className="details">
                                     <h5>labels</h5>
                                     <article className="labels-container">
@@ -91,7 +98,7 @@ export function CardDetails() {
                                 {!isDescriptionEdit && <button onClick={setIsDescriptionEdit}>Edit</button>}
                             </div>
                             <CardDescription card={card}
-                                submitDetail={submitDetail}
+                                onSaveDesc={onSaveDesc}
                                 isDescriptionEdit={isDescriptionEdit}
                                 setIsDescriptionEdit={setIsDescriptionEdit} />
                         </section>
