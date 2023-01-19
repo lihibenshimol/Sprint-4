@@ -1,4 +1,4 @@
-.cards-list {
+.card-list {
     flex: 1 1 auto;
     margin: 0 4px;
     min-height: 0;
@@ -6,7 +6,10 @@
     overflow-y: auto;
     // padding: 0 4px;
     z-index: 1;
+}
 
+a:hover {
+    text-decoration: none;
 }
 
 .card-preview {
@@ -21,6 +24,9 @@
     padding: 6px 8px 2px;
     position: relative;
     z-index: 0;
+    text-decoration: none;
+    // color: black;
+    color: #172b4d;
 
     .card-title {
         clear: both;
