@@ -5,7 +5,7 @@ import { CardList } from "./card-list";
 import { boardService } from "../services/board.service.local";
 import dotsIcon from '../assets/img/dots.svg'
 
-export function GroupPreview({ group, addCard, removeGroup }) {
+export function GroupDetails({ group, addCard, removeGroup }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [editMode, setEditMode] = useState(false)
     const [extrasMenu, openExtraMenu] = useState(false)
@@ -18,6 +18,14 @@ export function GroupPreview({ group, addCard, removeGroup }) {
         group.title = groupNewTitle
         updateBoard(board)
     }
+
+    // function handleChange({ target }) {
+    //     let { value } = target
+
+    //     if (target.id === 'group')  setGroupNewTitle(value)
+    //     else if (target.id === 'card') setCardToEdit((prevCard) => ({ ...prevCard, title: value }))
+    // }
+
 
     function handleGroupChange({ target }) {
         let { value } = target

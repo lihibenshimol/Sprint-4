@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import filterIcon from '../assets/img/filter.svg'
 import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
@@ -8,7 +8,11 @@ import { updateBoard } from "../store/board.actions";
 export function BoardHeader() {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [editMode, setEditMode] = useState(false)
-    const [boardNewTitle, setBoardNewTitle] = useState(board.title)
+    const [boardNewTitle, setBoardNewTitle] = useState()
+
+    useEffect(() => {
+        setBoardNewTitle(board.title)
+    }, [board])
 
     function changeBoardTitle(ev) {
         ev.preventDefault()
@@ -30,7 +34,7 @@ export function BoardHeader() {
                 <section className="left">
                     <h1 onClick={() => setEditMode(!editMode)} className={"board-header-text" + (editMode ? ' edit-mode' : '')}>{board.title}</h1>
                     <form onSubmit={changeBoardTitle}>
-                        <input onChange={handleChange} className={"board-name-input" + (editMode ? ' edit-mode' : '')} aria-label="Sprint 4" spellCheck="false" dir="auto" value={boardNewTitle} />
+                        <input onChange={handleChange} className={"board-name-input" + (editMode ? ' edit-mode' : '')} aria-label="hello" spellCheck="false" dir="auto" value={boardNewTitle} />
                     </form>
                     <span className="star-icon-box">
                         <button className="board-header-btn-icon" ><img className="board-header-icon star" width="20px" src={starIcon} alt="favorites" /></button>

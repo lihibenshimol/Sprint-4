@@ -7,26 +7,27 @@
     // padding: 0 4px;
     z-index: 1;
 
-    .card-preview {
-        background-color: #fff;
-        border-radius: 3px;
-        box-shadow: 0 1px 0 #091e4240;
-        cursor: pointer;
-        display: block;
-        margin-bottom: 8px;
-        max-width: 300px;
-        min-height: 20px;
-        padding: 6px 8px 2px;
-        position: relative;
-        z-index: 0;
+}
 
-        .card-title {
-            clear: both;
-            display: block;
-            margin: 0 0 4px;
-            text-decoration: none;
-            word-wrap: break-word;
-            overflow: hidden;
-        }
+.card-preview {
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 1px 0 #091e4240;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 8px;
+    max-width: 300px;
+    min-height: 20px;
+    padding: 6px 8px 2px;
+    position: relative;
+    z-index: 0;
+
+    .card-title {
+        clear: both;
+        display: block;
+        margin: 0 0 4px;
+        text-decoration: none;
+        word-wrap: break-word;
+        overflow: hidden;
     }
 }

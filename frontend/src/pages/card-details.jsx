@@ -12,7 +12,7 @@ import { RxActivityLog } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
 
 export function CardDetails() {
-    const { cardId } = useParams()
+    const { cardId, boardId } = useParams()
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const navigate = useNavigate()
@@ -46,7 +46,7 @@ export function CardDetails() {
     return <div className="window full">
         {!card && <Loader className="flex align-center" />}
         <section className="card">
-            {card && (<><button className="close-btn">X</button>
+            {card && (<><button onClick={() => navigate(`/board/${boardId}`)} className="close-btn">X</button>
                 <div className="card-header">
                     <span className="icon fa card-icon"></span>
                     <h2 className="title">{card.title}</h2>

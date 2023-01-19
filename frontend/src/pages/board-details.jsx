@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, Outlet } from 'react-router-dom'
 import { BoardHeader } from '../cmps/board-header.jsx'
 
 import { GroupList } from '../cmps/group-list.jsx'
+import { Loader } from '../cmps/loader.jsx'
 import { boardService } from '../services/board.service.local.js'
 import { setCurrBoard } from '../store/board.actions.js'
 
-export function BoardIndex() {
+export function BoardDetails() {
     const { boardId } = useParams()
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
@@ -60,9 +61,10 @@ export function BoardIndex() {
     //     console.log(`TODO Adding msg to group`)
     // }
 
-    if (!board) return <h1>loading</h1>
+    if (!board) return <Loader />
     return (
         <>
+        <Outlet />
             <section className='board-index main-container' style={(board.style.backgroundColor) ? { backgroundColor: board.style.backgroundColor } : '#023047'}>
                 <BoardHeader />
                 <div className="group-container">
