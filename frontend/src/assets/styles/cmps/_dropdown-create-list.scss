@@ -3,7 +3,7 @@
 
     article {
         color: $clr12;
-        padding: 0.5em;
+        padding: 0.5em 0.9em;
         cursor: pointer;
 
         &:hover {
@@ -12,6 +12,16 @@
 
         h4 {
             color: $clr9;
+            font-weight: normal;
+        }
+
+        .trello {
+            margin-inline-end: 0.5em;
+            color: #42526E;
+        }
+
+        p {
+            font-size: rem(12px);
         }
     }
 }

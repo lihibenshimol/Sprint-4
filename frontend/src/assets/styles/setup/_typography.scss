@@ -16,6 +16,15 @@
     font-family: fa-regular;
 }
 
+@font-face {
+    font-family: fa-brands;
+    src: url(../../fonts/font-awsome/fa-brands-400.ttf)
+}
+
+.fa-brands::before {
+    font-family: fa-brands;
+}
+
 // @font-face {
 //     font-family: Helvetica Neue;
 //     src: url(../../fonts/Helvetica-Neue/Helvetica-neue-medium.ttf)

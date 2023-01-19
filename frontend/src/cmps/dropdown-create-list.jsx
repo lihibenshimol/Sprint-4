@@ -10,7 +10,7 @@ export function DropdownCreateList({setDropDown}) {
     return (
         <section onClick={(ev) => ev.stopPropagation()} className="dropdown dropdown-create-list">
             <article onClick={() => setAddingBoard(prevAddingBoard => !prevAddingBoard)}>
-                <h4>Create board</h4>
+                <h4><i className="fa-brands trello"></i>Create board</h4>
                 <p>A board is made up of cards ordered on lists. Use it to manage projects, track information, or organize anything.</p>
             </article>
         </section>

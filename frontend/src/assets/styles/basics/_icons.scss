@@ -7,7 +7,7 @@
 }
 
 .fa.down-arrow::before {
-    content: "\f078";
+    content: "\f107";
 }
 
 .fa.circle::before {
@@ -45,4 +45,9 @@
 
 .fa.align-left::before {
     content: "\f036";
+}
+
+// BRANDS
+.fa-brands.trello::before {
+    content: "\f181";
 }
