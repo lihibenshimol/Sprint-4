@@ -41,7 +41,7 @@ export function BoardDetails() {
         try {
             await boardService.addNewItem(board, newGroup, 'groups')
             updateBoard(board)
-            newGroup.title = ''
+            // newGroup.title = ''
         } catch (err) {
             console.log('Cannot add group = ', err)
             throw err

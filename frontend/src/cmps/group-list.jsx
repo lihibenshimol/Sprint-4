@@ -19,6 +19,7 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
         ev.preventDefault()
         setEditMode(!editMode)
         onAddGroup(groupToEdit)
+        setGroupToEdit(boardService.getEmptyGroup())
     }
 
     function handleChange({ target }) {
@@ -28,6 +29,21 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
 
     function onDragEnd(res) {
         // TODO: reorder our columns
+        const { destination, source, draggableId } = res
+        if (!destination) return
+        if (destination.droppableId === source.droppableId &&
+            destination.index === source.index) { return }
+
+        const column = board.groups.find(g => g.id === source.droppableId)
+        const newCards = [...column.cards]
+        const card = newCards.find(c => c.id === draggableId)
+        newCards.splice(source.index, 1)
+        newCards.splice(destination.index, 0, card)
+
+        const newColumn = { ...column, cards: newCards }
+        board.groups = board.groups.map(g => (g.id === newColumn.id) ? newColumn : g)
+        console.log(board.groups)
+        updateBoard(board)
     }
 
     return (
