@@ -64,8 +64,7 @@ export function BoardDetails() {
     return (
         <>
         <Outlet />
-        {/* <div className="windoww"> */}
-        {/* <div className="over-body" onClick={() => navigate(`/board/${board._id}`)}></div> */}
+        
             <section className='board-details main-container' style={(board.style.backgroundColor) ? { backgroundColor: board.style.backgroundColor } : '#023047'}>
                 <BoardHeader />
                 <div className="group-container">
@@ -77,7 +76,7 @@ export function BoardDetails() {
                     />
                 </div>
             </section>
-            {/* </div> */}
+          
         </>
     )
 }

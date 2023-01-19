@@ -18,7 +18,7 @@ function Container(props) {
 export function CardPreview({ card, idx, groupId }) {
 const [quickEditor, toggleQuickEditor] = useState(false)
 
-    function openQuickEditor(ev) {
+    function openQuickEditor(ev, state) {
         ev.preventDefault()
         toggleQuickEditor(!quickEditor)
     }
@@ -35,7 +35,7 @@ const [quickEditor, toggleQuickEditor] = useState(false)
                         <span>{card.title}</span>
                         <button onClick={openQuickEditor} className="quick-edit-btn"> <BsPencil /> </button>
                     </section>
-                    {quickEditor && <QuickEditor cardId={card.id} groupId={groupId}/>}
+                    {quickEditor && <QuickEditor cardId={card.id} groupId={groupId} openQuickEditor={openQuickEditor} quickEditor={quickEditor}/>}
                 </Container>
             )}
         </Draggable>
