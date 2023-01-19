@@ -70,29 +70,17 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
 
                 {group.cards &&
                     <Droppable droppableId={group.id}>
-                        {(provided) => (
+                        {(provided, snapshot) => (
                             <CardList
                                 innerRef={provided.innerRef}
                                 cards={group.cards} groupId={group.id}
                                 provided={provided}
+                                isDraggingOver={snapshot.isDraggingOver}
                             >
 
                             </CardList>
                         )}
                     </Droppable>
-                    // <Droppable droppableId={group.id}>
-                    //     {(provided) => (
-                    //         <CardList
-                    //             innerRef={provided.innerRef}
-                    //             {...provided.droppableProps} cards={group.cards} groupId={group.id}
-                    //         >
-                    //             {group.cards.map((card, index) => (
-                    //                 <Card key={card.id} card={card} index={index} groupId={group.id} />
-                    //             ))}
-                    //             {provided.placeholder}
-                    //         </CardList>
-                    //     )}
-                    // </Droppable>
                 }
 
                 <span onClick={() => setAddMode(!addMode)} className={"area-add-item" + (addMode ? ' edit-mode' : '')}> <FiPlus /> Add a card </span>

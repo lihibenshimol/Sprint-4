@@ -5,8 +5,9 @@ import { QuickEditor } from "./quick-editor";
 
 
 function Container(props) {
-    const { children, innerRef, provided } = props
-    return <div className="card-preview" ref={innerRef}
+    const { children, innerRef, provided, isDragging } = props
+    console.log(isDragging)
+    return <div className={isDragging ? 'card-preview dragging' : 'card-preview'} ref={innerRef}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
     >
@@ -24,10 +25,11 @@ const [quickEditor, toggleQuickEditor] = useState(false)
 
     return (
         <Draggable draggableId={card.id} index={idx}>
-            {(provided) => (
+            {(provided, snapshot) => (
                 <Container
                     provided={provided}
                     innerRef={provided.innerRef}
+                    isDragging={snapshot.isDragging}
                 >
                     <section className="card-title flex">
                         <span>{card.title}</span>
