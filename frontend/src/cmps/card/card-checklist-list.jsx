@@ -3,7 +3,7 @@ import { IoMdCheckboxOutline } from 'react-icons/io';
 
 
 
-export function CheckListList({ checklists }) {
+export function CheckListList({ checklists, onSaveCheckList }) {
 
     return <>
         {checklists.map(checklist => {
@@ -13,7 +13,10 @@ export function CheckListList({ checklists }) {
                     <h3>{checklist ? checklist.title : 'Checklist'}</h3>
                     <button>Delete</button>
                 </div>
-                {<CheckListPreview checklist={checklist} />}
+                {<CheckListPreview
+                    onSaveCheckList={onSaveCheckList}
+                    checklists={checklists}
+                    checklist={checklist} />}
             </section>
         })}
     </>

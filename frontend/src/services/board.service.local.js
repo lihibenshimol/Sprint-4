@@ -143,6 +143,7 @@ async function saveCard(board, groupId, updatedCard) {
     group.cards = newCards
 
     board.groups = board.groups.map(g => (g.id === group.id) ? group : g)
+    console.log('board: ', board)
 
     save(board)
 }

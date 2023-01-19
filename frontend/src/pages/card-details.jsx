@@ -11,6 +11,7 @@ import { BsTextLeft } from 'react-icons/bs';
 import { boardService } from "../services/board.service.local"
 import { useSelector } from "react-redux"
 import { CheckListList } from "../cmps/card/card-checklist-list"
+import { updateBoard } from "../store/board.actions"
 
 
 
@@ -44,12 +45,12 @@ export function CardDetails() {
             boardService.saveCard(board, groupId, updateCard)
             setIsDescriptionEdit(!isDescriptionEdit)
             // navigate(`/board/${board._id}/g/${groupId}/c/${cardId}`)
-
+            
         } catch (err) {
             console.log('Cant edit the description ', err)
         }
     }
-
+    
     async function onChangeTitle({ target }) {
         let { innerText } = target
         try {
@@ -59,10 +60,18 @@ export function CardDetails() {
             console.log('Cant edit the Title ', err)
         }
     }
-
-    function onChangeTodo() {
-
+    
+    async function onSaveCheckList(checklists) {
+        try {
+            const updateCard = { ...card, checklists }
+            boardService.saveCard(board, groupId, updateCard)
+            updateBoard(board)
+        } catch (err) {
+            console.log('Cant save the checklist ', err)
+        }
     }
+
+
 
 
 
@@ -126,6 +135,7 @@ export function CardDetails() {
                         </section>
 
                         {card.checklists && <CheckListList
+                            onSaveCheckList={onSaveCheckList}
                             checklists={card.checklists} />}
 
                         {/* <section className="card-activity">

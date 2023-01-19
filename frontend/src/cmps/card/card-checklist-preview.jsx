@@ -1,12 +1,15 @@
+import { useEffect, useState } from "react"
 
 
 
-export function CheckListPreview({ checklist }) {
+export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
+    const [checklistsState, setChecklistsToPreview] = useState(checklist)
+
     console.log('checklist: ', checklist)
 
     function getDoneTodos() {
         if (!checklist.todos.length) return 0
-        const todos = checklist.todos
+        const todos = checklistsState.todos
         const isDone = todos.reduce((acc, todo) => {
             if (todo.isDone) acc++
             return acc
@@ -15,7 +18,18 @@ export function CheckListPreview({ checklist }) {
         return parseFloat((100 * isDone) / todos.length)
     }
 
+    function onIsTodoDone(todo) {
+        const newTodo = { ...todo, isDone: !todo.isDone }
+        const todos = checklistsState.todos
+            .map(todo => todo.id === newTodo.id ? newTodo : todo)
+        const newCheckList = { ...checklist, todos }
+        const newCheckLists = checklists.map(checklist => {
+            return checklist.id === newCheckList.id ? newCheckList : checklist
+        })
 
+        setChecklistsToPreview(newCheckList)
+        onSaveCheckList(newCheckLists)
+    }
 
 
     return (<>
@@ -30,12 +44,12 @@ export function CheckListPreview({ checklist }) {
         </div>
 
         <div className="todo-container">
-            {checklist.todos.map(t => {
-                console.log('t: ', t)
+            {checklistsState.todos.map(t => {
+                // console.log('t: ', t)
 
                 return (<div className="todo" key={t.id}>
-                    <span className={`${t.isDone ? "checked" : ''}`}></span>
-                    <div className="todo-title">
+                    <span className={`${t.isDone ? "checked" : ''}`} onClick={() => onIsTodoDone(t)}></span>
+                    <div className="todo-title" >
                         <p>{t.title}</p>
                         <div>utils</div>
                     </div>
