@@ -8,7 +8,7 @@ import { updateBoard } from "../store/board.actions";
 export function BoardHeader() {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [editMode, setEditMode] = useState(false)
-    const [boardNewTitle, setBoardNewTitle] = useState()
+    const [boardNewTitle, setBoardNewTitle] = useState(board.title)
 
     useEffect(() => {
         setBoardNewTitle(board.title)
