@@ -8,10 +8,10 @@ export function CheckListList({ checklists }) {
     return <>
         {checklists.map(checklist => {
             return <section className="card-checklist" key={checklist.id} >
-                <div className="section-header">
+                <div className="checklist-header">
                     <span className="check-list"><IoMdCheckboxOutline /></span>
                     <h3>{checklist ? checklist.title : 'Checklist'}</h3>
-                    <button >Edit</button>
+                    <button>Delete</button>
                 </div>
                 {<CheckListPreview checklist={checklist} />}
             </section>

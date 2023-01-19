@@ -21,6 +21,72 @@
             height: 8px;
             margin: 0 0 0 40px;
             overflow: hidden;
+            position: relative;
+
+            .bar {
+                color: green;
+                transition-delay: .2s;
+                bottom: 0;
+                left: 0;
+                position: absolute;
+                top: 0;
+                height: 100px;
+                width: 100px;
+            }
+        }
+    }
+
+
+    .todo-container {
+
+        .todo {
+            border-radius: 4px;
+            clear: both;
+            padding-left: 40px;
+            position: relative;
+            // padding: 6px 0;
+            // width: 100%
+
+            &:hover {
+                background-color: #091e420a;
+            }
+
+            span {
+                cursor: pointer;
+                background-color: #fafbfc;
+                box-shadow: inset 0 0 0 2px #dfe1e6;
+                border-radius: 2px;
+                flex-shrink: 0;
+                height: 16px;
+                overflow: hidden;
+                position: absolute;
+                transition: all .2s ease-in-out;
+                width: 16px;
+                top: 12px;
+                left: 6px;
+            }
+
+            span.checked {
+                content: url('../../img/checked.svg');
+                background-color: #0079bf;
+                box-shadow: inset 0 0 0 2px #0079bf;
+            }
+
+
+            .todo-title {
+                padding: 7px 0;
+                display: flex;
+
+                p {
+                    width: 100%;
+                    align-self: center;
+                    flex: 1;
+                    min-height: 20px;
+                    font-size: 14px;
+                    margin: 0;
+                }
+
+            }
         }
     }
 }

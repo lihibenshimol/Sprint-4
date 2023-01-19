@@ -7,36 +7,46 @@ export function CheckListPreview({ checklist }) {
     function getDoneTodos() {
         if (!checklist.todos.length) return 0
         const todos = checklist.todos
-        console.log('todos: ',todos)
-        
-        // const isDONE = todos.filter(todo => todo.isDone).length
-        const isDONE = todos.reduce((acc, todo) => {
+        const isDone = todos.reduce((acc, todo) => {
             if (todo.isDone) acc++
             return acc
         }, 0)
-        console.log('isDone: ', isDONE)
 
-        return parseFloat((100 * isDONE) / todos.length)
+        return parseFloat((100 * isDone) / todos.length)
     }
 
 
 
 
-    return (
-        <>
-            <div className="progress-bar-container">
-                <span>{getDoneTodos().toFixed(0)}%</span>
-                <div className="progress-bar">
-                    <div className="bar" style={{ width: `${getDoneTodos()}%` }}></div>
-                </div>
+    return (<>
+        <div className="progress-bar-container">
+            <span>{getDoneTodos().toFixed(0)}%</span>
+            <div className="progress-bar">
+                <div className="bar" style={{
+                    width: `${(getDoneTodos())}%`,
+                    backgroundColor: `${getDoneTodos() === 100 ? '#61bd4f' : '#5ba4cf'}`
+                }}></div>
             </div>
+        </div>
 
+        <div className="todo-container">
+            {checklist.todos.map(t => {
+                console.log('t: ', t)
 
+                return (<div className="todo" key={t.id}>
+                    <span className={`${t.isDone ? "checked" : ''}`}></span>
+                    <div className="todo-title">
+                        <p>{t.title}</p>
+                        <div>utils</div>
+                    </div>
+                </div>)
 
+            })
 
+            }
+        </div>
 
-
-        </>)
+    </>)
 }
 
 

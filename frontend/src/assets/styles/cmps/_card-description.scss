@@ -1,5 +1,5 @@
 .card .card-description {
-    margin-bottom: 24px;
+    margin-bottom: 29px;
 
     .description-editor {
         margin-left: 40px;
@@ -24,6 +24,9 @@
             outline: rgb(0, 119, 255) solid 2px;
         }
 
+        p{
+            font-size: 11px;
+        }
 
         button {
             margin: 0;
