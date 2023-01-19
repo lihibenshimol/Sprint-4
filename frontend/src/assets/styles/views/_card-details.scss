@@ -1,18 +1,29 @@
 .window {
   margin: 0;
-  background-color: #000000a3;
+  // background-color: #000000a3;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   position: absolute;
   inset: 0;
-  z-index: 999;
+  z-index: 500;
+  
   //   grid-row: -1/1;
   //   grid-column: -1/1;
   // }
 }
 
+.background {
+  position: absolute;
+  display: flex;
+  inset: 0;
+  margin: 0;
+  background-color: #000000a3;
+
+}
+
 .card {
+  z-index: 999;
   background-color: #f4f5f7;
   border-radius: 2px;
   // display: none;
@@ -160,7 +171,7 @@
 
     }
 
-    .description-header {
+    .section-header {
       align-items: center;
       display: flex;
       min-height: 32px;
@@ -177,6 +188,10 @@
         width: 32px;
         font-size: 22px;
         top: 9px
+      }
+
+      span.check-list {
+        top: 4px
       }
 
       h3 {
@@ -213,7 +228,6 @@
       margin-left: 40px
     }
   }
-
 }
 
 

@@ -10,8 +10,10 @@ import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 
 import { RxActivityLog } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
+import { IoMdCheckboxOutline } from 'react-icons/io';
 import { boardService } from "../services/board.service.local"
 import { useSelector } from "react-redux"
+import { CheckList } from "../cmps/card/card-checklist"
 
 
 
@@ -52,6 +54,7 @@ export function CardDetails() {
     }
 
     return <div className="window full">
+        <div className="background full" onClick={() => navigate(`/board/${board._id}`)}></div>
         {!card && <Loader className="flex align-center" />}
         <section className="card">
             {card && (<><button onClick={() => navigate(`/board/${board._id}`)} className="close-btn">X</button>
@@ -92,7 +95,7 @@ export function CardDetails() {
                         </section>
 
                         <section className="card-description">
-                            <div className="description-header">
+                            <div className="section-header">
                                 <span><BsTextLeft /></span>
                                 <h3>Description</h3>
                                 {!isDescriptionEdit && <button onClick={setIsDescriptionEdit}>Edit</button>}
@@ -103,28 +106,30 @@ export function CardDetails() {
                                 setIsDescriptionEdit={setIsDescriptionEdit} />
                         </section>
 
-                        {card.checklist && (
-                            <section className="card-checklist">
-                                <div className="checklist-header">
-                                    <span><BsTextLeft /></span>
-                                    <h3>Description</h3>
-                                </div>
-                                {card.describe && <p>{card.describe}</p>}
-                            </section>)}
+                        {/* {card.checklist && ( */}
+                        <section className="card-checklist">
+                            <div className="section-header">
+                                <span className="check-list"><IoMdCheckboxOutline /></span>
+                                <h3>{card.checklist ? card.checklist.title : 'Checklist'}</h3>
+                                <button >Edit</button>
+                            </div>
+                            <CheckList checklist={card.checklist} />
+                        </section>
+                        {/* )} */}
 
-                        <section className="card-activity">
+                        {/* <section className="card-activity">
                             <div className="activity-header">
                                 <span><RxActivityLog /></span>
                                 <h3>Activity</h3>
                             </div>
                             <p>routable, smart cmp</p>
-                        </section>
+                        </section> */}
                     </div >
                     <SideBar />
                 </div >
             </>)}
         </section >
-    </div>
+    </div >
 }
 
 
