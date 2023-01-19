@@ -34,15 +34,33 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
         if (destination.droppableId === source.droppableId &&
             destination.index === source.index) { return }
 
-        const column = board.groups.find(g => g.id === source.droppableId)
-        const newCards = [...column.cards]
-        const card = newCards.find(c => c.id === draggableId)
-        newCards.splice(source.index, 1)
-        newCards.splice(destination.index, 0, card)
+        const startColumn = board.groups.find(g => g.id === source.droppableId)
+        const endColumn = board.groups.find(g => g.id === destination.droppableId)
 
-        const newColumn = { ...column, cards: newCards }
-        board.groups = board.groups.map(g => (g.id === newColumn.id) ? newColumn : g)
-        console.log(board.groups)
+        if(startColumn.id === endColumn.id) {
+            const newCards = [...startColumn.cards]
+            const card = newCards.find(c => c.id === draggableId)
+            newCards.splice(source.index, 1)
+            newCards.splice(destination.index, 0, card)
+    
+            const newColumn = { ...startColumn, cards: newCards }
+            board.groups = board.groups.map(g => (g.id === newColumn.id) ? newColumn : g)
+            console.log(board.groups)
+            updateBoard(board)
+            return
+        }
+
+        const startCards = [...startColumn.cards]
+        const card = startCards.find(c => c.id === draggableId)
+        startCards.splice(source.index, 1)
+        const newStartColumn = {...startColumn, cards: startCards}
+
+        const finishCards = [...endColumn.cards]
+        finishCards.splice(destination.index, 0, card)
+        const newEndColumn = {...endColumn, cards: finishCards}
+
+        board.groups = board.groups.map(g => (g.id === newStartColumn.id) ? newStartColumn : g)
+        board.groups = board.groups.map(g => (g.id === newEndColumn.id) ? newEndColumn : g)
         updateBoard(board)
     }
 
