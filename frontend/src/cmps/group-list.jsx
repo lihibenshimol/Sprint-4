@@ -4,8 +4,9 @@ import { GroupDetails } from "./group-details";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import addIcon from '../assets/img/add.svg';
+import { DragDropContext } from 'react-beautiful-dnd'
 
-export function GroupList({onAddGroup, onAddCard, onRemoveGroup}) {
+export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [editMode, setEditMode] = useState(false)
     const [groupToEdit, setGroupToEdit] = useState(boardService.getEmptyGroup())
@@ -16,22 +17,30 @@ export function GroupList({onAddGroup, onAddCard, onRemoveGroup}) {
         setEditMode(!editMode)
         onAddGroup(groupToEdit)
     }
-    
+
     function handleChange({ target }) {
         let { value } = target
         setGroupToEdit((prevGroup) => ({ ...prevGroup, title: value }))
     }
 
+    function onDragEnd(res){
+        // TODO: reorder our columns
+    }
+
     return (
         <>
             <div className="group-list" >
-                {board.groups.map(group => <section className="group-wrapper flex" key={group.id}>
-                    <GroupDetails
-                        group={group}
-                        onAddCard={onAddCard}
-                        onRemoveGroup={onRemoveGroup}
-                    />
-                </section>)}
+                <DragDropContext onDragEnd={onDragEnd}>
+                    {board.groups.map(group => <section className="group-wrapper flex" key={group.id}>
+                        <GroupDetails
+                            group={group}
+                            onAddCard={onAddCard}
+                            onRemoveGroup={onRemoveGroup}
+                        />
+                    </section>)
+                    }
+                </DragDropContext>
+
 
                 <section className="add-group-section">
                     <div onClick={() => setEditMode(!editMode)} className={"add-group-btn" + (editMode ? ' edit-mode' : '')}>

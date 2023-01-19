@@ -1,14 +1,15 @@
 import { CardPreview } from "./card-preview";
 import { Link } from "react-router-dom"
 
-export function CardList({ cards, groupId }) {
+export function CardList(props) {
+    const { cards, groupId, innerRef, provided } = props
     return (
-        <section className="card-list">
-            {cards.map(card =>
-                <Link to={`g/${groupId}/c/${card.id}`} key={card.id}>
-                    <CardPreview card={card} />
-                </Link>
-            )}
+        <section {...props} ref={innerRef} className="card-list">
+            {cards.map((card, idx) =>
+
+                <CardPreview key={card.id} card={card} idx={idx} />
+                )}
+                {provided.placeholder}
         </section>
     )
 }
