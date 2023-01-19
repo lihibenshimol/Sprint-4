@@ -22,7 +22,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: system-ui,'Segoe UI', 'roboto', 'ubuntu', 'Open Sans', 'Helvetica Neue', sans-serif;
-
+    
     margin: 0 0 0.6em;
     line-height: 1;
 }
@@ -33,6 +33,14 @@ img {
 
 button {
     background-color: transparent;
+}
+
+textarea {
+    font-family: system-ui,'Segoe UI', 'roboto', 'ubuntu', 'Open Sans', 'Helvetica Neue', sans-serif;
+    outline: none;
+    overflow: auto;
+    resize: none;
+
 }
 
 p {
