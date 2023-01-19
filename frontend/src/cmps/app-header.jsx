@@ -10,8 +10,8 @@ export function AppHeader() {
     useEffect(() => {
         document.body.onclick = ({ target }) => {
             // weird solution which i don't like to be fairy honest
-            if (target.parentElement.classList.contains('main-nav') ||
-                target.parentElement.parentElement.classList.contains('main-nav') &&
+            if (target.parentElement?.classList?.contains('main-nav') ||
+                target?.parentElement?.parentElement?.classList?.contains('main-nav') &&
                 !target.classList.contains('brand')) return
             setDropDown({})
         }
