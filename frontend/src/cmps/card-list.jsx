@@ -7,7 +7,7 @@ export function CardList(props) {
         <section {...provided.droppableProps} ref={innerRef} className={isDraggingOver ? 'card-list drag-over' : 'card-list'}>
             {cards.map((card, idx) =>
                 <Link key={card.id} to={`g/${groupId}/c/${card.id}`}>
-                    <CardPreview card={card} idx={idx} />
+                    <CardPreview card={card} groupId={groupId} idx={idx} />
                 </Link>
             )}
             {provided.placeholder}

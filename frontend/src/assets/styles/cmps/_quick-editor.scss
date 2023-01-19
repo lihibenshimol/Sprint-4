@@ -1,0 +1,38 @@
+.black-bg {
+    position: fixed;
+    inset: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.234);
+    z-index: 1;
+}
+
+.quick-editor-btns {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 250px;
+    position: absolute;
+    z-index: 2;
+    width: max-content;
+
+    button {
+        background-color: rgba(0, 0, 0, .6);
+        color: #fff;
+        display: block;
+        font-size: 15px;
+        height: 32px;
+        margin: 0 0 4px 8px;
+        padding: 6px 12px 6px 8px;
+        cursor: pointer;
+        transition: .3s;
+        
+        
+        &:hover {
+            margin-left: 15px;
+            background-color: rgba(0, 0, 0, .9);
+
+
+        }
+    }
+}

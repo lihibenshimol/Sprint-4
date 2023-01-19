@@ -24,18 +24,11 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
         updateBoard(board)
     }
 
-    // function handleChange({ target }) {
-    //     let { value } = target
-
-    //     if (target.id === 'group')  setGroupNewTitle(value)
-    //     else if (target.id === 'card') setCardToEdit((prevCard) => ({ ...prevCard, title: value }))
-    // }
-
-
     function onSaveCard(ev) {
         ev.preventDefault()
-        setAddMode(!addMode)
+        // setAddMode(!addMode)
         onAddCard(group, cardToEdit)
+        setCardToEdit(boardService.getEmptyCard())
     }
 
     function handleGroupChange({ target }) {
