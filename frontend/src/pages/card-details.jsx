@@ -11,11 +11,14 @@ import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 import { RxActivityLog } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
 
+
+
 export function CardDetails() {
     const { cardId } = useParams()
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const navigate = useNavigate()
+
 
     useEffect(() => {
         loadCard()
@@ -34,8 +37,6 @@ export function CardDetails() {
 
     async function submitDetail(describe) {
         console.log('describe: ', describe)
-
-        console.log('***Save***')
         try {
 
         } catch (err) {
@@ -46,7 +47,7 @@ export function CardDetails() {
     return <div className="window full">
         {!card && <Loader className="flex align-center" />}
         <section className="card">
-            {card && (<><button className="close-btn">X</button>
+            {card && (<><button className="close-btn" onClick={()=>navigate('/board')}>X</button>
                 <div className="card-header">
                     <span className="icon fa card-icon"></span>
                     <h2 className="title">{card.title}</h2>
