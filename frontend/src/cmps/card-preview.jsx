@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 
 
 function Container(props) {
-    const { children, innerRef } = props
-    return <div ref={innerRef} {...props} >
+    const { children, innerRef, provided } = props
+    return <div className="card-preview" ref={innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+    >
         {children}
     </div>
 }
@@ -15,15 +18,12 @@ export function CardPreview({ card, idx }) {
         <Draggable draggableId={card.id} index={idx}>
             {(provided) => (
                 <Container
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
+                    provided={provided}
                     innerRef={provided.innerRef}
                 >
-                    <div className="card-preview" >
-                        <span className="card-title">
-                            {card.title}
-                        </span>
-                    </div>
+                    <span className="card-title">
+                        {card.title}
+                    </span>
                 </Container>
             )}
         </Draggable>

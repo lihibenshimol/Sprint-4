@@ -80,10 +80,10 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
                         {(provided) => (
                             <CardList
                                 innerRef={provided.innerRef}
-                                {...provided.droppableProps} cards={group.cards} groupId={group.id}
+                                cards={group.cards} groupId={group.id}
                                 provided={provided}
-                                >
-                                
+                            >
+
                             </CardList>
                         )}
                     </Droppable>
@@ -105,21 +105,21 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
                 <span onClick={() => setAddMode(!addMode)} className={"area-add-item" + (addMode ? ' edit-mode' : '')}> <FiPlus /> Add a card </span>
 
                 <div className={"add-item-btn" + (addMode ? ' edit-mode' : '')}>
-                <form onSubmit={onSaveCard} >
-                <textarea
-                        type="text" 
-                        name="title"
-                        value={cardToEdit.title}
-                        onChange={handleCardChange}
-                        placeholder="Enter a title for this card..."
+                    <form onSubmit={onSaveCard} >
+                        <textarea
+                            type="text"
+                            name="title"
+                            value={cardToEdit.title}
+                            onChange={handleCardChange}
+                            placeholder="Enter a title for this card..."
                         >
                         </textarea>
-                
-                    <span className="add-card-btns">
-                        <button className="save-btn">Add card</button>
-                        <button onClick={() => setAddMode(!addMode)} type="button" className="cancel-btn"><RxCross2 /></button>
-                    </span>
-                </form>
+
+                        <span className="add-card-btns">
+                            <button className="save-btn">Add card</button>
+                            <button onClick={() => setAddMode(!addMode)} type="button" className="cancel-btn"><RxCross2 /></button>
+                        </span>
+                    </form>
                 </div>
 
             </div>
