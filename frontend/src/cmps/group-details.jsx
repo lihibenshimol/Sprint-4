@@ -5,6 +5,7 @@ import { CardList } from "./card-list";
 import { boardService } from "../services/board.service.local";
 import dotsIcon from '../assets/img/dots.svg'
 import addIcon from '../assets/img/add.svg';
+import { RxCross2 } from 'react-icons/rx'
 
 
 export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
@@ -84,7 +85,10 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
                         onChange={handleCardChange}
                     />
                 {/* <button className="btn-add-card">Add card</button> */}
+                <span className="add-card-btns">
                 <button className="save-btn">Add card</button>
+                <button onClick={() => setAddMode(!addMode)} type="button" className="cancel-btn"><RxCross2 /></button>
+                </span>
                 </form>
             </div>
         </>

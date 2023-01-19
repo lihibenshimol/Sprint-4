@@ -49,6 +49,7 @@ export function BoardDetails() {
     }
 
     async function onAddCard(group ,newCard) {
+        if (!newCard.title) return
         try {
             await boardService.addNewItem(group, newCard, 'cards')
             updateBoard(board)
