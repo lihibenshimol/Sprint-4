@@ -107,6 +107,7 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
                 <div className={"add-item-btn" + (addMode ? ' edit-mode' : '')}>
                     <form onSubmit={onSaveCard} >
                         <textarea
+                            onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e) }}
                             type="text"
                             name="title"
                             value={cardToEdit.title}

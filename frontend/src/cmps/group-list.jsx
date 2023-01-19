@@ -26,7 +26,7 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
         setGroupToEdit((prevGroup) => ({ ...prevGroup, title: value }))
     }
 
-    function onDragEnd(res){
+    function onDragEnd(res) {
         // TODO: reorder our columns
     }
 
@@ -46,17 +46,13 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
 
 
                 <section className="add-group-section">
-                    {/* <div onClick={() => setEditMode(!editMode)} className={"add-group-btn" + (editMode ? ' edit-mode' : '')}>
-                        <span className="placeholder">
-                            <FiPlus />  Add another list
-                        </span>
-                    </div> */}
 
                     <span onClick={() => setEditMode(!editMode)} className={"add-item-btn" + (editMode ? ' edit-mode' : '')}> <FiPlus /> Add another list </span>
 
                     <div className={"add-item" + (editMode ? ' edit-mode' : '')}>
                         <form onSubmit={addGroup} >
                             <textarea
+                                onKeyPress={(e) => { if (e.key === 'Enter') addGroup(e) }}
                                 type="text"
                                 name="title"
                                 value={groupToEdit.title}
