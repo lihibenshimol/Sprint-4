@@ -50,14 +50,36 @@ export function CardDetails() {
         }
     }
 
+    async function onChangeTitle({ target }) {
+        let { innerText } = target
+        try {
+            const updateCard = { ...card, title: innerText }
+            boardService.saveCard(board, groupId, updateCard)
+        } catch (err) {
+            console.log('Cant edit the Title ', err)
+        }
+    }
+
+    function onChangeTodo() {
+
+    }
+
+
+
+
     return <div className="window full">
-        <div className="background full" onClick={() => navigate(`/board/${board._id}`)}></div>
+        <div className="black-bg full" onClick={() => navigate(`/board/${board._id}`)}></div>
         {!card && <Loader className="flex align-center" />}
         <section className="card">
             {card && (<><button onClick={() => navigate(`/board/${board._id}`)} className="close-btn">X</button>
                 <div className="card-header">
                     <span className="icon fa card-icon"></span>
-                    <h2 className="title">{card.title}</h2>
+                    <h2 className="title"
+                        suppressContentEditableWarning={true}
+                        contentEditable={true}
+                        onBlur={onChangeTitle}>
+                        {card.title}
+                    </h2>
                     <div>
                         <p>in group: Testing</p>
                     </div>
