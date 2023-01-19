@@ -89,18 +89,20 @@
         padding-inline-start: 5px;
         transition: margin .12s ease-in;
 
-        button {
+        & button {
             display: flex;
             align-items: center;
-            gap: 9px;
+            gap: 6px;
+            font-size: 14px;
             border-radius: 3px;
             background-color: rgba(255, 255, 255, 0.2);
             padding: 6px 12px;
-        }
 
-        .board-header-icon{
-            width: 20px;
-         }
+
+            &:hover {
+                background-color: $btn-hover;
+            }
+        }
     }
 
 }

@@ -25,6 +25,12 @@ a:hover {
     position: relative;
     text-decoration: none;
     color: #172b4d;
+
+
+    &:hover {
+        background-color: #f4f4f8;
+        cursor: pointer;
+    }
     
     .card-title {
         clear: both;

@@ -18,12 +18,12 @@
             // dissgn-items: center;
             //     position: relative;
             //     gap: 10px;
-            
-            
+
+
             .add-item-btn.edit-mode {
                 display: none;
             }
-            
+
             .add-item-btn {
                 border-radius: 3px;
                 display: flex;
@@ -39,7 +39,7 @@
                 color: white;
 
                 &:hover {
-                    background-color: #ffffff4d;
+                    background-color: $btn-hover;
                     border-radius: 3px;
                 }
             }
@@ -52,11 +52,11 @@
                 display: block;
                 background-color: #ebecf0;
                 border-radius: 3px;
-                font-size:14px;
+                font-size: 14px;
                 width: 266px;
                 padding: 4px 4px 0px 4px;
                 margin: 0 8px 0 4px;
-        
+
 
                 form {
                     display: flex;
@@ -68,7 +68,7 @@
                     border: none;
                     border-radius: 3px;
                     box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
-                    box-shadow:  rgba(9, 30, 66, .251);
+                    box-shadow: rgba(9, 30, 66, .251);
                     height: 34px;
                     padding: 9px 8px;
                     width: 100%;
@@ -76,14 +76,14 @@
                     overflow: hidden;
 
                     &:focus {
-                      box-shadow: inset 0 0 0 2px #0079bf; 
+                        box-shadow: inset 0 0 0 2px #0079bf;
                     }
                 }
 
                 .add-group-btns {
                     display: flex;
                     align-items: center;
-            
+
 
                     .save-btn {
                         background-color: #0079bf;
@@ -124,6 +124,8 @@
         max-width: 272px;
 
         .group-header {
+            display: flex;
+            align-items: center;
             position: relative;
             padding: 10px 36px 5px 8px;
 
@@ -131,14 +133,20 @@
                 position: absolute;
                 top: 2px;
                 right: 0;
-                // padding: 6px;
+                color: #000000;
 
-                img {
-                    width: 18px;
-                }
-
-                &:hover {
-                    background-color: #091e4214;
+                button {
+                    color: #6b778c;
+                    height: 25px;
+                    padding: 6px;
+                    text-align: center;
+                    
+                    &:hover {
+                        background-color: #091e4214;
+                        color: #172b4d;
+                        border-radius: 3px;
+             
+                    }
                 }
             }
 

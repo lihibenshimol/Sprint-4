@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { updateBoard } from "../store/board.actions";
-import { CardList } from "./card-list";
-import { boardService } from "../services/board.service.local";
-import dotsIcon from '../assets/img/dots.svg'
-import addIcon from '../assets/img/add.svg';
+import { useState } from "react"
+import { useSelector } from "react-redux"
+import { updateBoard } from "../store/board.actions"
+import { CardList } from "./card-list"
+import { boardService } from "../services/board.service.local"
 import { RxCross2 } from 'react-icons/rx'
 import { FiPlus } from 'react-icons/fi'
-import { Droppable } from "react-beautiful-dnd";
+import { BsThreeDots } from 'react-icons/bs'
+import { Droppable } from "react-beautiful-dnd"
 
 
 export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
@@ -56,11 +55,12 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
                     <h1 onClick={() => setEditMode(!editMode)} className={"group-title-text" + (editMode ? ' edit-mode' : '')}>{group.title}</h1>
 
                     <form onSubmit={changeGroupTitle}>
-                        <input onChange={handleGroupChange} className={"group-title-input" + (editMode ? ' edit-mode' : '')} aria-label={groupNewTitle} spellCheck="false" dir="auto" value={groupNewTitle} />
+                        <input onChange={handleGroupChange} className={"group-title-input" + (editMode ? ' edit-mode' : '')} aria-label={groupNewTitle} autoFocus spellCheck="false" dir="auto" value={groupNewTitle} />
                     </form>
 
                     <span className="extras-menu-btn">
-                        <button onClick={() => openExtraMenu(!extrasMenu)}><img src={dotsIcon} alt="" />
+                        <button onClick={() => openExtraMenu(!extrasMenu)}>
+                        <BsThreeDots />
                         </button>
 
                         {extrasMenu && <div className="extras-menu flex">
@@ -113,6 +113,7 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
                             value={cardToEdit.title}
                             onChange={handleCardChange}
                             placeholder="Enter a title for this card..."
+                            autoFocus
                         >
                         </textarea>
 
