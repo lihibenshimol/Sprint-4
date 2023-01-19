@@ -21,7 +21,9 @@ export function BoardList({ addNew = false }) {
     }
 
     return (
+        
         <section className="board-list">
+            
             {addNew && <BoardAdd />}
             {boards[0] && boards.map(board => (
                 <BoardPreview board={board} key={board._id} />

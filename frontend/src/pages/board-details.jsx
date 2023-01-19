@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams, Outlet } from 'react-router-dom'
+import { useParams, Outlet, useNavigate} from 'react-router-dom'
 import { BoardHeader } from '../cmps/board-header.jsx'
 import { GroupList } from '../cmps/group-list.jsx'
 import { Loader } from '../cmps/loader.jsx'
@@ -9,6 +9,7 @@ import { setCurrBoard, updateBoard } from '../store/board.actions.js'
 
 export function BoardDetails() {
     const { boardId } = useParams()
+    const navigate = useNavigate()
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
     useEffect(() => {
@@ -63,6 +64,8 @@ export function BoardDetails() {
     return (
         <>
         <Outlet />
+        {/* <div className="windoww"> */}
+        {/* <div className="over-body" onClick={() => navigate(`/board/${board._id}`)}></div> */}
             <section className='board-details main-container' style={(board.style.backgroundColor) ? { backgroundColor: board.style.backgroundColor } : '#023047'}>
                 <BoardHeader />
                 <div className="group-container">
@@ -74,6 +77,7 @@ export function BoardDetails() {
                     />
                 </div>
             </section>
+            {/* </div> */}
         </>
     )
 }
