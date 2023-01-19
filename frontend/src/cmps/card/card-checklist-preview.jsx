@@ -31,6 +31,12 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
         onSaveCheckList(newCheckLists)
     }
 
+    function onEditChecklistHeader(){
+        
+    }
+
+
+
 
     return (<>
         <div className="progress-bar-container">
@@ -45,12 +51,10 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
 
         <div className="todo-container">
             {checklistsState.todos.map(t => {
-                // console.log('t: ', t)
-
                 return (<div className="todo" key={t.id}>
                     <span className={`${t.isDone ? "checked" : ''}`} onClick={() => onIsTodoDone(t)}></span>
                     <div className="todo-title" >
-                        <p>{t.title}</p>
+                        <p className={`${t.isDone ? 'todo-done' : ''}`}>{t.title}</p>
                         <div>utils</div>
                     </div>
                 </div>)
