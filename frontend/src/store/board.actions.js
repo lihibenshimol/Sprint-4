@@ -2,7 +2,7 @@ import { boardService } from "../services/board.service.local.js";
 // import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UPDATE_BOARD } from "./board.reducer.js";
+import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UNDO_UPDATE_BOARD, UPDATE_BOARD } from "./board.reducer.js";
 
 // Action Creators:
 export function getActionRemoveBoard(boardId) {
@@ -76,11 +76,14 @@ export async function addBoard(board) {
 
 export async function updateBoard(board) {
     try {
+        store.dispatch(getActionUpdateBoard({...board}))
         const savedBoard = await boardService.save(board);
-        store.dispatch(getActionUpdateBoard(savedBoard))
         return savedBoard
     } catch (err) {
         console.log('Cannot save board', err);
+        store.dispatch({
+            type: UNDO_UPDATE_BOARD,
+        })
         throw err;
     }
 }
