@@ -5,46 +5,18 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import addIcon from '../assets/img/add.svg';
 
-export function GroupList() {
+export function GroupList({onAddGroup, onAddCard, onRemoveGroup}) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [editMode, setEditMode] = useState(false)
     const [groupToEdit, setGroupToEdit] = useState(boardService.getEmptyGroup())
 
 
-    async function addGroup(ev) {
+    function addGroup(ev) {
         ev.preventDefault()
         setEditMode(!editMode)
-        try {
-            await boardService.addNewItem(board, groupToEdit, 'groups')
-            updateBoard(board)
-            groupToEdit.title = ''
-        } catch (err) {
-            console.log('Cannot add group = ', err)
-            throw err
-        }
+        onAddGroup(groupToEdit)
     }
-
-    async function addCard(group, card) {
-        try {
-            await boardService.addNewItem(group, card, 'cards')
-            updateBoard(board)
-            card.title = ''
-        } catch (err) {
-            console.log('Cannot remove group = ', err)
-        }
-    }
-
-    async function removeGroup(groupId) {
-        try {
-            const idx = board.groups.findIndex(g => g.id === groupId)
-            board.groups.splice(idx, 1)
-            updateBoard(board)
-
-        } catch (err) {
-            console.log('Cannot remove group = ', err)
-        }
-    }
-
+    
     function handleChange({ target }) {
         let { value } = target
         setGroupToEdit((prevGroup) => ({ ...prevGroup, title: value }))
@@ -56,8 +28,8 @@ export function GroupList() {
                 {board.groups.map(group => <section className="group-wrapper flex" key={group.id}>
                     <GroupDetails
                         group={group}
-                        addCard={addCard}
-                        removeGroup={removeGroup}
+                        onAddCard={onAddCard}
+                        onRemoveGroup={onRemoveGroup}
                     />
                 </section>)}
 
