@@ -6,6 +6,7 @@ export function CardDescription({ card, onSaveDesc, isDescriptionEdit, setIsDesc
     function onIsDescriptionEdit() {
         setIsDescriptionEdit(!isDescriptionEdit)
     }
+    
     function cancelEdit() {
         setIsDescriptionEdit(!isDescriptionEdit)
         setDesc(prevDesc => card.desc)
@@ -13,7 +14,6 @@ export function CardDescription({ card, onSaveDesc, isDescriptionEdit, setIsDesc
 
     function handleChange({ target }) {
         let { value, name: filed } = target
-        console.log('value: ', value)
         setDesc(prevDesc => value)
     }
 
