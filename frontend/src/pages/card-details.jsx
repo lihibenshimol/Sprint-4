@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
-import { cardService } from "../services/card.service.local"
-
 import { Loader } from "../cmps/loader"
 import { SideBar } from "../cmps/card/card-side-bar"
 import { CardDescription } from "../cmps/card/card-description"
@@ -10,10 +8,9 @@ import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 
 import { RxActivityLog } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
-import { IoMdCheckboxOutline } from 'react-icons/io';
 import { boardService } from "../services/board.service.local"
 import { useSelector } from "react-redux"
-import { CheckList } from "../cmps/card/card-checklist"
+import { CheckListList } from "../cmps/card/card-checklist-list"
 
 
 
@@ -106,16 +103,8 @@ export function CardDetails() {
                                 setIsDescriptionEdit={setIsDescriptionEdit} />
                         </section>
 
-                        {/* {card.checklist && ( */}
-                        <section className="card-checklist">
-                            <div className="section-header">
-                                <span className="check-list"><IoMdCheckboxOutline /></span>
-                                <h3>{card.checklist ? card.checklist.title : 'Checklist'}</h3>
-                                <button >Edit</button>
-                            </div>
-                            <CheckList checklist={card.checklist} />
-                        </section>
-                        {/* )} */}
+                        {card.checklists && <CheckListList
+                            checklists={card.checklists} />}
 
                         {/* <section className="card-activity">
                             <div className="activity-header">

@@ -1,11 +1,14 @@
 
 
 
-export function CheckList(checklist) {
+export function CheckListPreview({ checklist }) {
+    console.log('checklist: ', checklist)
 
     function getDoneTodos() {
-        if (!checklist.todos) return 0
+        if (!checklist.todos.length) return 0
         const todos = checklist.todos
+        console.log('todos: ',todos)
+        
         // const isDONE = todos.filter(todo => todo.isDone).length
         const isDONE = todos.reduce((acc, todo) => {
             if (todo.isDone) acc++
@@ -22,7 +25,7 @@ export function CheckList(checklist) {
     return (
         <>
             <div className="progress-bar-container">
-                <span>{getDoneTodos()}%</span>
+                <span>{getDoneTodos().toFixed(0)}%</span>
                 <div className="progress-bar">
                     <div className="bar" style={{ width: `${getDoneTodos()}%` }}></div>
                 </div>
