@@ -30,7 +30,7 @@ export function CardDescription({ card, onSaveDesc, isDescriptionEdit, setIsDesc
         {
             isDescriptionEdit && (
                 // <div >
-                <form className="description-editor">
+                <form onSubmit={onSubmitDetails} className="description-editor">
                     <textarea
                         type="text"
                         id="body"
