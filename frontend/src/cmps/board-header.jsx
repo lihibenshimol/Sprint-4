@@ -5,6 +5,8 @@ import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
 import { updateBoard } from "../store/board.actions"
 import { AiFillStar } from 'react-icons/ai'
+import { BsFilter } from 'react-icons/bs'
+import { TfiDashboard } from 'react-icons/tfi'
 
 
 export function BoardHeader() {
@@ -51,12 +53,12 @@ export function BoardHeader() {
                 </section>
 
                 <section className="right">
-                    <button className="board-header-btn-icon filter-icon">
-                        <img className="board-header-icon filter" src={filterIcon} alt="filter" />
+                    <button className="board-header-btn-icon filter-icon">   
+                        <BsFilter />
                         Filter
                     </button>
                     <button className="board-header-btn-icon dashboard-icon">
-                        <img className="board-header-icon dashboard" src={dashboardIcon} alt="dashboard" />
+                    <TfiDashboard />
                         Dashboard
                     </button>
                 </section>

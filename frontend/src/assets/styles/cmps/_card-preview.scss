@@ -1,10 +1,14 @@
 .card-list {
     flex: 1 1 auto;
     margin: 0 4px;
-    min-height: 0;
+    min-height: 42.391px;
     // overflow: hidden;
     // padding: 0 4px;
     z-index: 1;
+
+    // &.drag-over {
+    //     background-color: #172b4d;
+    // }
 }
 
 a:hover {
@@ -25,6 +29,12 @@ a:hover {
     position: relative;
     text-decoration: none;
     color: #172b4d;
+
+
+    &:hover {
+        background-color: #f4f4f8;
+        cursor: pointer;
+    }
     
     .card-title {
         clear: both;
