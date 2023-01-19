@@ -84,3 +84,8 @@ export async function updateBoard(board) {
         throw err;
     }
 }
+
+export async function updateCard(board, card, content, key) {
+    card[key] = content
+    updateBoard(board)
+}

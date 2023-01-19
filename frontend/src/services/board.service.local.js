@@ -74,13 +74,17 @@ function getEmptyGroup() {
 //     }
 // }
 
+// async function updateCard(boardId, card, content, key) {
+//     card[key] = content
+//     save(boardId)
+// }
+
 async function addNewItem(parent, entityToAdd, entityType) {
     console.log('entityToAdd = ', entityToAdd)
 
     try {
         entityToAdd.id = utilService.makeId()
         parent[entityType].push(entityToAdd)
-
         // const collection = await dbService.getCollection('toy')
         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
         return entityToAdd
