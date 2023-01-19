@@ -59,8 +59,12 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
         finishCards.splice(destination.index, 0, card)
         const newEndColumn = {...endColumn, cards: finishCards}
 
-        board.groups = board.groups.map(g => (g.id === newStartColumn.id) ? newStartColumn : g)
-        board.groups = board.groups.map(g => (g.id === newEndColumn.id) ? newEndColumn : g)
+        board.groups = board.groups.map(g => {
+            if(g.id === newStartColumn.id) return newStartColumn
+            else if(g.id === newEndColumn.id) return newEndColumn
+            else return g
+        })
+        
         updateBoard(board)
     }
 
