@@ -1,3 +1,6 @@
-.trello-loader{
+.trello-loader {
+    position: fixed;
     width: 30px;
+    top: 40vh;
+    z-index: 100;
 }

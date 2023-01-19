@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import { SideBar } from "../cmps/side-bar"
-import { UserAvatarPreview } from "../cmps/user-avatar-preview"
+
 import { cardService } from "../services/card.service.local"
-import { BsTextLeft } from 'react-icons/bs';
-import { RxActivityLog } from 'react-icons/rx';
-import { CardDescription } from "../cmps/card/card-description"
+
 import { Loader } from "../cmps/loader"
+import { SideBar } from "../cmps/card/card-side-bar"
+import { CardDescription } from "../cmps/card/card-description"
+import { UserAvatarPreview } from "../cmps/user-avatar-preview"
+
+import { RxActivityLog } from 'react-icons/rx';
+import { BsTextLeft } from 'react-icons/bs';
+
 
 
 export function CardDetails() {
@@ -42,79 +46,78 @@ export function CardDetails() {
         }
     }
 
-    if (!card) return <Loader />
     return <div className="window full">
-
+        {!card && <Loader className="flex align-center" />}
         <section className="card">
-            <Loader />
-            <button className="close-btn">X</button>
-            <div className="card-header">
-                <span className="icon fa card-icon"></span>
-                <h2 className="title">{card.title}</h2>
-                <div>
-                    <p>in group: Testing</p>
+            {card && (<><button className="close-btn">X</button>
+                <div className="card-header">
+                    <span className="icon fa card-icon"></span>
+                    <h2 className="title">{card.title}</h2>
+                    <div>
+                        <p>in group: Testing</p>
+                    </div>
                 </div>
-            </div>
-            <div className="card-content flex">
-                <div className="main-content">
-                    <section className="card-details">
-                        {card.members.length &&
-                            <div className="details">
-                                <h5>Members</h5>
-                                <article className="members-container">
-                                    <UserAvatarPreview users={card.members} />
-                                    <div className="member add-btn fa add"></div>
-                                </article>
-                            </div>}
+                <div className="card-content flex">
+                    <div className="main-content">
+                        <section className="card-details">
+                            {card.members.length &&
+                                <div className="details">
+                                    <h5>Members</h5>
+                                    <article className="members-container">
+                                        <UserAvatarPreview users={card.members} />
+                                        <div className="member add-btn fa add"></div>
+                                    </article>
+                                </div>}
 
-                        {card.label.length &&
-                            <div className="details">
-                                <h5>labels</h5>
-                                <article className="labels-container">
-                                    {card.label.map(label => {
-                                        return <div className="label" key={label}>
-                                            <span className=" circle-label"></span>
-                                            {label}
-                                        </div>
-                                    })}
-                                    <div className="label fa add hover"></div>
-                                </article>
-                            </div>}
+                            {card.label.length &&
+                                <div className="details">
+                                    <h5>labels</h5>
+                                    <article className="labels-container">
+                                        {card.label.map(label => {
+                                            return <div className="label" key={label}>
+                                                <span className=" circle-label"></span>
+                                                {label}
+                                            </div>
+                                        })}
+                                        <div className="label fa add hover"></div>
+                                    </article>
+                                </div>}
 
-                        <h3>{card.checklist && card.checklist}</h3>
-                    </section>
+                            <h3>{card.checklist && card.checklist}</h3>
+                        </section>
 
-                    <section className="card-description">
-                        <div className="description-header">
-                            <span><BsTextLeft /></span>
-                            <h3>Description</h3>
-                            <button>Edit</button>
-                        </div>
-                        <CardDescription card={card}
-                            submitDetail={submitDetail}
-                            isDescriptionEdit={isDescriptionEdit}
-                            setIsDescriptionEdit={setIsDescriptionEdit} />
-                    </section>
-
-                    {card.checklist && (
-                        <section className="card-checklist">
-                            <div className="checklist-header">
+                        <section className="card-description">
+                            <div className="description-header">
                                 <span><BsTextLeft /></span>
                                 <h3>Description</h3>
+                                {!isDescriptionEdit && <button onClick={setIsDescriptionEdit}>Edit</button>}
                             </div>
-                            {card.describe && <p>{card.describe}</p>}
-                        </section>)}
+                            <CardDescription card={card}
+                                submitDetail={submitDetail}
+                                isDescriptionEdit={isDescriptionEdit}
+                                setIsDescriptionEdit={setIsDescriptionEdit} />
+                        </section>
 
-                    <section className="card-activity">
-                        <div className="activity-header">
-                            <span><RxActivityLog /></span>
-                            <h3>Activity</h3>
-                        </div>
-                        <p>routable, smart cmp</p>
-                    </section>
+                        {card.checklist && (
+                            <section className="card-checklist">
+                                <div className="checklist-header">
+                                    <span><BsTextLeft /></span>
+                                    <h3>Description</h3>
+                                </div>
+                                {card.describe && <p>{card.describe}</p>}
+                            </section>)}
+
+                        <section className="card-activity">
+                            <div className="activity-header">
+                                <span><RxActivityLog /></span>
+                                <h3>Activity</h3>
+                            </div>
+                            <p>routable, smart cmp</p>
+                        </section>
+                    </div >
+                    <SideBar />
                 </div >
-                <SideBar />
-            </div >
+            </>)}
         </section >
     </div>
 }
