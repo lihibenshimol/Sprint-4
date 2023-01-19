@@ -1,0 +1,26 @@
+.card .card-checklist {
+
+    .progress-bar-container {
+        position: relative;
+        margin-bottom: 6px;
+
+        span {
+            color: var(--ds-text-subtle, #5e6c84);
+            font-size: 11px;
+            left: 0;
+            line-height: 10px;
+            position: absolute;
+            text-align: center;
+            top: -1px;
+            width: 32px;
+        }
+
+        .progress-bar {
+            background: var(--ds-background-neutral, #091e4214);
+            border-radius: 4px;
+            height: 8px;
+            margin: 0 0 0 40px;
+            overflow: hidden;
+        }
+    }
+}

@@ -3,7 +3,10 @@ import { updateBoard } from "../store/board.actions";
 import { GroupDetails } from "./group-details";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import addIcon from '../assets/img/add.svg';
+import { FiPlus } from 'react-icons/fi'
+import { RxCross2 } from 'react-icons/rx'
+
+
 import { DragDropContext } from 'react-beautiful-dnd'
 
 export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
@@ -43,21 +46,31 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
 
 
                 <section className="add-group-section">
-                    <div onClick={() => setEditMode(!editMode)} className={"add-group-btn" + (editMode ? ' edit-mode' : '')}>
-                        <span className="group-list-add-icon">
-                            <img src={addIcon} /> </span>
+                    {/* <div onClick={() => setEditMode(!editMode)} className={"add-group-btn" + (editMode ? ' edit-mode' : '')}>
                         <span className="placeholder">
-                            Add another list
+                            <FiPlus />  Add another list
                         </span>
-                    </div>
+                    </div> */}
 
-                    <form onSubmit={addGroup} className={"group-title-form" + (editMode ? ' edit-mode' : '')} >
-                        <input onChange={handleChange}
-                            spellCheck="false"
-                            dir="auto"
-                            value={groupToEdit.title} />
-                        <button className="btn-add-group">Add list</button>
-                    </form>
+                    <span onClick={() => setEditMode(!editMode)} className={"add-item-btn" + (editMode ? ' edit-mode' : '')}> <FiPlus /> Add another list </span>
+
+                    <div className={"add-item" + (editMode ? ' edit-mode' : '')}>
+                        <form onSubmit={addGroup} >
+                            <textarea
+                                type="text"
+                                name="title"
+                                value={groupToEdit.title}
+                                onChange={handleChange}
+                                placeholder="Enter list title..."
+                            >
+                            </textarea>
+
+                            <span className="add-group-btns">
+                                <button className="save-btn">Add list</button>
+                                <button onClick={() => setEditMode(!editMode)} type="button" className="cancel-btn"><RxCross2 /></button>
+                            </span>
+                        </form>
+                    </div>
                 </section>
             </div>
         </>

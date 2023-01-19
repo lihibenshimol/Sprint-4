@@ -6,6 +6,7 @@ import { boardService } from "../services/board.service.local";
 import dotsIcon from '../assets/img/dots.svg'
 import addIcon from '../assets/img/add.svg';
 import { RxCross2 } from 'react-icons/rx'
+import { FiPlus } from 'react-icons/fi'
 import { Droppable } from "react-beautiful-dnd";
 
 
@@ -101,21 +102,26 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup }) {
                     // </Droppable>
                 }
 
-                <h1 onClick={() => setAddMode(!addMode)} className={"area-add-card" + (addMode ? ' edit-mode' : '')}>   <img src={addIcon} /> Add a card</h1>
-                <form onSubmit={onSaveCard} className={"new-card-input" + (addMode ? ' edit-mode' : '')}>
-                    <input
-                        type="text"
+                <span onClick={() => setAddMode(!addMode)} className={"area-add-item" + (addMode ? ' edit-mode' : '')}> <FiPlus /> Add a card </span>
+
+                <div className={"add-item-btn" + (addMode ? ' edit-mode' : '')}>
+                <form onSubmit={onSaveCard} >
+                <textarea
+                        type="text" 
                         name="title"
-                        placeholder="Enter a title for this card..."
                         value={cardToEdit.title}
                         onChange={handleCardChange}
-                    />
-                    {/* <button className="btn-add-card">Add card</button> */}
+                        placeholder="Enter a title for this card..."
+                        >
+                        </textarea>
+                
                     <span className="add-card-btns">
                         <button className="save-btn">Add card</button>
                         <button onClick={() => setAddMode(!addMode)} type="button" className="cancel-btn"><RxCross2 /></button>
                     </span>
                 </form>
+                </div>
+
             </div>
         </>
     )
