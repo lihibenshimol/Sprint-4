@@ -7,7 +7,7 @@ import { FiPlus } from 'react-icons/fi'
 import { RxCross2 } from 'react-icons/rx'
 
 
-import { DragDropContext } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 
 export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
@@ -29,20 +29,33 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
 
     function onDragEnd(res) {
         // TODO: reorder our columns
-        const { destination, source, draggableId } = res
+        const { destination, source, draggableId, type } = res
         if (!destination) return
         if (destination.droppableId === source.droppableId &&
             destination.index === source.index) { return }
 
+        if (type === 'column') {
+            const newColumns = [...board.groups]
+            const column = newColumns.find(c => c.id === draggableId)
+            newColumns.splice(source.index, 1)
+            newColumns.splice(destination.index, 0, column)
+
+            board.groups = newColumns
+            updateBoard(board)
+        }
+
+        
         const startColumn = board.groups.find(g => g.id === source.droppableId)
         const endColumn = board.groups.find(g => g.id === destination.droppableId)
-
-        if(startColumn.id === endColumn.id) {
+        
+        // if(!startColumn || endColumn) return
+        if (startColumn?.id === endColumn?.id) {
+            if(!startColumn?.id || !endColumn?.id) return
             const newCards = [...startColumn.cards]
             const card = newCards.find(c => c.id === draggableId)
             newCards.splice(source.index, 1)
             newCards.splice(destination.index, 0, card)
-    
+
             const newColumn = { ...startColumn, cards: newCards }
             board.groups = board.groups.map(g => (g.id === newColumn.id) ? newColumn : g)
             console.log(board.groups)
@@ -53,18 +66,18 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
         const startCards = [...startColumn.cards]
         const card = startCards.find(c => c.id === draggableId)
         startCards.splice(source.index, 1)
-        const newStartColumn = {...startColumn, cards: startCards}
+        const newStartColumn = { ...startColumn, cards: startCards }
 
         const finishCards = [...endColumn.cards]
         finishCards.splice(destination.index, 0, card)
-        const newEndColumn = {...endColumn, cards: finishCards}
+        const newEndColumn = { ...endColumn, cards: finishCards }
 
         board.groups = board.groups.map(g => {
-            if(g.id === newStartColumn.id) return newStartColumn
-            else if(g.id === newEndColumn.id) return newEndColumn
+            if (g.id === newStartColumn.id) return newStartColumn
+            else if (g.id === newEndColumn.id) return newEndColumn
             else return g
         })
-        
+
         updateBoard(board)
     }
 
@@ -72,14 +85,23 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
         <>
             <div className="group-list" >
                 <DragDropContext onDragEnd={onDragEnd}>
-                    {board.groups.map(group => <section className="group-wrapper flex" key={group.id}>
-                        <GroupDetails
-                            group={group}
-                            onAddCard={onAddCard}
-                            onRemoveGroup={onRemoveGroup}
-                        />
-                    </section>)
-                    }
+                    <Droppable droppableId="all-columns" direction="horizontal" type="column">
+                        {(provided) => (
+                            <div ref={provided.innerRef} {...provided.droppableProps} className="group-list">
+                                {board.groups.map((group, idx) =>
+                                    <GroupDetails
+                                        idx={idx}
+                                        key={group.id}
+                                        group={group}
+                                        onAddCard={onAddCard}
+                                        onRemoveGroup={onRemoveGroup}
+                                    />
+                                )
+                                }
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
                 </DragDropContext>
 
 
