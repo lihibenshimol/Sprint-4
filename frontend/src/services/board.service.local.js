@@ -107,7 +107,7 @@ function getEmptyBoard() {
     return {
         title: "",
         isStarred: false,
-        style: { backgroundColor: '#026aa7' },
+        style: { backgroundImg: '#026aa7' },
         // "createdBy": {
         //     "_id": "u101",
         //     "fullname": "Abi Abambi",
@@ -162,7 +162,11 @@ function _createDemoBoards() {
                 //     "fullname": "Abi Abambi",
                 //     "imgUrl": "http://some-img"
                 // },
-                "style": { backgroundColor: '#1d3557' },
+                "style": {
+                    backgroundImg: "https://images.unsplash.com/photo-1614314169000-4cf229a1db33?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MzJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+                    backgroundColor: "#3d5a80"
+
+                },
                 "labels": [
                     {
                         "id": "l101",

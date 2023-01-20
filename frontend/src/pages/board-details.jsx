@@ -11,15 +11,20 @@ export function BoardDetails() {
     const { boardId } = useParams()
     const navigate = useNavigate()
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+    let inlineStyles ={}
 
     useEffect(() => {
         loadBoard()
+       
     }, [boardId])
 
     async function loadBoard() {
         try {
             const board = await boardService.getById(boardId)
             setCurrBoard(board)
+            // inlineStyles = {
+            //     backgroundImage: `url(${board.style.backgroundImg})`
+            // }
         } catch (err) {
             console.log('Cannot load board')
             throw err
@@ -60,12 +65,14 @@ export function BoardDetails() {
         }
     }
 
+
     if (!board) return <Loader />
     return (
         <>
         <Outlet />
         
-            <section className='board-details main-container' style={(board.style.backgroundColor) ? { backgroundColor: board.style.backgroundColor } : '#023047'}>
+            <section className='board-details main-container' style={(board.style.backgroundImg) ? {backgroundColor: board.style.backgroundColor } : '#023047'}>
+            {/* <section className='board-details main-container' style={inlineStyles}> */}
                 <BoardHeader />
                 <div className="group-container">
                     <GroupList 
