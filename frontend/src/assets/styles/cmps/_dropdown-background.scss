@@ -3,4 +3,39 @@
     top: 50%;
     left: 110%;
     transform: translate(0, -50%);
+
+    .dropdown-background-photos, .dropdown-background-colors {
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-block-end: 0.5em;
+        }
+
+        button {
+            background-color: rgba(9, 30, 66, 0.04);
+            color: $clr9;
+            width: initial;
+            padding: 0.43em 0.8572em;
+            line-height: 1.45;
+
+            &:hover {
+                background-color: rgba(9, 30, 66, 0.08);
+            }
+        }
+    }
+
+    .color-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        > * {
+            width: 85.23px;
+            height: 56px;
+            border-radius: 0.3em;
+            margin: 0.4em;
+            cursor: pointer;
+        }
+    }
 }

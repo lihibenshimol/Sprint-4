@@ -3,7 +3,7 @@ import { DropdownBoards } from "./dropdown-boards";
 import { DropdownCreate } from "./dropdown-create";
 import { DropdownCreateList } from "./dropdown-create-list";
 
-export function DropDown({ type, setAddingBoard, setDropDown, setBgMenuOpen, setBoardBackground }) {
+export function DropDown({ type, setAddingBoard, setDropDown, setBgMenuOpen, setBoardBackground, colors, isSelectedColor }) {
 
     switch (type) {
         case 'boards':
@@ -32,7 +32,7 @@ export function DropDown({ type, setAddingBoard, setDropDown, setBgMenuOpen, set
             )
         case 'background':
             return (
-                <DropdownBackground setBoardBackground={setBoardBackground} setBgMenuOpen={setBgMenuOpen} />
+                <DropdownBackground isSelectedColor={isSelectedColor} colors={colors} setBoardBackground={setBoardBackground} setBgMenuOpen={setBgMenuOpen} />
             )
     }
 }

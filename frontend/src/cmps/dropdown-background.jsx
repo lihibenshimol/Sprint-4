@@ -1,4 +1,8 @@
-export function DropdownBackground({ setBgMenuOpen, setBoardBackground }) {
+import { boardService } from "../services/board.service.local"
+
+export function DropdownBackground({ setBgMenuOpen, setBoardBackground, isSelectedColor }) {
+
+    const colors = boardService.getBoardColors()
 
     function handleClosingDropdown() {
         setBgMenuOpen(false)
@@ -12,13 +16,24 @@ export function DropdownBackground({ setBgMenuOpen, setBoardBackground }) {
             </h3>
 
             <section className="dropdown-background-photos">
-                <label>Photos</label>
-                {/* <button>See more</button> */}
+                <div>
+                    <label>Photos</label>
+                    <button>See more</button>
+                </div>
             </section>
 
             <section className="dropdown-background-colors">
-                <label>Colors</label>
-                {/* <button>See more</button> */}
+                <div>
+                    <label>Colors</label>
+                    <button>See more</button>
+                </div>
+                <section className="color-list">
+                    {colors.slice(0, 6).map(color => (
+                        <div key={color} onClick={() => setBoardBackground(color)} style={{ backgroundColor: color }}>
+                            {isSelectedColor(color) && <i className='fa checked'></i>}
+                        </div>
+                    ))}
+                </section>
             </section>
         </section>
     )

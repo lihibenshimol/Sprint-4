@@ -10,6 +10,7 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
     const [board, setBoard] = useState(boardService.getEmptyBoard())
     const [isBgMenuOpen, setBgMenuOpen] = useState(false)
     const navigate = useNavigate()
+    const colors = boardService.getBoardColors()
 
     async function onAddBoard(ev) {
         ev.preventDefault()
@@ -58,25 +59,24 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
 
             <form onSubmit={onAddBoard}>
                 <label>Background</label>
-                <section className='bg-options'></section>
+
+                {/* <section className='bg-options'>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </section> */}
+
                 <section className='clr-options'>
-                    <div onClick={() => setBoardBackground('#0079bf')} style={{ backgroundColor: '#0079bf' }}>
-                        {isSelectedColor('#0079bf') && <i className='fa checked'></i>}
-                    </div>
-                    <div onClick={() => setBoardBackground('#d29034')} style={{ backgroundColor: '#d29034' }}>
-                        {isSelectedColor('#d29034') && <i className='fa checked'></i>}
-                    </div>
-                    <div onClick={() => setBoardBackground('#519839')} style={{ backgroundColor: '#519839' }}>
-                        {isSelectedColor('#519839') && <i className='fa checked'></i>}
-                    </div>
-                    <div onClick={() => setBoardBackground('#b04632')} style={{ backgroundColor: '#b04632' }}>
-                        {isSelectedColor('#b04632') && <i className='fa checked'></i>}
-                    </div>
-                    <div onClick={() => setBoardBackground('#89609e')} style={{ backgroundColor: '#89609e' }}>
-                        {isSelectedColor('#89609e') && <i className='fa checked'></i>}
-                    </div>
+
+                    {colors.slice(0, 5).map(color => (
+                        <div key={color} onClick={() => setBoardBackground(color)} style={{ backgroundColor: color }}>
+                            {isSelectedColor(color) && <i className='fa checked'></i>}
+                        </div>
+                    ))}
+
                     <div onClick={(ev) => { ev.stopPropagation(); setBgMenuOpen(prevMenuOpen => !prevMenuOpen) }} className='more-clr-options'>
-                        {isBgMenuOpen && <DropDown setBoardBackground={setBoardBackground} setBgMenuOpen={setBgMenuOpen} type={'background'} />}
+                        {isBgMenuOpen && <DropDown isSelectedColor={isSelectedColor} colors={colors} setBoardBackground={setBoardBackground} setBgMenuOpen={setBgMenuOpen} type={'background'} />}
                     </div>
                 </section>
 
