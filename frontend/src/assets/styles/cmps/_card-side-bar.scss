@@ -46,3 +46,37 @@
         }
     }
 }
+
+.card .extras-menu {
+    cursor: default;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+    position: absolute;
+    top: 38px;
+    left: 0px;
+    min-height: 100px;
+    min-width: 270px;
+    border-radius: 3px;
+    z-index: 1000;
+    box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+
+    .title-container {
+        color: $clr12;
+        line-height: 40px;
+        text-align: center;
+        border-bottom: 1px solid rgba(9, 30, 66, .129);
+        margin: 0 12px 8px;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .action-btn {
+        cursor: pointer;
+        line-height: 20px;
+        color: #000000;
+        padding: 6px 12px;
+    }
+}

@@ -32,6 +32,20 @@ export function SideBar({ groupId, card, board, onSaveCheckList, }) {
             <button className="label-btn">
                 <span className="tag-label labels"><TbTag /></span>
                 <span>labels</span>
+
+                <div className="extras-menu flex">
+                    <span className="title-container">
+                        <p>
+                            Members
+                        </p>
+                    </span>
+                    <span>x</span>
+                    <span className="action-btn delete-btn" >Delete this list</span>
+                </div>
+
+
+
+
             </button>
             <button className="label-btn" onClick={onAddChecklist}>
                 <span className=" tag-label"><IoMdCheckboxOutline /></span>
@@ -46,6 +60,7 @@ export function SideBar({ groupId, card, board, onSaveCheckList, }) {
                 <span>Cover</span>
             </button>
         </section>
+
     </div>
     )
 }
