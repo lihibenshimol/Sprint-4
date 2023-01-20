@@ -3,11 +3,14 @@ import { boardService } from "../services/board.service.local"
 import { useNavigate } from 'react-router-dom'
 import { addBoard } from '../store/board.actions'
 import groupsImg from '../assets/img/groups-img.svg'
+import { DropDown } from './dropdown'
 
 export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
 
     const [board, setBoard] = useState(boardService.getEmptyBoard())
+    const [isBgMenuOpen, setBgMenuOpen] = useState(false)
     const navigate = useNavigate()
+    const colors = boardService.getBoardColors()
 
     async function onAddBoard(ev) {
         ev.preventDefault()
@@ -32,8 +35,16 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
         setAddingBoard(prevAddingBoard => !prevAddingBoard)
     }
 
+    function setBoardBackground(bg) {
+        setBoard(prevBoard => ({ ...prevBoard, style: { ...prevBoard.style, backgroundColor: bg } }))
+    }
+
+    function isSelectedColor(clr) {
+        return clr === board.style.backgroundColor
+    }
+
     return (
-        <section onClick={(ev) => ev.stopPropagation()} className={fromNavbar ? 'dropdown dropdown-create-navbar' : 'dropdown dropdown-create'}>
+        <section onClick={(ev) => { ev.stopPropagation(); setBgMenuOpen(false) }} className={fromNavbar ? 'dropdown dropdown-create-navbar' : 'dropdown dropdown-create'}>
 
             <h3>Create board
                 <i onClick={handleClosingDropdown} className='fa xmark'></i>
@@ -41,12 +52,34 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
             </h3>
 
             <section className="img-container">
-                <div className="img-background">
+                <div className="img-background" style={{ backgroundColor: board.style.backgroundColor }}>
                     <img src={groupsImg} alt="Groups image" />
                 </div>
             </section>
 
             <form onSubmit={onAddBoard}>
+                <label>Background</label>
+
+                {/* <section className='bg-options'>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </section> */}
+
+                <section className='clr-options'>
+
+                    {colors.slice(0, 5).map(color => (
+                        <div key={color} onClick={() => setBoardBackground(color)} style={{ backgroundColor: color }}>
+                            {isSelectedColor(color) && <i className='fa checked'></i>}
+                        </div>
+                    ))}
+
+                    <div onClick={(ev) => { ev.stopPropagation(); setBgMenuOpen(prevMenuOpen => !prevMenuOpen) }} className='more-clr-options'>
+                        {isBgMenuOpen && <DropDown isSelectedColor={isSelectedColor} colors={colors} setBoardBackground={setBoardBackground} setBgMenuOpen={setBgMenuOpen} type={'background'} />}
+                    </div>
+                </section>
+
                 <label htmlFor="title">Board title <span className='required'>*</span></label>
                 <input className={board.title ? '' : 'input-required'} autoFocus name='title' value={board.title} onChange={handleChange} type="text" />
                 <p><span>👋</span>Board title is required</p>

@@ -44,13 +44,13 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
             updateBoard(board)
         }
 
-        
+
         const startColumn = board.groups.find(g => g.id === source.droppableId)
         const endColumn = board.groups.find(g => g.id === destination.droppableId)
-        
+
         // if(!startColumn || endColumn) return
         if (startColumn?.id === endColumn?.id) {
-            if(!startColumn?.id || !endColumn?.id) return
+            if (!startColumn?.id || !endColumn?.id) return
             const newCards = [...startColumn.cards]
             const card = newCards.find(c => c.id === draggableId)
             newCards.splice(source.index, 1)
