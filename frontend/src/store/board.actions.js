@@ -77,14 +77,14 @@ export async function addBoard(board) {
 export async function updateBoard(board) {
     try {
         store.dispatch(getActionUpdateBoard({...board}))
-        const savedBoard = await boardService.save(board);
+        const savedBoard = await boardService.save(board)
         return savedBoard
     } catch (err) {
-        console.log('Cannot save board', err);
+        console.log('Cannot save board', err)
         store.dispatch({
-            type: UNDO_UPDATE_BOARD,
+            type: UNDO_UPDATE_BOARD
         })
-        throw err;
+        throw err
     }
 }
 
