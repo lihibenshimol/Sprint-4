@@ -17,6 +17,7 @@
             // dissgn-items: center;
             //     position: relative;
             //     gap: 10px;
+            padding: 0 0 0 4.5px;
 
 
             .add-item-btn.edit-mode {
@@ -33,7 +34,7 @@
                 min-height: 40px;
                 max-height: 80px;
                 padding: 8px 8px;
-                margin: 0 2px;
+                margin: 0 2px 0 0;
                 cursor: pointer;
                 color: white;
 
@@ -139,12 +140,12 @@
                     height: 25px;
                     padding: 6px;
                     text-align: center;
-                    
+
                     &:hover {
                         background-color: #091e4214;
                         color: #172b4d;
                         border-radius: 3px;
-             
+
                     }
                 }
             }
