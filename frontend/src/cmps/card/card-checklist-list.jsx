@@ -21,18 +21,25 @@ export function CheckListList({ checklists, onSaveCheckList }) {
         const todo = boardService.getEmptyTodo()
         todo.title = todoTitle
         checklist.todos.push(todo)
+        const newChecklists = checklists
+            .map(c => (c.id === checklist.id) ? checklist : c)
+
+        onSaveCheckList(newChecklists)
     }
+
+
 
     function handleChange({ target }) {
         let { value, name: filed } = target
         setTodoTitle(prevDesc => value)
     }
 
-    function onSubmitDetails(ev) {
+    function onSubmitDetails(ev, checklist) {
         ev.preventDefault()
-        setIsAddTodoOpen(!isAddTodoOpen)
-        onAddTask()
+        onAddTask(checklist)
+        cancelEditMode()
     }
+
 
 
     return <>
@@ -48,17 +55,19 @@ export function CheckListList({ checklists, onSaveCheckList }) {
                     checklists={checklists}
                     checklist={checklist} />
 
+
+
                 {!isAddTodoOpen &&
                     <button className="btn btn-add-todo" onClick={onSetIsAddTodoOpen}>
                         Add an item
                     </button>}
                 {isAddTodoOpen && (
-                    <form onSubmit={onSubmitDetails} className="description-editor">
+                    <form onSubmit={(e) => onSubmitDetails(e, checklist)} className="description-editor">
                         <textarea
                             type="text"
                             id="body"
                             name="body"
-                            value={''}
+                            value={todoTitle}
                             onChange={handleChange}
                             placeholder="Add an item"
                         >
