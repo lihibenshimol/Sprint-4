@@ -80,7 +80,6 @@ export function CardDetails() {
 
 
 
-
     return <div className="window full">
         <div className="black-bg full" onClick={() => navigate(`/board/${board._id}`)}></div>
         {!card && <Loader className="flex align-center" />}

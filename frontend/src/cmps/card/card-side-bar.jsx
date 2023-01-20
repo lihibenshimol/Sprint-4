@@ -9,11 +9,9 @@ export function SideBar({ groupId, card, board, onSaveCheckList, }) {
 
     async function onAddChecklist() {
         try {
-            console.log('checklists: before', card.checklists)
             const newChecklist = boardService.getEmptyChecklist()
             card.checklists.push(newChecklist)
             const newChecklists = card.checklists
-            console.log('newChecklists: ', newChecklists)
 
             onSaveCheckList(newChecklists)
         } catch (err) {
@@ -21,19 +19,7 @@ export function SideBar({ groupId, card, board, onSaveCheckList, }) {
         }
     }
 
-    async function onAddChecklist() {
-        try {
-            console.log('checklists: before', card.checklists)
-            const newChecklist = boardService.getEmptyChecklist()
-            card.checklists.push(newChecklist)
-            const newChecklists = card.checklists
-            console.log('newChecklists: ', newChecklists)
 
-            onSaveCheckList(newChecklists)
-        } catch (err) {
-            console.log('Cant add the checklis', err)
-        }
-    }
 
 
     return (<div className="side-bar">
