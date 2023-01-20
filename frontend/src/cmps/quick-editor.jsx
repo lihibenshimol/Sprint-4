@@ -6,6 +6,7 @@ import { RiBankCard2Line } from 'react-icons/ri'
 import { RxClock } from 'react-icons/rx'
 import { FiArchive } from 'react-icons/fi'
 import { updateBoard } from "../store/board.actions"
+import { boardService } from "../services/board.service.local"
 
 
 export function QuickEditor({ groupId, cardId, openQuickEditor, quickEditor }) {
@@ -19,12 +20,14 @@ export function QuickEditor({ groupId, cardId, openQuickEditor, quickEditor }) {
         openQuickEditor(ev, !quickEditor)
     }
 
-    function removeCard(ev) {
+    async function onRemoveCard(ev) {
         ev.preventDefault()
-        const group = board.groups.find(g => g.id === groupId)
-        const cardIndex = group.cards.findIndex(c => c.id === cardId)
-        group.cards.splice(cardIndex, 1)
-        updateBoard(board)
+        try {
+          const updatedBoard = await boardService.removeCard(board, groupId, cardId)
+            updateBoard(updatedBoard)
+        } catch (err) {
+            console.log('err = ', err)
+        }
     }
 
 
@@ -39,7 +42,7 @@ export function QuickEditor({ groupId, cardId, openQuickEditor, quickEditor }) {
                 <button> <span className="quick-icon"> <BsFillPersonFill /> </span>Change members</button>
                 <button> <span className="quick-icon"> <RiBankCard2Line /> </span> Change cover</button>
                 <button> <span className="quick-icon"> <RxClock /> </span> Edit dates</button>
-                <button onClick={(ev) => removeCard(ev)}> <span className="quick-icon"> <FiArchive /> </span> Delete</button>
+                <button onClick={(ev) => onRemoveCard(ev)}> <span className="quick-icon"> <FiArchive /> </span> Delete</button>
             </div>
 
         </>

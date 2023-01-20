@@ -20,6 +20,7 @@ export const boardService = {
     //Cards
     getCardById,
     saveCard,
+    removeCard
 
 
 }
@@ -107,7 +108,7 @@ function getEmptyBoard() {
     return {
         title: "",
         isStarred: false,
-        style: { backgroundImg: '#026aa7' },
+        style: { backgroundColor: '#026aa7' },
         // "createdBy": {
         //     "_id": "u101",
         //     "fullname": "Abi Abambi",
@@ -148,6 +149,18 @@ async function saveCard(board, groupId, updatedCard) {
     save(board)
 }
 
+async function removeCard(board, groupId, cardId) {
+    const group = board.groups.find(g => g.id === groupId)
+    const cardIndex = group.cards.findIndex(c => c.id === cardId)
+    try {
+        group.cards.splice(cardIndex, 1)
+        save(board)
+        return board
+    } catch (err) {
+        console.log('Cannot remove card = ', err)
+    }
+}
+
 
 function _createDemoBoards() {
     let boards = utilService.loadFromStorage(STORAGE_KEY)
@@ -163,9 +176,7 @@ function _createDemoBoards() {
                 //     "imgUrl": "http://some-img"
                 // },
                 "style": {
-                    backgroundImg: "https://images.unsplash.com/photo-1614314169000-4cf229a1db33?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MzJ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
                     backgroundColor: "#3d5a80"
-
                 },
                 "labels": [
                     {
