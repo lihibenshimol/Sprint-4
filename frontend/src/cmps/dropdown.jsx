@@ -1,13 +1,14 @@
+import { DropdownBackground } from "./dropdown-background";
 import { DropdownBoards } from "./dropdown-boards";
 import { DropdownCreate } from "./dropdown-create";
 import { DropdownCreateList } from "./dropdown-create-list";
 
-export function DropDown({ type, setAddingBoard, setDropDown }) {
+export function DropDown({ type, setAddingBoard, setDropDown, setBgMenuOpen, setBoardBackground }) {
 
     switch (type) {
         case 'boards':
             return (
-                <DropdownBoards setDropDown={setDropDown}/>
+                <DropdownBoards setDropDown={setDropDown} />
             )
         case 'recent':
             return (
@@ -28,6 +29,10 @@ export function DropDown({ type, setAddingBoard, setDropDown }) {
         case 'create':
             return (
                 <DropdownCreate setAddingBoard={setAddingBoard} />
+            )
+        case 'background':
+            return (
+                <DropdownBackground setBoardBackground={setBoardBackground} setBgMenuOpen={setBgMenuOpen} />
             )
     }
 }

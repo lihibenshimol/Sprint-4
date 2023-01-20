@@ -253,3 +253,41 @@
         }
     }
 }
+
+.dropdown-create, .dropdown-create-navbar {
+    .clr-options, .bg-options {
+        display: flex;
+        justify-content: space-between;
+
+        > * {
+            width: 40px;
+            height: 32px;
+            border-radius: 0.2em;
+            background-color: $clr8;
+            cursor: pointer;
+        }
+    }
+
+    .clr-options {
+        margin-block-end: 1em;
+    }
+
+    .more-clr-options {
+        position: relative;
+        transition: background-color 0.1s ease-in-out;
+
+        &:hover {
+            background-color: rgba(9, 30, 66, 0.16);
+        }
+
+        &::before {
+            font-family: fa;
+            content: "\f141";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: $clr12;
+        }
+    }
+}

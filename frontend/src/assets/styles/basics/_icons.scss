@@ -51,6 +51,10 @@
     content: "\f104";
 }
 
+.fa.ellipsis::before {
+    content: "\f141";
+}
+
 // BRANDS
 .fa-brands.trello::before {
     content: "\f181";
