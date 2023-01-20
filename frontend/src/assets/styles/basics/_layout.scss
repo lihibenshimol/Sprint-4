@@ -40,6 +40,23 @@
     }
 }
 
+.homepage-header.main-layout {
+    @include for-narrow-layout {
+        grid-template-columns:
+            minmax(1rem, 1fr) minmax(auto, $mobile-breakpoint + 140px) minmax(1rem, 1fr);
+    }
+
+    @include for-normal-layout {
+        grid-template-columns:
+            minmax(1rem, 1fr) minmax(auto, $narrow-breakpoint + 140px) minmax(1rem, 1fr);
+    }
+
+    @include for-wide-layout {
+        grid-template-columns:
+            minmax(1rem, 1fr) minmax(auto, $normal-breakpoint + 140px) minmax(1rem, 1fr);
+    }
+}
+
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

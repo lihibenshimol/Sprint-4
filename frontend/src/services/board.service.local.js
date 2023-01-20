@@ -21,6 +21,7 @@ export const boardService = {
     getCardById,
     saveCard,
     getEmptyTodo,
+    removeCard,
 
 
 }
@@ -156,6 +157,18 @@ async function saveCard(board, groupId, updatedCard) {
     save(board)
 }
 
+async function removeCard(board, groupId, cardId) {
+    const group = board.groups.find(g => g.id === groupId)
+    const cardIndex = group.cards.findIndex(c => c.id === cardId)
+    try {
+        group.cards.splice(cardIndex, 1)
+        save(board)
+        return board
+    } catch (err) {
+        console.log('Cannot remove card = ', err)
+    }
+}
+
 
 function _createDemoBoards() {
     let boards = utilService.loadFromStorage(STORAGE_KEY)
@@ -170,7 +183,9 @@ function _createDemoBoards() {
                 //     "fullname": "Abi Abambi",
                 //     "imgUrl": "http://some-img"
                 // },
-                "style": { backgroundColor: '#1d3557' },
+                "style": {
+                    backgroundColor: "#3d5a80"
+                },
                 "labels": [
                     {
                         "id": "l101",

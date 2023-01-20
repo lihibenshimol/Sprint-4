@@ -1,6 +1,8 @@
 .board-details {
     height: 100%;
     padding-bottom: 10px;
+    background-repeat: no-repeat;
+   
     /* width */
     ::-webkit-scrollbar {
         height: rem(12px);

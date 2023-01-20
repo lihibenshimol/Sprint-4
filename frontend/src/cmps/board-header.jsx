@@ -38,7 +38,7 @@ export function BoardHeader() {
                 <section className="left">
                     <h1 onClick={() => setEditMode(!editMode)} className={"board-header-text" + (editMode ? ' edit-mode' : '')}>{board.title}</h1>
                     <form onSubmit={changeBoardTitle}>
-                        <input onChange={handleChange} className={"board-name-input" + (editMode ? ' edit-mode' : '')} aria-label="hello" spellCheck="false" dir="auto" value={boardNewTitle} />
+                        <input onChange={handleChange} className={"board-name-input" + (editMode ? ' edit-mode' : '')} aria-label="hello" autoFocus spellCheck="false" dir="auto" value={boardNewTitle} />
                     </form>
                     <span className="star-icon-box">
                         <button className="board-header-star-btn" >

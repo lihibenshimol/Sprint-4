@@ -65,8 +65,7 @@
 
 .homepage-header {
     background-color: $clr6;
-    padding: 1em 0;
-
+    
     h1 {
         margin: 0;
         font-size: 2rem;
@@ -75,9 +74,26 @@
     a {
         color: $clr2;
         font-size: 1.1rem;
+        padding: 0.906em 1.365em;
+        display: inline-block;
 
         &:hover {
             text-decoration: none;
+        }
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        > a {
+            padding: 0;
+        }
+
+        .cta-btn {
+            background-color: $clr14;
+            color: $clr6;
         }
     }
 

@@ -1,5 +1,12 @@
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { BsCreditCard2Back, BsFillPersonFill } from 'react-icons/bs'
+import { TiTag } from 'react-icons/ti'
+import { RiBankCard2Line } from 'react-icons/ri'
+import { RxClock } from 'react-icons/rx'
+import { FiArchive } from 'react-icons/fi'
+import { updateBoard } from "../store/board.actions"
+import { boardService } from "../services/board.service.local"
 
 
 export function QuickEditor({ groupId, cardId, openQuickEditor, quickEditor }) {
@@ -13,9 +20,14 @@ export function QuickEditor({ groupId, cardId, openQuickEditor, quickEditor }) {
         openQuickEditor(ev, !quickEditor)
     }
 
-    function del(ev) {
+    async function onRemoveCard(ev) {
         ev.preventDefault()
-        console.log('hello')
+        try {
+          const updatedBoard = await boardService.removeCard(board, groupId, cardId)
+            updateBoard(updatedBoard)
+        } catch (err) {
+            console.log('err = ', err)
+        }
     }
 
 
@@ -24,13 +36,13 @@ export function QuickEditor({ groupId, cardId, openQuickEditor, quickEditor }) {
         <>
             <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
             <div className="quick-editor-btns">
-                <button onClick={(e) => navig(e)}>Open card</button>
+                <button onClick={(e) => navig(e)}> <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card</button>
                 {/* <button onClick={() => navigate(`/board/${board._id}/g/${groupId}/c/${cardId}`)}>Open card</button> */}
-                <button>Edit labels</button>
-                <button>Change members</button>
-                <button>Change cover</button>
-                <button>Edit dates</button>
-                <button onClick={(ev) => del(ev)}>Delete</button>
+                <button> <span className="quick-icon"> <TiTag /> </span> Edit labels</button>
+                <button> <span className="quick-icon"> <BsFillPersonFill /> </span>Change members</button>
+                <button> <span className="quick-icon"> <RiBankCard2Line /> </span> Change cover</button>
+                <button> <span className="quick-icon"> <RxClock /> </span> Edit dates</button>
+                <button onClick={(ev) => onRemoveCard(ev)}> <span className="quick-icon"> <FiArchive /> </span> Delete</button>
             </div>
 
         </>
