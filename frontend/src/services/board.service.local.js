@@ -12,17 +12,16 @@ export const boardService = {
     getById,
     save,
     remove,
-    getEmptyCard,
     getEmptyBoard,
     addNewItem,
     getEmptyGroup,
 
     //Cards
     getCardById,
+    getEmptyCard,
     saveCard,
-    getEmptyTodo,
     removeCard,
-
+    getEmptyTodo,
 
 }
 window.cs = boardService

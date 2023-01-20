@@ -61,6 +61,7 @@ export function CardDetails() {
         }
     }
     
+    
     async function onSaveCheckList(checklists) {
         try {
             const updateCard = { ...card, checklists }
