@@ -5,6 +5,9 @@ import { boardService } from "../../services/board.service.local"
 
 export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
     const [checklistsState, setChecklistsToPreview] = useState(checklist)
+    const [isEditTodoTitle, setIsEditTodoTitle] = useState(false)
+    // const [title, setTitle] = useEffect(true)
+
 
     function getDoneTodos() {
         if (!checklist.todos.length) return 0
@@ -18,8 +21,6 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
     }
 
     function onIsTodoDone(todo) {
-        console.log('checklistsState: ', checklistsState)
-
         const newTodo = { ...todo, isDone: !todo.isDone }
         const todos = checklistsState.todos
             .map(todo => todo.id === newTodo.id ? newTodo : todo)
@@ -46,6 +47,7 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
 
 
 
+
     return (<>
         <div className="progress-bar-container">
             <span>{getDoneTodos().toFixed(0)}%</span>
@@ -62,7 +64,36 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
                 return (<div className="todo" key={t.id}>
                     <span className={`${t.isDone ? "checked" : ''}`} onClick={() => onIsTodoDone(t)}></span>
                     <div className="todo-title" >
-                        <p className={`${t.isDone ? 'todo-done' : ''}`}>{t.title}</p>
+
+
+                        {!isEditTodoTitle &&
+                            <p className={`${t.isDone ? 'todo-done' : ''}`}
+                            // onClick={onIsEditTodoTitle}
+                            >
+                                {t.title}</p>}
+
+                        {
+                            // isEditTodoTitle && (
+                            //     <form
+                            //         //  onSubmit={(e) => onSubmitDetails(e, checklist)}
+                            //         // onClick={e => e.stopPropagation()}
+                            //         className="description-editor">
+                            //         <textarea
+                            //             autoFocus
+                            //             type="text"
+                            //             id="description"
+                            //             name="description"
+                            //             value={t.title}
+                            //             // onChange={handleChange}
+                            //             placeholder="Add an item"
+                            //         >
+                            //         </textarea>
+                            //         <button className="save-btn">Add</button>
+                            //         {/* <button type="button" className="cancel-btn" onClick={cancelEditMode}>Cancel</button> */}
+                            //     </form>)
+                        }
+
+
                         <div className="todo-utils">
                             <button onClick={() => onRemoveTodo(t.id)}>Trash</button>
                         </div>

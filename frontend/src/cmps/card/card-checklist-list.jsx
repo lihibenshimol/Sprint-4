@@ -3,17 +3,14 @@ import { IoMdCheckboxOutline } from 'react-icons/io';
 import { useState } from "react";
 import { boardService } from "../../services/board.service.local";
 
-export function CheckListList({ checklists, onSaveCheckList }) {
-    const [isAddTodoOpen, setIsAddTodoOpen] = useState(false)
+export function CheckListList({ checklists, onSaveCheckList, isEditAddTodo, setIsEditAddTodo }) {
+    // const [isEditAddTodo, setIsEditAddTodo] = useState(false)
     const [todoTitle, setTodoTitle] = useState('')
+
 
     function cancelEditMode() {
         setTodoTitle('')
-        setIsAddTodoOpen(!isAddTodoOpen)
-    }
-
-    function onSetIsAddTodoOpen() {
-        setIsAddTodoOpen(!isAddTodoOpen)
+        setIsEditAddTodo(!isEditAddTodo)
     }
 
     function onAddTask(checklist) {
@@ -27,10 +24,10 @@ export function CheckListList({ checklists, onSaveCheckList }) {
         onSaveCheckList(newChecklists)
     }
 
-
-
     function handleChange({ target }) {
         let { value, name: filed } = target
+        console.log('filed: ', filed)
+
         setTodoTitle(prevDesc => value)
     }
 
@@ -41,10 +38,10 @@ export function CheckListList({ checklists, onSaveCheckList }) {
     }
 
 
-
     return <>
         {checklists.map(checklist => {
-            return <section className="card-checklist" key={checklist.id} >
+            return <section className="card-checklist"
+                key={checklist.id}>
                 <div className="checklist-header">
                     <span className="check-list"><IoMdCheckboxOutline /></span>
                     <h3>{checklist ? checklist.title : 'Checklist'}</h3>
@@ -56,17 +53,19 @@ export function CheckListList({ checklists, onSaveCheckList }) {
                     checklist={checklist} />
 
 
-
-                {!isAddTodoOpen &&
-                    <button className="btn btn-add-todo" onClick={onSetIsAddTodoOpen}>
+                {!isEditAddTodo &&
+                    <button className="btn btn-add-todo" onClick={() => setIsEditAddTodo(!isEditAddTodo)}>
                         Add an item
                     </button>}
-                {isAddTodoOpen && (
-                    <form onSubmit={(e) => onSubmitDetails(e, checklist)} className="description-editor">
+                {isEditAddTodo && (
+                    <form onSubmit={(e) => onSubmitDetails(e, checklist)}
+                        onClick={e => e.stopPropagation()}
+                        className="description-editor">
                         <textarea
+                            autoFocus
                             type="text"
-                            id="body"
-                            name="body"
+                            id="description"
+                            name="description"
                             value={todoTitle}
                             onChange={handleChange}
                             placeholder="Add an item"

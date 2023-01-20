@@ -70,7 +70,22 @@
         padding-bottom: 9px;
         width: 100%;
         padding: 8px 12px;
+        margin: 4px 0 0;
+        overflow: hidden;
+        overflow-wrap: break-word;
+        height: 55.8491px;
+        background-color: var(--ds-background-input, #fff);
+        margin: 4px 0 0;
+        min-height: 32px;
     }
+
+    // **********************************************************
+    // ------------------------------------
+    // **********************************************************
+    &:focus {
+        box-shadow: inset 0 0 0 2px #0079bf;
+    }
+
 
     textarea:focus {
         outline: #0077ff solid 2px;

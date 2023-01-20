@@ -22,6 +22,8 @@ export const boardService = {
     saveCard,
     removeCard,
     getEmptyTodo,
+    // getEmptyMember,
+    getEmptyChecklist,
 
 }
 window.cs = boardService
@@ -76,6 +78,18 @@ function getEmptyTodo() {
         isDone: false,
     }
 }
+
+function getEmptyChecklist() {
+    return {
+        id: utilService.makeId(),
+        title: 'Checklist',
+        todos: [],
+    }
+}
+// function getEmptyMembers() {
+//     // return member[]
+// }
+
 // async function addNewCard(group, card, arr) {
 //     try {
 //         card.id = utilService.makeId()
