@@ -6,26 +6,41 @@
     z-index: 1;
 }
 
+// .quick-editor-btns.fade-in {
+//     opacity: 1;
+//     transform: translateX(0);
+// }
+
 .quick-editor-btns {
-    align-items: flex-start;
     display: flex;
+    align-items: flex-start;
     flex-direction: column;
     justify-content: center;
     left: 250px;
     position: absolute;
     z-index: 2;
     width: max-content;
+    transition: opacity 85ms ease-in,transform 85ms ease-in;
 
     button {
         background-color: rgba(0, 0, 0, .6);
         color: #fff;
-        display: block;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         font-size: 15px;
         height: 32px;
         margin: 0 0 4px 8px;
-        padding: 6px 12px 6px 8px;
+        padding: 6px 12px 6px 12px;
+        border-radius: 3px;
         cursor: pointer;
-        transition: .3s;
+        // transition: .3s;
+        transition: transform 85ms ease-in;
+
+        .quick-icon {
+            font-size: 14px;
+            padding-top: 3px;
+        }
         
         
         &:hover {
