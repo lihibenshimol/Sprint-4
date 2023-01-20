@@ -7,7 +7,6 @@
     .group-list {
         display: flex;
         column-count: auto;
-        gap: 3px;
         font-size: 14px;
         height: 100%;
         position: relative;
@@ -113,7 +112,7 @@
     }
 
     .group-wrapper {
-        padding: 0 3px;
+        padding: 0 4.5px;
         box-sizing: border-box;
         display: inline-block;
         height: 100%;
