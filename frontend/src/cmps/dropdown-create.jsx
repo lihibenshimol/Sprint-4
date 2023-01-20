@@ -34,12 +34,16 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
         setAddingBoard(prevAddingBoard => !prevAddingBoard)
     }
 
-    function setBoardBackground(bg){
-        setBoard(prevBoard => ({...prevBoard, style: {...prevBoard.style, backgroundColor: bg}}))
+    function setBoardBackground(bg) {
+        setBoard(prevBoard => ({ ...prevBoard, style: { ...prevBoard.style, backgroundColor: bg } }))
+    }
+
+    function isSelectedColor(clr) {
+        return clr === board.style.backgroundColor
     }
 
     return (
-        <section onClick={(ev) => {ev.stopPropagation(); setBgMenuOpen(false)}} className={fromNavbar ? 'dropdown dropdown-create-navbar' : 'dropdown dropdown-create'}>
+        <section onClick={(ev) => { ev.stopPropagation(); setBgMenuOpen(false) }} className={fromNavbar ? 'dropdown dropdown-create-navbar' : 'dropdown dropdown-create'}>
 
             <h3>Create board
                 <i onClick={handleClosingDropdown} className='fa xmark'></i>
@@ -47,7 +51,7 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
             </h3>
 
             <section className="img-container">
-                <div className="img-background" style={{backgroundColor: board.style.backgroundColor}}>
+                <div className="img-background" style={{ backgroundColor: board.style.backgroundColor }}>
                     <img src={groupsImg} alt="Groups image" />
                 </div>
             </section>
@@ -56,13 +60,23 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
                 <label>Background</label>
                 <section className='bg-options'></section>
                 <section className='clr-options'>
-                    <div onClick={() => setBoardBackground('#0079bf')} style={{ backgroundColor: '#0079bf' }}></div>
-                    <div onClick={() => setBoardBackground('#d29034')} style={{ backgroundColor: '#d29034' }}></div>
-                    <div onClick={() => setBoardBackground('#519839')} style={{ backgroundColor: '#519839' }}></div>
-                    <div onClick={() => setBoardBackground('#b04632')} style={{ backgroundColor: '#b04632' }}></div>
-                    <div onClick={() => setBoardBackground('#89609e')} style={{ backgroundColor: '#89609e' }}></div>
-                    <div onClick={(ev) => {ev.stopPropagation();setBgMenuOpen(prevMenuOpen => !prevMenuOpen)}} className='more-clr-options'>
-                        {isBgMenuOpen && <DropDown setBoardBackground={setBoardBackground} setBgMenuOpen={setBgMenuOpen} type={'background'}/>}
+                    <div onClick={() => setBoardBackground('#0079bf')} style={{ backgroundColor: '#0079bf' }}>
+                        {isSelectedColor('#0079bf') && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={() => setBoardBackground('#d29034')} style={{ backgroundColor: '#d29034' }}>
+                        {isSelectedColor('#d29034') && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={() => setBoardBackground('#519839')} style={{ backgroundColor: '#519839' }}>
+                        {isSelectedColor('#519839') && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={() => setBoardBackground('#b04632')} style={{ backgroundColor: '#b04632' }}>
+                        {isSelectedColor('#b04632') && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={() => setBoardBackground('#89609e')} style={{ backgroundColor: '#89609e' }}>
+                        {isSelectedColor('#89609e') && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={(ev) => { ev.stopPropagation(); setBgMenuOpen(prevMenuOpen => !prevMenuOpen) }} className='more-clr-options'>
+                        {isBgMenuOpen && <DropDown setBoardBackground={setBoardBackground} setBgMenuOpen={setBgMenuOpen} type={'background'} />}
                     </div>
                 </section>
 

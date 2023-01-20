@@ -1,4 +1,5 @@
-.dropdown-create {
+.dropdown-create,
+.dropdown-create-navbar {
     padding: 0 1em 1em;
     left: 105%;
     top: 0;
@@ -117,155 +118,39 @@
             margin-inline-end: 0.6em;
         }
     }
-}
 
-.dropdown-create-navbar {
-    padding: 0 1em 1em;
-
-    .img-container {
-        display: flex;
-        justify-content: center;
-        margin-block-end: 1.5em;
-        right: 0;
-    }
-
-    .img-background {
-        width: 200px;
-        height: 120px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: $clr1;
-        border-radius: 0.2em;
-
-        img {
-            width: 186px;
-            height: 103px;
-        }
-    }
-
-    input {
-        outline: none;
-        width: 100%;
-        font-size: rem(14px);
-        padding: 0.55em 0.85em;
-        color: $clr9;
-        border: none;
-        border-radius: 0.2em;
-        border: rem(2px) solid rgba(9, 30, 66, 0.12);
-        margin-block-end: 0.4em;
-
-        &:hover {
-            background-color: $clr8;
-        }
-
-        &:focus {
-            border: rem(2px) solid $clr1;
-        }
-
-        &.input-required {
-            border: rem(2px) solid $clr13;
-
-            &:focus {
-                border: rem(2px) solid $clr1;
-            }
-        }
-    }
-
-    button {
-        background-color: $clr1;
-        color: $clr6;
-        width: 100%;
-        border-radius: 0.2em;
-        margin: 0;
-        padding: 0.64em 1em;
-        transition: background-color 0.1s ease-in-out;
-
-        &:hover {
-            background-color: darken($clr1, 6%);
-        }
-
-        &.btn-disabled {
-            background-color: $clr8;
-            color: lighten($clr2, 65%);
-            font-weight: 600;
-            cursor: not-allowed;
-
-            &:hover {
-                background-color: $clr8;
-            }
-        }
-    }
-
-    h3 {
-        color: $clr12;
-        font-weight: normal;
-        letter-spacing: rem(0.5px);
-        font-size: rem(14px);
-        text-align: center;
-        padding: 1em;
-        margin-block-end: 0.5em;
-        border-bottom: rem(1px) solid rgba(9, 30, 66, 0.12);
-        position: relative;
-    }
-
-    .xmark {
-        position: absolute;
-        right: 0;
-        font-size: rem(14px);
-        color: inherit;
-        cursor: pointer;
-
-        &:hover {
-            color: darken($clr12, 25%);
-        }
-    }
-
-    .arrow-left {
-        position: absolute;
-        left: 0;
-        font-size: rem(14px);
-        color: inherit;
-        cursor: pointer;
-
-        &:hover {
-            color: darken($clr12, 25%);
-        }
-    }
-
-    label {
-        margin: 0;
-        color: $clr12;
-        font-size: rem(14px);
-        font-weight: 600;
-        letter-spacing: rem(-0.2px);
-        display: block;
-        margin-block-end: 0.25em;
-    }
-
-    p {
-        color: $clr12;
-        margin: 0;
-        width: 100%;
-        margin-block-end: 1em;
-
-        span {
-            margin-inline-end: 0.6em;
-        }
-    }
-}
-
-.dropdown-create, .dropdown-create-navbar {
-    .clr-options, .bg-options {
+    .clr-options,
+    .bg-options {
         display: flex;
         justify-content: space-between;
 
-        > * {
+        >* {
             width: 40px;
             height: 32px;
             border-radius: 0.2em;
             background-color: $clr8;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: rem(10px);
+            color: $clr6;
             cursor: pointer;
+
+            &:not(.more-clr-options)::before {
+                content: '';
+                width: 100%;
+                height: 100%;
+                border-radius: 0.2em;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: background-color 0.1s ease-in-out;
+            }
+
+            &:not(.more-clr-options):hover::before {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
         }
     }
 
@@ -290,5 +175,39 @@
             transform: translate(-50%, -50%);
             color: $clr12;
         }
+    }
+}
+
+.dropdown-create-navbar {
+    left: 0;
+    top: 2.65rem;
+
+    input {
+        margin-block-end: 0.4em;
+    }
+
+    button {
+        &.btn-disabled {
+            &:hover {
+                background-color: $clr8;
+            }
+        }
+    }
+
+    .arrow-left {
+        position: absolute;
+        left: 0;
+        font-size: rem(14px);
+        color: inherit;
+        cursor: pointer;
+
+        &:hover {
+            color: darken($clr12, 25%);
+        }
+    }
+
+    label {
+        display: block;
+        margin-block-end: 0.25em;
     }
 }

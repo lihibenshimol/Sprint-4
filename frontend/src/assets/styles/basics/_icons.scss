@@ -55,6 +55,10 @@
     content: "\f141";
 }
 
+.fa.checked::before {
+    content: "\f00c";
+}
+
 // BRANDS
 .fa-brands.trello::before {
     content: "\f181";
