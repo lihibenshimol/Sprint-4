@@ -20,6 +20,7 @@ export const boardService = {
     //Cards
     getCardById,
     saveCard,
+    getEmptyTodo,
 
 
 }
@@ -68,6 +69,13 @@ function getEmptyGroup() {
     return { title: '', cards: [], style: {} }
 }
 
+function getEmptyTodo() {
+    return {
+        id: utilService.makeId(),
+        title: '',
+        isDone: false,
+    }
+}
 // async function addNewCard(group, card, arr) {
 //     try {
 //         card.id = utilService.makeId()

@@ -35,7 +35,13 @@
         font-weight: 600
     }
 
-    button {
+
+
+
+}
+
+.card-checklist {
+    button.btn {
         margin: 0;
         background-color: #EAEBEF;
         color: black;
@@ -49,5 +55,48 @@
         justify-content: center;
         line-height: 20px;
         align-items: center;
+    }
+
+    button.btn-add-todo {
+        margin: 8px 0;
+    }
+
+    textarea {
+        font-family: system-ui, "Segoe UI", "roboto", "ubuntu", "Open Sans", "Helvetica Neue", sans-serif;
+        resize: none;
+        height: 108px;
+        border: 0;
+        border-radius: 2px;
+        padding-bottom: 9px;
+        width: 100%;
+        padding: 8px 12px;
+    }
+
+    textarea:focus {
+        outline: #0077ff solid 2px;
+    }
+
+    p {
+        font-size: 11px;
+    }
+
+    button {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 400;
+        justify-content: center;
+        line-height: 20px;
+        padding: 6px 12px;
+        border-radius: 3px;
+    }
+
+    .cancel-btn {
+        color: black;
+        background-color: rgba(0, 121, 191, 0);
+    }
+
+    .save-btn {
+        margin-inline-end: 4px;
+        background-color: #0079bf;
     }
 }

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
+import { boardService } from "../../services/board.service.local"
 
 
 
 export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
     const [checklistsState, setChecklistsToPreview] = useState(checklist)
-
-    console.log('checklist: ', checklist)
 
     function getDoneTodos() {
         if (!checklist.todos.length) return 0
@@ -19,6 +18,8 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
     }
 
     function onIsTodoDone(todo) {
+        console.log('checklistsState: ', checklistsState)
+
         const newTodo = { ...todo, isDone: !todo.isDone }
         const todos = checklistsState.todos
             .map(todo => todo.id === newTodo.id ? newTodo : todo)
@@ -31,10 +32,17 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
         onSaveCheckList(newCheckLists)
     }
 
-    function onEditChecklistHeader(){
-        
-    }
+    function onRemoveTodo(todoId) {
+        const todos = checklistsState.todos
+            .filter(todo => todo.id !== todoId)
+        const newCheckList = { ...checklist, todos }
+        const newCheckLists = checklists.map(checklist => {
+            return checklist.id === newCheckList.id ? newCheckList : checklist
+        })
 
+        setChecklistsToPreview(newCheckList)
+        onSaveCheckList(newCheckLists)
+    }
 
 
 
@@ -55,13 +63,12 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
                     <span className={`${t.isDone ? "checked" : ''}`} onClick={() => onIsTodoDone(t)}></span>
                     <div className="todo-title" >
                         <p className={`${t.isDone ? 'todo-done' : ''}`}>{t.title}</p>
-                        <div>utils</div>
+                        <div className="todo-utils">
+                            <button onClick={() => onRemoveTodo(t.id)}>Trash</button>
+                        </div>
                     </div>
                 </div>)
-
-            })
-
-            }
+            })}
         </div>
 
     </>)

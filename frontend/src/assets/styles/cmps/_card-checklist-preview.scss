@@ -5,7 +5,7 @@
         margin-bottom: 6px;
 
         span {
-            color: var(--ds-text-subtle, #5e6c84);
+            color: $clr12;
             font-size: 11px;
             left: 0;
             line-height: 10px;
@@ -48,7 +48,7 @@
             // width: 100%
 
             &:hover {
-                background-color: #091e420a;
+                background-color: $clr8;
             }
 
             span {
@@ -88,7 +88,7 @@
                 }
 
                 p.todo-done {
-                    color: #5e6c84;
+                    color: $clr12;
                     text-decoration: line-through;
                 }
             }
