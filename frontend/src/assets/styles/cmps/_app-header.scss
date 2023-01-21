@@ -2,6 +2,9 @@
     background-color: $clr1;
     padding: 0.101em 0;
     color: $clr6;
+    position: fixed;
+    width: 100%;
+    z-index: 20;
 
     h1 {
         margin: 0;

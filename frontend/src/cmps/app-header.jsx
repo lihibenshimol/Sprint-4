@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { DropDown } from './dropdown'
 
 export function AppHeader() {
 
     const [dropdown, setDropDown] = useState({})
+    const location = useLocation()
 
     useEffect(() => {
         document.body.onclick = ({ target }) => {
@@ -52,8 +53,12 @@ export function AppHeader() {
         else setDropDown({ type })
     }
 
+    function isInBoardDetails(){
+        return location.pathname.includes('/board/')
+    }
+
     return (
-        <header className="app-header full flex space-between align-center main-container">
+        <header style={isInBoardDetails() ? {backgroundColor: 'rgba(0, 0, 0 ,0.6)'} : {}} className="app-header full flex space-between align-center main-container">
 
             <nav className='flex align-center main-nav'>
                 <Link to="/board"><h1 className='brand'>Trello</h1></Link>
