@@ -8,9 +8,10 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { MembersSelect } from '../members-selector';
 
-export function SideBar({ groupId, card, onSaveCheckList, onSaveMembers }) {
+export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
     const [isAddMembersEdit, setIsAddMembersEdit] = useState(false)
 
+    console.log('card: ', card)
 
     async function onAddChecklist() {
         try {
@@ -24,14 +25,26 @@ export function SideBar({ groupId, card, onSaveCheckList, onSaveMembers }) {
         }
     }
 
-    function onAddMember(member) {
-        // const newMembers = []
+    function addMember(member) {
+        console.log('add')
+        if (!card.members) card.members = []
+        if (card.members.includes(member)) return console.log('Include')
         card.members.push(member)
         const newMembers = card.members
-
         onSaveMembers(newMembers)
     }
 
+    function removeMember(member) {
+        console.log('remove')
+        if (!card.members) return
+        const memberIdx = card.members.findIndex(m => m._id === member._id)
+        if (memberIdx === -1) return
+        card.members.splice(memberIdx, 1)
+
+        const newMembers = card.members
+        onSaveMembers(newMembers)
+
+    }
 
 
     return (<div className="side-bar">
@@ -41,17 +54,20 @@ export function SideBar({ groupId, card, onSaveCheckList, onSaveMembers }) {
             <button className="label-btn" onClick={() => setIsAddMembersEdit(!isAddMembersEdit)}>
                 <span className=" tag-label"><AiOutlineUser /></span>
                 <span>members</span>
+            </button>
 
-                {isAddMembersEdit && <div className="extras-menu flex">
+            {isAddMembersEdit &&
+                <div className="extras-menu flex">
                     <span className="title-container">
                         <p>
                             Members
                         </p>
                         <a className='close-btn'><RxCross2 /></a>
                     </span>
-                    <MembersSelect />
+                    <MembersSelect
+                        addMember={addMember}
+                        removeMember={removeMember} />
                 </div>}
-            </button>
 
 
             <button className="label-btn">
