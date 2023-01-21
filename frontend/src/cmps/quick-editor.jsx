@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react"
 import { MembersSelect } from "./members-selector"
 
 
-export function QuickEditor({ groupId, card, toggleQuickEditor, quickEditor }) {
+export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [cardToEdit, setCardToEdit] = useState(card)
     const [membersSelect, openMembersSelect] = useState(false)
@@ -24,7 +24,7 @@ export function QuickEditor({ groupId, card, toggleQuickEditor, quickEditor }) {
 
     function onOpenCard() {
         navigate(`/board/${board._id}/g/${groupId}/c/${card.id}`)
-        toggleQuickEditor(!quickEditor)
+        openQuickEditor(!quickEditor)
     }
 
     async function onRemoveCard() {
@@ -32,7 +32,7 @@ export function QuickEditor({ groupId, card, toggleQuickEditor, quickEditor }) {
         try {
             const updatedBoard = await boardService.removeCard(board, groupId, card.id)
             updateBoard(updatedBoard)
-            toggleQuickEditor(!quickEditor)
+            openQuickEditor(!quickEditor)
         } catch (err) {
             console.log('err = ', err)
         }
@@ -47,7 +47,7 @@ export function QuickEditor({ groupId, card, toggleQuickEditor, quickEditor }) {
         ev.preventDefault()
         card.title = cardToEdit.title
         updateBoard(board)
-        toggleQuickEditor(ev, !quickEditor)
+        openQuickEditor(ev, !quickEditor)
     }
 
     async function onSaveMembers(members) {
@@ -78,15 +78,15 @@ export function QuickEditor({ groupId, card, toggleQuickEditor, quickEditor }) {
 
     return (
         <>
-            <div className="black-bg" onClick={(ev) => toggleQuickEditor(ev, !quickEditor)}></div>
-             <div className="quick-editor" onClick={e => e.preventDefault}>
+            <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
+             <div className="quick-editor" onClick={e => e.preventDefault()}>
 
 
                 <div className="quick-editor-textarea" onClick={(e) => e.preventDefault()}>
                     <form onSubmit={onSaveCard}>
                         <textarea
                             ref={textAreaRef}
-                            onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e) }}
+                            onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e)}}
                             type="text"
                             name="title"
                             value={cardToEdit.title}

@@ -18,7 +18,7 @@ export function CardPreview({ card, idx, groupId }) {
     const [quickEditor, toggleQuickEditor] = useState(false)
 
     function openQuickEditor(ev) {
-        // ev.stopPropagation()
+        ev.stopPropagation()
         ev.preventDefault()
         toggleQuickEditor(!quickEditor)
     }
@@ -33,7 +33,7 @@ export function CardPreview({ card, idx, groupId }) {
                 >
                     <section className="card-title flex">
                         <span>{card.title}</span>
-                        <button onClick={(ev) => toggleQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
+                        <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
                     </section>
                     <section className="card-preview-details">
                         {card.members && card.members.map(member => <span key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
