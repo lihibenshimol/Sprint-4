@@ -11,7 +11,7 @@ import { useEffect, useRef, useState } from "react"
 import { MembersSelect } from "./members-selector"
 
 
-export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
+export function QuickEditor({ groupId, card, toggleQuickEditor, quickEditor }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [cardToEdit, setCardToEdit] = useState(card)
     const [membersSelect, openMembersSelect] = useState(false)
@@ -24,7 +24,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
 
     function onOpenCard() {
         navigate(`/board/${board._id}/g/${groupId}/c/${card.id}`)
-        openQuickEditor(!quickEditor)
+        toggleQuickEditor(!quickEditor)
     }
 
     async function onRemoveCard() {
@@ -32,7 +32,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         try {
             const updatedBoard = await boardService.removeCard(board, groupId, card.id)
             updateBoard(updatedBoard)
-            openQuickEditor(!quickEditor)
+            toggleQuickEditor(!quickEditor)
         } catch (err) {
             console.log('err = ', err)
         }
@@ -47,7 +47,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         ev.preventDefault()
         card.title = cardToEdit.title
         updateBoard(board)
-        openQuickEditor(ev, !quickEditor)
+        toggleQuickEditor(ev, !quickEditor)
     }
 
     async function onSaveMembers(members) {
@@ -81,7 +81,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
 
     return (
         <>
-            <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
+            <div className="black-bg" onClick={(ev) => toggleQuickEditor(ev, !quickEditor)}></div>
             <div className="quick-editor">
 
 

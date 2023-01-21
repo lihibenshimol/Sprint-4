@@ -33,12 +33,12 @@ export function CardPreview({ card, idx, groupId }) {
                 >
                     <section className="card-title flex">
                         <span>{card.title}</span>
-                        <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
+                        <button onClick={(ev) => toggleQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
                     </section>
                     <section className="card-preview-details">
                     {card.members && card.members.map(member => <span key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
                     </section>
-                    {quickEditor && <QuickEditor card={card} groupId={groupId} openQuickEditor={openQuickEditor} quickEditor={quickEditor} />}
+                    {quickEditor && <QuickEditor card={card} groupId={groupId} toggleQuickEditor={toggleQuickEditor} quickEditor={quickEditor} />}
                 </Container>
             )}
         </Draggable>
