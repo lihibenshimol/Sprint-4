@@ -33,7 +33,12 @@ export function DropdownBoards({ setDropDown }) {
                     boards.map(board => (
                         <li key={board._id}>
                             <Link to={`/board/${board._id}`} onClick={(ev) => handleLinkClick(ev, board._id)}>
-                                <article><h3>{board.title}</h3></article>
+                                <article>
+                                    <div style={board.style} className="board-bg">
+                                        <span>{board.title.charAt(0).toUpperCase()}</span>
+                                    </div>
+                                    <h3>{board.title}</h3>
+                                </article>
                             </Link>
                         </li>
                     ))
