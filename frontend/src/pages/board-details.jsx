@@ -22,9 +22,6 @@ export function BoardDetails() {
         try {
             const board = await boardService.getById(boardId)
             setCurrBoard(board)
-            // inlineStyles = {
-            //     backgroundImage: `url(${board.style.backgroundImg})`
-            // }
         } catch (err) {
             console.log('Cannot load board')
             throw err
@@ -72,7 +69,6 @@ export function BoardDetails() {
         <Outlet />
         
             <section className='board-details main-container' style={board.style}>
-            {/* <section className='board-details main-container' style={inlineStyles}> */}
                 <BoardHeader />
                 <div className="group-container">
                     <GroupList 

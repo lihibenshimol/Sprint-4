@@ -35,7 +35,7 @@ const [quickEditor, toggleQuickEditor] = useState(false)
                         <span>{card.title}</span>
                         <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
                     </section>
-                    {quickEditor && <QuickEditor cardId={card.id} groupId={groupId} openQuickEditor={openQuickEditor} quickEditor={quickEditor}/>}
+                    {quickEditor && <QuickEditor card={card} groupId={groupId} openQuickEditor={openQuickEditor} quickEditor={quickEditor}/>}
                 </Container>
             )}
         </Draggable>

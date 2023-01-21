@@ -10,6 +10,7 @@
         font-size: 14px;
         height: 100%;
         position: relative;
+        gap: 10px;
 
         .add-group-section {
             //     color: whitesmoke;
@@ -84,7 +85,6 @@
                     display: flex;
                     align-items: center;
 
-
                     .save-btn {
                         background-color: #0079bf;
                         color: #fff;
@@ -127,7 +127,7 @@
             display: flex;
             align-items: center;
             position: relative;
-            padding: 10px 36px 5px 8px;
+            padding: 10px 36px 8px 8px;
 
             .extras-menu-btn {
                 position: absolute;

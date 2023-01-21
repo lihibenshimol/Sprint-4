@@ -1,13 +1,13 @@
 .group-content {
-    padding: 0 8px 6px;
+    padding: 0 4px 6px;
     flex-direction: column;
     background-color: $group-bg;
     border-radius: 3px;
     box-sizing: border-box;
     display: flex;
     max-height: 100%;
-    // position: relative;
     white-space: normal;
+    width: 272px;
 
     .group-header {
         color: black;
@@ -18,6 +18,7 @@
         font-size: 14px;
         font-weight: 600;
         display: block;
+        padding: 5px 8px 0px 8px;
     }
 
     .group-title-text.edit-mode {
@@ -50,10 +51,10 @@
         display: block;
 
         textarea {
-            height: 65px;
+            height: 66px;
             border: none;
             margin-left: 4px;
-            max-width: rem(242px);
+            max-width: rem(256px);
             padding: 7px 8px 42px 8px;
             border-radius: 3px;
             width: 100%;
@@ -71,7 +72,7 @@
                 margin-right: 4px;
                 height: 32px;
                 border-radius: 3px;
-                padding: 6px 12px;
+                padding: 6px 11px;
                 font-size: 14px;
                 width: 82px;
             }
