@@ -14,6 +14,7 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
     async function onAddChecklist() {
         try {
             const newChecklist = boardService.getEmptyChecklist()
+            if (!card.checklists) card.checklists = []
             card.checklists.push(newChecklist)
             const newChecklists = card.checklists
 

@@ -65,7 +65,7 @@ async function save(board) {
 }
 
 function getEmptyCard() {
-    return { title: '' }
+    return { title: '', checklists: [], members: [], labels: [] }
 }
 
 function getEmptyGroup() {
@@ -87,9 +87,6 @@ function getEmptyChecklist() {
         todos: [],
     }
 }
-// function getEmptyMembers() {
-//     // return member[]
-// }
 
 // async function addNewCard(group, card, arr) {
 //     try {
@@ -253,11 +250,16 @@ function _createDemoBoards() {
                                         "fullname": "Aviad Malikan",
                                         "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512"
                                     },
-                                ]
+                                ],
+                                checklists: [],
+                                labels: [],
                             },
                             {
                                 "id": "c102",
-                                "title": "Add Samples"
+                                "title": "Add Samples",
+                                checklists: [],
+                                members: [],
+                                labels: [],
                             }
                         ],
                         "style": {}
@@ -269,11 +271,16 @@ function _createDemoBoards() {
                         "cards": [
                             {
                                 "id": "c103",
-                                "title": "Test groups"
+                                "title": "Test groups",
+                                checklists: [],
+                                members: [],
+                                labels: [],
                             },
                             {
                                 "id": "c104",
                                 "title": "Test Cards",
+                                members: [],
+                                labels: [],
                                 checklists: [
                                     {
                                         id: 'YEhmF',

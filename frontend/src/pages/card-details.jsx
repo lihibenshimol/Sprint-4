@@ -58,11 +58,9 @@ export function CardDetails() {
 
     async function onSaveDesc(desc) {
         try {
-            // const card = await boardService.getCardById(board, groupId, cardId)
             const updateCard = { ...card, desc }
             boardService.saveCard(board, groupId, updateCard)
             setIsDescriptionEdit(!isDescriptionEdit)
-            // navigate(`/board/${board._id}/g/${groupId}/c/${cardId}`)
 
         } catch (err) {
             console.log('Cant edit the description ', err)
@@ -72,6 +70,8 @@ export function CardDetails() {
     async function onSaveCheckList(checklists) {
         try {
             const updateCard = { ...card, checklists }
+            console.log('updateCard: ', updateCard)
+
             boardService.saveCard(board, groupId, updateCard)
             updateBoard(board)
         } catch (err) {
@@ -83,7 +83,6 @@ export function CardDetails() {
             const updateCard = { ...card, members }
             boardService.saveCard(board, groupId, updateCard)
             updateBoard(board)
-
         } catch (err) {
             console.log('Cant Add the members ', err)
         }

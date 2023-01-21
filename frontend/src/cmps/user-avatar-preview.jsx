@@ -1,5 +1,4 @@
 export function UserAvatarPreview({ users }) {
-    console.log('users: ',users)
     
     return <>
         {users.map(user => {
