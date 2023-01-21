@@ -12,14 +12,15 @@ export function MembersSelect({ checkAddOrRemove }) {
                 <p>
                     Members
                 </p>
-                <a className='close-btn'><RxCross2 /></a>
+                <span className='close-btn'><RxCross2 /></span>
             </span>
             <div className="extras-content-members">
                 <input type="text" className='search-input'
                     placeholder='Search members'
                     title='not available right now' />
 
-                <ul className='member-selector'>
+
+                <ul className='member-selector' >
                     {board.members.map(m => {
                         return <MemberLabel
                             checkAddOrRemove={checkAddOrRemove}

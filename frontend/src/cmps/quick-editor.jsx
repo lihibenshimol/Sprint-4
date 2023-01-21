@@ -55,22 +55,19 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
             const updateCard = { ...card, members }
             boardService.saveCard(board, groupId, updateCard)
             updateBoard(board)
-
         } catch (err) {
             console.log('Cant Add the members ', err)
         }
     }
 
     function checkAddOrRemove(member) {
+        console.log('heyyyy')
+
+        if (!card.members) card.members = []
         const memberIdx = card.members.findIndex(m => m._id === member._id)
 
-        if (memberIdx === -1) {
-            if (!card.members) card.members = []
-            card.members.push(member)
-        }
-        else {
-            card.members.splice(memberIdx, 1)
-        }
+        if (memberIdx === -1) card.members.push(member)
+        else card.members.splice(memberIdx, 1)
 
         const newMembers = card.members
         onSaveMembers(newMembers)
@@ -82,7 +79,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     return (
         <>
             <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
-            <div className="quick-editor">
+             <div className="quick-editor" onClick={e => e.preventDefault}>
 
 
                 <div className="quick-editor-textarea" onClick={(e) => e.preventDefault()}>
@@ -106,6 +103,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                 </div>
 
                 {membersSelect &&
+
                     <div onClick={(e) => e.preventDefault()}>
                         <MembersSelect
                             checkAddOrRemove={checkAddOrRemove} />

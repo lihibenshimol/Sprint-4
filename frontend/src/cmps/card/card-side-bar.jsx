@@ -25,15 +25,16 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
     }
 
     function checkAddOrRemove(member) {
+        if (!card.members) card.members = []
         const memberIdx = card.members.findIndex(m => m._id === member._id)
 
         if (memberIdx === -1) {
-            if (!card.members) card.members = []
+            member.isCheck = true
+            console.log('member: ',member)
+            
             card.members.push(member)
         }
-        else {
-            card.members.splice(memberIdx, 1)
-        }
+        else card.members.splice(memberIdx, 1)
 
         const newMembers = card.members
         onSaveMembers(newMembers)

@@ -18,7 +18,7 @@ export function CardPreview({ card, idx, groupId }) {
     const [quickEditor, toggleQuickEditor] = useState(false)
 
     function openQuickEditor(ev) {
-        ev.stopPropagation()
+        // ev.stopPropagation()
         ev.preventDefault()
         toggleQuickEditor(!quickEditor)
     }
@@ -36,9 +36,16 @@ export function CardPreview({ card, idx, groupId }) {
                         <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
                     </section>
                     <section className="card-preview-details">
-                    {card.members && card.members.map(member => <span key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
+                        {card.members && card.members.map(member => <span key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
                     </section>
-                    {quickEditor && <QuickEditor card={card} groupId={groupId} openQuickEditor={openQuickEditor} quickEditor={quickEditor} />}
+                    {quickEditor &&
+                        <section onClick={e => e.stopPropagation()}>
+                            <QuickEditor
+                                card={card}
+                                groupId={groupId}
+                                openQuickEditor={openQuickEditor}
+                                quickEditor={quickEditor} />
+                        </section>}
                 </Container>
             )}
         </Draggable>
