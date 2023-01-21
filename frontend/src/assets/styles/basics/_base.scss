@@ -73,6 +73,6 @@ a:hover {
 
 main {
     > * {
-        padding-top: 44px;
+        padding-top: rem(44px);
     }
 }
