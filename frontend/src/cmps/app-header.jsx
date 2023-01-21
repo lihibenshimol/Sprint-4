@@ -58,7 +58,7 @@ export function AppHeader() {
     }
 
     return (
-        <header style={isInBoardDetails() ? {backgroundColor: 'rgba(0, 0, 0 ,0.6)'} : {}} className="app-header full flex space-between align-center main-container">
+        <header style={isInBoardDetails() ? {backgroundColor: 'rgba(0, 0, 0 ,0.8)'} : {}} className="app-header full flex space-between align-center main-container">
 
             <nav className='flex align-center main-nav'>
                 <Link to="/board"><h1 className='brand'>Trello</h1></Link>
