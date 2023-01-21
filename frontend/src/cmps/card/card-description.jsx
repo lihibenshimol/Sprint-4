@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function CardDescription({ card, onSaveDesc, isDescriptionEdit, setIsDescriptionEdit }) {
     const [desc, setDesc] = useState(card.desc)
@@ -6,7 +6,7 @@ export function CardDescription({ card, onSaveDesc, isDescriptionEdit, setIsDesc
     function onIsDescriptionEdit() {
         setIsDescriptionEdit(!isDescriptionEdit)
     }
-    
+
     function cancelEdit() {
         setIsDescriptionEdit(!isDescriptionEdit)
         setDesc(prevDesc => card.desc)
@@ -37,6 +37,7 @@ export function CardDescription({ card, onSaveDesc, isDescriptionEdit, setIsDesc
                         value={desc}
                         onChange={handleChange}
                         placeholder="Add a more detailed description…"
+
                     >
                     </textarea>
                     <button className="save-btn">Add</button>

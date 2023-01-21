@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { updateBoard } from "../store/board.actions"
 import { CardList } from "./card-list"
@@ -16,6 +16,7 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
     const [extrasMenu, openExtraMenu] = useState(false)
     const [groupNewTitle, setGroupNewTitle] = useState(group.title)
     const [cardToEdit, setCardToEdit] = useState(boardService.getEmptyCard())
+    const groupTitleRef = useRef(null)
 
     function changeGroupTitle(ev) {
         ev.preventDefault()
@@ -49,8 +50,8 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
                         <div {...provided.dragHandleProps} className="group-header" >
                             <h1 onClick={() => setEditMode(!editMode)} className={"group-title-text" + (editMode ? ' edit-mode' : '')}>{group.title}</h1>
 
-                            <form onSubmit={changeGroupTitle}>
-                                <input onChange={handleGroupChange} className={"group-title-input" + (editMode ? ' edit-mode' : '')} aria-label={groupNewTitle} autoFocus spellCheck="false" dir="auto" value={groupNewTitle} />
+                            <form onSubmit={changeGroupTitle} onClick={() => groupTitleRef.current.select()}>
+                                <input onChange={handleGroupChange} className={"group-title-input" + (editMode ? ' edit-mode' : '')} aria-label={groupNewTitle} autoFocus spellCheck="false"  ref={groupTitleRef} dir="auto" value={groupNewTitle} />
                             </form>
 
                             <span className="extras-menu-btn">

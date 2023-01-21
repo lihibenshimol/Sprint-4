@@ -20,7 +20,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
 
     useEffect(() => {
         textAreaRef.current.select()
-      }, [])
+    }, [])
 
     function onOpenCard() {
         navigate(`/board/${board._id}/g/${groupId}/c/${card.id}`)
@@ -61,25 +61,19 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         }
     }
 
-    function addMember(member) {
-        console.log('add')
-        if (!card.members) card.members = []
-        if (card.members.includes(member)) return console.log('Include')
-        card.members.push(member)
-        const newMembers = card.members
-        onSaveMembers(newMembers)
-    }
-
-    function removeMember(member) {
-        console.log('remove')
-        if (!card.members) return
+    function checkAddOrRemove(member) {
         const memberIdx = card.members.findIndex(m => m._id === member._id)
-        if (memberIdx === -1) return
-        card.members.splice(memberIdx, 1)
+
+        if (memberIdx === -1) {
+            if (!card.members) card.members = []
+            card.members.push(member)
+        }
+        else {
+            card.members.splice(memberIdx, 1)
+        }
 
         const newMembers = card.members
         onSaveMembers(newMembers)
-
     }
 
 
@@ -105,23 +99,16 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                         >
                         </textarea>
                         <section className="quick-editor-card-details">
-                            {card.members && card.members.map(member => <span key={member.id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
+                            {card.members && card.members.map(member => <span key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
                         </section>
                         <button type="button" className="save-btn">Save</button>
                     </form>
                 </div>
 
                 {membersSelect &&
-                    <div onClick={(e) => e.preventDefault()} className="extras-menu flex">
-                        <span className="title-container">
-                            <p>
-                                Members
-                            </p>
-                            <a className='close-btn'><RxCross2 /></a>
-                        </span>
+                    <div onClick={(e) => e.preventDefault()}>
                         <MembersSelect
-                            addMember={addMember}
-                            removeMember={removeMember} />
+                            checkAddOrRemove={checkAddOrRemove} />
                     </div>}
 
                 <div className="quick-editor-btns" onClick={(e) => e.preventDefault()}>
