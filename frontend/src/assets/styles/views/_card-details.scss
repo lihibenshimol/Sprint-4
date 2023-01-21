@@ -75,97 +75,118 @@
     }
   }
 
-  .main-content {
-    flex: 1;
-    margin: 0;
-    min-height: 24px;
-    padding: 0 8px 8px 16px;
-    position: relative;
-    width: 552px;
-    margin-bottom: 80px;
+  .card-content {
+
+    flex-direction: column;
+
+    @include for-normal-layout {
+      flex-direction: row;
 
 
-    .card-details {
-      margin-left: 40px;
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
+      .main-content{
+        width: 552px;
+      }
+    }
+
+    .main-content {
+      flex: 1;
+      margin: 0;
+      min-height: 24px;
+      padding: 0 8px 8px 16px;
+      position: relative;
+      width: 100%;
+      margin-bottom: 80px;
 
 
-      .details {
-        .members-container {
-          display: flex;
-          flex-wrap: wrap;
-          max-width: fit-content;
-          margin: 0 8px 8px 0;
+      .card-details {
+        margin-left: 40px;
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
 
-          &>:last-child {
-            color: black;
-            font-size: 16px;
-            padding: 2px 0;
-            background-color: #eaecf0;
+
+        .details {
+          .members-container {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: fit-content;
             margin: 0 8px 8px 0;
-          }
-        }
 
-        h5 {
-          text-transform: capitalize;
-          display: block;
-          font-size: 12px;
-          font-weight: 600;
-          line-height: 16px;
-          margin: 0 8px 7px 0;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .labels-container {
-          margin: 0 8px 8px 0;
-          max-width: 100%;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 4px;
-
-
-          .circle-label {
-            position: absolute;
-            background-color: #ef7564;
-            left: 10px;
-            top: 8px;
-            bottom: 8px;
-            left: 8px;
-            border-radius: 50%;
-            width: 16px;
-            height: 16px;
+            &>:last-child {
+              color: black;
+              font-size: 16px;
+              padding: 2px 0;
+              background-color: #eaecf0;
+              margin: 0 8px 8px 0;
+            }
           }
 
-          .label {
-            display: inline-block;
-            position: relative;
-            margin-bottom: 0;
-            border-radius: 3px;
-            padding: 0 12px;
+          h5 {
+            text-transform: capitalize;
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 16px;
+            margin: 0 8px 7px 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .labels-container {
+            margin: 0 8px 8px 0;
             max-width: 100%;
-            min-width: 48px;
-            height: 32px;
-            background-color: #f5d3ce;
-            line-height: 32px;
-            color: $clr9;
-            padding-left: 32px
-          }
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
 
-          &>:last-child {
-            min-width: 0;
-            width: 32px;
-            padding: 0 8px;
-            color: black;
-            font-size: 16px;
-            background-color: #eaecf0;
+
+            .circle-label {
+              position: absolute;
+              background-color: #ef7564;
+              left: 10px;
+              top: 8px;
+              bottom: 8px;
+              left: 8px;
+              border-radius: 50%;
+              width: 16px;
+              height: 16px;
+            }
+
+            .label {
+              display: inline-block;
+              position: relative;
+              margin-bottom: 0;
+              border-radius: 3px;
+              padding: 0 12px;
+              max-width: 100%;
+              min-width: 48px;
+              height: 32px;
+              background-color: #f5d3ce;
+              line-height: 32px;
+              color: $clr9;
+              padding-left: 32px
+            }
+
+            &>:last-child {
+              min-width: 0;
+              width: 32px;
+              padding: 0 8px;
+              color: black;
+              font-size: 16px;
+              background-color: #eaecf0;
+            }
           }
         }
       }
 
+    }
+
+    .card-description {
+      h3 {
+        font-size: 18px;
+        padding-top: 6px;
+      }
     }
 
     .section-header {
@@ -190,6 +211,7 @@
       span.check-list {
         top: 4px
       }
+
 
       h3 {
         display: inline-block;

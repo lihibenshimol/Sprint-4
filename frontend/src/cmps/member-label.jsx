@@ -3,6 +3,8 @@ import { useState } from "react"
 
 export function MemberLabel({ member, handleChange, checkAddOrRemove }) {
     const [checked, setChecked] = useState(member.isChecked)
+    console.log('member: ',member)
+    
 
 
     function handleChange() {
@@ -33,7 +35,7 @@ export function MemberLabel({ member, handleChange, checkAddOrRemove }) {
                         value={checked}
                     /> */}
                 </div>
-                <span>{checked ? 'v' : ''}</span>
+                <span>{member.isChecked ? 'v' : ''}</span>
             </label>
         </li>
     )

@@ -58,6 +58,7 @@ export function CardDetails() {
 
     async function onSaveDesc(desc) {
         try {
+            card.desc = desc
             const updateCard = { ...card, desc }
             boardService.saveCard(board, groupId, updateCard)
             setIsDescriptionEdit(!isDescriptionEdit)
@@ -69,24 +70,26 @@ export function CardDetails() {
 
     async function onSaveCheckList(checklists) {
         try {
-            const updateCard = { ...card, checklists }
-            console.log('updateCard: ', updateCard)
-
-            boardService.saveCard(board, groupId, updateCard)
+            card.checklists = checklists
             updateBoard(board)
         } catch (err) {
             console.log('Cant save the checklist ', err)
         }
     }
-    
+
     async function onSaveMembers(members) {
         try {
-            const updateCard = { ...card, members }
-            boardService.saveCard(board, groupId, updateCard)
+            card.members = members
             updateBoard(board)
         } catch (err) {
             console.log('Cant Add the members ', err)
         }
+    }
+
+    function getGroup() {
+        const group = board.groups.find(g => g.id === groupId)
+        console.log('group: ', group)
+        return group.title
     }
 
 
@@ -105,7 +108,7 @@ export function CardDetails() {
                         {card.title}
                     </h2>
                     <div>
-                        <p>in group: Testing</p>
+                        <p>in group: {getGroup()}</p>
                     </div>
                 </div>
                 <div className="card-content flex">
@@ -134,7 +137,6 @@ export function CardDetails() {
                                     </article>
                                 </div>}
 
-                            <h3>{card.checklist && card.checklist}</h3>
                         </section>
 
                         <section className="card-description">

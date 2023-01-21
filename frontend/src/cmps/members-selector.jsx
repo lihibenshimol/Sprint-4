@@ -3,8 +3,9 @@ import { MemberLabel } from "./member-label"
 import { RxCross2 } from 'react-icons/rx';
 
 
-export function MembersSelect({ checkAddOrRemove }) {
+export function MembersSelect({ checkAddOrRemove, openMembersSelect, membersSelect }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+
 
     return (
         <div className="extras-menu flex">
@@ -12,7 +13,7 @@ export function MembersSelect({ checkAddOrRemove }) {
                 <p>
                     Members
                 </p>
-                <span className='close-btn'><RxCross2 /></span>
+                <span className='close-btn hover' onClick={() => openMembersSelect(!membersSelect)}><RxCross2 /></span>
             </span>
             <div className="extras-content-members">
                 <input type="text" className='search-input'
@@ -20,8 +21,8 @@ export function MembersSelect({ checkAddOrRemove }) {
                     title='not available right now' />
 
 
-                <ul className='member-selector' >
-                    {board.members.map(m => {
+                {board.members && <ul className='member-selector' >
+                    {board.members?.map(m => {
                         return <MemberLabel
                             checkAddOrRemove={checkAddOrRemove}
                             member={m}
@@ -29,7 +30,7 @@ export function MembersSelect({ checkAddOrRemove }) {
                         />
 
                     })}
-                </ul>
+                </ul>}
             </div>
         </div>
     )
