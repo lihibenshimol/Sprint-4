@@ -49,8 +49,7 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
             </button>
 
             {isAddMembersEdit &&
-                <MembersSelect
-                    checkAddOrRemove={checkAddOrRemove} />}
+                <MembersSelect checkAddOrRemove={checkAddOrRemove} />}
 
 
             <button className="label-btn">
