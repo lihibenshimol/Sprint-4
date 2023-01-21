@@ -77,6 +77,15 @@ export function CardDetails() {
             console.log('Cant save the checklist ', err)
         }
     }
+    async function onAddLabel() {
+        try {
+
+
+
+        } catch (err) {
+            console.log('Cant Add the members ', err)
+        }
+    }
 
 
 
@@ -159,8 +168,7 @@ export function CardDetails() {
                     <SideBar
                         card={card}
                         onSaveCheckList={onSaveCheckList}
-                        // groupId={groupId}
-                    // board={board}
+                        groupId={groupId}
                     />
                 </div >
             </>)}

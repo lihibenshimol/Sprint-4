@@ -52,14 +52,20 @@
     flex-direction: column;
     background-color: white;
     color: black;
-    position: absolute;
+    position: fixed;
     top: 38px;
-    left: 0px;
+    // left: 0px;
     min-height: 100px;
-    min-width: 270px;
+    min-width: 304px;
     border-radius: 3px;
     z-index: 1000;
     box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
+
+    top: 195px;
+    right: 196px;
+
+
+
 
     .title-container {
         color: $clr12;
@@ -68,8 +74,22 @@
         border-bottom: 1px solid rgba(9, 30, 66, .129);
         margin: 0 12px 8px;
 
+
+
         p {
             margin: 0;
+        }
+
+        button.close-btn {
+            position: absolute;
+            position: absolute;
+            // right: 0;
+            top: 3px;
+            font-size: 18px;
+            height: 20px;
+            line-height: 20px;
+            width: 20px;
+            right: 10px;
         }
     }
 
@@ -79,4 +99,6 @@
         color: #000000;
         padding: 6px 12px;
     }
+
+
 }
