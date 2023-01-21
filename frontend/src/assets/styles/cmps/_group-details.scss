@@ -7,6 +7,7 @@
     display: flex;
     max-height: 100%;
     white-space: normal;
+    width: 272px;
 
     .group-header {
         color: black;
@@ -50,10 +51,10 @@
         display: block;
 
         textarea {
-            height: 65px;
+            height: 66px;
             border: none;
             margin-left: 4px;
-            max-width: rem(242px);
+            max-width: rem(256px);
             padding: 7px 8px 42px 8px;
             border-radius: 3px;
             width: 100%;
@@ -71,7 +72,7 @@
                 margin-right: 4px;
                 height: 32px;
                 border-radius: 3px;
-                padding: 6px 12px;
+                padding: 6px 11px;
                 font-size: 14px;
                 width: 82px;
             }
