@@ -71,7 +71,7 @@ export function BoardDetails() {
         <>
         <Outlet />
         
-            <section className='board-details main-container' style={(board.style.backgroundColor) ? {backgroundColor: board.style.backgroundColor } : '#023047'}>
+            <section className='board-details main-container' style={board.style}>
             {/* <section className='board-details main-container' style={inlineStyles}> */}
                 <BoardHeader />
                 <div className="group-container">
