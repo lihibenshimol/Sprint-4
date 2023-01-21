@@ -78,6 +78,7 @@ export function CardDetails() {
             console.log('Cant save the checklist ', err)
         }
     }
+    
     async function onSaveMembers(members) {
         try {
             const updateCard = { ...card, members }

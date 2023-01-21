@@ -4,11 +4,10 @@ import { useState } from "react"
 export function MemberLabel({ member, handleChange, checkAddOrRemove }) {
     const [checked, setChecked] = useState(true)
 
-    // }
 
-    function handleChange(member) {
+    function handleChange() {
         setChecked(!checked)
-        // console.log('checked: ', checked)
+        console.log('checked: ', checked)
 
         checked ? onAddMember(member) : onRemoveMember(member)
     }
@@ -25,15 +24,15 @@ export function MemberLabel({ member, handleChange, checkAddOrRemove }) {
     }
 
     return (
-        <li className="flex ">
+        <li className="flex " onClick={handleChange}>
             <label>
                 <div className='flex'>
                     <img src={`${member.imgUrl}`} alt="member" className='member-avatar' />
                     <span>{member.fullname}</span>
-                    <input type="checkbox"
-                        onChange={() => handleChange(member)}
+                    {/* <input type="checkbox"
+                        // onChange={handleChange}
                         value={checked}
-                    />
+                    /> */}
                 </div>
                 <span>{!checked ? 'v' : ''}</span>
             </label>
