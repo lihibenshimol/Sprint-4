@@ -16,18 +16,17 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     const navigate = useNavigate()
 
 
-    function onOpenCard(ev) {
-        ev.preventDefault()
+    function onOpenCard() {
         navigate(`/board/${board._id}/g/${groupId}/c/${card.id}`)
-        openQuickEditor(ev, !quickEditor)
+        openQuickEditor(!quickEditor)
     }
 
-    async function onRemoveCard(ev) {
-        ev.preventDefault()
+    async function onRemoveCard() {
+
         try {
             const updatedBoard = await boardService.removeCard(board, groupId, card.id)
             updateBoard(updatedBoard)
-            openQuickEditor(ev, !quickEditor)
+            openQuickEditor(!quickEditor)
         } catch (err) {
             console.log('err = ', err)
         }
@@ -51,17 +50,16 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         <>
             <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
 
-            <div className="quick-editor-textarea">
+            <div className="quick-editor-textarea" onClick={(e) => e.preventDefault()}>
                 <form onSubmit={onSaveCard}>
                     <textarea
-                    onClick={(e) => e.preventDefault()}
                         onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e) }}
                         type="text"
                         name="title"
                         value={cardToEdit.title}
                         onChange={handleChange}
                         autoFocus
-                        
+
                     >
                     </textarea>
                     <section className="quick-editor-card-details">
@@ -71,13 +69,13 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                 </form>
 
             </div>
-            <div className="quick-editor-btns">
-                <button onClick={(e) => onOpenCard(e)}> <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card</button>
+            <div className="quick-editor-btns" onClick={(e) => e.preventDefault()}>
+                <button onClick={onOpenCard}> <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card</button>
                 <button> <span className="quick-icon"> <TiTag /> </span> Edit labels</button>
                 <button> <span className="quick-icon"> <BsFillPersonFill /> </span>Change members</button>
                 <button> <span className="quick-icon"> <RiBankCard2Line /> </span> Change cover</button>
                 <button> <span className="quick-icon"> <RxClock /> </span> Edit dates</button>
-                <button onClick={(ev) => onRemoveCard(ev)}> <span className="quick-icon"> <FiArchive /> </span> Delete</button>
+                <button onClick={onRemoveCard}> <span className="quick-icon"> <FiArchive /> </span> Delete</button>
             </div>
 
         </>

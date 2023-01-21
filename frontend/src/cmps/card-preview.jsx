@@ -15,7 +15,7 @@ function Container(props) {
 }
 
 export function CardPreview({ card, idx, groupId }) {
-const [quickEditor, toggleQuickEditor] = useState(false)
+    const [quickEditor, toggleQuickEditor] = useState(false)
 
     function openQuickEditor(ev) {
         ev.stopPropagation()
@@ -35,7 +35,10 @@ const [quickEditor, toggleQuickEditor] = useState(false)
                         <span>{card.title}</span>
                         <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
                     </section>
-                    {quickEditor && <QuickEditor card={card} groupId={groupId} openQuickEditor={openQuickEditor} quickEditor={quickEditor}/>}
+                    <section className="card-preview-details">
+                    {card.members && card.members.map(member => <span key={member.id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
+                    </section>
+                    {quickEditor && <QuickEditor card={card} groupId={groupId} openQuickEditor={openQuickEditor} quickEditor={quickEditor} />}
                 </Container>
             )}
         </Draggable>

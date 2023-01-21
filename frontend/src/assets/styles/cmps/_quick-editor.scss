@@ -22,13 +22,12 @@
         border-radius: 3px;
         box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
         box-shadow: rgba(9, 30, 66, .251);
-        // min-height: 32px;
-        height: 100px;
+        min-height: 100px;
         padding: 9px 8px;
         width: 256px;
         font-size: 14px;
         overflow: hidden;
-        resize: none;
+        resize: vertical;
 
 
         // &:focus {
