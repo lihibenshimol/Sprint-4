@@ -1,6 +1,5 @@
 import { BiWindow } from 'react-icons/bi';
 import { TbTag } from 'react-icons/tb';
-import { RxCross2 } from 'react-icons/rx';
 import { AiOutlineClockCircle, AiOutlineUser } from 'react-icons/ai';
 import { IoMdCheckboxOutline } from 'react-icons/io';
 import { boardService } from '../../services/board.service.local';
@@ -11,7 +10,6 @@ import { MembersSelect } from '../members-selector';
 export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
     const [isAddMembersEdit, setIsAddMembersEdit] = useState(false)
 
-    console.log('card: ', card)
 
     async function onAddChecklist() {
         try {
@@ -25,25 +23,19 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
         }
     }
 
-    function addMember(member) {
-        console.log('add')
-        if (!card.members) card.members = []
-        if (card.members.includes(member)) return console.log('Include')
-        card.members.push(member)
-        const newMembers = card.members
-        onSaveMembers(newMembers)
-    }
-
-    function removeMember(member) {
-        console.log('remove')
-        if (!card.members) return
+    function checkAddOrRemove(member) {
         const memberIdx = card.members.findIndex(m => m._id === member._id)
-        if (memberIdx === -1) return
-        card.members.splice(memberIdx, 1)
+
+        if (memberIdx === -1) {
+            if (!card.members) card.members = []
+            card.members.push(member)
+        }
+        else {
+            card.members.splice(memberIdx, 1)
+        }
 
         const newMembers = card.members
         onSaveMembers(newMembers)
-
     }
 
 
@@ -57,17 +49,8 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
             </button>
 
             {isAddMembersEdit &&
-                <div className="extras-menu flex">
-                    <span className="title-container">
-                        <p>
-                            Members
-                        </p>
-                        <a className='close-btn'><RxCross2 /></a>
-                    </span>
-                    <MembersSelect
-                        addMember={addMember}
-                        removeMember={removeMember} />
-                </div>}
+                <MembersSelect
+                    checkAddOrRemove={checkAddOrRemove} />}
 
 
             <button className="label-btn">

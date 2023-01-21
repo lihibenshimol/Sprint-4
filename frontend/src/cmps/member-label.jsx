@@ -1,11 +1,9 @@
 import { useState } from "react"
 
 
-export function MemberLabel({ member, handleChange, addMember, removeMember }) {
+export function MemberLabel({ member, handleChange, checkAddOrRemove }) {
     const [checked, setChecked] = useState(true)
 
-    // function onHandleChange() {
-    //     handleChange(!checked)
     // }
 
     function handleChange(member) {
@@ -15,14 +13,17 @@ export function MemberLabel({ member, handleChange, addMember, removeMember }) {
         checked ? onAddMember(member) : onRemoveMember(member)
     }
 
+
     function onAddMember(member) {
         if (!checked) return
-        addMember(member)
+        checkAddOrRemove(member)
+        // addMember(member)
     }
 
     function onRemoveMember(member) {
         if (checked) return
-        removeMember(member)
+        checkAddOrRemove(member)
+        // removeMember(member)
     }
 
     return (
