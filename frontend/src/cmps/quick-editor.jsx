@@ -61,14 +61,17 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     }
 
     function checkAddOrRemove(member) {
-        console.log('heyyyy')
-
         if (!card.members) card.members = []
         const memberIdx = card.members.findIndex(m => m._id === member._id)
 
-        if (memberIdx === -1) card.members.push(member)
-        else card.members.splice(memberIdx, 1)
-
+        if (memberIdx === -1) {
+            member.isChecked = true
+            card.members.push(member)
+        }
+        else {
+            member.isChecked = false
+            card.members.splice(memberIdx, 1)
+        }
         const newMembers = card.members
         onSaveMembers(newMembers)
     }

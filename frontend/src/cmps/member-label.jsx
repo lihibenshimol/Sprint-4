@@ -2,24 +2,23 @@ import { useState } from "react"
 
 
 export function MemberLabel({ member, handleChange, checkAddOrRemove }) {
-    const [checked, setChecked] = useState(true)
+    const [checked, setChecked] = useState(member.isChecked)
 
 
     function handleChange() {
         setChecked(!checked)
-        console.log('checked: ', checked)
 
         checked ? onAddMember(member) : onRemoveMember(member)
     }
 
 
     function onAddMember(member) {
-        if (!checked) return
+        // if (!checked) return
         checkAddOrRemove(member)
     }
 
     function onRemoveMember(member) {
-        if (checked) return
+        // if (checked) return
         checkAddOrRemove(member)
     }
 
@@ -34,7 +33,7 @@ export function MemberLabel({ member, handleChange, checkAddOrRemove }) {
                         value={checked}
                     /> */}
                 </div>
-                <span>{!checked ? 'v' : ''}</span>
+                <span>{checked ? 'v' : ''}</span>
             </label>
         </li>
     )
