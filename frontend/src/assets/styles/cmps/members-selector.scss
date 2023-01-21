@@ -37,6 +37,10 @@
                 justify-content: space-between;
                 cursor: pointer;
 
+                &:hover {
+                    background-color: #091e420a;
+                }
+
                 input {
                     opacity: 0;
                     width: 80px;
