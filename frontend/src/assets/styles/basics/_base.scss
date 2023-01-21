@@ -33,6 +33,7 @@ img {
 
 button {
     background-color: transparent;
+    font-family: system-ui,'Segoe UI', 'roboto', 'ubuntu', 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 textarea {
@@ -64,4 +65,8 @@ a:hover {
 
 .fa, .fa-brands, .fa-regular {
     font-style: normal;
+}
+
+.placeholder {
+    background-color: rgba(0, 0, 0, 0.25);
 }

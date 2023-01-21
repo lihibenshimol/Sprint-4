@@ -1,11 +1,18 @@
 import { useEffect, useState } from "react"
+import { boardService } from "../../services/board.service.local"
+import { TfiTrash } from "react-icons/tfi"
 
 
-
-export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
+export function CheckListPreview({ checklist, onSaveCheckList, checklists,
+    // isEditAddTodo, setIsEditAddTodo,
+}) {
     const [checklistsState, setChecklistsToPreview] = useState(checklist)
+    const [isEditTodoTitle, setIsEditTodoTitle] = useState(false)
+    const [todoTitle, setTodoTitle] = useState('')
+    const [isEditAddTodo, setIsEditAddTodo] = useState(false)
+    // const [title, setTitle] = useEffect(true)
 
-    console.log('checklist: ', checklist)
+
 
     function getDoneTodos() {
         if (!checklist.todos.length) return 0
@@ -31,12 +38,49 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
         onSaveCheckList(newCheckLists)
     }
 
-    function onEditChecklistHeader(){
-        
+    function onRemoveTodo(todoId) {
+        const todos = checklistsState.todos
+            .filter(todo => todo.id !== todoId)
+        const newCheckList = { ...checklist, todos }
+        const newCheckLists = checklists.map(checklist => {
+            return checklist.id === newCheckList.id ? newCheckList : checklist
+        })
+
+        setChecklistsToPreview(newCheckList)
+        onSaveCheckList(newCheckLists)
     }
 
 
+    //--------------------------------
 
+
+    function onAddTodo(checklist) {
+        if (todoTitle === '') return
+        const todo = boardService.getEmptyTodo()
+        todo.title = todoTitle
+        checklist.todos.push(todo)
+        const newChecklists = checklists
+            .map(c => (c.id === checklist.id) ? checklist : c)
+        onSaveCheckList(newChecklists)
+    }
+
+    function handleChange({ target }) {
+        let { value, name: filed } = target
+        console.log('filed: ', filed)
+
+        setTodoTitle(prevDesc => value)
+    }
+
+    function onSubmitDetails(ev, checklist) {
+        ev.preventDefault()
+        onAddTodo(checklist)
+        cancelEditMode()
+    }
+
+    function cancelEditMode() {
+        setTodoTitle('')
+        setIsEditAddTodo(!isEditAddTodo)
+    }
 
     return (<>
         <div className="progress-bar-container">
@@ -54,16 +98,68 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists }) {
                 return (<div className="todo" key={t.id}>
                     <span className={`${t.isDone ? "checked" : ''}`} onClick={() => onIsTodoDone(t)}></span>
                     <div className="todo-title" >
-                        <p className={`${t.isDone ? 'todo-done' : ''}`}>{t.title}</p>
-                        <div>utils</div>
+
+
+                        {!isEditTodoTitle &&
+                            <p className={`${t.isDone ? 'todo-done' : ''}`}
+                            // onClick={onIsEditTodoTitle}
+                            >
+                                {t.title}</p>}
+
+                        {
+                            // isEditTodoTitle && (
+                            //     <form
+                            //         //  onSubmit={(e) => onSubmitDetails(e, checklist)}
+                            //         // onClick={e => e.stopPropagation()}
+                            //         className="description-editor">
+                            //         <textarea
+                            //             autoFocus
+                            //             type="text"
+                            //             id="description"
+                            //             name="description"
+                            //             value={t.title}
+                            //             // onChange={handleChange}
+                            //             placeholder="Add an item"
+                            //         >
+                            //         </textarea>
+                            //         <button className="save-btn">Add</button>
+                            //         {/* <button type="button" className="cancel-btn" onClick={cancelEditMode}>Cancel</button> */}
+                            //     </form>)
+                        }
+
+
+                        <div className="todo-utils">
+                            <button onClick={() => onRemoveTodo(t.id)}><TfiTrash /></button>
+                        </div>
                     </div>
                 </div>)
-
-            })
-
-            }
+            })}
         </div>
 
+
+        {!isEditAddTodo &&
+            <button className="btn btn-add-todo"
+                onClick={() => setIsEditAddTodo(!isEditAddTodo)}>
+                Add an item
+            </button>}
+
+        {isEditAddTodo && (
+            <form onSubmit={(e) => onSubmitDetails(e, checklist)}
+                onClick={e => e.stopPropagation()}
+                className="description-editor">
+                <textarea
+                    autoFocus
+                    type="text"
+                    id="description"
+                    name="description"
+                    value={todoTitle}
+                    onChange={handleChange}
+                    placeholder="Add an item"
+                >
+                </textarea>
+                <button className="save-btn">Add</button>
+                <button type="button" className="cancel-btn" onClick={cancelEditMode}>Cancel</button>
+            </form>)}
     </>)
 }
 

@@ -11,7 +11,8 @@
     .group-header {
         color: black;
     }
-    
+
+
     .group-title-text {
         font-size: 14px;
         font-weight: 600;
@@ -97,7 +98,7 @@
         display: flex;
         align-items: center;
         cursor: pointer;
-        color: #5e6c84;
+        color: $clr12;
         margin: 0 0 8px 4px;
         gap: 3px;
         font-size: 14px;
@@ -109,7 +110,7 @@
         &:hover {
             background-color: #091e4214;
             border-radius: 3px;
-            color: #172b4d;
+            color: $clr9;
         }
     }
 

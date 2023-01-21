@@ -1,16 +1,14 @@
 .window {
+  overflow: auto;
   margin: 0;
-  // background-color: #000000a3;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   position: absolute;
   inset: 0;
   z-index: 500;
+  background-color: #000000a3;
 
-  //   grid-row: -1/1;
-  //   grid-column: -1/1;
-  // }
 }
 
 .black-bg {
@@ -18,13 +16,11 @@
   display: flex;
   inset: 0;
   margin: 0;
-  background-color: #000000a3;
-
 }
 
 .card {
   z-index: 999;
-  background-color: #f4f5f7;
+  background-color: $clr11;
   border-radius: 2px;
   // display: none;
   margin: 48px 0 80px;
@@ -34,7 +30,7 @@
   min-height: 600px;
 
   .close-btn {
-    background-color: #172b4d00;
+    background-color: rgba(0, 0, 0, 0);
     border-radius: 50%;
     color: #42526e;
     height: 32px;
@@ -86,6 +82,7 @@
     padding: 0 8px 8px 16px;
     position: relative;
     width: 552px;
+    margin-bottom: 80px;
 
 
     .card-details {
@@ -154,7 +151,7 @@
             height: 32px;
             background-color: #f5d3ce;
             line-height: 32px;
-            color: var(--text-color, var(--ds-text, #172b4d));
+            color: $clr9;
             padding-left: 32px
           }
 
@@ -227,28 +224,5 @@
       margin-top: 7px;
       margin-left: 40px
     }
-  }
-}
-
-
-
-.loader {
-  border: 7px solid #f3f3f3;
-  /* Light grey */
-  border-top: 7px solid #8d8d8d;
-  /* Blue */
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  animation: spin 0.7s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
   }
 }

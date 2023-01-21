@@ -12,16 +12,19 @@ export const boardService = {
     getById,
     save,
     remove,
-    getEmptyCard,
     getEmptyBoard,
     addNewItem,
     getEmptyGroup,
+    getBoardColors,
 
     //Cards
     getCardById,
+    getEmptyCard,
     saveCard,
-    removeCard
-
+    removeCard,
+    getEmptyTodo,
+    // getEmptyMember,
+    getEmptyChecklist,
 
 }
 window.cs = boardService
@@ -69,6 +72,25 @@ function getEmptyGroup() {
     return { title: '', cards: [], style: {} }
 }
 
+function getEmptyTodo() {
+    return {
+        id: utilService.makeId(),
+        title: '',
+        isDone: false,
+    }
+}
+
+function getEmptyChecklist() {
+    return {
+        id: utilService.makeId(),
+        title: 'Checklist',
+        todos: [],
+    }
+}
+// function getEmptyMembers() {
+//     // return member[]
+// }
+
 // async function addNewCard(group, card, arr) {
 //     try {
 //         card.id = utilService.makeId()
@@ -108,7 +130,7 @@ function getEmptyBoard() {
     return {
         title: "",
         isStarred: false,
-        style: { backgroundColor: '#026aa7' },
+        style: { backgroundColor: '#0079bf' },
         // "createdBy": {
         //     "_id": "u101",
         //     "fullname": "Abi Abambi",
@@ -127,6 +149,10 @@ function getEmptyBoard() {
         groups: [
         ]
     }
+}
+
+function getBoardColors(){
+    return ['#0079bf', '#d29034', '#519839', '#b04632', '#89609e', '#cd5a91', '#4bbf6b', '#00aecc', '#838c91']
 }
 
 

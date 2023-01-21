@@ -19,13 +19,20 @@ export function CardDetails() {
     const { cardId, groupId } = useParams()
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
-    const navigate = useNavigate()
+    const [isEditAddTodo, setIsEditAddTodo] = useState(false)
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+
+    const navigate = useNavigate()
 
 
     useEffect(() => {
         loadCard()
     }, [cardId, isDescriptionEdit])
+
+    function closeAddTodoEdit() {
+        if (!isEditAddTodo) return
+        setIsEditAddTodo(!isEditAddTodo)
+    }
 
     async function loadCard() {
         try {
@@ -38,19 +45,6 @@ export function CardDetails() {
         }
     }
 
-    async function onSaveDesc(desc) {
-        try {
-            // const card = await boardService.getCardById(board, groupId, cardId)
-            const updateCard = { ...card, desc }
-            boardService.saveCard(board, groupId, updateCard)
-            setIsDescriptionEdit(!isDescriptionEdit)
-            // navigate(`/board/${board._id}/g/${groupId}/c/${cardId}`)
-            
-        } catch (err) {
-            console.log('Cant edit the description ', err)
-        }
-    }
-    
     async function onChangeTitle({ target }) {
         let { innerText } = target
         try {
@@ -60,7 +54,20 @@ export function CardDetails() {
             console.log('Cant edit the Title ', err)
         }
     }
-    
+
+    async function onSaveDesc(desc) {
+        try {
+            // const card = await boardService.getCardById(board, groupId, cardId)
+            const updateCard = { ...card, desc }
+            boardService.saveCard(board, groupId, updateCard)
+            setIsDescriptionEdit(!isDescriptionEdit)
+            // navigate(`/board/${board._id}/g/${groupId}/c/${cardId}`)
+
+        } catch (err) {
+            console.log('Cant edit the description ', err)
+        }
+    }
+
     async function onSaveCheckList(checklists) {
         try {
             const updateCard = { ...card, checklists }
@@ -70,16 +77,22 @@ export function CardDetails() {
             console.log('Cant save the checklist ', err)
         }
     }
+    async function onSaveMembers() {
+        try {
 
 
 
+        } catch (err) {
+            console.log('Cant Add the members ', err)
+        }
+    }
 
 
 
     return <div className="window full">
         <div className="black-bg full" onClick={() => navigate(`/board/${board._id}`)}></div>
         {!card && <Loader className="flex align-center" />}
-        <section className="card">
+        <section className="card" onClick={closeAddTodoEdit}>
             {card && (<><button onClick={() => navigate(`/board/${board._id}`)} className="close-btn">X</button>
                 <div className="card-header">
                     <span className="icon fa card-icon"></span>
@@ -134,9 +147,14 @@ export function CardDetails() {
                                 setIsDescriptionEdit={setIsDescriptionEdit} />
                         </section>
 
-                        {card.checklists && <CheckListList
-                            onSaveCheckList={onSaveCheckList}
-                            checklists={card.checklists} />}
+                        {card.checklists &&
+                            <CheckListList
+                                onSaveCheckList={onSaveCheckList}
+                                checklists={card.checklists}
+                                isEditAddTodo={isEditAddTodo}
+                                setIsEditAddTodo={setIsEditAddTodo}
+                            />
+                        }
 
                         {/* <section className="card-activity">
                             <div className="activity-header">
@@ -146,7 +164,13 @@ export function CardDetails() {
                             <p>routable, smart cmp</p>
                         </section> */}
                     </div >
-                    <SideBar />
+
+                    <SideBar
+                        card={card}
+                        onSaveCheckList={onSaveCheckList}
+                        onSaveMembers={onSaveMembers}
+                        groupId={groupId}
+                    />
                 </div >
             </>)}
         </section >
@@ -154,22 +178,42 @@ export function CardDetails() {
 }
 
 
-   // cards = [{
-    //     _id: 'c103',
-    //     title: 'Test groups',
-    //     label: ['funny'],
-    //     members: ['Aviad', 'Shay', 'Lihi'],
-    //     describe: '',
-    //     checklists: [
-    //         {
-    //             id: 'YEhmF',
-    //             title: 'Checklist',
-    //             todos: [
+// cards = [{
+    //             _id: 'c103',
+    //             title: 'Test groups',
+    //             label: ['funny'],
+    //             members: ['Aviad', 'Shay', 'Lihi'],
+    //             checklists: [
     //                 {
-    //                     id: '212jX',
-    //                     title: 'To Do 1',
-    //                     isDone: false
+    //                     id: 'YEhmF',
+    //                     title: 'Checklist',
+    //                     todos: [
+    //                         {
+    //                             id: '212jX',
+    //                             title: 'To Do 1',
+    //                             isDone: false
+    //                         }
+    //                     ]
     //                 }
-    //             ]
-    //         }
-    //     ]}]
+    //             ],
+    //         },
+    //         {
+    //             _id: 'c102',
+    //             title: 'Test groups number 2',
+    //             label: ['funny', 'important', 'suggested'],
+    //             members: ['Lihi', 'Shay'],
+    //             checklists: [
+    //                 {
+    //                     id: 'f11f123',
+    //                     title: 'Todos',
+    //                     todos: [
+    //                         {
+    //                             id: '213jX',
+    //                             title: 'To Do 2',
+    //                             isDone: false
+    //                         }
+    //                     ]
+    //                 }
+    //             ],
+    //         },
+    //         ]
