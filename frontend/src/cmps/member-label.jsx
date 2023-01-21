@@ -16,6 +16,7 @@ export function MemberLabel({ member, handleChange, addMember, removeMember }) {
     }
 
     function onAddMember(member) {
+        console.log('memmber = ', member)
         if (!checked) return
         addMember(member)
     }
