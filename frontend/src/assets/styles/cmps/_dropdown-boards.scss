@@ -1,4 +1,16 @@
 .dropdown-boards {
+
+    label {
+        margin: 0;
+        color: $clr12;
+        font-size: rem(12px);
+        font-weight: 600;
+        letter-spacing: rem(-0.2px);
+        margin-block-end: 1em;
+        display: block;
+        padding: 0 0.3em;
+    }
+
     h3 {
         margin: 0;
         color: $clr9;

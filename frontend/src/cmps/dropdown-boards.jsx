@@ -28,6 +28,7 @@ export function DropdownBoards({ setDropDown }) {
 
     return (
         <section onClick={(ev) => ev.stopPropagation()} className="dropdown dropdown-boards">
+            <label>Your boards</label>
             <ul className="clean-list">
                 {boards[0] &&
                     boards.map(board => (
