@@ -4,7 +4,8 @@
     left: 110%;
     transform: translate(0, -50%);
 
-    .dropdown-background-photos, .dropdown-background-colors {
+    .dropdown-background-photos,
+    .dropdown-background-colors {
         div {
             display: flex;
             justify-content: space-between;
@@ -30,12 +31,30 @@
         flex-wrap: wrap;
         justify-content: center;
 
-        > * {
+        >* {
             width: 85.23px;
             height: 56px;
             border-radius: 0.3em;
             margin: 0.4em;
             cursor: pointer;
+            position: relative;
+
+            &::before {
+                content: '';
+                width: 100%;
+                height: 100%;
+                border-radius: 0.3em;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: background-color 0.1s ease-in-out;
+            }
+
+            &:hover::before {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
         }
+
+
     }
 }

@@ -4,6 +4,18 @@
     left: 105%;
     top: 0;
 
+    .arrow-left {
+        position: absolute;
+        left: 0;
+        font-size: rem(14px);
+        color: inherit;
+        cursor: pointer;
+
+        &:hover {
+            color: darken($clr12, 25%);
+        }
+    }
+
     .img-container {
         display: flex;
         justify-content: center;
