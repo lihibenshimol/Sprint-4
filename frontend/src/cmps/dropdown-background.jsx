@@ -5,6 +5,8 @@ import bgImg1 from '../assets/img/bg-img-1.jpg'
 import bgImg2 from '../assets/img/bg-img-2.jpg'
 import bgImg3 from '../assets/img/bg-img-3.jpg'
 import bgImg4 from '../assets/img/bg-img-4.jpg'
+import bgImg5 from '../assets/img/bg-img-5.jpg'
+import bgImg6 from '../assets/img/bg-img-6.jpg'
 
 export function DropdownBackground({ setBgMenuOpen, setBoardBackground, isSelectedColor }) {
 
@@ -34,10 +36,24 @@ export function DropdownBackground({ setBgMenuOpen, setBoardBackground, isSelect
                     <button>See more</button>
                 </div>
                 <section className="picture-list">
-                    <div style={{backgroundImage: `url(${bgImg1})`}}></div>
-                    <div style={{backgroundImage: `url(${bgImg2})`}}></div>
-                    <div style={{backgroundImage: `url(${bgImg3})`}}></div>
-                    <div style={{backgroundImage: `url(${bgImg4})`}}></div>
+                    <div onClick={() => setBoardBackground(bgImg1)} style={{ backgroundImage: `url(${bgImg1})` }}>
+                        {isSelectedColor(bgImg1) && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={() => setBoardBackground(bgImg2)} style={{ backgroundImage: `url(${bgImg2})` }}>
+                        {isSelectedColor(bgImg2) && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={() => setBoardBackground(bgImg3)} style={{ backgroundImage: `url(${bgImg3})` }}>
+                        {isSelectedColor(bgImg3) && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={() => setBoardBackground(bgImg4)} style={{ backgroundImage: `url(${bgImg4})` }}>
+                        {isSelectedColor(bgImg4) && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={() => setBoardBackground(bgImg5)} style={{ backgroundImage: `url(${bgImg5})` }}>
+                        {isSelectedColor(bgImg5) && <i className='fa checked'></i>}
+                    </div>
+                    <div onClick={() => setBoardBackground(bgImg6)} style={{ backgroundImage: `url(${bgImg6})` }}>
+                        {isSelectedColor(bgImg6) && <i className='fa checked'></i>}
+                    </div>
                 </section>
             </section>
 
