@@ -47,6 +47,7 @@ export function CardDetails() {
 
     async function onChangeTitle({ target }) {
         let { innerText } = target
+
         try {
             const updateCard = { ...card, title: innerText }
             boardService.saveCard(board, groupId, updateCard)
@@ -77,10 +78,11 @@ export function CardDetails() {
             console.log('Cant save the checklist ', err)
         }
     }
-    async function onSaveMembers() {
+    async function onSaveMembers(members) {
         try {
-
-
+            const updateCard = { ...card, members }
+            boardService.saveCard(board, groupId, updateCard)
+            updateBoard(board)
 
         } catch (err) {
             console.log('Cant Add the members ', err)
@@ -88,11 +90,11 @@ export function CardDetails() {
     }
 
 
-
     return <div className="window full">
         <div className="black-bg full" onClick={() => navigate(`/board/${board._id}`)}></div>
-        {!card && <Loader className="flex align-center" />}
         <section className="card" onClick={closeAddTodoEdit}>
+            {!card && <Loader className="flex align-center" />}
+
             {card && (<><button onClick={() => navigate(`/board/${board._id}`)} className="close-btn">X</button>
                 <div className="card-header">
                     <span className="icon fa card-icon"></span>
@@ -109,7 +111,7 @@ export function CardDetails() {
                 <div className="card-content flex">
                     <div className="main-content">
                         <section className="card-details">
-                            {(card.members && card.members.length) &&
+                            {(card.members && card.members.length !== 0) &&
                                 <div className="details">
                                     <h5>Members</h5>
                                     <article className="members-container">
@@ -166,10 +168,10 @@ export function CardDetails() {
                     </div >
 
                     <SideBar
+                        groupId={groupId}
                         card={card}
                         onSaveCheckList={onSaveCheckList}
                         onSaveMembers={onSaveMembers}
-                        groupId={groupId}
                     />
                 </div >
             </>)}

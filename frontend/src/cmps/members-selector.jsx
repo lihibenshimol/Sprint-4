@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { MemberLabel } from "./member-label"
 
 
-export function MembersSelect({ }) {
+export function MembersSelect({ addMember, removeMember }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
 
@@ -21,6 +21,8 @@ export function MembersSelect({ }) {
                     return <MemberLabel
                         member={m}
                         key={m._id}
+                        addMember={addMember}
+                        removeMember={removeMember}
                     // handleChange={handleChange}
                     />
 
