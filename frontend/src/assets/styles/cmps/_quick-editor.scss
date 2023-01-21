@@ -33,6 +33,20 @@
         // }
     }
 
+    .quick-editor-card-details {
+        position: absolute;
+        bottom: 50px;
+        right: 5px;
+
+        .member-img {
+            height: 32px;
+            margin-right: -3px;
+            object-fit: cover;
+            width: 32px;
+            border-radius: 25em;
+        }
+    }
+
     .save-btn {
         background-color: #0079bf;
         color: #fff;

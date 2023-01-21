@@ -54,6 +54,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
             <div className="quick-editor-textarea">
                 <form onSubmit={onSaveCard}>
                     <textarea
+                    onClick={(e) => e.preventDefault()}
                         onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e) }}
                         type="text"
                         name="title"
@@ -62,8 +63,12 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                         autoFocus
                     >
                     </textarea>
+                    <section className="quick-editor-card-details">
+                        {card.members && card.members.map(member => <span key={member.id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
+                    </section>
                     <button type="button" className="save-btn">Save</button>
                 </form>
+
             </div>
             <div className="quick-editor-btns">
                 <button onClick={(e) => onOpenCard(e)}> <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card</button>

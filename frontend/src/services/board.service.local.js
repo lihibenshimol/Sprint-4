@@ -151,7 +151,7 @@ function getEmptyBoard() {
     }
 }
 
-function getBoardColors(){
+function getBoardColors() {
     return ['#0079bf', '#d29034', '#519839', '#b04632', '#89609e', '#cd5a91', '#4bbf6b', '#00aecc', '#838c91']
 }
 
@@ -241,7 +241,19 @@ function _createDemoBoards() {
                         "cards": [
                             {
                                 "id": "c101",
-                                "title": "Replace logo"
+                                "title": "Replace logo",
+                                "members": [
+                                    {
+                                        "_id": "u101",
+                                        "fullname": "Lihi Ben Shimol",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512"
+                                    },
+                                    {
+                                        "_id": "u102",
+                                        "fullname": "Aviad Malikan",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512"
+                                    },
+                                ]
                             },
                             {
                                 "id": "c102",
