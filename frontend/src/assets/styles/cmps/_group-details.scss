@@ -18,7 +18,7 @@
         font-size: 14px;
         font-weight: 600;
         display: block;
-        padding: 5px 8px 0px 8px;
+        padding: 3px 10px 0px 3px;
     }
 
     .group-title-text.edit-mode {
@@ -110,7 +110,8 @@
         width: 100%;
         max-width: 242px;
         height: 28px;
-        padding-left: 6px;
+        padding-left: 11px;
+        padding-top: 6px;
 
         &:hover {
             background-color: #091e4214;

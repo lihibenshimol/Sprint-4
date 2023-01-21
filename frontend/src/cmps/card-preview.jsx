@@ -18,7 +18,7 @@ export function CardPreview({ card, idx, groupId }) {
     const [quickEditor, toggleQuickEditor] = useState(false)
 
     function openQuickEditor(ev) {
-        ev.stopPropagation()
+        // ev.stopPropagation()
         ev.preventDefault()
         toggleQuickEditor(!quickEditor)
     }
