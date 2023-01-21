@@ -15,16 +15,13 @@ export function MemberLabel({ member, handleChange, checkAddOrRemove }) {
 
 
     function onAddMember(member) {
-        console.log('memmber = ', member)
         if (!checked) return
         checkAddOrRemove(member)
-        // addMember(member)
     }
 
     function onRemoveMember(member) {
         if (checked) return
         checkAddOrRemove(member)
-        // removeMember(member)
     }
 
     return (
