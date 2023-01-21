@@ -9,13 +9,16 @@ import { updateBoard } from "../store/board.actions"
 import { boardService } from "../services/board.service.local"
 import { useEffect, useRef, useState } from "react"
 import { MembersSelect } from "./members-selector"
+import { LabelsSelect } from "./label-selector"
 
 
 export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [cardToEdit, setCardToEdit] = useState(card)
 
+    const [labelsSelect, openLabelsSelect] = useState(false)
     const [membersSelect, openMembersSelect] = useState(false)
+
     const navigate = useNavigate()
     const textAreaRef = useRef(null)
 
@@ -77,6 +80,31 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         onSaveMembers(newMembers)
     }
 
+    //Added: Labels Editor:
+    async function onSaveLabels(labels) {
+        try {
+            card.labels = labels
+            updateBoard(board)
+        } catch (err) {
+            console.log('Cant Add the labels ', err)
+        }
+    }
+
+    function addOrDeleteLabel(label) {
+        if (!card.labels) card.labels = []
+        const labelIdx = card.labels.findIndex(l => l.id === label.id)
+        if (labelIdx === -1) {
+            label.isChecked = true
+            card.labels.push(label)
+        }
+        else {
+            label.isChecked = false
+            card.labels.splice(labelIdx, 1)
+        }
+
+        const newLabels = card.labels
+        onSaveLabels(newLabels)
+    }
 
 
 
@@ -107,7 +135,6 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                 </div>
 
                 {membersSelect &&
-
                     <div onClick={(e) => e.preventDefault()}>
                         <MembersSelect
                             openMembersSelect={openMembersSelect}
@@ -115,10 +142,29 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                             checkAddOrRemove={checkAddOrRemove} />
                     </div>}
 
+                {labelsSelect &&
+                    <div onClick={(e) => e.preventDefault()}>
+                        <LabelsSelect
+                            openLabelsSelect={openLabelsSelect}
+                            labelsSelect={labelsSelect}
+                            addOrDeleteLabel={addOrDeleteLabel} />
+                    </div>}
+
+
+
                 <div className="quick-editor-btns" onClick={(e) => e.preventDefault()}>
-                    <button onClick={onOpenCard}> <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card</button>
-                    <button> <span className="quick-icon"> <TiTag /> </span> Edit labels</button>
-                    <button onClick={() => openMembersSelect(!membersSelect)}> <span className="quick-icon"> <BsFillPersonFill /> </span>Change members</button>
+                    <button onClick={onOpenCard}>
+                        <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card
+                    </button>
+
+                    <button onClick={() => openLabelsSelect(!labelsSelect)}>
+                        <span className="quick-icon"> <TiTag /></span> Edit labels
+                    </button>
+
+                    <button onClick={() => openMembersSelect(!membersSelect)}>
+                        <span className="quick-icon"> <BsFillPersonFill /> </span> Change members
+                    </button>
+
                     <button> <span className="quick-icon"> <RiBankCard2Line /> </span> Change cover</button>
                     <button> <span className="quick-icon"> <RxClock /> </span> Edit dates</button>
                     <button onClick={onRemoveCard}> <span className="quick-icon"> <FiArchive /> </span> Delete</button>

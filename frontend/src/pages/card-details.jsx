@@ -20,6 +20,10 @@ export function CardDetails() {
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
+    const [membersSelect, openMembersSelect] = useState(false)
+    const [labelsSelect, openLabelsSelect] = useState(false)
+
+
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
     const navigate = useNavigate()
@@ -86,9 +90,17 @@ export function CardDetails() {
         }
     }
 
+    async function onSaveLabels(labels) {
+        try {
+            card.labels = labels
+            updateBoard(board)
+        } catch (err) {
+            console.log('Cant Add the labels ', err)
+        }
+    }
+
     function getGroup() {
         const group = board.groups.find(g => g.id === groupId)
-        console.log('group: ', group)
         return group.title
     }
 
@@ -119,21 +131,24 @@ export function CardDetails() {
                                     <h5>Members</h5>
                                     <article className="members-container">
                                         <UserAvatarPreview users={card.members} />
-                                        <div className="member add-btn fa add"></div>
+                                        <div className="member add-btn fa add"
+                                            onClick={() => openMembersSelect(!membersSelect)}></div>
                                     </article>
                                 </div>}
 
-                            {(card.label && card.label.length) &&
+                            {(card.labels && card.labels.length !== 0) &&
                                 <div className="details">
                                     <h5>labels</h5>
                                     <article className="labels-container">
-                                        {card.label.map(label => {
-                                            return <div className="label" key={label}>
-                                                <span className=" circle-label"></span>
-                                                {label}
+                                        {card.labels.map(label => {
+                                            return <div className="label hover" style={{ backgroundColor: label.color + '40' }}
+                                                key={label.id} onClick={() => openLabelsSelect(!labelsSelect)}>
+                                                <span className=" circle-label" style={{ backgroundColor: label.color }}></span>
+                                                {label.title}
                                             </div>
                                         })}
-                                        <div className="label fa add hover"></div>
+                                        <div className="label fa add hover"
+                                            onClick={() => openLabelsSelect(!labelsSelect)}></div>
                                     </article>
                                 </div>}
 
@@ -170,8 +185,13 @@ export function CardDetails() {
                     </div >
 
                     <SideBar
-                        groupId={groupId}
                         card={card}
+                        membersSelect={membersSelect}
+                        openMembersSelect={openMembersSelect}
+                        labelsSelect={labelsSelect}
+                        openLabelsSelect={openLabelsSelect}
+
+                        onSaveLabels={onSaveLabels}
                         onSaveCheckList={onSaveCheckList}
                         onSaveMembers={onSaveMembers}
                     />

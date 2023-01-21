@@ -2,8 +2,15 @@
     padding: 0 12px 12px;
     display: flex;
     flex-direction: column;
+    cursor: default;
 
-
+    h4 {
+        color: #5e6c84;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 16px;
+        margin-top: 16px;
+    }
 
     .search-input {
         background-color: var(--ds-background-input, #fafbfc);
@@ -12,7 +19,6 @@
         box-shadow: inset 0 0 0 2px var(--ds-border-input, #dfe1e6);
         box-sizing: border-box;
         line-height: 20px;
-        margin-bottom: 12px;
         outline: none;
         padding: 8px 12px;
         display: block;
@@ -27,6 +33,8 @@
 
     ul {
         padding: 0;
+        margin: 0;
+        margin-bottom: 8px;
 
         li {
 

@@ -210,8 +210,33 @@ function _createDemoBoards() {
                     {
                         "id": "l102",
                         "title": "Progress",
-                        "color": "#61bd33"
-                    }
+                        "color": "#f5e340"
+                    },
+                    {
+                        "id": "l103",
+                        "title": "",
+                        "color": "#ffaf3f"
+                    },
+                    {
+                        "id": "l104",
+                        "title": "Important",
+                        "color": "#f54040"
+                    },
+                    {
+                        "id": "l105",
+                        "title": "",
+                        "color": "#cd8de5"
+                    },
+                    {
+                        "id": "l106",
+                        "title": "",
+                        "color": "#5ba4cf"
+                    },
+                    {
+                        "id": "l107",
+                        "title": "",
+                        "color": "#091e42"
+                    },
                 ],
                 "members": [
                     {

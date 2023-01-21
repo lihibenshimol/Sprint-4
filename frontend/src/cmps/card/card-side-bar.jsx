@@ -3,12 +3,14 @@ import { TbTag } from 'react-icons/tb';
 import { AiOutlineClockCircle, AiOutlineUser } from 'react-icons/ai';
 import { IoMdCheckboxOutline } from 'react-icons/io';
 import { boardService } from '../../services/board.service.local';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { MembersSelect } from '../members-selector';
+import { LabelsSelect } from '../label-selector';
 
-export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
-    const [membersSelect, openMembersSelect] = useState(false)
+export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels,
+    membersSelect, openMembersSelect, labelsSelect, openLabelsSelect }) {
+    // const [membersSelect, openMembersSelect] = useState(false)
+    // const [labelsSelect, openLabelsSelect] = useState(false)
 
 
     async function onAddChecklist() {
@@ -24,7 +26,7 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
         }
     }
 
-    function checkAddOrRemove(member) {
+    function addOrDeleteMember(member) {
         if (!card.members) card.members = []
         const memberIdx = card.members.findIndex(m => m._id === member._id)
         if (memberIdx === -1) {
@@ -40,6 +42,22 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
         onSaveMembers(newMembers)
     }
 
+    function addOrDeleteLabel(label) {
+        if (!card.labels) card.labels = []
+        const labelIdx = card.labels.findIndex(l => l.id === label.id)
+        if (labelIdx === -1) {
+            label.isChecked = true
+            card.labels.push(label)
+        }
+        else {
+            label.isChecked = false
+            card.labels.splice(labelIdx, 1)
+        }
+
+        const newLabels = card.labels
+        onSaveLabels(newLabels)
+    }
+
 
 
     return (<div className="side-bar">
@@ -53,17 +71,22 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
 
             {membersSelect &&
                 <MembersSelect
-                    checkAddOrRemove={checkAddOrRemove}
+                    addOrDeleteMember={addOrDeleteMember}
                     membersSelect={membersSelect}
                     openMembersSelect={openMembersSelect}
                 />}
 
 
-            <button className="label-btn">
+            <button className="label-btn" onClick={() => openLabelsSelect(!labelsSelect)}>
                 <span className="tag-label labels"><TbTag /></span>
                 <span>labels</span>
             </button>
-
+            {labelsSelect &&
+                <LabelsSelect
+                    addOrDeleteLabel={addOrDeleteLabel}
+                    labelsSelect={labelsSelect}
+                    openLabelsSelect={openLabelsSelect}
+                />}
 
             <button className="label-btn" onClick={onAddChecklist}>
                 <span className=" tag-label"><IoMdCheckboxOutline /></span>

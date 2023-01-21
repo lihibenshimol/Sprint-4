@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux"
-import { MemberLabel } from "./member-label"
+import { MemberOption } from "./member-option"
 import { RxCross2 } from 'react-icons/rx';
 
 
-export function MembersSelect({ checkAddOrRemove, openMembersSelect, membersSelect }) {
+export function MembersSelect({ addOrDeleteMember, openMembersSelect, membersSelect }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
 
@@ -18,13 +18,15 @@ export function MembersSelect({ checkAddOrRemove, openMembersSelect, membersSele
             <div className="extras-content-members">
                 <input type="text" className='search-input'
                     placeholder='Search members'
-                    title='not available right now' />
+                    title='not available right now'
+                    disabled />
 
+                <h4>Board members</h4>
 
                 {board.members && <ul className='member-selector' >
                     {board.members?.map(m => {
-                        return <MemberLabel
-                            checkAddOrRemove={checkAddOrRemove}
+                        return <MemberOption
+                            addOrDeleteMember={addOrDeleteMember}
                             member={m}
                             key={m._id}
                         />
