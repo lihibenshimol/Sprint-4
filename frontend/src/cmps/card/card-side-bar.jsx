@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { MembersSelect } from '../members-selector';
 
 export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
-    const [isAddMembersEdit, setIsAddMembersEdit] = useState(false)
+    const [membersSelect, openMembersSelect] = useState(false)
 
 
     async function onAddChecklist() {
@@ -27,31 +27,36 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers }) {
     function checkAddOrRemove(member) {
         if (!card.members) card.members = []
         const memberIdx = card.members.findIndex(m => m._id === member._id)
-
         if (memberIdx === -1) {
-            member.isCheck = true
-            console.log('member: ',member)
-            
+            member.isChecked = true
             card.members.push(member)
         }
-        else card.members.splice(memberIdx, 1)
+        else {
+            member.isChecked = false
+            card.members.splice(memberIdx, 1)
+        }
 
         const newMembers = card.members
         onSaveMembers(newMembers)
     }
 
 
+
     return (<div className="side-bar">
         <section className="card-utils">
             <h5>Add to card</h5>
 
-            <button className="label-btn" onClick={() => setIsAddMembersEdit(!isAddMembersEdit)}>
+            <button className="label-btn" onClick={() => openMembersSelect(!membersSelect)}>
                 <span className=" tag-label"><AiOutlineUser /></span>
                 <span>members</span>
             </button>
 
-            {isAddMembersEdit &&
-                <MembersSelect checkAddOrRemove={checkAddOrRemove} />}
+            {membersSelect &&
+                <MembersSelect
+                    checkAddOrRemove={checkAddOrRemove}
+                    membersSelect={membersSelect}
+                    openMembersSelect={openMembersSelect}
+                />}
 
 
             <button className="label-btn">

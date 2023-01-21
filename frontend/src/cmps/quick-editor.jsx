@@ -14,6 +14,7 @@ import { MembersSelect } from "./members-selector"
 export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [cardToEdit, setCardToEdit] = useState(card)
+
     const [membersSelect, openMembersSelect] = useState(false)
     const navigate = useNavigate()
     const textAreaRef = useRef(null)
@@ -61,13 +62,16 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     }
 
     function checkAddOrRemove(member) {
-        console.log('heyyyy')
-
         if (!card.members) card.members = []
         const memberIdx = card.members.findIndex(m => m._id === member._id)
-
-        if (memberIdx === -1) card.members.push(member)
-        else card.members.splice(memberIdx, 1)
+        if (memberIdx === -1) {
+            member.isChecked = true
+            card.members.push(member)
+        }
+        else {
+            member.isChecked = false
+            card.members.splice(memberIdx, 1)
+        }
 
         const newMembers = card.members
         onSaveMembers(newMembers)
@@ -79,14 +83,14 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     return (
         <>
             <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
-             <div className="quick-editor" onClick={e => e.preventDefault()}>
+            <div className="quick-editor" onClick={e => e.preventDefault()}>
 
 
                 <div className="quick-editor-textarea" onClick={(e) => e.preventDefault()}>
                     <form onSubmit={onSaveCard}>
                         <textarea
                             ref={textAreaRef}
-                            onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e)}}
+                            onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e) }}
                             type="text"
                             name="title"
                             value={cardToEdit.title}
@@ -106,6 +110,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
 
                     <div onClick={(e) => e.preventDefault()}>
                         <MembersSelect
+                            openMembersSelect={openMembersSelect}
+                            membersSelect={membersSelect}
                             checkAddOrRemove={checkAddOrRemove} />
                     </div>}
 
