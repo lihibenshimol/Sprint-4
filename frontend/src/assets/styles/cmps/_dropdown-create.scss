@@ -31,6 +31,8 @@
         align-items: center;
         background-color: $clr1;
         border-radius: 0.2em;
+        background-position: center;
+        background-size: cover;
 
         img {
             width: 186px;
@@ -173,6 +175,40 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+    }
+
+    .bg-options {
+        margin-block-end: 0.5em;
+        >* {
+            width: 64px;
+            height: 40px;
+            border-radius: 0.2em;
+            background-color: $clr8;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: rem(10px);
+            color: $clr6;
+            cursor: pointer;
+            background-position: center;
+            background-size: cover;
+
+            &:not(.more-clr-options)::before {
+                content: '';
+                width: 100%;
+                height: 100%;
+                border-radius: 0.2em;
+                position: absolute;
+                top: 0;
+                left: 0;
+                transition: background-color 0.1s ease-in-out;
+            }
+
+            &:not(.more-clr-options):hover::before {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
         }
     }
 
