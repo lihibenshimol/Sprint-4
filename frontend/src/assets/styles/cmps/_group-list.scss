@@ -10,6 +10,7 @@
         font-size: 14px;
         height: 100%;
         position: relative;
+        gap: 10px;
 
         .add-group-section {
             //     color: whitesmoke;
@@ -83,7 +84,6 @@
                 .add-group-btns {
                     display: flex;
                     align-items: center;
-
 
                     .save-btn {
                         background-color: #0079bf;
