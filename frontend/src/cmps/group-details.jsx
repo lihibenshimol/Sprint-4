@@ -90,13 +90,13 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
                         <div className={"add-item-btn" + (addMode ? ' edit-mode' : '')}>
                             <form onSubmit={onSaveCard} >
                                 <textarea
+                                    autoFocus
                                     onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e) }}
                                     type="text"
                                     name="title"
                                     value={cardToEdit.title}
                                     onChange={handleCardChange}
                                     placeholder="Enter a title for this card..."
-                                    autoFocus
                                 >
                                 </textarea>
 

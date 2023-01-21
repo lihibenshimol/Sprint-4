@@ -61,6 +61,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                         value={cardToEdit.title}
                         onChange={handleChange}
                         autoFocus
+                        
                     >
                     </textarea>
                     <section className="quick-editor-card-details">

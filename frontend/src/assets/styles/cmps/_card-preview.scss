@@ -19,8 +19,8 @@ a:hover {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
-    max-width: 300px;
-    min-height: 20px;
+    // max-width: 300px;
+    min-height: 32px;
     width: 256px;
     padding: 6px 8px 2px;
     position: relative;
@@ -46,6 +46,9 @@ a:hover {
     }
 
     .quick-edit-btn {
+        position: absolute;
+        top: 5px;
+        right: 0;
         font-size: 12px;
         color: #42526e;
         opacity: 0;
@@ -57,5 +60,6 @@ a:hover {
 
 
 .card-preview:hover .quick-edit-btn {
+    background-color: rgba(255, 255, 255, 0.394);
     opacity: 1;
 }
