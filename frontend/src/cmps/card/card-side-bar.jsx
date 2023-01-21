@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { MembersSelect } from '../members-selector';
 
-export function SideBar({ groupId, card, onSaveCheckList, }) {
+export function SideBar({ groupId, card, onSaveCheckList, onSaveMembers }) {
     const [isAddMembersEdit, setIsAddMembersEdit] = useState(false)
 
 
@@ -24,8 +24,12 @@ export function SideBar({ groupId, card, onSaveCheckList, }) {
         }
     }
 
-    function onAddMember() {
+    function onAddMember(member) {
+        // const newMembers = []
+        card.members.push(member)
+        const newMembers = card.members
 
+        onSaveMembers(newMembers)
     }
 
 
@@ -34,18 +38,11 @@ export function SideBar({ groupId, card, onSaveCheckList, }) {
         <section className="card-utils">
             <h5>Add to card</h5>
 
-            <button className="label-btn">
+            <button className="label-btn" onClick={() => setIsAddMembersEdit(!isAddMembersEdit)}>
                 <span className=" tag-label"><AiOutlineUser /></span>
                 <span>members</span>
-            </button>
 
-
-            <button className="label-btn">
-                <span className="tag-label labels"><TbTag /></span>
-                <span>labels</span>
-
-
-                <div className="extras-menu flex">
+                {isAddMembersEdit && <div className="extras-menu flex">
                     <span className="title-container">
                         <p>
                             Members
@@ -53,10 +50,13 @@ export function SideBar({ groupId, card, onSaveCheckList, }) {
                         <a className='close-btn'><RxCross2 /></a>
                     </span>
                     <MembersSelect />
+                </div>}
+            </button>
 
-                </div>
 
-
+            <button className="label-btn">
+                <span className="tag-label labels"><TbTag /></span>
+                <span>labels</span>
             </button>
 
 

@@ -1,10 +1,14 @@
 import { useSelector } from "react-redux"
+import { MemberLabel } from "./member-label"
 
 
 export function MembersSelect({ }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
 
+    // function handleChange() {
+    //     setChecked(!checked)
+    // }
 
     return (
         <div className="extras-content-members">
@@ -14,18 +18,12 @@ export function MembersSelect({ }) {
 
             <ul className='member-selector'>
                 {board.members.map(m => {
-                    return (
-                        <li key={m._id} className="flex ">
-                            <label>
-                                <div className='flex'>
-                                    <img src={`${m.imgUrl}`} alt="member" className='member-avatar' />
-                                    <span>{m.fullname}</span>
-                                    <input type="checkbox" />
-                                </div>
-                                <span>V</span>
-                            </label>
-                        </li>
-                    )
+                    return <MemberLabel
+                        member={m}
+                        key={m._id}
+                    // handleChange={handleChange}
+                    />
+
                 })}
             </ul>
         </div>
