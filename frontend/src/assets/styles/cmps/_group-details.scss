@@ -1,23 +1,22 @@
 .group-content {
-    padding: 0 8px 6px;
+    padding: 0 4px 6px;
     flex-direction: column;
     background-color: $group-bg;
     border-radius: 3px;
     box-sizing: border-box;
     display: flex;
     max-height: 100%;
-    // position: relative;
     white-space: normal;
 
     .group-header {
         color: black;
     }
     
-
     .group-title-text {
         font-size: 14px;
         font-weight: 600;
         display: block;
+        padding: 5px 8px 0px 8px;
     }
 
     .group-title-text.edit-mode {

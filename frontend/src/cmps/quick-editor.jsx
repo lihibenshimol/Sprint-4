@@ -14,7 +14,7 @@ export function QuickEditor({ groupId, cardId, openQuickEditor, quickEditor }) {
     const navigate = useNavigate()
 
 
-    function navig(ev) {
+    function onOpenCard(ev) {
         ev.preventDefault()
         navigate(`/board/${board._id}/g/${groupId}/c/${cardId}`)
         openQuickEditor(ev, !quickEditor)
@@ -23,8 +23,9 @@ export function QuickEditor({ groupId, cardId, openQuickEditor, quickEditor }) {
     async function onRemoveCard(ev) {
         ev.preventDefault()
         try {
-          const updatedBoard = await boardService.removeCard(board, groupId, cardId)
+            const updatedBoard = await boardService.removeCard(board, groupId, cardId)
             updateBoard(updatedBoard)
+            openQuickEditor(ev, !quickEditor)
         } catch (err) {
             console.log('err = ', err)
         }
@@ -36,7 +37,7 @@ export function QuickEditor({ groupId, cardId, openQuickEditor, quickEditor }) {
         <>
             <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
             <div className="quick-editor-btns">
-                <button onClick={(e) => navig(e)}> <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card</button>
+                <button onClick={(e) => onOpenCard(e)}> <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card</button>
                 {/* <button onClick={() => navigate(`/board/${board._id}/g/${groupId}/c/${cardId}`)}>Open card</button> */}
                 <button> <span className="quick-icon"> <TiTag /> </span> Edit labels</button>
                 <button> <span className="quick-icon"> <BsFillPersonFill /> </span>Change members</button>
