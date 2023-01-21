@@ -82,14 +82,14 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     return (
         <>
             <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
-             <div className="quick-editor" onClick={e => e.preventDefault}>
+             <div className="quick-editor" onClick={e => e.preventDefault()}>
 
 
                 <div className="quick-editor-textarea" onClick={(e) => e.preventDefault()}>
                     <form onSubmit={onSaveCard}>
                         <textarea
                             ref={textAreaRef}
-                            onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e) }}
+                            onKeyPress={(e) => { if (e.key === 'Enter') onSaveCard(e)}}
                             type="text"
                             name="title"
                             value={cardToEdit.title}
