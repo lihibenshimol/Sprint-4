@@ -47,7 +47,8 @@ export function boardReducer(state = initialState, action) {
 
         case UPDATE_BOARD:
             lastUpdatedBoard = state.boards.find(b => (b._id === action.board._id) ? action.board : b)
-            return { ...state, currBoard: action.board }
+            boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
+            return { ...state, currBoard: action.board, boards }
 
         default:
             return state

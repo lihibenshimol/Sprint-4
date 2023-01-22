@@ -68,14 +68,9 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     function addOrDeleteMember(member) {
         if (!card.members) card.members = []
         const memberIdx = card.members.findIndex(m => m._id === member._id)
-        if (memberIdx === -1) {
-            member.isChecked = true
-            card.members.push(member)
-        }
-        else {
-            member.isChecked = false
-            card.members.splice(memberIdx, 1)
-        }
+
+        if (memberIdx === -1) card.members.push(member)
+        else card.members.splice(memberIdx, 1)
 
         const newMembers = card.members
         onSaveMembers(newMembers)
@@ -103,14 +98,9 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     function addOrDeleteLabel(label) {
         if (!card.labels) card.labels = []
         const labelIdx = card.labels.findIndex(l => l.id === label.id)
-        if (labelIdx === -1) {
-            label.isChecked = true
-            card.labels.push(label)
-        }
-        else {
-            label.isChecked = false
-            card.labels.splice(labelIdx, 1)
-        }
+
+        if (labelIdx === -1) card.labels.push(label)
+        else card.labels.splice(labelIdx, 1)
 
         const newLabels = card.labels
         onSaveLabels(newLabels)

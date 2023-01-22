@@ -14,6 +14,7 @@ import { boardService } from "../services/board.service.local"
 import { useSelector } from "react-redux"
 import { CheckListList } from "../cmps/card/card-checklist-list"
 import { updateBoard } from "../store/board.actions"
+import { CardHeader } from "../cmps/card-header"
 
 
 
@@ -138,19 +139,11 @@ export function CardDetails() {
                     </div>
                 </div>}
 
+                <CardHeader
+                    card={card}
+                    getGroup={getGroup}
+                    onChangeTitle={onChangeTitle} />
 
-                <div className="card-header">
-                    <span className="icon fa card-icon"></span>
-                    <h2 className="title"
-                        suppressContentEditableWarning={true}
-                        contentEditable={true}
-                        onBlur={onChangeTitle}>
-                        {card.title}
-                    </h2>
-                    <div>
-                        <p className="group-show">in group: {getGroup()}</p>
-                    </div>
-                </div>
                 <div className="card-content flex">
                     <div className="main-content">
                         <section className="card-details">
