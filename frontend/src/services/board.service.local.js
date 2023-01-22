@@ -258,19 +258,19 @@ function _createDemoBoards() {
                 "groups": [
                     {
                         "id": "g101",
-                        "title": "Group 1",
+                        "title": "Backlog - client",
                         // "archivedAt": 1589983468418,
                         "cards": [
                             {
                                 "id": "c101",
-                                "title": "Replace logo",
+                                "title": "Build app header",
                                 "members": [
-                                    // {
-                                    //     "_id": "u101",
-                                    //     "fullname": "Lihi Ben Shimol",
-                                    //     "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512",
-                                    //     isChecked: true
-                                    // },
+                                    {
+                                        "_id": "u101",
+                                        "fullname": "Lihi Ben Shimol",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512",
+                                        isChecked: true
+                                    },
                                     // {
                                     //     "_id": "u102",
                                     //     "fullname": "Aviad Malikan",
@@ -283,7 +283,14 @@ function _createDemoBoards() {
                             },
                             {
                                 "id": "c102",
-                                "title": "Add Samples",
+                                "title": "Implementing client-side functionality such as form validation, page transitions, and interactive elements",
+                                checklists: [],
+                                members: [],
+                                labels: [],
+                            },
+                            {
+                                "id": "c103",
+                                "title": "Create and maintain client-side documentation",
                                 checklists: [],
                                 members: [],
                                 labels: [],
@@ -293,19 +300,27 @@ function _createDemoBoards() {
                     },
                     {
                         "id": "g102",
-                        "title": "Group 2",
+                        "title": "Backlog - server",
                         // "archivedAt": 1589983468418,
                         "cards": [
                             {
-                                "id": "c103",
-                                "title": "Test groups",
+                                "id": "c104",
+                                "title": "Add user authentication",
                                 checklists: [],
-                                members: [],
+                                members: [
+                                    {
+                                            "_id": "u102",
+                                            "fullname": "Aviad Malikan",
+                                            "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
+                                            isChecked: true
+                                        
+                                    }
+                                ],
                                 labels: [],
                             },
                             {
-                                "id": "c104",
-                                "title": "Test Cards",
+                                "id": "c105",
+                                "title": "Connect socket service",
                                 members: [],
                                 labels: [],
                                 checklists: [
@@ -315,22 +330,101 @@ function _createDemoBoards() {
                                         todos: [
                                             {
                                                 id: '212jX',
-                                                title: 'To Do 1',
+                                                title: 'Test msg sent',
                                                 isDone: false
                                             },
                                             {
                                                 id: '213jX',
-                                                title: 'To Do 2',
+                                                title: 'Fix brodcast of msg',
                                                 isDone: true
                                             },
                                             {
                                                 id: '214jX',
-                                                title: 'To Do 3',
+                                                title: 'Test loggedin user alerts',
                                                 isDone: false
                                             },
                                         ]
                                     },
                                 ]
+                            }
+                        ],
+                        "style": {}
+                    },
+                    {
+                        "id": "g103",
+                        "title": "In development",
+                        // "archivedAt": 1589983468418,
+                        "cards": [
+                            {
+                                "id": "c106",
+                                "title": "Server routes and API's",
+                                checklists: [],
+                                members: [
+                                    {
+                                            // "_id": "u102",
+                                            // "fullname": "Aviad Malikan",
+                                            // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
+                                            // isChecked: true
+                                        
+                                    }
+                                ],
+                                labels: [],
+                            },
+                            {
+                                "id": "c107",
+                                "title": "Admin authentication and options",
+                                members: [],
+                                labels: [],
+                                checklists: [
+                                    {
+                                        id: 'YEhmF',
+                                        title: 'Checklist',
+                                        todos: [
+                                            {
+                                                id: '220jX',
+                                                title: 'Admin user profile',
+                                                isDone: true
+                                            },
+                                
+                                        ]
+                                    },
+                                ]
+                            }
+                        ],
+                        "style": {}
+                    },
+                    {
+                        "id": "g104",
+                        "title": "QA",
+                        // "archivedAt": 1589983468418,
+                        "cards": [
+                            {
+                                "id": "c108",
+                                "title": "Mobile resposive and flexible css",
+                                checklists: [],
+                                members: [
+                                    {
+                                            // "_id": "u102",
+                                            // "fullname": "Aviad Malikan",
+                                            // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
+                                            // isChecked: true
+                                        
+                                    }
+                                ],
+                                labels: [],
+                            },
+                            {
+                                "id": "c109",
+                                "title": "Ensuring that the frontend code is accessible and compliant with web standards",
+                                members: [
+                                    {
+                                        "_id": "u103",
+                                        "fullname": "Shay Skitel",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512"
+                                    }
+                                ],
+                                labels: [],
+                                checklists: []
                             }
                         ],
                         "style": {}
