@@ -32,7 +32,7 @@ export function BoardIndex() {
                 {starredBoards[0] &&
                     <section className="starred-boards">
                         <h3><i className="fa-regular star"></i>Starred boards</h3>
-                        <BoardList type={'starred'} boards={starredBoards} />
+                        <BoardList boards={starredBoards} />
                     </section>
                 }
 
