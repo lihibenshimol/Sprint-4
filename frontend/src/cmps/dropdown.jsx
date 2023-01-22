@@ -2,6 +2,7 @@ import { DropdownBackground } from "./dropdown-background";
 import { DropdownBoards } from "./dropdown-boards";
 import { DropdownCreate } from "./dropdown-create";
 import { DropdownCreateList } from "./dropdown-create-list";
+import { DropdownStarred } from "./dropdown-starred";
 
 export function DropDown({ type, setAddingBoard, setDropDown, setBgMenuOpen, setBoardBackground, colors, isSelectedColor }) {
 
@@ -16,7 +17,7 @@ export function DropDown({ type, setAddingBoard, setDropDown, setBgMenuOpen, set
             )
         case 'starred':
             return (
-                <DropdownBoards />
+                <DropdownStarred setDropDown={setDropDown}/>
             )
         case 'templates':
             return (
