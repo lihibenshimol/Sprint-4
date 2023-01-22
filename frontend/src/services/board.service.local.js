@@ -432,6 +432,16 @@ function _createDemoBoards() {
                         "style": {}
                     },
                 ]
+            },
+            {
+                groups: [],
+                isStarred: false,
+                labels: [],
+                style: {
+                    backgroundColor: null, backgroundImage: "url(/static/media/bg-img-4.be3ac8c92f74564819c8.jpg)"
+                },
+                title: "Iceland 2023",
+                _id: "O9qs3MWx7p"
             }
         ]
         utilService.saveToStorage(STORAGE_KEY, boards)

@@ -4,6 +4,8 @@
     min-height: 1px;
     position: relative;
     width: 264px;
+    // overflow-y: scroll;
+    // overflow-x: hidden;
 }
 
 a:hover {
@@ -45,6 +47,7 @@ a:hover {
         text-decoration: none;
         word-wrap: break-word;
         position: relative;
+        margin-bottom: 5px;
     }
 
     .card-preview-details {
@@ -59,7 +62,7 @@ a:hover {
         .preview-details-members {
             justify-self: end;
             align-self: flex-end;
-            
+
             .member-img {
                 height: 28px;
                 width: 28px;

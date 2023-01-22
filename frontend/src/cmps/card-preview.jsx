@@ -45,7 +45,6 @@ export function CardPreview({ card, idx, groupId }) {
                         <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
                     </section>
                     <section className="card-preview-details">
-                        {/* {card.checklists && <span className="preview-details-checklist" key={card.checklists[0].id}> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline/> </span> </span>} */}
                         {card.checklists && card.checklists.map(checklist => <span className="preview-details-checklist" key={checklist.id}> {doneInCheckList(checklist)}/{checklist.todos.length} <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline/> </span> </span>)}
                         {card.members && <span className="preview-details-members"> {card.members.map(member => <span key={member._id}> <img className="member-img" src={member.imgUrl} alt="" /></span> )} </span>}
                     </section>
