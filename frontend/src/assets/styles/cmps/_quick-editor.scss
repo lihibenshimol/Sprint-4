@@ -81,6 +81,10 @@
     position: absolute;
     z-index: 2;
     width: max-content;
+    -webkit-transition: opacity 85ms ease-in, transform 85ms ease-in;
+    -moz-transition: opacity 85ms ease-in, transform 85ms ease-in;
+    -ms-transition: opacity 85ms ease-in, transform 85ms ease-in;
+    -o-transition: opacity 85ms ease-in, transform 85ms ease-in;
     transition: opacity 85ms ease-in, transform 85ms ease-in;
 
     button {
@@ -96,6 +100,10 @@
         border-radius: 3px;
         cursor: pointer;
         // transition: .3s;
+        -webkit-transition: margin 85ms ease-in;
+        -moz-transition: margin 85ms ease-in;
+        -ms-transition: margin 85ms ease-in;
+        -o-transition: margin 85ms ease-in;
         transition: margin 85ms ease-in;
 
         .quick-icon {
