@@ -31,14 +31,16 @@ export function BoardIndex() {
 
                 {starredBoards[0] &&
                     <section className="starred-boards">
-                        <h3>Starred boards</h3>
+                        <h3><i className="fa-regular star"></i>Starred boards</h3>
                         <BoardList type={'starred'} boards={starredBoards} />
                     </section>
                 }
 
+                <section>
+                    <h2>Your boards</h2>
+                    <BoardList boards={boards} addNew={true} />
+                </section>
 
-                <h2>Your boards</h2>
-                <BoardList boards={boards} addNew={true} />
             </section>
         </section>
     )
