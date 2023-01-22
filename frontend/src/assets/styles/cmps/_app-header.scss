@@ -8,7 +8,12 @@
 
     h1 {
         margin: 0;
-        font-size: 1.35rem;
+        font-size: 1.25rem;
+
+        i {
+            margin-inline-end: 0.35em;
+            font-size: 1rem;
+        }
     }
 
     a,
