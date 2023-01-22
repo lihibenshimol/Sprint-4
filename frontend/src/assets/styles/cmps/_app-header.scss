@@ -53,12 +53,13 @@
     }
 
     nav>* {
-        margin-inline-end: 0.8em;
+        margin-inline-end: 0.85em;
     }
 
     .create-btn {
         background-color: darken($clr1, 10%);
         transition: background-color 0.1s ease-in-out;
+        padding: 0.7em 0.82em;
 
         &:hover {
             background-color: $clr10 !important;
