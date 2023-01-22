@@ -10,12 +10,9 @@ import bgImg2 from '../assets/img/bg-img-2.jpg'
 import bgImg3 from '../assets/img/bg-img-3.jpg'
 import bgImg4 from '../assets/img/bg-img-4.jpg'
 import { boardService } from "../services/board.service.local"
-import { DropDown } from "./dropdown"
 
-export function CoverSelector({ onSaveCover }) {
-    const board = useSelector(storeState => storeState.boardModule.currBoard)
+export function CoverSelector({ onSaveCover, openCoverSelect, coverSelect }) {
     const colors = boardService.getCardCoverColors()
-
 
     return (
         <div className="extras-menu flex">
@@ -23,7 +20,7 @@ export function CoverSelector({ onSaveCover }) {
                 <p>
                     Cover
                 </p>
-                <span className='close-btn hover' ><RxCross2 /></span>
+                <span className='close-btn hover' onClick={() => openCoverSelect(!coverSelect)}><RxCross2 /></span>
             </span>
             <div className="extras-content-cover">
 

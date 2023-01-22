@@ -9,10 +9,8 @@ import { LabelsSelect } from '../label-selector';
 import { CoverSelector } from '../cover-selector';
 
 export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, onSaveCover,
-    membersSelect, openMembersSelect, labelsSelect, openLabelsSelect }) {
-    // const [membersSelect, openMembersSelect] = useState(false)
-    // const [labelsSelect, openLabelsSelect] = useState(false)
-
+    membersSelect, openMembersSelect, labelsSelect, openLabelsSelect,
+    openCoverSelect, coverSelect }) {
 
     async function onAddChecklist() {
         try {
@@ -78,11 +76,6 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
                     openMembersSelect={openMembersSelect}
                 />}
 
-
-            <button className="label-btn" onClick={() => openLabelsSelect(!labelsSelect)}>
-                <span className="tag-label labels"><TbTag /></span>
-                <span>labels</span>
-            </button>
             {labelsSelect &&
                 <LabelsSelect
                     addOrDeleteLabel={addOrDeleteLabel}
@@ -91,9 +84,18 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
                 />}
 
 
-            <CoverSelector
-                onSaveCover={onSaveCover}
-            />
+            {coverSelect &&
+                <CoverSelector
+                    onSaveCover={onSaveCover}
+                    openCoverSelect={openCoverSelect}
+                    coverSelect={coverSelect}
+                />}
+
+            <button className="label-btn" onClick={() => openLabelsSelect(!labelsSelect)}>
+                <span className="tag-label labels"><TbTag /></span>
+                <span>labels</span>
+            </button>
+
 
             <button className="label-btn" onClick={onAddChecklist}>
                 <span className=" tag-label"><IoMdCheckboxOutline /></span>
@@ -107,10 +109,11 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
             </button>
 
 
-            <button className="label-btn">
-                <span className="tag-label"><BiWindow /></span>
-                <span>Cover</span>
-            </button>
+            {!card.cover &&
+                <button className="label-btn" onClick={() => openCoverSelect(!coverSelect)}>
+                    <span className="tag-label"><BiWindow /></span>
+                    <span>Cover</span>
+                </button>}
 
         </section>
 

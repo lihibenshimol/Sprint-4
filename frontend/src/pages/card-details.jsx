@@ -25,6 +25,7 @@ export function CardDetails() {
 
     const [membersSelect, openMembersSelect] = useState(false)
     const [labelsSelect, openLabelsSelect] = useState(false)
+    const [coverSelect, openCoverSelect] = useState(false)
 
 
     const board = useSelector(storeState => storeState.boardModule.currBoard)
@@ -103,8 +104,6 @@ export function CardDetails() {
     }
 
     async function onSaveCover(clr) {
-        console.log('clr: ',clr)
-        
         try {
             card.cover = clr
             updateBoard(board)
@@ -133,7 +132,7 @@ export function CardDetails() {
 
 
                 {card.cover && <div className="card-cover" style={{ backgroundColor: card.cover }}>
-                    <div className="cover-btn">
+                    <div className="cover-btn hover" onClick={() => openCoverSelect(!coverSelect)}>
                         <span><BiWindow /></span>
                         {' Cover'}
                     </div>
@@ -219,6 +218,8 @@ export function CardDetails() {
                         openMembersSelect={openMembersSelect}
                         labelsSelect={labelsSelect}
                         openLabelsSelect={openLabelsSelect}
+                        coverSelect={coverSelect}
+                        openCoverSelect={openCoverSelect}
 
                         onSaveCover={onSaveCover}
                         onSaveLabels={onSaveLabels}
@@ -231,43 +232,3 @@ export function CardDetails() {
     </div >
 }
 
-
-// cards = [{
-    //             _id: 'c103',
-    //             title: 'Test groups',
-    //             label: ['funny'],
-    //             members: ['Aviad', 'Shay', 'Lihi'],
-    //             checklists: [
-    //                 {
-    //                     id: 'YEhmF',
-    //                     title: 'Checklist',
-    //                     todos: [
-    //                         {
-    //                             id: '212jX',
-    //                             title: 'To Do 1',
-    //                             isDone: false
-    //                         }
-    //                     ]
-    //                 }
-    //             ],
-    //         },
-    //         {
-    //             _id: 'c102',
-    //             title: 'Test groups number 2',
-    //             label: ['funny', 'important', 'suggested'],
-    //             members: ['Lihi', 'Shay'],
-    //             checklists: [
-    //                 {
-    //                     id: 'f11f123',
-    //                     title: 'Todos',
-    //                     todos: [
-    //                         {
-    //                             id: '213jX',
-    //                             title: 'To Do 2',
-    //                             isDone: false
-    //                         }
-    //                     ]
-    //                 }
-    //             ],
-    //         },
-    //         ]
