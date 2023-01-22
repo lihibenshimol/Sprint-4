@@ -38,10 +38,15 @@
             bottom: 0.6em;
             right: 0.6em;
             transform: translateX(150%);
+            -webkit-transition: transform 0.1s ease-in-out;
+            -moz-transition: transform 0.1s ease-in-out;
+            -ms-transition: transform 0.1s ease-in-out;
+            -o-transition: transform 0.1s ease-in-out;
             transition: transform 0.1s ease-in-out;
 
             &.starred {
                 color: $clr15;
+                transform: translateX(0);
 
                 &::before {
                     font-family: fa;
@@ -56,6 +61,10 @@
 
             &::before {
                 transform: scale(1);
+                -webkit-transition: transform 0.1s ease-in-out;
+                -moz-transition: transform 0.1s ease-in-out;
+                -ms-transition: transform 0.1s ease-in-out;
+                -o-transition: transform 0.1s ease-in-out;
                 transition: transform 0.1s ease-in-out;
             }
 

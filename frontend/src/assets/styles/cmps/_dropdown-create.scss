@@ -75,6 +75,10 @@
         border-radius: 0.2em;
         margin: 0;
         padding: 0.64em 1em;
+        -webkit-transition: background-color 0.1s ease-in-out;
+        -moz-transition: background-color 0.1s ease-in-out;
+        -ms-transition: background-color 0.1s ease-in-out;
+        -o-transition: background-color 0.1s ease-in-out;
         transition: background-color 0.1s ease-in-out;
 
         &:hover {
@@ -159,6 +163,10 @@
                 position: absolute;
                 top: 0;
                 left: 0;
+                -webkit-transition: background-color 0.1s ease-in-out;
+                -moz-transition: background-color 0.1s ease-in-out;
+                -ms-transition: background-color 0.1s ease-in-out;
+                -o-transition: background-color 0.1s ease-in-out;
                 transition: background-color 0.1s ease-in-out;
             }
 
@@ -180,6 +188,7 @@
 
     .bg-options {
         margin-block-end: 0.5em;
+
         >* {
             width: 64px;
             height: 40px;
@@ -203,6 +212,10 @@
                 position: absolute;
                 top: 0;
                 left: 0;
+                -webkit-transition: background-color 0.1s ease-in-out;
+                -moz-transition: background-color 0.1s ease-in-out;
+                -ms-transition: background-color 0.1s ease-in-out;
+                -o-transition: background-color 0.1s ease-in-out;
                 transition: background-color 0.1s ease-in-out;
             }
 
@@ -218,6 +231,10 @@
 
     .more-clr-options {
         position: relative;
+        -webkit-transition: background-color 0.1s ease-in-out;
+        -moz-transition: background-color 0.1s ease-in-out;
+        -ms-transition: background-color 0.1s ease-in-out;
+        -o-transition: background-color 0.1s ease-in-out;
         transition: background-color 0.1s ease-in-out;
 
         &:hover {

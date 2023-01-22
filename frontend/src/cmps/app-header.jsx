@@ -19,7 +19,6 @@ export function AppHeader() {
             const url = board.style.backgroundImage.slice(4, -1)
             fac.getColorAsync(url)
                 .then(color => {
-                    console.log(color)
                     setNavColor(color.hex)
                 })
                 .catch(e => {
@@ -83,7 +82,7 @@ export function AppHeader() {
         <header style={isInBoardDetails() ? { backgroundColor: navColor, color: 'red' } : {}} className="app-header full flex space-between align-center main-container">
 
             <nav className='flex align-center main-nav'>
-                <Link to="/board"><h1 className='brand'>Trello</h1></Link>
+                <Link to="/board"><h1 className='brand'><i className="fa-brands trello"></i>Trello</h1></Link>
                 <button className={dropdown.type === 'boards' ? 'active' : ''} onClick={() => onShowDropdown('boards')}>Boards<i className="fa down-arrow"></i>
                     {dropdown.type === 'boards' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </button>
@@ -93,7 +92,7 @@ export function AppHeader() {
                 </button>
 
                 <button onClick={() => onShowDropdown('starred')} className={dropdown.type === 'starred' ? 'active' : ''}>Starred<i className="fa down-arrow"></i>
-                    {dropdown.type === 'starred' && <DropDown type={dropdown.type} />}
+                    {dropdown.type === 'starred' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </button>
 
                 <button onClick={() => onShowDropdown('templates')} className={dropdown.type === 'templates' ? 'active' : ''}>Templates<i className="fa down-arrow"></i>

@@ -8,7 +8,12 @@
 
     h1 {
         margin: 0;
-        font-size: 1.35rem;
+        font-size: 1.25rem;
+
+        i {
+            margin-inline-end: 0.35em;
+            font-size: 1rem;
+        }
     }
 
     a,
@@ -20,6 +25,10 @@
         padding: 0.7em 0.72em;
         text-decoration: none;
         border-radius: 0.25em;
+        -webkit-transition: background-color 0.1s ease-in-out;
+        -moz-transition: background-color 0.1s ease-in-out;
+        -ms-transition: background-color 0.1s ease-in-out;
+        -o-transition: background-color 0.1s ease-in-out;
         transition: background-color 0.1s ease-in-out;
         background: none;
         margin: 0;
@@ -59,6 +68,10 @@
 
     .create-btn {
         background-color: rgba(0, 0, 0, 0.3);
+        -webkit-transition: background-color 0.1s ease-in-out;
+        -moz-transition: background-color 0.1s ease-in-out;
+        -ms-transition: background-color 0.1s ease-in-out;
+        -o-transition: background-color 0.1s ease-in-out;
         transition: background-color 0.1s ease-in-out;
         padding: 0.7em 0.82em;
 
@@ -70,7 +83,7 @@
 
 .homepage-header {
     background-color: $clr6;
-    
+
     h1 {
         margin: 0;
         font-size: 2rem;
@@ -92,7 +105,7 @@
         justify-content: space-between;
         align-items: center;
 
-        > a {
+        >a {
             padding: 0;
         }
 

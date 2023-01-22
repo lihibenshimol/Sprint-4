@@ -24,15 +24,15 @@
             padding: 18px 16px 14px;
             background-color: rgba(255, 255, 255, 0.2);
         }
-        
-        .board-header-star-btn{
+
+        .board-header-star-btn {
             color: #f2d600;
             font-size: 16px;
-         }
+        }
 
-         .board-header-text.edit-mode {
-             display: none;
-         }
+        .board-header-text.edit-mode {
+            display: none;
+        }
 
         .board-header-text {
             font-size: 18px;
@@ -56,7 +56,7 @@
             display: none;
         }
 
-        .board-name-input.edit-mode{
+        .board-name-input.edit-mode {
             background-color: rgba(255, 255, 255);
             border: 0;
             display: block;
@@ -99,6 +99,10 @@
         display: flex;
         margin: 0 4px 5px auto;
         padding-inline-start: 5px;
+        -webkit-transition: margin .12s ease-in;
+        -moz-transition: margin .12s ease-in;
+        -ms-transition: margin .12s ease-in;
+        -o-transition: margin .12s ease-in;
         transition: margin .12s ease-in;
         gap: 10px;
 

@@ -24,6 +24,10 @@
             position: relative;
 
             .bar {
+                -webkit-transition: all 1s;
+                -moz-transition: all 1s;
+                -ms-transition: all 1s;
+                -o-transition: all 1s;
                 transition: all 1s;
                 transition-delay: .2s;
                 bottom: 0;
@@ -44,6 +48,10 @@
             clear: both;
             padding-left: 40px;
             position: relative;
+            -webkit-transition: background-color .2s;
+            -moz-transition: background-color .2s;
+            -ms-transition: background-color .2s;
+            -o-transition: background-color .2s;
             transition: background-color .2s;
             // padding: 6px 0;
             // width: 100%
@@ -75,6 +83,10 @@
                 height: 16px;
                 overflow: hidden;
                 position: absolute;
+                -webkit-transition: all .2s ease-in-out;
+                -moz-transition: all .2s ease-in-out;
+                -ms-transition: all .2s ease-in-out;
+                -o-transition: all .2s ease-in-out;
                 transition: all .2s ease-in-out;
                 width: 16px;
                 top: 11px;
