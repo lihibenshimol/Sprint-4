@@ -64,7 +64,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         }
     }
 
-    function checkAddOrRemove(member) {
+    function addOrDeleteMember(member) {
         if (!card.members) card.members = []
         const memberIdx = card.members.findIndex(m => m._id === member._id)
         if (memberIdx === -1) {
@@ -79,6 +79,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         const newMembers = card.members
         onSaveMembers(newMembers)
     }
+
 
     //Added: Labels Editor:
     async function onSaveLabels(labels) {
@@ -139,7 +140,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                         <MembersSelect
                             openMembersSelect={openMembersSelect}
                             membersSelect={membersSelect}
-                            checkAddOrRemove={checkAddOrRemove} />
+                            addOrDeleteMember={addOrDeleteMember} />
                     </div>}
 
                 {labelsSelect &&
