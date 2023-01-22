@@ -3,7 +3,7 @@
     // flex-wrap: wrap;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: rem(24.5px) rem(16px);
+    gap: rem(32px) rem(16px);
 
     @include for-normal-layout {
         grid-template-columns: repeat(3, 194px);
@@ -23,6 +23,46 @@
         position: relative;
         background-position: center;
         background-size: cover;
+        overflow: hidden;
+
+        i.star {
+            font-size: rem(12px);
+            width: 20px;
+            height: 20px;
+            color: $clr6;
+            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            bottom: 0.6em;
+            right: 0.6em;
+            transform: translateX(150%);
+            transition: transform 0.1s ease-in-out;
+
+            &.starred {
+                color: $clr15;
+
+                &::before {
+                    font-family: fa;
+                    content: "\f005";
+                }
+
+                &:hover::before {
+                    font-family: fa-regular;
+                    content: "\f005";
+                }
+            }
+
+            &::before {
+                transform: scale(1);
+                transition: transform 0.1s ease-in-out;
+            }
+
+            &:hover::before {
+                transform: scale(1.2);
+            }
+        }
 
 
         h3 {
@@ -33,6 +73,12 @@
             position: relative;
             z-index: 1;
             text-shadow: 0 0 1px black;
+        }
+
+        &:hover {
+            i {
+                transform: translateX(0);
+            }
         }
 
         &::before {
@@ -58,6 +104,7 @@
         align-items: center;
         color: $clr9;
         font-size: rem(14px);
+        overflow: visible;
 
         &::before {
             background: none;
