@@ -20,6 +20,7 @@ export function CardDetails() {
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
+    
     const [membersSelect, openMembersSelect] = useState(false)
     const [labelsSelect, openLabelsSelect] = useState(false)
 
