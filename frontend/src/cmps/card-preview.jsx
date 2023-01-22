@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { BsPencil } from 'react-icons/bs'
+import { IoMdCheckboxOutline } from 'react-icons/io'
 import { QuickEditor } from "./quick-editor";
 
 
@@ -12,6 +13,15 @@ function Container(props) {
     >
         {children}
     </div>
+}
+
+function doneInCheckList(checklist) {
+    console.log('checklist = ', checklist)
+    let doneTasks = 0
+    checklist.todos.forEach(task => {
+        if (task.isDone) doneTasks++
+    })
+    return doneTasks
 }
 
 export function CardPreview({ card, idx, groupId }) {
@@ -36,7 +46,8 @@ export function CardPreview({ card, idx, groupId }) {
                         <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
                     </section>
                     <section className="card-preview-details">
-                        {card.members && card.members.map(member => <span key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
+                        {card.checklists && card.checklists.map(checklist => <span className="preview-details-checklist" key={checklist.id}> {doneInCheckList(checklist)}/{checklist.todos.length} <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline/> </span> </span>)}
+                        {card.members && <span className="preview-details-members"> {card.members.map(member => <span key={member._id}> <img className="member-img" src={member.imgUrl} alt="" /></span> )} </span>}
                     </section>
                     {quickEditor &&
                         <section onClick={e => e.stopPropagation()}>

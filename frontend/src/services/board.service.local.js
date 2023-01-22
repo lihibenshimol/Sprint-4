@@ -309,11 +309,11 @@ function _createDemoBoards() {
                                 checklists: [],
                                 members: [
                                     {
-                                            "_id": "u102",
-                                            "fullname": "Aviad Malikan",
-                                            "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
-                                            isChecked: true
-                                        
+                                        "_id": "u102",
+                                        "fullname": "Aviad Malikan",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
+                                        isChecked: true
+
                                     }
                                 ],
                                 labels: [],
@@ -321,7 +321,13 @@ function _createDemoBoards() {
                             {
                                 "id": "c105",
                                 "title": "Connect socket service",
-                                members: [],
+                                members: [
+                                    {
+                                        "_id": "u103",
+                                        "fullname": "Shay Skitel",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512"
+                                    }
+                                ],
                                 labels: [],
                                 checklists: [
                                     {
@@ -360,12 +366,12 @@ function _createDemoBoards() {
                                 "title": "Server routes and API's",
                                 checklists: [],
                                 members: [
-                                    
-                                            // "_id": "u102",
-                                            // "fullname": "Aviad Malikan",
-                                            // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
-                                            // isChecked: true
-                                    
+                                    {
+                                        "_id": "u102",
+                                        "fullname": "Aviad Malikan",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
+                                        isChecked: true
+                                    }
                                 ],
                                 labels: [],
                             },
@@ -384,7 +390,7 @@ function _createDemoBoards() {
                                                 title: 'Admin user profile',
                                                 isDone: true
                                             },
-                                
+
                                         ]
                                     },
                                 ]
@@ -401,15 +407,7 @@ function _createDemoBoards() {
                                 "id": "c108",
                                 "title": "Mobile resposive and flexible css",
                                 checklists: [],
-                                members: [
-                                    {
-                                            // "_id": "u102",
-                                            // "fullname": "Aviad Malikan",
-                                            // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
-                                            // isChecked: true
-                                        
-                                    }
-                                ],
+                                members: [],
                                 labels: [],
                             },
                             {
@@ -420,6 +418,11 @@ function _createDemoBoards() {
                                         "_id": "u103",
                                         "fullname": "Shay Skitel",
                                         "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512"
+                                    },
+                                    {
+                                        "_id": "u101",
+                                        "fullname": "Lihi Ben Shimol",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512"
                                     }
                                 ],
                                 labels: [],
