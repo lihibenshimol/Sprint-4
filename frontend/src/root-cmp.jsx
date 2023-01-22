@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom'
 import routes from './routes'
 
 import { AppHeader } from './cmps/app-header'
-import { AppFooter } from './cmps/app-footer'
 import { BoardDetails } from './pages/board-details'
 import { HomepageHeader } from './cmps/homepage-header'
 import { Provider } from 'react-redux'
@@ -28,7 +27,6 @@ export function RootCmp() {
                         </Route>
                     </Routes>
                 </main>
-                {location.pathname === '/' && <AppFooter />}
             </Provider>
 
         </>

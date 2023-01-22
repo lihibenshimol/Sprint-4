@@ -6,8 +6,10 @@ import { SideBar } from "../cmps/card/card-side-bar"
 import { CardDescription } from "../cmps/card/card-description"
 import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 
-import { RxActivityLog } from 'react-icons/rx';
+import { RxCross1 } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
+import { BiWindow } from 'react-icons/bi';
+
 import { boardService } from "../services/board.service.local"
 import { useSelector } from "react-redux"
 import { CheckListList } from "../cmps/card/card-checklist-list"
@@ -20,9 +22,10 @@ export function CardDetails() {
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
-    
+
     const [membersSelect, openMembersSelect] = useState(false)
     const [labelsSelect, openLabelsSelect] = useState(false)
+    const [coverSelect, openCoverSelect] = useState(false)
 
 
     const board = useSelector(storeState => storeState.boardModule.currBoard)
@@ -100,6 +103,16 @@ export function CardDetails() {
         }
     }
 
+    async function onSaveCover(clr) {
+        try {
+            card.cover = clr
+            updateBoard(board)
+        } catch (err) {
+            console.log('Cant Add the labels ', err)
+        }
+    }
+
+
     function getGroup() {
         const group = board.groups.find(g => g.id === groupId)
         return group.title
@@ -111,7 +124,21 @@ export function CardDetails() {
         <section className="card" onClick={closeAddTodoEdit}>
             {!card && <Loader className="flex align-center" />}
 
-            {card && (<><button onClick={() => navigate(`/board/${board._id}`)} className="close-btn">X</button>
+
+            {card && (<>
+                <a onClick={() => navigate(`/board/${board._id}`)} className={`close-btn ${card.cover ? 'with-cover' : ''}`}>
+                    <RxCross1 />
+                </a>
+
+
+                {card.cover && <div className="card-cover" style={{ backgroundColor: card.cover }}>
+                    <div className="cover-btn hover" onClick={() => openCoverSelect(!coverSelect)}>
+                        <span><BiWindow /></span>
+                        {' Cover'}
+                    </div>
+                </div>}
+
+
                 <div className="card-header">
                     <span className="icon fa card-icon"></span>
                     <h2 className="title"
@@ -121,7 +148,7 @@ export function CardDetails() {
                         {card.title}
                     </h2>
                     <div>
-                        <p>in group: {getGroup()}</p>
+                        <p className="group-show">in group: {getGroup()}</p>
                     </div>
                 </div>
                 <div className="card-content flex">
@@ -191,7 +218,10 @@ export function CardDetails() {
                         openMembersSelect={openMembersSelect}
                         labelsSelect={labelsSelect}
                         openLabelsSelect={openLabelsSelect}
+                        coverSelect={coverSelect}
+                        openCoverSelect={openCoverSelect}
 
+                        onSaveCover={onSaveCover}
                         onSaveLabels={onSaveLabels}
                         onSaveCheckList={onSaveCheckList}
                         onSaveMembers={onSaveMembers}
@@ -202,43 +232,3 @@ export function CardDetails() {
     </div >
 }
 
-
-// cards = [{
-    //             _id: 'c103',
-    //             title: 'Test groups',
-    //             label: ['funny'],
-    //             members: ['Aviad', 'Shay', 'Lihi'],
-    //             checklists: [
-    //                 {
-    //                     id: 'YEhmF',
-    //                     title: 'Checklist',
-    //                     todos: [
-    //                         {
-    //                             id: '212jX',
-    //                             title: 'To Do 1',
-    //                             isDone: false
-    //                         }
-    //                     ]
-    //                 }
-    //             ],
-    //         },
-    //         {
-    //             _id: 'c102',
-    //             title: 'Test groups number 2',
-    //             label: ['funny', 'important', 'suggested'],
-    //             members: ['Lihi', 'Shay'],
-    //             checklists: [
-    //                 {
-    //                     id: 'f11f123',
-    //                     title: 'Todos',
-    //                     todos: [
-    //                         {
-    //                             id: '213jX',
-    //                             title: 'To Do 2',
-    //                             isDone: false
-    //                         }
-    //                     ]
-    //                 }
-    //             ],
-    //         },
-    //         ]

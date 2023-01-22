@@ -77,7 +77,7 @@
                 position: absolute;
                 transition: all .2s ease-in-out;
                 width: 16px;
-                top: 15px;
+                top: 11px;
                 left: 6px;
             }
 
@@ -108,5 +108,13 @@
             }
 
         }
+    }
+
+    // form.add-todo-editor {
+    //     margin-left: 40px
+    // }
+
+    .add-todo-container {
+        margin-left: 40px;
     }
 }

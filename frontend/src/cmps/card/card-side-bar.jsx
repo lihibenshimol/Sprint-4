@@ -6,12 +6,11 @@ import { boardService } from '../../services/board.service.local';
 import { useState } from 'react';
 import { MembersSelect } from '../members-selector';
 import { LabelsSelect } from '../label-selector';
+import { CoverSelector } from '../cover-selector';
 
-export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels,
-    membersSelect, openMembersSelect, labelsSelect, openLabelsSelect }) {
-    // const [membersSelect, openMembersSelect] = useState(false)
-    // const [labelsSelect, openLabelsSelect] = useState(false)
-
+export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, onSaveCover,
+    membersSelect, openMembersSelect, labelsSelect, openLabelsSelect,
+    openCoverSelect, coverSelect }) {
 
     async function onAddChecklist() {
         try {
@@ -60,6 +59,7 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels,
 
 
 
+
     return (<div className="side-bar">
         <section className="card-utils">
             <h5>Add to card</h5>
@@ -76,17 +76,26 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels,
                     openMembersSelect={openMembersSelect}
                 />}
 
-
-            <button className="label-btn" onClick={() => openLabelsSelect(!labelsSelect)}>
-                <span className="tag-label labels"><TbTag /></span>
-                <span>labels</span>
-            </button>
             {labelsSelect &&
                 <LabelsSelect
                     addOrDeleteLabel={addOrDeleteLabel}
                     labelsSelect={labelsSelect}
                     openLabelsSelect={openLabelsSelect}
                 />}
+
+
+            {coverSelect &&
+                <CoverSelector
+                    onSaveCover={onSaveCover}
+                    openCoverSelect={openCoverSelect}
+                    coverSelect={coverSelect}
+                />}
+
+            <button className="label-btn" onClick={() => openLabelsSelect(!labelsSelect)}>
+                <span className="tag-label labels"><TbTag /></span>
+                <span>labels</span>
+            </button>
+
 
             <button className="label-btn" onClick={onAddChecklist}>
                 <span className=" tag-label"><IoMdCheckboxOutline /></span>
@@ -100,10 +109,11 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels,
             </button>
 
 
-            <button className="label-btn">
-                <span className="tag-label"><BiWindow /></span>
-                <span>Cover</span>
-            </button>
+            {!card.cover &&
+                <button className="label-btn" onClick={() => openCoverSelect(!coverSelect)}>
+                    <span className="tag-label"><BiWindow /></span>
+                    <span>Cover</span>
+                </button>}
 
         </section>
 
