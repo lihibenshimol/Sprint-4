@@ -3,7 +3,7 @@
     // flex-wrap: wrap;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: rem(16px);
+    gap: rem(24.5px) rem(16px);
 
     @include for-normal-layout {
         grid-template-columns: repeat(3, 194px);
@@ -13,7 +13,7 @@
         grid-template-columns: repeat(4, 194px);
     }
 
-    > * {
+    >* {
         border-radius: 0.2em;
         background-color: $clr8;
         min-width: 136px;
@@ -23,7 +23,7 @@
         position: relative;
         background-position: center;
         background-size: cover;
-        
+
 
         h3 {
             margin: 0;

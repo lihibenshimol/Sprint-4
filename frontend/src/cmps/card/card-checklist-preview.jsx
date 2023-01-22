@@ -136,30 +136,31 @@ export function CheckListPreview({ checklist, onSaveCheckList, checklists,
             })}
         </div>
 
+        <div className="add-todo-container">
+            {!isEditAddTodo &&
+                <button className="btn btn-add-todo"
+                    onClick={() => setIsEditAddTodo(!isEditAddTodo)}>
+                    Add an item
+                </button>}
 
-        {!isEditAddTodo &&
-            <button className="btn btn-add-todo"
-                onClick={() => setIsEditAddTodo(!isEditAddTodo)}>
-                Add an item
-            </button>}
-
-        {isEditAddTodo && (
-            <form onSubmit={(e) => onSubmitDetails(e, checklist)}
-                onClick={e => e.stopPropagation()}
-                className="description-editor">
-                <textarea
-                    autoFocus
-                    type="text"
-                    id="description"
-                    name="description"
-                    value={todoTitle}
-                    onChange={handleChange}
-                    placeholder="Add an item"
-                >
-                </textarea>
-                <button className="save-btn">Add</button>
-                <button type="button" className="cancel-btn" onClick={cancelEditMode}>Cancel</button>
-            </form>)}
+            {isEditAddTodo && (
+                <form onSubmit={(e) => onSubmitDetails(e, checklist)}
+                    onClick={e => e.stopPropagation()}
+                    className="add-todo-editor">
+                    <textarea
+                        autoFocus
+                        type="text"
+                        id="description"
+                        name="description"
+                        value={todoTitle}
+                        onChange={handleChange}
+                        placeholder="Add an item"
+                    >
+                    </textarea>
+                    <button className="save-btn">Add</button>
+                    <button type="button" className="cancel-btn" onClick={cancelEditMode}>Cancel</button>
+                </form>)}
+        </div>
     </>)
 }
 

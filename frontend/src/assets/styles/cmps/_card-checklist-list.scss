@@ -4,13 +4,12 @@
     justify-content: space-between;
 
     min-height: 32px;
-    margin: 0px 0 10px 40px;
-    padding: 2px 0;
+    margin: 0px 0 12px 40px;
     position: relative;
 
 
     span {
-        left: -34px;
+        left: -35px;
         position: absolute;
         height: 32px;
         line-height: 32px;
@@ -20,7 +19,7 @@
     }
 
     span.check-list {
-        top: 4px
+        top: 2px
     }
 
     h3 {
@@ -41,7 +40,7 @@
 }
 
 .card-checklist {
-    margin-bottom: 24px;
+    margin-bottom: 30px;
 
     button.btn {
         margin: 0;
@@ -97,6 +96,7 @@
         font-size: 11px;
     }
 
+
     button {
         margin: 0;
         font-size: 14px;
@@ -105,6 +105,13 @@
         line-height: 20px;
         padding: 6px 12px;
         border-radius: 3px;
+    }
+
+    .todo-utils {
+        button {
+
+            padding: 0px 12px;
+        }
     }
 
     .cancel-btn {

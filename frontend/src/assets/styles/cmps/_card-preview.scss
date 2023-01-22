@@ -31,6 +31,10 @@ a:hover {
     text-decoration: none;
     color: $clr9;
 
+    // &.dragging {
+    //     rotate: 5deg;
+    // }
+
     &:hover {
         background-color: #f4f4f8;
         cursor: pointer;
