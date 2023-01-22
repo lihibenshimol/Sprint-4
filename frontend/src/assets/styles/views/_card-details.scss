@@ -19,6 +19,7 @@
 }
 
 .card {
+  background-color: #f4f5f7;
   z-index: 999;
   background-color: $clr11;
   border-radius: 2px;
@@ -111,12 +112,18 @@
       font-size: 20px;
       line-height: 24px;
       font-weight: 600;
+
+      &:focus{
+        background-color: white;
+        padding: 4px 8p;
+      }
     }
 
     p {
       display: inline-block;
       margin: 4px 8px 4px 2px;
     }
+
   }
 
   .card-content {

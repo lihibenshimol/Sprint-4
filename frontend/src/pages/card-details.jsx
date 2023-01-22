@@ -126,7 +126,7 @@ export function CardDetails() {
 
 
             {card && (<>
-                <a onClick={() => navigate(`/board/${board._id}`)} className={`close-btn with-cover ${card.cover ? 'with-cover' : ''}`}>
+                <a onClick={() => navigate(`/board/${board._id}`)} className={`close-btn ${card.cover ? 'with-cover' : ''}`}>
                     <RxCross1 />
                 </a>
 
@@ -148,7 +148,7 @@ export function CardDetails() {
                         {card.title}
                     </h2>
                     <div>
-                        <p>in group: {getGroup()}</p>
+                        <p className="group-show">in group: {getGroup()}</p>
                     </div>
                 </div>
                 <div className="card-content flex">
