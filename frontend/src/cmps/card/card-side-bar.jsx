@@ -7,10 +7,13 @@ import { useState } from 'react';
 import { MembersSelect } from '../members-selector';
 import { LabelsSelect } from '../label-selector';
 import { CoverSelector } from '../cover-selector';
+import { utilService } from '../../services/util.service';
 
 export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, onSaveCover,
     membersSelect, openMembersSelect, labelsSelect, openLabelsSelect,
     openCoverSelect, coverSelect }) {
+
+    const [pos, setPos] = useState({})
 
     async function onAddChecklist() {
         try {
@@ -44,21 +47,22 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
     function addOrDeleteLabel(label) {
         if (!card.labels) card.labels = []
         const labelIdx = card.labels.findIndex(l => l.id === label.id)
-        if (labelIdx === -1) {
-            label.isChecked = true
-            card.labels.push(label)
-        }
-        else {
-            label.isChecked = false
-            card.labels.splice(labelIdx, 1)
-        }
+
+        if (labelIdx === -1) card.labels.push(label)
+        else card.labels.splice(labelIdx, 1)
 
         const newLabels = card.labels
         onSaveLabels(newLabels)
     }
 
 
+    function onOpenLabelsSelect(ev) {
+        console.log('ev: ',ev)
+        
+        setPos(prevPos => utilService.getPosToDisplay(ev))
 
+        openLabelsSelect(!labelsSelect)
+    }
 
     return (<div className="side-bar">
         <section className="card-utils">
@@ -71,6 +75,7 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
 
             {membersSelect &&
                 <MembersSelect
+                    card={card}
                     addOrDeleteMember={addOrDeleteMember}
                     membersSelect={membersSelect}
                     openMembersSelect={openMembersSelect}
@@ -78,6 +83,8 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
 
             {labelsSelect &&
                 <LabelsSelect
+                    pos={pos}
+                    card={card}
                     addOrDeleteLabel={addOrDeleteLabel}
                     labelsSelect={labelsSelect}
                     openLabelsSelect={openLabelsSelect}
@@ -91,7 +98,7 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
                     coverSelect={coverSelect}
                 />}
 
-            <button className="label-btn" onClick={() => openLabelsSelect(!labelsSelect)}>
+            <button className="label-btn" onClick={(e) => onOpenLabelsSelect(e)}>
                 <span className="tag-label labels"><TbTag /></span>
                 <span>labels</span>
             </button>

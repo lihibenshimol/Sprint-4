@@ -1,19 +1,24 @@
 import { useState } from "react"
 
 
-export function LabelOption({ label, addOrDeleteLabel }) {
+export function LabelOption({ card, label, addOrDeleteLabel }) {
 
-    const [checked, setChecked] = useState(label.isChecked)
 
     function handleChange() {
-        setChecked(!checked)
         addOrDeleteLabel(label)
+    }
+
+    function labelIsCheck() {
+        const idx = card.labels.findIndex(l => l.id === label.id)
+
+        if (idx !== -1) return false
+        return true
     }
 
     return (
         <li className="flex " onClick={handleChange}>
             <label>
-                <span className={`${checked ? "checked" : 'un-checked'}`}></span>
+                <span className={`${labelIsCheck() ? "un-checked" : 'checked'}`}></span>
                 <div className='flex clr-box' style={{ backgroundColor: label.color + '40' }}>
                     <div className="clr-dot" style={{ backgroundColor: label.color }}></div>
                     <span>{label.title}</span>

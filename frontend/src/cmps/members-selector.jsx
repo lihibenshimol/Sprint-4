@@ -1,14 +1,15 @@
 import { useSelector } from "react-redux"
 import { MemberOption } from "./member-option"
 import { RxCross2 } from 'react-icons/rx';
+import { utilService } from "../services/util.service";
 
 
-export function MembersSelect({ addOrDeleteMember, openMembersSelect, membersSelect }) {
+export function MembersSelect({ card, addOrDeleteMember, openMembersSelect, membersSelect }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
 
     return (
-        <div className="extras-menu flex">
+        <div className="extras-menu flex" >
             <span className="title-container">
                 <p>
                     Members
@@ -26,6 +27,7 @@ export function MembersSelect({ addOrDeleteMember, openMembersSelect, membersSel
                 {board.members && <ul className='member-selector' >
                     {board.members?.map(m => {
                         return <MemberOption
+                            card={card}
                             addOrDeleteMember={addOrDeleteMember}
                             member={m}
                             key={m._id}

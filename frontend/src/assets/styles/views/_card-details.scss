@@ -86,45 +86,9 @@
       vertical-align: bottom;
     }
 
-
   }
 
-  .card-header {
-    margin-bottom: 9px;
-    min-height: 32px;
-    padding: 12px 40px 8px 56px;
-    position: relative;
-
-    .icon {
-      left: 24px;
-      position: absolute;
-      top: 20px;
-      height: 32px;
-      line-height: 32px;
-      width: 32px;
-      font-size: 18px
-    }
-
-    h2 {
-      margin: 0;
-      padding: 12px 0 0;
-      margin-right: 4px;
-      font-size: 20px;
-      line-height: 24px;
-      font-weight: 600;
-
-      &:focus{
-        background-color: white;
-        padding: 4px 8p;
-      }
-    }
-
-    p {
-      display: inline-block;
-      margin: 4px 8px 4px 2px;
-    }
-
-  }
+  
 
   .card-content {
 
