@@ -19,7 +19,6 @@ export function AppHeader() {
             const url = board.style.backgroundImage.slice(4, -1)
             fac.getColorAsync(url)
                 .then(color => {
-                    console.log(color)
                     setNavColor(color.hex)
                 })
                 .catch(e => {
