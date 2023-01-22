@@ -7,6 +7,7 @@ import { RxCross2 } from 'react-icons/rx'
 import { FiPlus } from 'react-icons/fi'
 import { BsThreeDots } from 'react-icons/bs'
 import { Droppable, Draggable } from "react-beautiful-dnd"
+import { QuickEditor } from "./quick-editor"
 
 
 export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
@@ -17,7 +18,7 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
     const [groupNewTitle, setGroupNewTitle] = useState(group.title)
     const [cardToEdit, setCardToEdit] = useState(boardService.getEmptyCard())
     const groupTitleRef = useRef(null)
-
+   
     function changeGroupTitle(ev) {
         ev.preventDefault()
         setEditMode(!editMode)
@@ -51,7 +52,7 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
                             <h1 onClick={() => setEditMode(!editMode)} className={"group-title-text" + (editMode ? ' edit-mode' : '')}>{group.title}</h1>
 
                             <form onSubmit={changeGroupTitle} onClick={() => groupTitleRef.current.select()}>
-                                <input onChange={handleGroupChange} className={"group-title-input" + (editMode ? ' edit-mode' : '')} aria-label={groupNewTitle} autoFocus spellCheck="false"  ref={groupTitleRef} dir="auto" value={groupNewTitle} />
+                                <input onChange={handleGroupChange} className={"group-title-input" + (editMode ? ' edit-mode' : '')} aria-label={groupNewTitle} autoFocus spellCheck="false" ref={groupTitleRef} dir="auto" value={groupNewTitle} />
                             </form>
 
                             <span className="extras-menu-btn">
@@ -80,11 +81,11 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
                                         provided={provided}
                                         isDraggingOver={snapshot.isDraggingOver}
                                     >
-
                                     </CardList>
                                 )}
                             </Droppable>
                         }
+                
 
                         <span onClick={() => setAddMode(!addMode)} className={"area-add-item" + (addMode ? ' edit-mode' : '')}> <FiPlus /> Add a card </span>
 
