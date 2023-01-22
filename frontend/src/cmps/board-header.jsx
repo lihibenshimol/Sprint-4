@@ -4,7 +4,7 @@ import filterIcon from '../assets/img/filter.svg'
 import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
 import { updateBoard } from "../store/board.actions"
-import { AiFillStar } from 'react-icons/ai'
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { BsFilter } from 'react-icons/bs'
 import { TfiDashboard } from 'react-icons/tfi'
 
@@ -17,6 +17,13 @@ export function BoardHeader() {
     useEffect(() => {
         setBoardNewTitle(board.title)
     }, [board])
+
+    function onStarBoard(ev) {
+        ev.stopPropagation()
+        board.isStarred = !board.isStarred
+        board.starredAt = Date.now()
+        updateBoard(board)
+    }
 
     function changeBoardTitle(ev) {
         ev.preventDefault()
@@ -41,8 +48,8 @@ export function BoardHeader() {
                         <input onChange={handleChange} className={"board-name-input" + (editMode ? ' edit-mode' : '')} aria-label="hello" autoFocus spellCheck="false" dir="auto" value={boardNewTitle} />
                     </form>
                     <span className="star-icon-box">
-                        <button className="board-header-star-btn" >
-                       < AiFillStar />
+                        <button className="board-header-star-btn" onClick={onStarBoard} >
+                       {board.isStarred ? < AiFillStar /> : < AiOutlineStar />}
                             </button>
                     </span>
                     {board && <div className="board-members">
