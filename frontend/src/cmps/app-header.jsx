@@ -8,10 +8,10 @@ import { useSelector } from 'react-redux'
 export function AppHeader() {
 
     const [dropdown, setDropDown] = useState({})
-    const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [navColor, setNavColor] = useState('rgba(0, 0, 0 ,0.5)')
-    console.log(board)
+    const board = useSelector(storeState => storeState.boardModule.currBoard)
     const location = useLocation()
+    
     const fac = new FastAverageColor()
 
     useEffect(() => {
