@@ -27,7 +27,8 @@
         cursor: pointer;
 
         &:not(:first-child):hover {
-            background-color: darken($clr1, 6%);
+            background-color: rgba(0, 0, 0, 0.3);
+            // background-color: darken($clr1, 6%);
         }
 
         .fa.down-arrow {
@@ -53,12 +54,13 @@
     }
 
     nav>* {
-        margin-inline-end: 0.8em;
+        margin-inline-end: 0.85em;
     }
 
     .create-btn {
-        background-color: darken($clr1, 10%);
+        background-color: rgba(0, 0, 0, 0.3);
         transition: background-color 0.1s ease-in-out;
+        padding: 0.7em 0.82em;
 
         &:hover {
             background-color: $clr10 !important;

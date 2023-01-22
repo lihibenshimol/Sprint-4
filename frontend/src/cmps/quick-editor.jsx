@@ -10,6 +10,7 @@ import { boardService } from "../services/board.service.local"
 import { useEffect, useRef, useState } from "react"
 import { MembersSelect } from "./members-selector"
 import { LabelsSelect } from "./label-selector"
+import { IoMdCheckboxOutline } from 'react-icons/io'
 
 
 export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
@@ -80,6 +81,14 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         onSaveMembers(newMembers)
     }
 
+    function doneInCheckList(checklist) {
+        let doneTasks = 0
+        checklist.todos.forEach(task => {
+            if (task.isDone) doneTasks++
+        })
+        return doneTasks
+    }
+
 
     //Added: Labels Editor:
     async function onSaveLabels(labels) {
@@ -129,6 +138,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                         >
                         </textarea>
                         <section className="quick-editor-card-details">
+                            {card.checklists && card.checklists.map(checklist => <span className="preview-details-checklist" key={checklist.id}> {doneInCheckList(checklist)}/{checklist.todos.length} <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span> </span>)}
                             {card.members && card.members.map(member => <span key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
                         </section>
                         <button type="button" className="save-btn">Save</button>

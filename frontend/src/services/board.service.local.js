@@ -326,7 +326,13 @@ function _createDemoBoards() {
                             {
                                 "id": "c105",
                                 "title": "Connect socket service",
-                                members: [],
+                                members: [
+                                    {
+                                        "_id": "u103",
+                                        "fullname": "Shay Skitel",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512"
+                                    }
+                                ],
                                 labels: [],
                                 checklists: [
                                     {
@@ -371,6 +377,10 @@ function _createDemoBoards() {
                                         // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
                                         // isChecked: true
 
+                                        "_id": "u102",
+                                        "fullname": "Aviad Malikan",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
+                                        isChecked: true
                                     }
                                 ],
                                 labels: [],
@@ -416,6 +426,7 @@ function _createDemoBoards() {
 
                                     }
                                 ],
+                                members: [],
                                 labels: [],
                             },
                             {
@@ -426,6 +437,11 @@ function _createDemoBoards() {
                                         "_id": "u103",
                                         "fullname": "Shay Skitel",
                                         "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512"
+                                    },
+                                    {
+                                        "_id": "u101",
+                                        "fullname": "Lihi Ben Shimol",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512"
                                     }
                                 ],
                                 labels: [],
@@ -435,6 +451,16 @@ function _createDemoBoards() {
                         "style": {}
                     },
                 ]
+            },
+            {
+                groups: [],
+                isStarred: false,
+                labels: [],
+                style: {
+                    backgroundColor: null, backgroundImage: "url(/static/media/bg-img-4.be3ac8c92f74564819c8.jpg)"
+                },
+                title: "Iceland 2023",
+                _id: "O9qs3MWx7p"
             }
         ]
         utilService.saveToStorage(STORAGE_KEY, boards)
