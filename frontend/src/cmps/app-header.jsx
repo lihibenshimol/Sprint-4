@@ -11,7 +11,7 @@ export function AppHeader() {
     const [navColor, setNavColor] = useState('rgba(0, 0, 0 ,0.5)')
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const location = useLocation()
-    
+
     const fac = new FastAverageColor()
 
     useEffect(() => {
@@ -23,12 +23,12 @@ export function AppHeader() {
                     setNavColor(color.hex)
                 })
                 .catch(e => {
-                    console.log(e);
-                });
+                    console.log(e)
+                })
         } else {
             setNavColor('rgba(0, 0, 0 ,0.5)')
         }
-    }, [board])
+    }, [board?.style])
 
     useEffect(() => {
         document.body.onclick = ({ target }) => {
@@ -80,7 +80,7 @@ export function AppHeader() {
     }
 
     return (
-        <header style={isInBoardDetails() ? { backgroundColor: navColor } : {}} className="app-header full flex space-between align-center main-container">
+        <header style={isInBoardDetails() ? { backgroundColor: navColor, color: 'red' } : {}} className="app-header full flex space-between align-center main-container">
 
             <nav className='flex align-center main-nav'>
                 <Link to="/board"><h1 className='brand'>Trello</h1></Link>
