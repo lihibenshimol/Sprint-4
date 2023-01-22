@@ -7,11 +7,18 @@
     cursor: default;
 }
 
+.quick-editor {
+    // position: absolute;
+
+    z-index: 5;
+}
+
 .quick-editor-textarea {
+    position: relative;
 
     form {
-        position: absolute;
-        z-index: 2;
+        position: fixed;
+        z-index: 3;
         left: 0;
         top: 0;
     }
@@ -29,7 +36,7 @@
         overflow: hidden;
 
         // &:focus {
-        //     box-shadow: inset 0 0 0 2px #0079bf;
+        //     box-shadow: inset 0 0 0 2px $focus-input;
         // }
 
         &::selection {
@@ -39,7 +46,7 @@
     }
 
     .quick-editor-card-details {
-        position: absolute;
+        position: fixed;
         bottom: 50px;
         right: 5px;
 
@@ -53,7 +60,7 @@
     }
 
     .save-btn {
-        background-color: #0079bf;
+        background-color: $focus-input;
         color: #fff;
         // margin-right: 4px;
         margin-top: 10px;
@@ -63,6 +70,7 @@
         padding: 6px 12px;
         font-size: 14px;
         width: 82px;
+        position: fixed;
     }
 
 }
@@ -78,7 +86,9 @@
     flex-direction: column;
     justify-content: center;
     left: 258px;
-    position: absolute;
+    position: fixed;
+    // position: relative;
+    top: 0;
     z-index: 2;
     width: max-content;
     -webkit-transition: opacity 85ms ease-in, transform 85ms ease-in;

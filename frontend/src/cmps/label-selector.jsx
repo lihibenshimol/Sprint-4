@@ -3,12 +3,12 @@ import { RxCross2 } from 'react-icons/rx';
 import { LabelOption } from "./label-option";
 
 
-export function LabelsSelect({ addOrDeleteLabel, openLabelsSelect, labelsSelect }) {
+export function LabelsSelect({ pos, card, addOrDeleteLabel, openLabelsSelect, labelsSelect }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
 
     return (
-        <div className="extras-menu flex">
+        <div className="extras-menu flex" style={pos}>
             <span className="title-container">
                 <p>
                     Labels
@@ -27,6 +27,7 @@ export function LabelsSelect({ addOrDeleteLabel, openLabelsSelect, labelsSelect 
                 {board.labels && <ul className='label-selector' >
                     {board.labels?.map(l => {
                         return <LabelOption
+                            card={card}
                             addOrDeleteLabel={addOrDeleteLabel}
                             label={l}
                             key={l.id}

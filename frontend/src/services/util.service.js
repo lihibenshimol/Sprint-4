@@ -5,7 +5,18 @@ export const utilService = {
     debounce,
     randomPastTime,
     saveToStorage,
-    loadFromStorage
+    loadFromStorage,
+    getPosToDisplay,
+}
+
+function getPosToDisplay(ev) {
+    const parentEl = ev.currentTarget?.parentNode
+    if(!parentEl) return
+    const details = parentEl.getBoundingClientRect()
+
+    const top = details.top
+    const left = details.right + 10
+    return { top, left }
 }
 
 function makeId(length = 6) {
