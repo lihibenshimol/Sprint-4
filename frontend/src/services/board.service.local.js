@@ -16,13 +16,15 @@ export const boardService = {
     addNewItem,
     getEmptyGroup,
     getBoardColors,
-
+    
     //Cards
     getCardById,
     getEmptyCard,
     saveCard,
     removeCard,
     getEmptyTodo,
+    getCardCoverColors,
+    
     // getEmptyMember,
     getEmptyChecklist,
 
@@ -150,6 +152,9 @@ function getEmptyBoard() {
 
 function getBoardColors() {
     return ['#0079bf', '#d29034', '#519839', '#b04632', '#89609e', '#cd5a91', '#4bbf6b', '#00aecc', '#838c91']
+}
+function getCardCoverColors() {
+    return ['#7bc86c', '#f5dd29', "#ffaf3f", '#ef7564', '#cd8de5', '#5ba4cf', '#29cce5', '#6deca9', '#ff8ed4', '#172b4d']
 }
 
 
@@ -309,11 +314,11 @@ function _createDemoBoards() {
                                 checklists: [],
                                 members: [
                                     {
-                                            "_id": "u102",
-                                            "fullname": "Aviad Malikan",
-                                            "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
-                                            isChecked: true
-                                        
+                                        "_id": "u102",
+                                        "fullname": "Aviad Malikan",
+                                        "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
+                                        isChecked: true
+
                                     }
                                 ],
                                 labels: [],
@@ -361,11 +366,11 @@ function _createDemoBoards() {
                                 checklists: [],
                                 members: [
                                     {
-                                            // "_id": "u102",
-                                            // "fullname": "Aviad Malikan",
-                                            // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
-                                            // isChecked: true
-                                        
+                                        // "_id": "u102",
+                                        // "fullname": "Aviad Malikan",
+                                        // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
+                                        // isChecked: true
+
                                     }
                                 ],
                                 labels: [],
@@ -385,7 +390,7 @@ function _createDemoBoards() {
                                                 title: 'Admin user profile',
                                                 isDone: true
                                             },
-                                
+
                                         ]
                                     },
                                 ]
@@ -404,11 +409,11 @@ function _createDemoBoards() {
                                 checklists: [],
                                 members: [
                                     {
-                                            // "_id": "u102",
-                                            // "fullname": "Aviad Malikan",
-                                            // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
-                                            // isChecked: true
-                                        
+                                        // "_id": "u102",
+                                        // "fullname": "Aviad Malikan",
+                                        // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
+                                        // isChecked: true
+
                                     }
                                 ],
                                 labels: [],

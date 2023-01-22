@@ -6,8 +6,9 @@ import { boardService } from '../../services/board.service.local';
 import { useState } from 'react';
 import { MembersSelect } from '../members-selector';
 import { LabelsSelect } from '../label-selector';
+import { CoverSelector } from '../cover-selector';
 
-export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels,
+export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, onSaveCover,
     membersSelect, openMembersSelect, labelsSelect, openLabelsSelect }) {
     // const [membersSelect, openMembersSelect] = useState(false)
     // const [labelsSelect, openLabelsSelect] = useState(false)
@@ -60,6 +61,7 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels,
 
 
 
+
     return (<div className="side-bar">
         <section className="card-utils">
             <h5>Add to card</h5>
@@ -87,6 +89,11 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels,
                     labelsSelect={labelsSelect}
                     openLabelsSelect={openLabelsSelect}
                 />}
+
+
+            <CoverSelector
+                onSaveCover={onSaveCover}
+            />
 
             <button className="label-btn" onClick={onAddChecklist}>
                 <span className=" tag-label"><IoMdCheckboxOutline /></span>

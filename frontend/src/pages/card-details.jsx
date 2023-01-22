@@ -6,8 +6,10 @@ import { SideBar } from "../cmps/card/card-side-bar"
 import { CardDescription } from "../cmps/card/card-description"
 import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 
-import { RxActivityLog } from 'react-icons/rx';
+import { RxCross1 } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
+import { BiWindow } from 'react-icons/bi';
+
 import { boardService } from "../services/board.service.local"
 import { useSelector } from "react-redux"
 import { CheckListList } from "../cmps/card/card-checklist-list"
@@ -20,7 +22,7 @@ export function CardDetails() {
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
-    
+
     const [membersSelect, openMembersSelect] = useState(false)
     const [labelsSelect, openLabelsSelect] = useState(false)
 
@@ -100,6 +102,18 @@ export function CardDetails() {
         }
     }
 
+    async function onSaveCover(clr) {
+        console.log('clr: ',clr)
+        
+        try {
+            card.cover = clr
+            updateBoard(board)
+        } catch (err) {
+            console.log('Cant Add the labels ', err)
+        }
+    }
+
+
     function getGroup() {
         const group = board.groups.find(g => g.id === groupId)
         return group.title
@@ -111,7 +125,21 @@ export function CardDetails() {
         <section className="card" onClick={closeAddTodoEdit}>
             {!card && <Loader className="flex align-center" />}
 
-            {card && (<><button onClick={() => navigate(`/board/${board._id}`)} className="close-btn">X</button>
+
+            {card && (<>
+                <a onClick={() => navigate(`/board/${board._id}`)} className={`close-btn with-cover ${card.cover ? 'with-cover' : ''}`}>
+                    <RxCross1 />
+                </a>
+
+
+                {card.cover && <div className="card-cover" style={{ backgroundColor: card.cover }}>
+                    <div className="cover-btn">
+                        <span><BiWindow /></span>
+                        {' Cover'}
+                    </div>
+                </div>}
+
+
                 <div className="card-header">
                     <span className="icon fa card-icon"></span>
                     <h2 className="title"
@@ -192,6 +220,7 @@ export function CardDetails() {
                         labelsSelect={labelsSelect}
                         openLabelsSelect={openLabelsSelect}
 
+                        onSaveCover={onSaveCover}
                         onSaveLabels={onSaveLabels}
                         onSaveCheckList={onSaveCheckList}
                         onSaveMembers={onSaveMembers}
