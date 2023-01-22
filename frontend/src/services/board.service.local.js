@@ -442,7 +442,40 @@ function _createDemoBoards() {
                 },
                 title: "Iceland 2023",
                 _id: "O9qs3MWx7p"
-            }
+            },
+            {
+                groups: [],
+                isStarred: false,
+                labels: [],
+                style: {
+                    backgroundColor: null,
+                    backgroundImage: "url(/static/media/bg-img-5.de5659898d3bfc5eb8ea.jpg)"
+                },
+                title: "Fullstack bootcamp",
+                _id: "hKLJZmXjbf"
+            },
+            {
+                groups: [],
+                isStarred: false,
+                labels: [],
+                style: {
+                    backgroundColor: null,
+                    backgroundImage: "url(/static/media/bg-img-6.624349ed01b920f8b7c5.jpg)"
+                },
+                title: "House renovation",
+                _id: "uegPI5Gxmv"
+            },
+            {
+                groups: [],
+                isStarred: false,
+                labels: [],
+                style: {
+                    backgroundColor: "#519839",
+                    backgroundImage: null
+                },
+                title: "Holiday menu",
+                _id: "hkx9bR0e46"
+            },
         ]
         utilService.saveToStorage(STORAGE_KEY, boards)
     }
