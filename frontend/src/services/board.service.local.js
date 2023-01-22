@@ -360,13 +360,12 @@ function _createDemoBoards() {
                                 "title": "Server routes and API's",
                                 checklists: [],
                                 members: [
-                                    {
+                                    
                                             // "_id": "u102",
                                             // "fullname": "Aviad Malikan",
                                             // "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
                                             // isChecked: true
-                                        
-                                    }
+                                    
                                 ],
                                 labels: [],
                             },
