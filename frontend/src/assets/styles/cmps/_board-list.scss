@@ -46,6 +46,7 @@
 
             &.starred {
                 color: $clr15;
+                transform: translateX(0);
 
                 &::before {
                     font-family: fa;
