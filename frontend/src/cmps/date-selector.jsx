@@ -14,6 +14,8 @@ export function DateSelector({ pos, isDropDownOpen, setIsDropDownOpen }) {
     useEffect(() => {
         if (dropdownRef.current) {
             const rect = dropdownRef.current.getBoundingClientRect()
+            console.log('rect: ', rect)
+
             if (rect.width + pos.right >= window.innerWidth) {
                 dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
             } else {
@@ -36,7 +38,7 @@ export function DateSelector({ pos, isDropDownOpen, setIsDropDownOpen }) {
                 <div className="calender">
 
                     <Calendar calendarType='US' className="class2" onChange={onChange} value={value} />
-                
+
                 </div>
             </div>
         </div>
