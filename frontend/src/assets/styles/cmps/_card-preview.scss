@@ -29,6 +29,13 @@ a:hover {
     text-decoration: none;
 }
 
+.card-preview-cover {
+    height: 32px;
+    width: 100%;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    // margin-bottom: 5px;
+}
 
 .card-preview {
     background-color: #fff;
@@ -41,7 +48,7 @@ a:hover {
     margin-bottom: 8px;
     min-height: 32px;
     max-width: 256px;
-    padding: 6px 8px 2px;
+    // padding: 6px 8px 2px;
     position: relative;
     text-decoration: none;
     color: $clr9;
@@ -58,6 +65,9 @@ a:hover {
     .card-preview-labels {
         display: flex;
         gap: 5px;
+        margin-top: 5px;
+        padding: 0px 8px 2px;
+
 
         .card-preview-label {
             height: 8px;
@@ -66,7 +76,7 @@ a:hover {
             margin: 4px 0 4px 0;
             font-size: 12px;
             line-height: 16px;
-            transition: height .4s ease-in;
+            transition:  .4s ease-in;
 
 
             &:hover {
@@ -81,20 +91,8 @@ a:hover {
                 width: max-content;
                 padding: 0 8px;
                 box-shadow: inset 0px 0px 0px 20px rgba(255, 255, 255, 0.442);
+                margin-top: 0;
             }
-
-            // &.expanded::before {
-            //     content: '';
-            //     position: absolute;
-            //     top: 4px;
-            //     bottom: 4px;
-            //     left: 4px;
-            //     border-radius: 50%;
-            //     width: 8px;
-            //     height: 8px;
-            //     color: black;
-            // }
-
         }
     }
 
@@ -111,11 +109,12 @@ a:hover {
         position: relative;
         margin-bottom: 5px;
         padding-right: 25px;
+        padding: 0px 8px 2px;
+
     }
 
     .card-preview-details {
-        // position: relative;
-        // display: flex;
+        padding: 0px 8px 2px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         align-items: center;
@@ -156,8 +155,8 @@ a:hover {
 
     .quick-edit-btn {
         position: absolute;
-        top: 5px;
-        right: 10px;
+        top: 1px;
+        right: 1px;
         font-size: 12px;
         z-index: 3;
         color: #42526e;
@@ -170,6 +169,8 @@ a:hover {
 
 
 .card-preview:hover .quick-edit-btn {
-    background-color: rgba(255, 255, 255, 0.394);
+    background-color: rgba(255, 255, 255, 0.612);
+    border-radius: 3px;
+    padding: 7px;
     opacity: 1;
 }

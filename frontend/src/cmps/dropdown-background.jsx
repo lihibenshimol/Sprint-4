@@ -28,6 +28,7 @@ export function DropdownBackground({ setBgMenuOpen, setBoardBackground, isSelect
                 dropdownRef.current.style = 'left: -770%'
 
             }
+            window.scrollTo(0, document.body.scrollHeight)
         }
     }, [dropdownRef])
 

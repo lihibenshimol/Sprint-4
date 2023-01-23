@@ -81,7 +81,7 @@ export function CardPreview({ card, idx, groupId }) {
                         isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
                     >
                         <div>
-
+                            {card.cover && <div className="card-preview-cover" style={{backgroundColor: card.cover}}> </div>}
                             <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
 
                             <section className="card-preview-labels" >
