@@ -15,12 +15,13 @@ export function BoardDetails() {
 
     useEffect(() => {
         loadBoard()
-       
     }, [boardId])
 
     async function loadBoard() {
         try {
             const board = await boardService.getById(boardId)
+            board.lastViewed = Date.now()
+            updateBoard(board)
             setCurrBoard(board)
         } catch (err) {
             console.log('Cannot load board')
