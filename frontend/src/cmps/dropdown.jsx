@@ -4,6 +4,7 @@ import { DropdownCreate } from "./dropdown-create";
 import { DropdownCreateList } from "./dropdown-create-list";
 import { DropdownRecent } from "./dropdown-recent";
 import { DropdownStarred } from "./dropdown-starred";
+import { DropdownUser } from "./dropdown-user";
 
 export function DropDown({ type, setAddingBoard, setDropDown, setBgMenuOpen, setBoardBackground, colors, isSelectedColor }) {
 
@@ -35,6 +36,10 @@ export function DropDown({ type, setAddingBoard, setDropDown, setBgMenuOpen, set
         case 'background':
             return (
                 <DropdownBackground isSelectedColor={isSelectedColor} colors={colors} setBoardBackground={setBoardBackground} setBgMenuOpen={setBgMenuOpen} />
+            )
+        case 'user':
+            return (
+                <DropdownUser setDropDown={setDropDown} />
             )
     }
 }
