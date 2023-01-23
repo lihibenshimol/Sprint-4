@@ -47,8 +47,16 @@
 
     .quick-editor-card-details {
         position: fixed;
-        bottom: 50px;
-        right: 5px;
+        // left: 180px;
+        top: 70px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        width: 256px;
+        justify-content: space-between;
+        // bottom: 50px;
+        // right: 5px;
 
         .member-img {
             height: 28px;
