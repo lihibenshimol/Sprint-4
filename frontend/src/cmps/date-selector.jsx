@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react"
 import { Calendar } from "react-calendar"
 import { RxCross2 } from "react-icons/rx"
+import 'react-calendar/dist/Calendar.css';
 
 
 
@@ -33,7 +34,9 @@ export function DateSelector({ pos, isDropDownOpen, setIsDropDownOpen }) {
             <div className="extras-content-dates">
                 <h4>Dates</h4>
                 <div className="calender">
-                    <Calendar onChange={onChange} value={value} />
+
+                    <Calendar calendarType='US' className="class2" onChange={onChange} value={value} />
+                
                 </div>
             </div>
         </div>
