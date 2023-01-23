@@ -173,20 +173,15 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
 
         setPos(prevPos => position)
         setDropdownType(prevType => typeToSet)
-
-        if (isDropDownOpen && typeToSet !== dropdownType) return
-        setIsDropDownOpen(!isDropDownOpen)
-
+        if (typeToSet === dropdownType || !dropdownType) setIsDropDownOpen(!isDropDownOpen)
     }
-
 
 
 
     return (
         <>
             <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
-            <div className="quick-editor" onClick={e => e.preventDefault()}>
-
+            <div className="quick-editor"  onClick={e => e.preventDefault()}>
 
                 <div className="quick-editor-textarea" ref={quickEditorTextareaRef} onClick={(e) => e.preventDefault()}>
                     <form onSubmit={onSaveCard}>
@@ -209,14 +204,12 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                                             {doneInCheckList(checklist)}/{checklist.todos.length}
                                         </div>)}
                             {card.members && <span className="preview-details-members">{card.members.map(member =>  <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
-                            {card.checklists && card.checklists.map(checklist => <span className="preview-details-checklist" key={checklist.id}> {doneInCheckList(checklist)}/{checklist.todos.length} <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span> </span>)}
-                            {card.members && <span className="preview-details-members">{card.members.map(member => <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
                         </section>
                         <button className="save-btn">Save</button>
                     </form>
                 </div>
 
-        {/* {console.log(' = ', )} */}
+        {console.log('quickEditorPos.right = ', quickEditorPos.right)}
                 {isDropDownOpen && <CardSelectDropDown
                     type={dropdownType} card={card}
                     pos={quickEditorPos}
@@ -249,16 +242,6 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
 
                     <button> <span className="quick-icon"> <RxClock /> </span> Edit dates</button>
                     <button onClick={onRemoveCard}> <span className="quick-icon"> <FiArchive /> </span> Delete</button>
-                    {isDropDownOpen && <CardSelectDropDown
-                        type={dropdownType} card={card}
-                        pos={quickEditorPos}
-                        // pos={pos}
-                        setIsDropDownOpen={setIsDropDownOpen}
-                        isDropDownOpen={isDropDownOpen}
-                        addOrDeleteMember={addOrDeleteMember}
-                        addOrDeleteLabel={addOrDeleteLabel}
-                        onSaveCover={onSaveCover}
-                    />}
                 </div>
             </div>
         </>
