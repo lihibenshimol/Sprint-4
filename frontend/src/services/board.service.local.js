@@ -248,17 +248,17 @@ function _createDemoBoards() {
                 ],
                 "members": [
                     {
-                        "_id": "u101",
+                        "_id": "6yBQqcMDlP",
                         "fullname": "Lihi Ben Shimol",
                         "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512"
                     },
                     {
-                        "_id": "u102",
+                        "_id": "cWZFwumkpu",
                         "fullname": "Aviad Malikan",
                         "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512"
                     },
                     {
-                        "_id": "u103",
+                        "_id": "MxqOGVX0NK",
                         "fullname": "Shay Skitel",
                         "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512"
                     },

@@ -1,13 +1,24 @@
 import { useSelector } from "react-redux"
 import { MemberOption } from "./member-option"
 import { RxCross2 } from 'react-icons/rx';
-import { utilService } from "../services/util.service";
 import { useRef, useEffect } from "react";
+import { userService } from "../services/user.service";
+import { loadUsers } from "../store/user.actions";
 
 
-export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen, isDropDownOpen }) {
+export function BoardMemberSelect({ pos, addOrDeleteMember, setIsDropDownOpen, isDropDownOpen }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+    const users = useSelector(storeState => storeState.userModule.users)
     const dropdownRef = useRef(null)
+
+    console.log('users = ', users)
+
+    useEffect(() => {
+        loadUsers()
+    }, [])
+
+
+
 
     useEffect(() => {
         if (dropdownRef.current) {
@@ -20,7 +31,7 @@ export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen,
         }
     }, [dropdownRef])
 
-    console.log('board.members = ', board.members)
+
 
 
     return (
@@ -39,18 +50,17 @@ export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen,
 
                 <h4>Board members</h4>
 
-                {board.members && <ul className='member-selector' >
-                    {board.members?.map(m => {
+                <ul className='member-selector' >
+                    {users?.map(m => {
+                      
                         return <MemberOption
-                            
-                            card={card}
                             addOrDeleteMember={addOrDeleteMember}
                             member={m}
                             key={m._id}
                             board={board}
                         />
                     })}
-                </ul>}
+                </ul>
             </div>
         </div >
     )

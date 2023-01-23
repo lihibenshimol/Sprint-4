@@ -20,7 +20,7 @@
     position: fixed;
     background-color: #ffffff;
     width: 256px;
-    height: 140px;
+    height: 150px;
     box-shadow: rgba(9, 30, 66, .251);
     border-radius: 3px;
 
@@ -53,11 +53,12 @@
     }
 
     .quick-editor-card-details {
-        // position: fixed;
-        top: 90px;
+        position: absolute;
+        bottom: 0;
         text-decoration: none;
         align-items: center;
-        padding: 0 15px;
+        padding: 0 10px;
+        margin: 0 4px 4px 0;
         width: 256px;
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -81,7 +82,12 @@
             color: #5e6c84;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            width: 50px;
+            border-radius: 3px;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
 
                 .preview-details-checklist-icon {
                     font-size: 15px;
@@ -102,7 +108,7 @@
         font-size: 14px;
         width: 82px;
         position: absolute;
-        top: 140px;
+        top: 150px;
         left: 0;
     }
 

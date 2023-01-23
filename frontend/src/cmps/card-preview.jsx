@@ -57,7 +57,6 @@ export function CardPreview({ card, idx, groupId }) {
         } else {
             return {backgroundColor: '#ffffff'}
         }
-
     }
 
     function openQuickEditor(ev) {
@@ -83,7 +82,10 @@ export function CardPreview({ card, idx, groupId }) {
                         groupId={groupId}
                         openQuickEditor={openQuickEditor}
                         quickEditor={quickEditor}
-                        quickEditorPos={quickEditorPos} />
+                        quickEditorPos={quickEditorPos}
+                        isTasksDone={isTasksDone}
+                        doneInCheckList={doneInCheckList}
+                        />
                 </section>}
 
             <Draggable draggableId={card.id} index={idx}>
@@ -94,7 +96,7 @@ export function CardPreview({ card, idx, groupId }) {
                         isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
                     >
                         <div>
-                            {card.cover && <div className="card-preview-cover" style={{ backgroundColor: card.cover }}> </div>}
+                            {/* {card.cover && <div className="card-preview-cover" style={{ backgroundColor: card.cover }}> </div>} */}
                             <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
 
                             {!!card.labels.length && <section className="card-preview-labels">
