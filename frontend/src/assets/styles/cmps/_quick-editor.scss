@@ -8,16 +8,24 @@
 }
 
 .quick-editor {
-    // position: absolute;
-
+    position: fixed;
+    // height: 300px;
+    // width: 300px;
     z-index: 5;
+    // display: flex;
+    display: grid;
 }
 
 .quick-editor-textarea {
-    position: relative;
+    position: fixed;
+    background-color: #ffffff;
+    width: 256px;
+    height: 140px;
+    box-shadow: rgba(9, 30, 66, .251);
+    border-radius: 3px;
 
     form {
-        position: fixed;
+        // position: fixed;
         z-index: 3;
         left: 0;
         top: 0;
@@ -27,14 +35,12 @@
         background-color: #fff;
         border: none;
         border-radius: 3px;
-        box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
-        box-shadow: rgba(9, 30, 66, .251);
-        min-height: 120px;
+        // box-shadow: 0 1px 0 rgb(9 30 66 / 25%);
+        min-height: 100px;
         padding: 9px 8px;
         width: 256px;
         font-size: 14px;
         overflow: hidden;
-        margin-bottom: 90px;
 
         // &:focus {
         //     box-shadow: inset 0 0 0 2px $focus-input;
@@ -47,7 +53,7 @@
     }
 
     .quick-editor-card-details {
-        position: fixed;
+        // position: fixed;
         top: 90px;
         text-decoration: none;
         align-items: center;
@@ -95,7 +101,7 @@
         padding: 6px 12px;
         font-size: 14px;
         width: 82px;
-        position: fixed;
+        // position: fixed;
         top: 120px;
         left: 0;
     }
@@ -112,10 +118,8 @@
     align-items: flex-start;
     flex-direction: column;
     justify-content: center;
-    left: 258px;
     position: fixed;
-    // position: relative;
-    top: 0;
+    // top: 0;
     z-index: 2;
     width: max-content;
     -webkit-transition: opacity 85ms ease-in, transform 85ms ease-in;
