@@ -11,7 +11,7 @@ export function BoardDetails() {
     const { boardId } = useParams()
     const navigate = useNavigate()
     const board = useSelector(storeState => storeState.boardModule.currBoard)
-    let inlineStyles ={}
+
 
     useEffect(() => {
         loadBoard()

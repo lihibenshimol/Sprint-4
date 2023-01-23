@@ -15,13 +15,42 @@ import { CardSelectDropDown } from "./card/card-select-dropdown"
 import { utilService } from "../services/util.service"
 
 
-export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
+export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quickEditorPos }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [cardToEdit, setCardToEdit] = useState(card)
-
+    const [pos, setPos] = useState({})
     const [dropdownType, setDropdownType] = useState(null)
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
-    const [pos, setPos] = useState({})
+    const quickEditorBtnsRef = useRef(null)
+    const quickEditorTextareaRef = useRef(null)
+
+    useEffect(() => {
+        if (quickEditorBtnsRef.current) {
+            const rect = quickEditorBtnsRef.current.getBoundingClientRect()
+            if (rect.width + quickEditorPos.right >= window.innerWidth) {
+                console.log('here');
+                quickEditorBtnsRef.current.style = `left:${quickEditorPos.left - rect.width - 20}px; top:${quickEditorPos.top}; direction: rtl `
+            } else {
+                console.log('there');
+                quickEditorBtnsRef.current.style = `left:${quickEditorPos.right + 10}px; `
+            }
+        }
+    }, [quickEditorBtnsRef])
+
+    useEffect(() => {
+        if (quickEditorTextareaRef.current) {
+            const rect = quickEditorTextareaRef.current.getBoundingClientRect()
+
+            quickEditorTextareaRef.current.style = `left:${quickEditorPos.left - 10}px; top:${quickEditorPos.top}; `
+            // if (rect.width + quickEditorPos.right >= window.innerWidth) {
+            //     console.log('here');
+            //     quickEditorTextareaRef.current.style = `left:${quickEditorPos.left}px; top:${quickEditorPos.top};`
+            // } else {
+            //     console.log('there');
+            //     quickEditorTextareaRef.current.style = `right:${quickEditorPos.right - 100}px; `
+            // }
+        }
+    }, [quickEditorTextareaRef])
 
     const navigate = useNavigate()
     const textAreaRef = useRef(null)
@@ -160,10 +189,9 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     return (
         <>
             <div className="black-bg" onClick={(ev) => openQuickEditor(ev, !quickEditor)}></div>
-            <div className="quick-editor" onClick={e => e.preventDefault()}>
+            <div className="quick-editor"  onClick={e => e.preventDefault()}>
 
-
-                <div className="quick-editor-textarea" onClick={(e) => e.preventDefault()}>
+                <div className="quick-editor-textarea" ref={quickEditorTextareaRef} onClick={(e) => e.preventDefault()}>
                     <form onSubmit={onSaveCard}>
                         <textarea
                             ref={textAreaRef}
@@ -173,12 +201,12 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                             value={cardToEdit.title}
                             onChange={handleChange}
                             autoFocus
-
                         >
                         </textarea>
+
                         <section className="quick-editor-card-details">
                             {card.checklists && card.checklists.map(checklist => <span className="preview-details-checklist" key={checklist.id}> {doneInCheckList(checklist)}/{checklist.todos.length} <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span> </span>)}
-                            {card.members && card.members.map(member => <span className="preview-details-members" key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
+                            {card.members && <span className="preview-details-members">{card.members.map(member =>  <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
                         </section>
                         <button className="save-btn">Save</button>
                     </form>
@@ -195,7 +223,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                 />}
 
 
-                <div className="quick-editor-btns" onClick={(e) => e.preventDefault()}>
+                <div className="quick-editor-btns" ref={quickEditorBtnsRef} onClick={(e) => e.preventDefault()}>
                     <button onClick={onOpenCard}>
                         <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card
                     </button>
