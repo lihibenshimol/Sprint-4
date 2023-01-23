@@ -42,14 +42,27 @@
         ;
         // background-image: linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180));
 
-        a {
-            color: $clr2;
+        .start-demo-btn {
+            background-color: #0065ff;
+            padding: 0.7rem 1rem 0.8rem;
+            width: 160px;
+            text-align: center;
+            color: white;
+            border-radius: 3px;
+            font-family: 'charlie-text';
+            font-size: 16px;
+            margin-left: 0;
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
         }
 
         .signup-intro {
             display: flex;
             flex-direction: column;
-
+            justify-content: space-evenly;
             width: 50%;
             text-align: left;
 
@@ -93,7 +106,7 @@
     .boards-desc {
         display: flex;
         flex-wrap: wrap;
-        padding: 6em;
+        padding: 2em 6em;
         gap: 50px;
         justify-content: center;
         font-size: 16px;
