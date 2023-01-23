@@ -35,12 +35,12 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         openQuickEditor(!quickEditor)
     }
 
-    async function onRemoveCard() {
+    async function onRemoveCard(ev) {
 
         try {
             const updatedBoard = await boardService.removeCard(board, groupId, card.id)
             updateBoard(updatedBoard)
-            openQuickEditor(!quickEditor)
+            openQuickEditor(ev, !quickEditor)
         } catch (err) {
             console.log('err = ', err)
         }
