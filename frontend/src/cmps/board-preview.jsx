@@ -12,8 +12,6 @@ export function BoardPreview({ board, type }) {
 
     function onBoardClick() {
         navigate(`/board/${board._id}`)
-        board.lastViewed = Date.now()
-        updateBoard(board)
     }
 
     return (
