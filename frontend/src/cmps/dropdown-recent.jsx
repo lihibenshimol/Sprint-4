@@ -35,7 +35,6 @@ export function DropdownRecent({ setDropDown }) {
 
     return (
         <section onClick={(ev) => ev.stopPropagation()} className="dropdown dropdown-boards">
-            <label>Recently viewed</label>
             <ul className="clean-list">
                 {recentBoards[0] &&
                     recentBoards.map(board => (
