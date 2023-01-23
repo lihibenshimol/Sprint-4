@@ -21,7 +21,8 @@
         align-content: start;
         display: flex;
         flex-wrap: wrap;
-        background-image: linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180));
+        background: url('../../img/white-wave-bg.svg') center bottom -0.5px / 100% 14% no-repeat scroll padding-box border-box, linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);;
+        // background-image: linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180));
 
         a {
             color: $clr2;
@@ -53,12 +54,12 @@
 
     }
 
-    .white-wave {
-        position: absolute;
-        width: 100%;
-        left: 0;
-        top: 88%;
-    }
+    // .white-wave {
+    //     position: absolute;
+    //     width: 100%;
+    //     left: 0;
+    //     bottom: 120px;
+    // }
 
     .app-desc {
         padding: 2rem 6rem;
