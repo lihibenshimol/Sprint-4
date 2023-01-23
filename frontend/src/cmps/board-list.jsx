@@ -1,6 +1,3 @@
-import { useEffect } from "react";
-import { useSelector } from 'react-redux'
-import { loadBoards } from "../store/board.actions";
 import { BoardAdd } from "./board-add";
 import { BoardPreview } from "./board-preview";
 
