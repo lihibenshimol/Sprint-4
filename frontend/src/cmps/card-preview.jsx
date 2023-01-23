@@ -47,6 +47,19 @@ export function CardPreview({ card, idx, groupId }) {
         return doneTasks
     }
 
+    function isTasksDone(checklist) {
+        let doneTasks = 0
+        checklist.todos.forEach(task => {
+            if (task.isDone) doneTasks++
+        })
+        if (checklist.todos.length / doneTasks === 1) {
+            return {backgroundColor: '#61bd4f', color: '#ffffff'}
+        } else {
+            return {backgroundColor: '#ffffff'}
+        }
+
+    }
+
     function openQuickEditor(ev) {
         ev.preventDefault()
         const pos = utilService.getPosToDisplay(ev)
@@ -56,21 +69,21 @@ export function CardPreview({ card, idx, groupId }) {
 
     function expandLabels(e) {
         e.preventDefault()
-        if (!labelsExpanded ) dispatch({type: EXPAND_LABELS })
-       else dispatch({type: UNEXPAND_LABELS })
-        
+        if (!labelsExpanded) dispatch({ type: EXPAND_LABELS })
+        else dispatch({ type: UNEXPAND_LABELS })
+
     }
 
     return (
         <>
             {quickEditor &&
-                <section  onClick={e => e.stopPropagation()}>
+                <section onClick={e => e.stopPropagation()}>
                     <QuickEditor
                         card={card}
                         groupId={groupId}
                         openQuickEditor={openQuickEditor}
                         quickEditor={quickEditor}
-                        quickEditorPos={quickEditorPos}/>
+                        quickEditorPos={quickEditorPos} />
                 </section>}
 
             <Draggable draggableId={card.id} index={idx}>
@@ -81,14 +94,14 @@ export function CardPreview({ card, idx, groupId }) {
                         isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
                     >
                         <div>
-                            {card.cover && <div className="card-preview-cover" style={{backgroundColor: card.cover}}> </div>}
+                            {card.cover && <div className="card-preview-cover" style={{ backgroundColor: card.cover }}> </div>}
                             <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
 
-                           {!!card.labels.length && <section className="card-preview-labels">
+                            {!!card.labels.length && <section className="card-preview-labels">
                                 {card.labels?.map(label => <div className={`card-preview-label ${labelsExpanded ? 'expanded' : ''} `} key={label.id}
                                     style={{ backgroundColor: label.color }}
                                     onClick={expandLabels}>
-                                        <span className="circle-label" style={{ backgroundColor: label.color }}></span>
+                                    <span className="circle-label" style={{ backgroundColor: label.color }}></span>
                                     {labelsExpanded ? label.title : ''}
                                 </div>)}
                             </section>}
@@ -99,12 +112,11 @@ export function CardPreview({ card, idx, groupId }) {
                             </section>
 
                             <section className="card-preview-details">
-                                {card.checklists &&
-                                    card.checklists.map(checklist =>
-                                        <div className="preview-details-checklist" key={checklist.id}>
-                                            <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
-                                            {doneInCheckList(checklist)}/{checklist.todos.length}
-                                        </div>)}
+                                {!!card.checklists.length &&
+                                    <div style={isTasksDone(card.checklists[0])} className="preview-details-checklist" >
+                                        <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
+                                        {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length}
+                                    </div>}
                                 {card.members &&
                                     <span className="preview-details-members"> {card.members.map(member => <span key={member._id}> <img className="member-img" src={member.imgUrl} alt="" /></span>)} </span>}
                             </section>

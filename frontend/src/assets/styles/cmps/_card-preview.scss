@@ -157,6 +157,12 @@ a:hover {
             display: flex;
             gap: 6px;
             padding-bottom: 3px;
+            width: 50px;
+            border-radius: 3px;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            margin: 0 4px 4px 0;
 
             .preview-details-checklist-icon {
                 font-size: 15px;
