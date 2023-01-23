@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { updateBoard } from "../store/board.actions"
+import { starBoard, updateBoard } from "../store/board.actions"
 
 export function BoardPreview({ board, type }) {
 
@@ -7,9 +7,7 @@ export function BoardPreview({ board, type }) {
 
     function onStarBoard(ev) {
         ev.stopPropagation()
-        board.isStarred = !board.isStarred
-        board.starredAt = Date.now()
-        updateBoard(board)
+        starBoard(board)
     }
 
     function onBoardClick() {

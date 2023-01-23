@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
-import { loadBoards, updateBoard } from "../store/board.actions"
+import { loadBoards, loadStarredBoards, starBoard, updateBoard } from "../store/board.actions"
 
 import starredImg from '../assets/img/starred-img.svg'
 
 export function DropdownStarred({ setDropDown }) {
 
     const navigate = useNavigate()
-    const boards = useSelector(storeState => storeState.boardModule.boards)
-    const [starredBoards, setStarredBoards] = useState([])
+    const starredBoards = useSelector(storeState => storeState.boardModule.starredBoards)
+    console.log(starredBoards)
+    // const [starredBoards, setStarredBoards] = useState([])
 
-    useEffect(() => {
-        setStarredBoards(boards?.filter(board => board.isStarred).sort((b1, b2) => b1.starredAt - b2.starredAt))
-    }, [boards])
+    // useEffect(() => {
+    //     setStarredBoards(boards?.filter(board => board.isStarred).sort((b1, b2) => b1.starredAt - b2.starredAt))
+    // }, [boards])
 
     useEffect(() => {
         getBoards()
@@ -21,7 +22,7 @@ export function DropdownStarred({ setDropDown }) {
 
     async function getBoards() {
         try {
-            await loadBoards()
+            await loadStarredBoards()
         } catch (err) {
             console.log('Had error fetching boards; ', err)
         }
@@ -36,9 +37,8 @@ export function DropdownStarred({ setDropDown }) {
     function onStarBoard(ev, board) {
         ev.stopPropagation()
         ev.preventDefault()
-        board.isStarred = !board.isStarred
-        board.starredAt = Date.now()
-        updateBoard(board)
+        starBoard(board)
+        // updateBoard(board)
     }
 
     return (

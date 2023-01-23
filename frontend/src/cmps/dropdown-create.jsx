@@ -34,6 +34,7 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
                 if (fromNavbar) dropdownRef.current.style = 'left: -383%'
                 else dropdownRef.current.style = 'left: -160%'
             }
+            window.scrollTo(0, document.body.scrollHeight)
         }
     }, [dropdownRef])
 
