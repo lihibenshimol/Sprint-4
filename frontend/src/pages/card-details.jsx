@@ -244,7 +244,7 @@ export function CardDetails() {
                             <div className="section-header">
                                 <span><BsTextLeft /></span>
                                 <h3>Description</h3>
-                                {!isDescriptionEdit && <button onClick={setIsDescriptionEdit}>Edit</button>}
+                                {(!isDescriptionEdit && card.desc) && <button onClick={setIsDescriptionEdit}>Edit</button>}
                             </div>
 
                             <CardDescription
