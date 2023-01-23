@@ -10,6 +10,7 @@ export function AppHeader() {
     const [dropdown, setDropDown] = useState({})
     const [navColor, setNavColor] = useState('rgba(0, 0, 0 ,0.5)')
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+    const user = useSelector(storeState => storeState.userModule.user)
     const location = useLocation()
 
     const fac = new FastAverageColor()
@@ -76,7 +77,11 @@ export function AppHeader() {
                 <div onClick={() => onShowDropdown('create-list')} className={dropdown.type === 'create-list' ? 'create-btn active' : 'create-btn'}>Create
                     {dropdown.type === 'create-list' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </div>
+                <button className='app-header-user'>
+                    {user?.imgUrl && <img src={user.imgUrl} alt="" />}
+                </button>
             </nav>
+
 
         </header>
     )
