@@ -9,18 +9,17 @@ import { useState } from 'react'
 export function HomePage() {
     const [dynImg, setDynImg] = useState(asset1)
 
-    function handleClick(imgNum) {
-        setDynImg(`asset+${imgNum}`)
-    }
-
     return (
         <section className='home-page '>
 
             <div className='main-hero full main-layout'>
                 <section className='signup-intro'>
-                    <h2>Trello brings all your tasks, teammates, and tools together</h2>
-                    <h3>Keep everything in the same place—even if your team isn’t.</h3>
-                    <Link to="/board">Start demo</Link>
+                    <span>
+
+                        <h2>Trello brings all your tasks, teammates, and tools together</h2>
+                        <h3>Keep everything in the same place—even if your team isn’t.</h3>
+                    </span>
+                    <button className='start-demo-btn'><Link to="/board">Start demo</Link></button>
 
                 </section>
                 <section className='collage1'>
@@ -39,7 +38,7 @@ export function HomePage() {
 
             <div className='boards-desc'>
                 <div className='tabs'>
-                    <button onClick={() => setDynImg(asset1)} className='tab tab1'>
+                    <button selected onClick={() => setDynImg(asset1)} className='tab tab1'>
                         <h4>Boards</h4>
                         <p>Trello boards keep tasks organized and work moving forward. In a glance, see everything from “things to do” to “aww yeah, we did it!”</p>
                     </button>
