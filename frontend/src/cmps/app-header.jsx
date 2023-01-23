@@ -78,8 +78,10 @@ export function AppHeader() {
                 <div onClick={() => onShowDropdown('create-list')} className={dropdown.type === 'create-list' ? 'create-btn active' : 'create-btn'}>Create
                     {dropdown.type === 'create-list' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </div>
-                <button className='app-header-user'>
+
+                <button onClick={() => onShowDropdown('user')} className={dropdown.type === 'user' ? 'app-header-user active' : 'app-header-user'}>
                     <img src={user?.imgUrl || userImg} alt="" />
+                    {dropdown.type === 'user' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </button>
             </nav>
 

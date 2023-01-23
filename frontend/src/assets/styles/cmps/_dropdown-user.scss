@@ -1,0 +1,23 @@
+.dropdown-user {
+    left: -730%;
+    min-width: 232px;
+    // padding: 0 1em 1em;
+
+    label {
+        margin: 0;
+        color: $clr12;
+        font-size: rem(12px);
+        font-weight: bold;
+        letter-spacing: rem(-0.2px);
+        text-transform: uppercase;
+        margin-block-end: 1.5em;
+        display: block;
+    }
+
+    div {
+        color: $clr9;
+        font-size: rem(14px);
+        cursor: pointer;
+    }
+
+}
