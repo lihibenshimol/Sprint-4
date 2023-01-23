@@ -5,7 +5,7 @@ import { DateSelector } from "../date-selector";
 
 export function CardSelectDropDown({ type, card, pos, isDropDownOpen, setIsDropDownOpen,
     addOrDeleteLabel, addOrDeleteMember, onSaveCover, }) {
-        console.log('pos = ', pos)
+        console.log('pos = ', pos.x)
 
     switch (type) {
         case 'labels':

@@ -84,13 +84,14 @@ export function CardPreview({ card, idx, groupId }) {
                             {card.cover && <div className="card-preview-cover" style={{backgroundColor: card.cover}}> </div>}
                             <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
 
-                            <section className="card-preview-labels" >
-                                {card.labels && card.labels.map(label => <div className={`card-preview-label ${labelsExpanded ? 'expanded' : ''} `} key={label.id}
+                           {!!card.labels.length && <section className="card-preview-labels">
+                                {card.labels?.map(label => <div className={`card-preview-label ${labelsExpanded ? 'expanded' : ''} `} key={label.id}
                                     style={{ backgroundColor: label.color }}
                                     onClick={expandLabels}>
+                                        <span className="circle-label" style={{ backgroundColor: label.color }}></span>
                                     {labelsExpanded ? label.title : ''}
                                 </div>)}
-                            </section>
+                            </section>}
 
                             <section className="card-title flex">
                                 <span>{card.title}</span>

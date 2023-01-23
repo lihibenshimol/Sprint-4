@@ -197,14 +197,19 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                         </textarea>
 
                         <section className="quick-editor-card-details">
-                            {card.checklists && card.checklists.map(checklist => <span className="preview-details-checklist" key={checklist.id}> {doneInCheckList(checklist)}/{checklist.todos.length} <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span> </span>)}
+                            {card.checklists &&
+                                    card.checklists.map(checklist =>
+                                        <div className="preview-details-checklist" key={checklist.id}>
+                                            <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
+                                            {doneInCheckList(checklist)}/{checklist.todos.length}
+                                        </div>)}
                             {card.members && <span className="preview-details-members">{card.members.map(member =>  <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
                         </section>
                         <button className="save-btn">Save</button>
                     </form>
                 </div>
 
-        {/* {console.log(' = ', )} */}
+        {console.log('quickEditorPos.right = ', quickEditorPos.right)}
                 {isDropDownOpen && <CardSelectDropDown
                     type={dropdownType} card={card}
                     pos={quickEditorPos}
