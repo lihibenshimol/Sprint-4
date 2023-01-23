@@ -16,6 +16,7 @@ export function LabelsSelect({ pos, card, addOrDeleteLabel, setIsDropDownOpen, i
                 dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
             } else {
                 dropdownRef.current.style = `left:${pos.right + 10}px`
+                // dropdownRef.current.style = `top:0p=`
             }
         }
     }, [dropdownRef])
