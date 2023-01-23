@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { DropDown } from './dropdown'
 import { FastAverageColor } from 'fast-average-color'
 import { useSelector } from 'react-redux'
+import userImg from '../assets/img/u0.png'
 
 export function AppHeader() {
 
@@ -78,7 +79,7 @@ export function AppHeader() {
                     {dropdown.type === 'create-list' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </div>
                 <button className='app-header-user'>
-                    {user?.imgUrl && <img src={user.imgUrl} alt="" />}
+                    <img src={user?.imgUrl || userImg} alt="" />
                 </button>
             </nav>
 
