@@ -8,15 +8,17 @@ import { useEffect } from "react";
 export function LabelsSelect({ pos, card, addOrDeleteLabel, setIsDropDownOpen, isDropDownOpen }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const dropdownRef = useRef(null)
+    console.log('pos in label = ', pos)
 
     useEffect(() => {
         if (dropdownRef.current) {
             const rect = dropdownRef.current.getBoundingClientRect()
             if (rect.width + pos.right >= window.innerWidth) {
+                console.log('a');
                 dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
             } else {
+                console.log('b');
                 dropdownRef.current.style = `left:${pos.right + 10}px`
-                // dropdownRef.current.style = `top:0p=`
             }
         }
     }, [dropdownRef])

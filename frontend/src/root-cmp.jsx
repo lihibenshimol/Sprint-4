@@ -13,12 +13,12 @@ import { CardDetails } from './pages/card-details'
 
 export function RootCmp() {
 
-    const location = useLocation()
+    const {pathname} = useLocation()
 
     return (
         <>
             <Provider store={store}>
-                {location.pathname === '/' ? <HomepageHeader /> : <AppHeader />}
+                {pathname === '/' ? <HomepageHeader /> : pathname !== '/signup' && pathname !== '/login' && <AppHeader />}
                 <main className='full'>
                     <Routes>
                         {routes.map(route => <Route key={route.path} exact={true} element={route.component} path={route.path} />)}
