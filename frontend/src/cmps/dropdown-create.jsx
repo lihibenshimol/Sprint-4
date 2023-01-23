@@ -9,6 +9,8 @@ import bgImg1 from '../assets/img/bg-img-1.jpg'
 import bgImg2 from '../assets/img/bg-img-2.jpg'
 import bgImg3 from '../assets/img/bg-img-3.jpg'
 import bgImg4 from '../assets/img/bg-img-4.jpg'
+import { useEffect } from 'react'
+import { useRef } from 'react'
 
 export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
 
@@ -16,6 +18,24 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
     const [isBgMenuOpen, setBgMenuOpen] = useState(false)
     const navigate = useNavigate()
     const colors = boardService.getBoardColors()
+    const dropdownRef = useRef(null)
+
+    useEffect(() => {
+        if (dropdownRef.current) {
+            const rect = dropdownRef.current.getBoundingClientRect()
+            const availableSpaceRight = window.innerWidth - rect.left
+            const availableSpaceLeft = rect.left
+
+            if ((fromNavbar && availableSpaceRight - dropdownRef.current.offsetWidth > 0) || availableSpaceRight > availableSpaceLeft) {
+                if (!fromNavbar) dropdownRef.current.style = 'left: 105%'
+
+
+            } else {
+                if (fromNavbar) dropdownRef.current.style = 'left: -383%'
+                else dropdownRef.current.style = 'left: -160%'
+            }
+        }
+    }, [dropdownRef])
 
     async function onAddBoard(ev) {
         ev.preventDefault()
@@ -60,7 +80,7 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
     const previewBgStyle = board.style.backgroundImage ? { backgroundImage: board.style.backgroundImage } : { backgroundColor: board.style.backgroundColor }
 
     return (
-        <section onClick={(ev) => { ev.stopPropagation(); setBgMenuOpen(false) }} className={fromNavbar ? 'dropdown dropdown-create-navbar' : 'dropdown dropdown-create'}>
+        <section ref={dropdownRef} onClick={(ev) => { ev.stopPropagation(); setBgMenuOpen(false) }} className={fromNavbar ? 'dropdown dropdown-create-navbar' : 'dropdown dropdown-create'}>
 
             <h3>Create board
                 <i onClick={handleClosingDropdown} className='fa xmark'></i>
