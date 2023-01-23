@@ -2,28 +2,28 @@ import { useSelector } from "react-redux"
 import { RxCross2 } from 'react-icons/rx';
 import { LabelOption } from "./label-option";
 import { useRef } from "react";
+import { useEffect } from "react";
 
 
 export function LabelsSelect({ pos, card, addOrDeleteLabel, setIsDropDownOpen, isDropDownOpen }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
-    const windowWidth = useRef(window.innerWidth);
-    const windowHeight = useRef(window.innerHeight);
+    const dropdownRef = useRef(null)
 
-    function setNewPos() {
-        // console.log('width: ', windowWidth.current);
-        // console.log('height: ', windowHeight.current);
-        let newPos = { ...pos }
-        
-        // if (pos.left + 305 > windowWidth.current) newPos.right = 0
-        if (pos.top + 500 > windowHeight.current) newPos.top = 0
-
-        return newPos
-    }
+    useEffect(() => {
+        if (dropdownRef.current) {
+            const rect = dropdownRef.current.getBoundingClientRect()
+            if (rect.width + pos.right >= window.innerWidth) {
+                dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
+            } else {
+                dropdownRef.current.style = `left:${pos.right + 10}px`
+            }
+        }
+    }, [dropdownRef])
 
 
 
     return (
-        <div className="extras-menu flex" style={setNewPos()}>
+        <div className="extras-menu flex" ref={dropdownRef} >
             <span className="title-container">
                 <p>
                     Labels

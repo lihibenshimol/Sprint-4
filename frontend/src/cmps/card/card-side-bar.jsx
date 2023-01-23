@@ -50,9 +50,9 @@ export function SideBar({ card, onSaveCheckList, onSetType, }) {
                     <span>Cover</span>
                 </button>}
 
-            <button className="label-btn">
+            <button className="label-btn" onClick={(e) => onSetType(e, 'date')}>
                 <span className="tag-label"><AiOutlineClockCircle /></span>
-                <span>Date</span>
+                <span>Dates</span>
             </button>
 
 

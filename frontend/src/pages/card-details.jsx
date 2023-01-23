@@ -154,7 +154,8 @@ export function CardDetails() {
         setPos(prevPos => position)
         setDropdownType(prevType => typeToSet)
 
-        if (typeToSet === dropdownType || !dropdownType) setIsDropDownOpen(!isDropDownOpen)
+        if (isDropDownOpen && typeToSet !== dropdownType) return
+        setIsDropDownOpen(!isDropDownOpen)
     }
 
 

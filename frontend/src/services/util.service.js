@@ -13,7 +13,7 @@ function getPosToDisplay(ev) {
     const parentEl = ev.currentTarget?.parentNode
     if (!parentEl) return
     const details = parentEl.getBoundingClientRect()
-
+    return details
     let top = details.top
     let left = details.right + 10
 

@@ -1,6 +1,7 @@
 import { LabelsSelect } from "../label-selector";
 import { MembersSelect } from "../members-selector";
 import { CardCoverSelector } from "../card-cover-selector";
+import { DateSelector } from "../date-selector";
 
 export function CardSelectDropDown({ type, card, pos, isDropDownOpen, setIsDropDownOpen,
     addOrDeleteLabel, addOrDeleteMember, onSaveCover, }) {
@@ -26,6 +27,13 @@ export function CardSelectDropDown({ type, card, pos, isDropDownOpen, setIsDropD
                 isDropDownOpen={isDropDownOpen}
                 setIsDropDownOpen={setIsDropDownOpen}
                 onSaveCover={onSaveCover} />
+        case 'date':
+            return <DateSelector
+                pos={pos}
+                isDropDownOpen={isDropDownOpen}
+                setIsDropDownOpen={setIsDropDownOpen}
+
+            />
         default:
             return
 

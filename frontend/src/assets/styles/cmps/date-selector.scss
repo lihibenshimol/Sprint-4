@@ -1,0 +1,32 @@
+.extras-menu .extras-content-dates {
+    padding: 0 12px 12px;
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+    background-color: red;
+    max-width: 303px;
+
+    h4 {
+        color: #5e6c84;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 16px;
+        margin-top: 16px;
+    }
+
+
+    .calender {
+        color: black;
+
+        button {
+            flex: 0 1;
+            // color: black;
+            // display: flex;
+        }
+
+        .react-calendar__month-view__days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+    }
+}

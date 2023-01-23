@@ -2,13 +2,27 @@ import { useSelector } from "react-redux"
 import { MemberOption } from "./member-option"
 import { RxCross2 } from 'react-icons/rx';
 import { utilService } from "../services/util.service";
+import { useRef, useEffect } from "react";
 
 
 export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen, isDropDownOpen }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+    const dropdownRef = useRef(null)
+
+    useEffect(() => {
+        if (dropdownRef.current) {
+            const rect = dropdownRef.current.getBoundingClientRect()
+            if (rect.width + pos.right >= window.innerWidth) {
+                dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
+            } else {
+                dropdownRef.current.style = `left:${pos.right + 10}px`
+            }
+        }
+    }, [dropdownRef])
+
 
     return (
-        <div className="extras-menu flex" style={pos} >
+        <div className="extras-menu flex" ref={dropdownRef} >
             <span className="title-container">
                 <p>
                     Members
@@ -35,6 +49,6 @@ export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen,
                     })}
                 </ul>}
             </div>
-        </div>
+        </div >
     )
 }
