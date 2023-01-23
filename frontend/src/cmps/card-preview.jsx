@@ -28,10 +28,6 @@ export function CardPreview({ card, idx, groupId }) {
     const [quickEditor, toggleQuickEditor] = useState(false)
     const [labelsExpanded, setLabelsExpanded] = useState(false)
 
-    // useEffect(() => {
-    //     console.log('hee')
-    // }, [labelsExpanded])
-
     function openQuickEditor(ev) {
         // ev.stopPropagation()
         ev.preventDefault()
@@ -64,7 +60,7 @@ export function CardPreview({ card, idx, groupId }) {
                        <div>
 
                        <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
-                       
+
                         <section className="card-preview-labels" >
                             {card.labels && card.labels.map(label => <div className={`card-preview-label ${labelsExpanded ? 'expanded' : ''} `} key={label.id}
                                 style={{ backgroundColor: label.color }}
