@@ -42,33 +42,7 @@ export function AppHeader() {
             document.body.onclick = () => { }
         }
     }, [])
-    // const user = useSelector(storeState => storeState.userModule.user)
-
-    // async function onLogin(credentials) {
-    //     try {
-    //         const user = await login(credentials)
-    //         showSuccessMsg(`Welcome: ${user.fullname}`)
-    //     } catch(err) {
-    //         showErrorMsg('Cannot login')
-    //     }
-    // }
-    // async function onSignup(credentials) {
-    //     try {
-    //         const user = await signup(credentials)
-    //         showSuccessMsg(`Welcome new user: ${user.fullname}`)
-    //     } catch(err) {
-    //         showErrorMsg('Cannot signup')
-    //     }
-    // }
-    // async function onLogout() {
-    //     try {
-    //         await logout()
-    //         showSuccessMsg(`Bye now`)
-    //     } catch(err) {
-    //         showErrorMsg('Cannot logout')
-    //     }
-    // }
-
+    
     function onShowDropdown(type) {
         if (dropdown.type === type) setDropDown({})
         else setDropDown({ type })

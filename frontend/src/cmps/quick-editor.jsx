@@ -35,12 +35,12 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         openQuickEditor(!quickEditor)
     }
 
-    async function onRemoveCard() {
+    async function onRemoveCard(ev) {
 
         try {
             const updatedBoard = await boardService.removeCard(board, groupId, card.id)
             updateBoard(updatedBoard)
-            openQuickEditor(!quickEditor)
+            openQuickEditor(ev, !quickEditor)
         } catch (err) {
             console.log('err = ', err)
         }
@@ -178,7 +178,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                         </textarea>
                         <section className="quick-editor-card-details">
                             {card.checklists && card.checklists.map(checklist => <span className="preview-details-checklist" key={checklist.id}> {doneInCheckList(checklist)}/{checklist.todos.length} <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span> </span>)}
-                            {card.members && card.members.map(member => <span key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
+                            {card.members && card.members.map(member => <span className="preview-details-members" key={member._id}><img className="member-img" src={member.imgUrl} alt="" /></span>)}
                         </section>
                         <button className="save-btn">Save</button>
                     </form>
