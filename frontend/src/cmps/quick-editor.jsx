@@ -39,16 +39,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
 
     useEffect(() => {
         if (quickEditorTextareaRef.current) {
-            const rect = quickEditorTextareaRef.current.getBoundingClientRect()
-
-            quickEditorTextareaRef.current.style = `left:${quickEditorPos.left - 10}px; top:${quickEditorPos.top}; `
-            // if (rect.width + quickEditorPos.right >= window.innerWidth) {
-            //     console.log('here');
-            //     quickEditorTextareaRef.current.style = `left:${quickEditorPos.left}px; top:${quickEditorPos.top};`
-            // } else {
-            //     console.log('there');
-            //     quickEditorTextareaRef.current.style = `right:${quickEditorPos.right - 100}px; `
-            // }
+            // const rect = quickEditorTextareaRef.current.getBoundingClientRect()
+            quickEditorTextareaRef.current.style = `left:${quickEditorPos.left}px; top:${quickEditorPos.top}; `
         }
     }, [quickEditorTextareaRef])
 
@@ -212,9 +204,11 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                     </form>
                 </div>
 
-
+        {/* {console.log(' = ', )} */}
                 {isDropDownOpen && <CardSelectDropDown
-                    type={dropdownType} card={card} pos={pos}
+                    type={dropdownType} card={card}
+                    pos={quickEditorPos}
+                    // pos={pos}
                     setIsDropDownOpen={setIsDropDownOpen}
                     isDropDownOpen={isDropDownOpen}
                     addOrDeleteMember={addOrDeleteMember}
