@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { boardService } from "../services/board.service.local"
 import { DropdownBackgroundColor } from "./dropdown-background-color"
 import bgImg1 from '../assets/img/bg-img-1.jpg'
@@ -13,6 +13,24 @@ export function DropdownBackground({ setBgMenuOpen, setBoardBackground, isSelect
     const [isColorsMenuOpen, setColorsMenuOpen] = useState(false)
     const colors = boardService.getBoardColors()
 
+    const dropdownRef = useRef(null)
+
+    useEffect(() => {
+        if (dropdownRef.current) {
+            const rect = dropdownRef.current.getBoundingClientRect()
+            const availableSpaceRight = window.innerWidth - rect.left
+            const availableSpaceLeft = rect.left
+            
+            if (availableSpaceRight - dropdownRef.current.offsetWidth > 0 || availableSpaceRight > availableSpaceLeft) {
+                dropdownRef.current.style = 'left: 110%'
+
+            } else {
+                dropdownRef.current.style = 'left: -770%'
+
+            }
+        }
+    }, [dropdownRef])
+
     function handleClosingDropdown() {
         setBgMenuOpen(false)
     }
@@ -24,7 +42,7 @@ export function DropdownBackground({ setBgMenuOpen, setBoardBackground, isSelect
 
     if (isColorsMenuOpen) return <DropdownBackgroundColor setColorsMenuOpen={setColorsMenuOpen} setBgMenuOpen={setBgMenuOpen} setBoardBackground={setBoardBackground} isSelectedColor={isSelectedColor} />
     return (
-        <section onClick={(ev) => ev.stopPropagation()} className='dropdown dropdown-background'>
+        <section ref={dropdownRef} onClick={(ev) => ev.stopPropagation()} className='dropdown dropdown-background'>
 
             <h3>Board background
                 <i onClick={handleClosingDropdown} className='fa xmark'></i>

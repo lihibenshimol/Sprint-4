@@ -1,17 +1,13 @@
 .board-index {
     margin-block-start: 2.5rem;
 
-    .starred-boards {
-        margin-block-end: 4em;
-    }
-
     h2 {
         color: $clr12;
         text-transform: uppercase;
         font-size: rem(16px);
     }
 
-    h3{
+    h3 {
         font-size: rem(16px);
         color: $clr9;
 
@@ -24,6 +20,10 @@
 
     .your-boards {
         max-width: 825px;
+
+        >section {
+            margin-block-end: 4em;
+        }
 
         @include for-normal-layout {
             justify-self: center;

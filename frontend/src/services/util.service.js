@@ -11,11 +11,12 @@ export const utilService = {
 
 function getPosToDisplay(ev) {
     const parentEl = ev.currentTarget?.parentNode
-    if(!parentEl) return
+    if (!parentEl) return
     const details = parentEl.getBoundingClientRect()
 
-    const top = details.top
-    const left = details.right + 10
+    let top = details.top
+    let left = details.right + 10
+
     return { top, left }
 }
 

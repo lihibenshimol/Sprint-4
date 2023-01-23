@@ -1,19 +1,34 @@
 import { useSelector } from "react-redux"
 import { RxCross2 } from 'react-icons/rx';
 import { LabelOption } from "./label-option";
+import { useRef } from "react";
 
 
-export function LabelsSelect({ pos, card, addOrDeleteLabel, openLabelsSelect, labelsSelect }) {
+export function LabelsSelect({ pos, card, addOrDeleteLabel, setIsDropDownOpen, isDropDownOpen }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+    const windowWidth = useRef(window.innerWidth);
+    const windowHeight = useRef(window.innerHeight);
+
+    function setNewPos() {
+        // console.log('width: ', windowWidth.current);
+        // console.log('height: ', windowHeight.current);
+        let newPos = { ...pos }
+        
+        // if (pos.left + 305 > windowWidth.current) newPos.right = 0
+        if (pos.top + 500 > windowHeight.current) newPos.top = 0
+
+        return newPos
+    }
+
 
 
     return (
-        <div className="extras-menu flex" style={pos}>
+        <div className="extras-menu flex" style={setNewPos()}>
             <span className="title-container">
                 <p>
                     Labels
                 </p>
-                <span className='close-btn hover' onClick={() => openLabelsSelect(!labelsSelect)}><RxCross2 /></span>
+                <span className='close-btn hover' onClick={() => setIsDropDownOpen(!isDropDownOpen)}><RxCross2 /></span>
             </span>
             <div className="extras-content-labels">
                 <input type="text" className='search-input'

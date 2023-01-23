@@ -4,16 +4,10 @@ import { AiOutlineClockCircle, AiOutlineUser } from 'react-icons/ai';
 import { IoMdCheckboxOutline } from 'react-icons/io';
 import { boardService } from '../../services/board.service.local';
 import { useState } from 'react';
-import { MembersSelect } from '../members-selector';
-import { LabelsSelect } from '../label-selector';
-import { CoverSelector } from '../cover-selector';
 import { utilService } from '../../services/util.service';
+import { CardSelectDropDown } from './card-select-dropdown';
 
-export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, onSaveCover,
-    membersSelect, openMembersSelect, labelsSelect, openLabelsSelect,
-    openCoverSelect, coverSelect }) {
-
-    const [pos, setPos] = useState({})
+export function SideBar({ card, onSaveCheckList, onSetType, }) {
 
     async function onAddChecklist() {
         try {
@@ -28,77 +22,18 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
         }
     }
 
-    function addOrDeleteMember(member) {
-        if (!card.members) card.members = []
-        const memberIdx = card.members.findIndex(m => m._id === member._id)
-        if (memberIdx === -1) {
-            member.isChecked = true
-            card.members.push(member)
-        }
-        else {
-            member.isChecked = false
-            card.members.splice(memberIdx, 1)
-        }
-
-        const newMembers = card.members
-        onSaveMembers(newMembers)
-    }
-
-    function addOrDeleteLabel(label) {
-        if (!card.labels) card.labels = []
-        const labelIdx = card.labels.findIndex(l => l.id === label.id)
-
-        if (labelIdx === -1) card.labels.push(label)
-        else card.labels.splice(labelIdx, 1)
-
-        const newLabels = card.labels
-        onSaveLabels(newLabels)
-    }
-
-
-    function onOpenLabelsSelect(ev) {
-        console.log('ev: ',ev)
-        
-        setPos(prevPos => utilService.getPosToDisplay(ev))
-
-        openLabelsSelect(!labelsSelect)
-    }
 
     return (<div className="side-bar">
         <section className="card-utils">
             <h5>Add to card</h5>
 
-            <button className="label-btn" onClick={() => openMembersSelect(!membersSelect)}>
+            <button className="label-btn" onClick={(e) => onSetType(e, 'members')}>
                 <span className=" tag-label"><AiOutlineUser /></span>
                 <span>members</span>
             </button>
 
-            {membersSelect &&
-                <MembersSelect
-                    card={card}
-                    addOrDeleteMember={addOrDeleteMember}
-                    membersSelect={membersSelect}
-                    openMembersSelect={openMembersSelect}
-                />}
 
-            {labelsSelect &&
-                <LabelsSelect
-                    pos={pos}
-                    card={card}
-                    addOrDeleteLabel={addOrDeleteLabel}
-                    labelsSelect={labelsSelect}
-                    openLabelsSelect={openLabelsSelect}
-                />}
-
-
-            {coverSelect &&
-                <CoverSelector
-                    onSaveCover={onSaveCover}
-                    openCoverSelect={openCoverSelect}
-                    coverSelect={coverSelect}
-                />}
-
-            <button className="label-btn" onClick={(e) => onOpenLabelsSelect(e)}>
+            <button className="label-btn" onClick={(e) => onSetType(e, 'labels')}>
                 <span className="tag-label labels"><TbTag /></span>
                 <span>labels</span>
             </button>
@@ -109,6 +44,11 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
                 <span>Checklist</span>
             </button>
 
+            {!card.cover &&
+                <button className="label-btn" onClick={(e) => onSetType(e, 'cover')}>
+                    <span className="tag-label"><BiWindow /></span>
+                    <span>Cover</span>
+                </button>}
 
             <button className="label-btn">
                 <span className="tag-label"><AiOutlineClockCircle /></span>
@@ -116,11 +56,6 @@ export function SideBar({ card, onSaveCheckList, onSaveMembers, onSaveLabels, on
             </button>
 
 
-            {!card.cover &&
-                <button className="label-btn" onClick={() => openCoverSelect(!coverSelect)}>
-                    <span className="tag-label"><BiWindow /></span>
-                    <span>Cover</span>
-                </button>}
 
         </section>
 

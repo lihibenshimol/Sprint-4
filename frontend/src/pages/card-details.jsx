@@ -15,6 +15,8 @@ import { useSelector } from "react-redux"
 import { CheckListList } from "../cmps/card/card-checklist-list"
 import { updateBoard } from "../store/board.actions"
 import { CardHeader } from "../cmps/card-header"
+import { CardSelectDropDown } from "../cmps/card/card-select-dropdown"
+import { utilService } from "../services/util.service"
 
 
 
@@ -24,13 +26,11 @@ export function CardDetails() {
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
 
-    const [membersSelect, openMembersSelect] = useState(false)
-    const [labelsSelect, openLabelsSelect] = useState(false)
-    const [coverSelect, openCoverSelect] = useState(false)
-
+    const [dropdownType, setDropdownType] = useState(null)
+    const [isDropDownOpen, setIsDropDownOpen] = useState(false)
+    const [pos, setPos] = useState({})
 
     const board = useSelector(storeState => storeState.boardModule.currBoard)
-
     const navigate = useNavigate()
 
 
@@ -41,6 +41,11 @@ export function CardDetails() {
     function closeAddTodoEdit() {
         if (!isEditAddTodo) return
         setIsEditAddTodo(!isEditAddTodo)
+    }
+
+    function getGroup() {
+        const group = board.groups.find(g => g.id === groupId)
+        return group.title
     }
 
     async function loadCard() {
@@ -114,10 +119,45 @@ export function CardDetails() {
     }
 
 
-    function getGroup() {
-        const group = board.groups.find(g => g.id === groupId)
-        return group.title
+    //ADD FUNCTION 
+
+    function addOrDeleteMember(member) {
+        if (!card.members) card.members = []
+        const memberIdx = card.members.findIndex(m => m._id === member._id)
+        if (memberIdx === -1) {
+            member.isChecked = true
+            card.members.push(member)
+        }
+        else {
+            member.isChecked = false
+            card.members.splice(memberIdx, 1)
+        }
+
+        const newMembers = card.members
+        onSaveMembers(newMembers) // TO CHECK IF WE CAN REMOVE THE FUNC
     }
+
+    function addOrDeleteLabel(label) {
+        if (!card.labels) card.labels = []
+        const labelIdx = card.labels.findIndex(l => l.id === label.id)
+
+        if (labelIdx === -1) card.labels.push(label)
+        else card.labels.splice(labelIdx, 1)
+
+        const newLabels = card.labels
+        onSaveLabels(newLabels) // TO CHECK IF WE CAN REMOVE THE FUNC
+    }
+
+    function onSetType(ev, typeToSet) {
+        const position = utilService.getPosToDisplay(ev)
+
+        setPos(prevPos => position)
+        setDropdownType(prevType => typeToSet)
+
+        if (typeToSet === dropdownType || !dropdownType) setIsDropDownOpen(!isDropDownOpen)
+    }
+
+
 
 
     return <div className="window full">
@@ -131,9 +171,19 @@ export function CardDetails() {
                     <RxCross1 />
                 </a>
 
+                {isDropDownOpen && <CardSelectDropDown
+                    type={dropdownType} card={card} pos={pos}
+                    setIsDropDownOpen={setIsDropDownOpen}
+                    isDropDownOpen={isDropDownOpen}
+                    addOrDeleteMember={addOrDeleteMember}
+                    addOrDeleteLabel={addOrDeleteLabel}
+                    onSaveCover={onSaveCover}
+                />}
+
 
                 {card.cover && <div className="card-cover" style={{ backgroundColor: card.cover }}>
-                    <div className="cover-btn hover" onClick={() => openCoverSelect(!coverSelect)}>
+
+                    <div className="cover-btn hover" onClick={(e) => onSetType(e, 'cover')}>
                         <span><BiWindow /></span>
                         {' Cover'}
                     </div>
@@ -153,7 +203,7 @@ export function CardDetails() {
                                     <article className="members-container">
                                         <UserAvatarPreview users={card.members} />
                                         <div className="member add-btn fa add"
-                                            onClick={() => openMembersSelect(!membersSelect)}></div>
+                                            onClick={(e) => onSetType(e, 'members')}></div>
                                     </article>
                                 </div>}
 
@@ -163,13 +213,14 @@ export function CardDetails() {
                                     <article className="labels-container">
                                         {card.labels.map(label => {
                                             return <div className="label hover" style={{ backgroundColor: label.color + '40' }}
-                                                key={label.id} onClick={() => openLabelsSelect(!labelsSelect)}>
+                                                key={label.id}
+                                                onClick={(e) => onSetType(e, 'labels')}>
                                                 <span className=" circle-label" style={{ backgroundColor: label.color }}></span>
                                                 {label.title}
                                             </div>
                                         })}
                                         <div className="label fa add hover"
-                                            onClick={() => openLabelsSelect(!labelsSelect)}></div>
+                                            onClick={(e) => onSetType(e, 'labels')}></div>
                                     </article>
                                 </div>}
 
@@ -206,18 +257,15 @@ export function CardDetails() {
                     </div >
 
                     <SideBar
-                        card={card}
-                        membersSelect={membersSelect}
-                        openMembersSelect={openMembersSelect}
-                        labelsSelect={labelsSelect}
-                        openLabelsSelect={openLabelsSelect}
-                        coverSelect={coverSelect}
-                        openCoverSelect={openCoverSelect}
-
+                        onSetType={onSetType}
+                        card={card} pos={pos} type={dropdownType}
+                        isDropDownOpen={isDropDownOpen}
+                        setIsDropDownOpen={setIsDropDownOpen}
+                        addOrDeleteMember={addOrDeleteMember}
+                        addOrDeleteLabel={addOrDeleteLabel}
                         onSaveCover={onSaveCover}
-                        onSaveLabels={onSaveLabels}
                         onSaveCheckList={onSaveCheckList}
-                        onSaveMembers={onSaveMembers}
+
                     />
                 </div >
             </>)}

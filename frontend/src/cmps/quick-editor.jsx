@@ -11,14 +11,17 @@ import { useEffect, useRef, useState } from "react"
 import { MembersSelect } from "./members-selector"
 import { LabelsSelect } from "./label-selector"
 import { IoMdCheckboxOutline } from 'react-icons/io'
+import { CardSelectDropDown } from "./card/card-select-dropdown"
+import { utilService } from "../services/util.service"
 
 
 export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [cardToEdit, setCardToEdit] = useState(card)
 
-    const [labelsSelect, openLabelsSelect] = useState(false)
-    const [membersSelect, openMembersSelect] = useState(false)
+    const [dropdownType, setDropdownType] = useState(null)
+    const [isDropDownOpen, setIsDropDownOpen] = useState(false)
+    const [pos, setPos] = useState({})
 
     const navigate = useNavigate()
     const textAreaRef = useRef(null)
@@ -48,6 +51,16 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         setCardToEdit((prevCard) => ({ ...prevCard, title: value }))
     }
 
+    function doneInCheckList(checklist) {
+        let doneTasks = 0
+        checklist.todos.forEach(task => {
+            if (task.isDone) doneTasks++
+        })
+        return doneTasks
+    }
+
+
+
     function onSaveCard(ev) {
         ev.preventDefault()
         card.title = cardToEdit.title
@@ -76,16 +89,16 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         onSaveMembers(newMembers)
     }
 
-    function doneInCheckList(checklist) {
-        let doneTasks = 0
-        checklist.todos.forEach(task => {
-            if (task.isDone) doneTasks++
-        })
-        return doneTasks
+
+    async function onSaveMembers(members) {
+        try {
+            card.members = members
+            updateBoard(board)
+        } catch (err) {
+            console.log('Cant Add the members ', err)
+        }
     }
 
-
-    //Added: Labels Editor:
     async function onSaveLabels(labels) {
         try {
             card.labels = labels
@@ -93,6 +106,34 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }
+    }
+
+    async function onSaveCover(clr) {
+        try {
+            card.cover = clr
+            updateBoard(board)
+        } catch (err) {
+            console.log('Cant Add the labels ', err)
+        }
+    }
+
+
+    //ADD FUNCTION 
+
+    function addOrDeleteMember(member) {
+        if (!card.members) card.members = []
+        const memberIdx = card.members.findIndex(m => m._id === member._id)
+        if (memberIdx === -1) {
+            member.isChecked = true
+            card.members.push(member)
+        }
+        else {
+            member.isChecked = false
+            card.members.splice(memberIdx, 1)
+        }
+
+        const newMembers = card.members
+        onSaveMembers(newMembers) // TO CHECK IF WE CAN REMOVE THE FUNC
     }
 
     function addOrDeleteLabel(label) {
@@ -103,7 +144,15 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
         else card.labels.splice(labelIdx, 1)
 
         const newLabels = card.labels
-        onSaveLabels(newLabels)
+        onSaveLabels(newLabels) // TO CHECK IF WE CAN REMOVE THE FUNC
+    }
+
+    function onSetType(ev, typeToSet) {
+        const position = utilService.getPosToDisplay(ev)
+
+        setPos(prevPos => position)
+        setDropdownType(prevType => typeToSet)
+        if (typeToSet === dropdownType || !dropdownType) setIsDropDownOpen(!isDropDownOpen)
     }
 
 
@@ -135,22 +184,15 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                     </form>
                 </div>
 
-                {membersSelect &&
-                    <div onClick={(e) => e.preventDefault()}>
-                        <MembersSelect
-                            openMembersSelect={openMembersSelect}
-                            membersSelect={membersSelect}
-                            addOrDeleteMember={addOrDeleteMember} />
-                    </div>}
 
-                {labelsSelect &&
-                    <div onClick={(e) => e.preventDefault()}>
-                        <LabelsSelect
-                            openLabelsSelect={openLabelsSelect}
-                            labelsSelect={labelsSelect}
-                            addOrDeleteLabel={addOrDeleteLabel} />
-                    </div>}
-
+                {isDropDownOpen && <CardSelectDropDown
+                    type={dropdownType} card={card} pos={pos}
+                    setIsDropDownOpen={setIsDropDownOpen}
+                    isDropDownOpen={isDropDownOpen}
+                    addOrDeleteMember={addOrDeleteMember}
+                    addOrDeleteLabel={addOrDeleteLabel}
+                    onSaveCover={onSaveCover}
+                />}
 
 
                 <div className="quick-editor-btns" onClick={(e) => e.preventDefault()}>
@@ -158,15 +200,19 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor }) {
                         <span className="quick-icon"> <BsCreditCard2Back /> </span> Open card
                     </button>
 
-                    <button onClick={() => openLabelsSelect(!labelsSelect)}>
+                    <button onClick={(e) => onSetType(e, 'labels')}>
                         <span className="quick-icon"> <TiTag /></span> Edit labels
                     </button>
 
-                    <button onClick={() => openMembersSelect(!membersSelect)}>
+                    <button onClick={(e) => onSetType(e, 'members')}>
                         <span className="quick-icon"> <BsFillPersonFill /> </span> Change members
                     </button>
 
-                    <button> <span className="quick-icon"> <RiBankCard2Line /> </span> Change cover</button>
+                    <button onClick={(e) => onSetType(e, 'cover')}>
+                        <span className="quick-icon"> <RiBankCard2Line /> </span> Change cover
+                    </button>
+
+
                     <button> <span className="quick-icon"> <RxClock /> </span> Edit dates</button>
                     <button onClick={onRemoveCard}> <span className="quick-icon"> <FiArchive /> </span> Delete</button>
                 </div>

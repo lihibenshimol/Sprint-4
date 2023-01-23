@@ -4,17 +4,16 @@ import { RxCross2 } from 'react-icons/rx';
 import { utilService } from "../services/util.service";
 
 
-export function MembersSelect({ card, addOrDeleteMember, openMembersSelect, membersSelect }) {
+export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen, isDropDownOpen }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
-
     return (
-        <div className="extras-menu flex" >
+        <div className="extras-menu flex" style={pos} >
             <span className="title-container">
                 <p>
                     Members
                 </p>
-                <span className='close-btn hover' onClick={() => openMembersSelect(!membersSelect)}><RxCross2 /></span>
+                <span className='close-btn hover' onClick={() => setIsDropDownOpen(!isDropDownOpen)}><RxCross2 /></span>
             </span>
             <div className="extras-content-members">
                 <input type="text" className='search-input'
