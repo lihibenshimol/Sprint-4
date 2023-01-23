@@ -19,7 +19,7 @@ export function HomePage() {
                     <img src={collage1} alt="img" />
                 </section>
             </div>
-            <div className='white-wave'><img src={whiteWave} alt="waveee" /> </div>
+            {/* <div className='white-wave'><img src={whiteWave} alt="waveee" /> </div> */}
 
 
             <div className='app-desc'>
