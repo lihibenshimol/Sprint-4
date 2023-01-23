@@ -78,7 +78,7 @@ export function AppHeader() {
                     {dropdown.type === 'create-list' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </div>
                 <button className='app-header-user'>
-                    <img src={user.imgUrl} alt="" />
+                    {user?.imgUrl && <img src={user.imgUrl} alt="" />}
                 </button>
             </nav>
 
