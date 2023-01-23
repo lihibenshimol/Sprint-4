@@ -42,7 +42,7 @@ export function AppHeader() {
             document.body.onclick = () => { }
         }
     }, [])
-    
+
     function onShowDropdown(type) {
         if (dropdown.type === type) setDropDown({})
         else setDropDown({ type })
@@ -62,7 +62,7 @@ export function AppHeader() {
                 </button>
 
                 <button onClick={() => onShowDropdown('recent')} className={dropdown.type === 'recent' ? 'active' : ''}>Recent<i className="fa down-arrow"></i>
-                    {dropdown.type === 'recent' && <DropDown type={dropdown.type} />}
+                    {dropdown.type === 'recent' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </button>
 
                 <button onClick={() => onShowDropdown('starred')} className={dropdown.type === 'starred' ? 'active' : ''}>Starred<i className="fa down-arrow"></i>
