@@ -6,8 +6,8 @@ export function HomepageHeader() {
             <nav className='flex align-center'>
                 <Link to="/"><h1>Trello</h1></Link>
                 <span>
-                    <Link to="/">Log in</Link>
-                    <Link className='cta-btn' to="/">Get Trello for free</Link>
+                    <Link to="/login">Log in</Link>
+                    <Link className='cta-btn' to="/signup">Get Trello for free</Link>
                 </span>
             </nav>
         </header>

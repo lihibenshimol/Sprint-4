@@ -32,7 +32,6 @@ export function CardSelectDropDown({ type, card, pos, isDropDownOpen, setIsDropD
                 pos={pos}
                 isDropDownOpen={isDropDownOpen}
                 setIsDropDownOpen={setIsDropDownOpen}
-
             />
         default:
             return
