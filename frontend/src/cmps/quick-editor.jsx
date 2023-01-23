@@ -202,6 +202,13 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                         </textarea>
 
                         <section className="quick-editor-card-details">
+                            {card.checklists &&
+                                    card.checklists.map(checklist =>
+                                        <div className="preview-details-checklist" key={checklist.id}>
+                                            <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
+                                            {doneInCheckList(checklist)}/{checklist.todos.length}
+                                        </div>)}
+                            {card.members && <span className="preview-details-members">{card.members.map(member =>  <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
                             {card.checklists && card.checklists.map(checklist => <span className="preview-details-checklist" key={checklist.id}> {doneInCheckList(checklist)}/{checklist.todos.length} <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span> </span>)}
                             {card.members && <span className="preview-details-members">{card.members.map(member => <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
                         </section>
@@ -209,7 +216,17 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                     </form>
                 </div>
 
-                {/* {console.log(' = ', )} */}
+        {/* {console.log(' = ', )} */}
+                {isDropDownOpen && <CardSelectDropDown
+                    type={dropdownType} card={card}
+                    pos={quickEditorPos}
+                    // pos={pos}
+                    setIsDropDownOpen={setIsDropDownOpen}
+                    isDropDownOpen={isDropDownOpen}
+                    addOrDeleteMember={addOrDeleteMember}
+                    addOrDeleteLabel={addOrDeleteLabel}
+                    onSaveCover={onSaveCover}
+                />}
 
 
                 <div className="quick-editor-btns" ref={quickEditorBtnsRef} onClick={(e) => e.preventDefault()}>
