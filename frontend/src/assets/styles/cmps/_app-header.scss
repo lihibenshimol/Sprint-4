@@ -1,6 +1,6 @@
 .app-header {
     background-color: $clr1;
-    padding: 0.101em 0;
+    padding: 0.1578em 0;
     color: $clr6;
     position: fixed;
     width: 100%;
@@ -13,12 +13,15 @@
         height: 30px;
         margin-left: auto;
         padding: 0;
-        background-color: red;
-        overflow: hidden;
+        background-color: rgba(0, 0, 0, 0.15);
+        
+        margin-inline-end: 0;
+        border: 1px solid rgba(0, 0, 0, 0.5);
 
         img {
             width: 100%;
             height: 100%;
+            border-radius: 50%;
         }
     }
 

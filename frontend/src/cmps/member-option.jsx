@@ -1,19 +1,24 @@
 import { useState } from "react"
+import { BsCheck } from 'react-icons/bs'
 
 
-export function MemberOption({ card, member, handleChange, addOrDeleteMember }) {
+
+export function MemberOption({ card, board, member, handleChange, addOrDeleteMember }) {
+
 
     function handleChange() {
         addOrDeleteMember(member)
     }
 
-    function memberIsCheck() {
-        const idx = card.members.findIndex(m => m._id === member._id)
+    function memberIsCheck(entity) {
+        const idx = entity.members.findIndex(m => m._id === member._id)
+        // const idx = card.members.findIndex(m => m._id === member._id)
 
         if (idx !== -1) return false
         return true
     }
 
+    if (member.isChecked === true) return
     return (
         <li className="flex " onClick={handleChange}>
             <label>
@@ -22,7 +27,8 @@ export function MemberOption({ card, member, handleChange, addOrDeleteMember }) 
                     <span>{member.fullname}</span>
 
                 </div>
-                <span>{memberIsCheck() ? '' : 'V'}</span>
+                {card && <span>{memberIsCheck(card) ? '' : <BsCheck />}</span>}
+                {!card && <span>{memberIsCheck(board) ? '' : <BsCheck />}</span>}
             </label>
         </li>
     )

@@ -94,4 +94,7 @@ function getEmptyUser(){
 //     await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123',score: 10000, isAdmin: false})
 //     await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', score: 10000, isAdmin: true})
 //     await userService.signup({fullname: 'Muki G', username: 'muki', password:'123', score: 10000})
+//     await userService.signup({fullname: 'Lihi Ben Shimol', username: 'lihibs', imgUrl: "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512", password:'123', score: 10000})
+//     await userService.signup({fullname: 'Aviad Malikan', username: 'Mr_Aviad', imgUrl: "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512", password:'123', score: 10000})
+//     await userService.signup({fullname: 'Shay Skitel', username: 'Skitsh', imgUrl: "https://ca.slack-edge.com/T043N4KE97B-U049WM10DR6-7e045b387033-512", password:'123', score: 10000})
 // })()

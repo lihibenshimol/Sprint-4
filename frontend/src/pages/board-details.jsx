@@ -69,7 +69,7 @@ export function BoardDetails() {
         <>
         <Outlet />
         
-            <section className='board-details main-container' style={board.style}>
+            <section className='board-details  full' style={board.style}>
                 <BoardHeader />
                 <div className="group-container">
                     <GroupList 

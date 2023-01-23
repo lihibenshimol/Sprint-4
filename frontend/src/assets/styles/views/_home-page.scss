@@ -1,51 +1,152 @@
 .home-page {
-    background-color: $clr3;
-    color: $clr6;
-    padding: 8em ;
-    height: 100%;
-    align-content: start;
-    display: flex;
-    flex-wrap: wrap;
-    // display: grid;
-    // grid-template-columns: 1fr 1fr;
-    // align-items: center;
-    background-image: linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180));
+    padding: 0;
+    background-color: white;
 
-    a {
-        color: $clr2;
+    h2 {
+        font-family: 'charlie-display-bold';
+
     }
 
-    .signup-intro {
-        // grid-column: 1 / 2;
-        display: flex;
-        flex-direction: column;
+    h3 {
+        font-family: 'charlie-text';
+        font-size: rem(20px);
+    }
 
-        width: 50%;
+    h4 {
+        font-size: rem(16px);
+        font-family: 'charlie-text';
+    }
+
+    p {
+        font-size: rem(16px);
+        font-family: 'charlie-text';
+    }
+
+    button {
+        color: inherit;
+        padding: 0;
         text-align: left;
 
-
-        h2{
-            font-size: 3rem;
-            font-family: 'charlie-display-bold';
-            width: 100%;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            font-family: 'charlie-text';
-        }
     }
 
-    .collage1 {
-        // grid-column: 2 / 3;
-        width: 50%;
-    }
 
-    .white-wave {
-        position: fixed;
-        width: 100%;
+    .main-hero {
+        background-color: $clr3;
+        color: $clr6;
+        padding: 8em;
         height: 100%;
-        left: 0;
-        top: 90%;
+      
+        display: flex;
+        flex-wrap: wrap;
+        background: url('../../img/white-wave-bg.svg') center bottom -0.5px / 100% 14% no-repeat scroll padding-box border-box, linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);
+        ;
+        // background-image: linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180));
+
+        .start-demo-btn {
+            background-color: #0065ff;
+            padding: 0.7rem 1rem 0.8rem;
+            width: 160px;
+            text-align: center;
+            color: white;
+            border-radius: 3px;
+            font-family: 'charlie-text';
+            font-size: 16px;
+            margin: 40px 0;
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+        }
+
+        .signup-intro {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%;
+            width: 50%;
+            text-align: left;
+
+
+            h2 {
+                font-size: 3rem;
+                font-family: 'charlie-display-bold';
+                width: 100%;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+                font-family: 'charlie-text';
+            }
+        }
+
+        .collage1 {
+            width: 50%;
+        }
+
+    }
+
+    .app-desc {
+        padding: 2rem 6rem;
+        display: flex;
+        align-items: flex-start;
+
+        .desc {
+            font-family: 'charlie-text';
+            font-size: rem(20px);
+            width: 700px;
+
+            h2 {
+                margin-bottom: 40px;
+                font-size: rem(36px);
+            }
+        }
+
+    }
+
+    .boards-desc {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 2em 6em;
+        gap: 50px;
+        justify-content: center;
+        font-size: 16px;
+        background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box border-box rgb(178, 212, 255);
+
+        .tabs {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            width: 400px;
+
+            .tab {
+                padding: 1rem 1rem 1rem 1.5rem;
+                width: 347px;
+                position: relative;
+            }
+
+
+            .tab:focus {
+                background-color: rgb(255, 255, 255);
+                box-shadow: rgb(9 30 66 / 15%) 0px 0.5rem 1rem 0px;
+                border-radius: .3rem;
+                border: 0;
+                padding: 1rem 1rem 1rem 1.5rem;
+                color: rgb(9, 30, 66);
+
+                &::after {
+                    background-color: rgb(0, 199, 229);
+                    border-radius: 0.3rem 0px 0px 0.3rem;
+                    bottom: 0px;
+                    content: "";
+                    left: 0px;
+                    position: absolute;
+                    top: 0px;
+                    width: 0.5rem;
+                }
+            }
+        }
+
+
     }
 }
