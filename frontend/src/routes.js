@@ -4,6 +4,7 @@ import { AboutUs } from './pages/about-us.jsx'
 import { CardDetails } from './pages/card-details.jsx'
 import { BoardIndex } from './pages/board-index.jsx'
 import { Signup } from './pages/signup.jsx'
+import { Login } from './pages/login.jsx'
 
 // Routes accesible from the main navigation (in AppHeader)
 const routes = [
@@ -24,7 +25,7 @@ const routes = [
     },
     {
         path: 'login',
-        component: <AboutUs />,
+        component: <Login />,
         label: 'Login'
     },
     {

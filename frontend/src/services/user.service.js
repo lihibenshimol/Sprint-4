@@ -1,5 +1,6 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
+import userImg from '../assets/img/u0.png'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 const STORAGE_KEY = 'userDB'
@@ -14,7 +15,7 @@ export const userService = {
     getById,
     remove,
     update,
-    changeScore
+    getEmptyUser
 }
 
 window.userService = userService
@@ -48,16 +49,17 @@ async function update({ _id, score }) {
 
 async function login(userCred) {
     const users = await storageService.query(STORAGE_KEY)
-    const user = users.find(user => user.username === userCred.username)
+    const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
     // const user = await httpService.post('auth/login', userCred)
     if (user) {
         // socketService.login(user._id)
         return saveLocalUser(user)
     }
+    else throw new Error('Invalid credentials')
 }
 
 async function signup(userCred) {
-    if (!userCred.imgUrl) userCred.imgUrl = 'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
+    if (!userCred.imgUrl) userCred.imgUrl = userImg
     const user = await storageService.post(STORAGE_KEY, userCred)
     // const user = await httpService.post('auth/signup', userCred)
     // socketService.login(user._id)
@@ -70,22 +72,22 @@ async function logout() {
     // return await httpService.post('auth/logout')
 }
 
-async function changeScore(by) {
-    const user = getLoggedinUser()
-    if (!user) throw new Error('Not loggedin')
-    user.score = user.score + by || by
-    await update(user)
-    return user.score
-}
-
 function saveLocalUser(user) {
-    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl, score: user.score }
+    user = { _id: user._id, fullname: user.fullname, imgUrl: user.imgUrl }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
     return user
 }
 
 function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+}
+
+function getEmptyUser(){
+    return {
+        fullname: '',
+        username: '',
+        password: ''
+    }
 }
 
 // ;(async ()=>{

@@ -1,17 +1,17 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { userService } from "../services/user.service"
-import { signup } from "../store/user.actions"
+import { login } from "../store/user.actions"
 
-export function Signup() {
+export function Login() {
 
     const [user, setUser] = useState(userService.getEmptyUser())
     const navigate = useNavigate()
 
-    async function onSignUp(ev) {
+    async function onLogin(ev) {
         ev.preventDefault()
         try {
-            await signup(user)
+            await login(user)
             navigate('/board')
         } catch (err) {
             console.log('Failed to signup; ', err)
@@ -25,11 +25,10 @@ export function Signup() {
 
     return (
         <section className="login-signup">
-            <form onSubmit={onSignUp}>
-                <input name="fullname" value={user.fullname} onChange={handleChange} type="text" placeholder="Enter full name" />
+            <form onSubmit={onLogin}>
                 <input name="username" value={user.username} onChange={handleChange} type="text" placeholder="Enter username" />
                 <input name="password" value={user.password} onChange={handleChange} type="password" placeholder="Enter password" />
-                <button>Sign up</button>
+                <button>Login</button>
             </form>
         </section>
     )

@@ -1,10 +1,11 @@
 import { createStore, combineReducers } from 'redux'
 import { boardReducer } from './board.reducer'
+import { userReducer } from './user.reducer'
 import { systemReducer } from './system.reducer'
 
 const rootReducer = combineReducers({
     boardModule: boardReducer,
-    // userModule: userReducer,
+    userModule: userReducer,
     systemModule: systemReducer,
     // reviewModule: reviewReducer,
 })
