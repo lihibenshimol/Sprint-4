@@ -156,6 +156,7 @@ export function CardDetails() {
 
         if (isDropDownOpen && typeToSet !== dropdownType) return
         setIsDropDownOpen(!isDropDownOpen)
+
     }
 
 

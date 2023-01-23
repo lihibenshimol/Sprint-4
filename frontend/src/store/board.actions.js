@@ -2,7 +2,7 @@ import { boardService } from "../services/board.service.local.js";
 // import { userService } from "../services/user.service.js";
 import { store } from './store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, UNDO_REMOVE_BOARD, UNDO_UPDATE_BOARD, UPDATE_BOARD } from "./board.reducer.js";
+import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, SET_STARRED_BOARDS, UNDO_REMOVE_BOARD, UNDO_UPDATE_BOARD, UPDATE_BOARD, UPDATE_STARRED_BOARDS } from "./board.reducer.js";
 
 // Action Creators:
 export function getActionRemoveBoard(boardId) {
@@ -48,6 +48,33 @@ export async function loadBoards() {
     }
 }
 
+export async function loadStarredBoards() {
+    try {
+        const boards = await boardService.query({ isStarred: true })
+        store.dispatch({
+            type: SET_STARRED_BOARDS,
+            boards
+        })
+
+    } catch (err) {
+        console.log('Cannot load boards', err)
+        throw err
+    }
+}
+
+export async function starBoard(board) {
+    board.isStarred = !board.isStarred
+    board.starredAt = Date.now()
+    try {
+        store.dispatch({type: UPDATE_STARRED_BOARDS, board})
+        const savedBoard = await boardService.save(board)
+        return savedBoard
+    } catch (err) {
+        console.log('Cannot save board', err)
+        throw err
+    }
+}
+
 export async function removeBoard(boardId) {
     try {
         store.dispatch(getActionRemoveBoard(boardId))
@@ -75,7 +102,7 @@ export async function addBoard(board) {
 
 export async function updateBoard(board) {
     try {
-        store.dispatch(getActionUpdateBoard({...board}))
+        store.dispatch(getActionUpdateBoard({ ...board }))
         const savedBoard = await boardService.save(board)
         return savedBoard
     } catch (err) {

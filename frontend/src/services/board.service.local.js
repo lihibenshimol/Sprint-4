@@ -31,8 +31,11 @@ export const boardService = {
 }
 window.cs = boardService
 
-async function query() {
-    const boards = await storageService.query(STORAGE_KEY)
+async function query(filterBy = {}) {
+    let boards = await storageService.query(STORAGE_KEY)
+    if(filterBy.isStarred) {
+        boards = boards.filter(board => board.isStarred).sort((b1, b2) => b1.starredAt - b2.starredAt)
+    }
     // if (filterBy.txt) {
     //     const regex = new RegExp(filterBy.txt, 'i')
     //     boards = boards.filter(board => regex.test(board.vendor) || regex.test(board.description))
