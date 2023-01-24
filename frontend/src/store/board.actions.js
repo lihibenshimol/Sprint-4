@@ -66,7 +66,7 @@ export async function starBoard(board) {
     board.isStarred = !board.isStarred
     board.starredAt = Date.now()
     try {
-        store.dispatch({type: UPDATE_STARRED_BOARDS, board})
+        store.dispatch({ type: UPDATE_STARRED_BOARDS, board })
         const savedBoard = await boardService.save(board)
         return savedBoard
     } catch (err) {
@@ -110,6 +110,22 @@ export async function updateBoard(board) {
         store.dispatch({
             type: UNDO_UPDATE_BOARD
         })
+        throw err
+    }
+}
+
+export async function undoBoardUpdate(prevBoard) {
+    try {
+        store.dispatch({
+            type: UNDO_UPDATE_BOARD
+        })
+        
+        console.log('prevBoard = ', prevBoard)
+        updateBoard(prevBoard)
+        // const savedBoard = await boardService.save(prevBoard)
+        // return savedBoard
+    } catch (err) {
+        console.log('Cannot undo move', err)
         throw err
     }
 }

@@ -12,7 +12,8 @@ import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.ser
 
 
 export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
-    const board = useSelector(storeState => storeState.boardModule.currBoard)
+    let board = useSelector(storeState => storeState.boardModule.currBoard)
+    board = {...board}
     const [editMode, setEditMode] = useState(false)
     const [addMode, setAddMode] = useState(false)
     const [extrasMenu, openExtraMenu] = useState(false)

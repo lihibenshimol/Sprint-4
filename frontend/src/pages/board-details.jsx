@@ -11,10 +11,10 @@ import { setCurrBoard, updateBoard } from '../store/board.actions.js'
 
 export function BoardDetails() {
  
-    const dispatch = useDispatch()
     const { boardId } = useParams()
-    const navigate = useNavigate()
-    const board = useSelector(storeState => storeState.boardModule.currBoard)
+    let board = useSelector(storeState => storeState.boardModule.currBoard)
+    // board = JSON.parse(JSON.stringify(board))
+    // console.log('board = ', board)
 
 
     useEffect(() => {

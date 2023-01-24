@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import filterIcon from '../assets/img/filter.svg'
 import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
-import { updateBoard } from "../store/board.actions"
+import { undoBoardUpdate, updateBoard } from "../store/board.actions"
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { BsFilter } from 'react-icons/bs'
 import { TfiDashboard } from 'react-icons/tfi'
@@ -16,11 +16,14 @@ import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.ser
 
 export function BoardHeader() {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+    const lastUpdatedBoard = useSelector(storeState => storeState.boardModule.lastUpdatedBoard)
     const [editMode, setEditMode] = useState(false)
     const [boardNewTitle, setBoardNewTitle] = useState(board.title)
     const [pos, setPos] = useState({})
     const [dropdownType, setDropdownType] = useState(null)
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
+
+    console.log(' lastUpdatedBoard = ',  lastUpdatedBoard)
 
     useEffect(() => {
         setBoardNewTitle(board.title)
@@ -95,14 +98,7 @@ export function BoardHeader() {
                     addOrDeleteMember={addOrDeleteMember}
 
                 />}
-            {/* {isDropDownOpen && <CardSelectDropDown
-                    type={dropdownType}
-                    pos={pos}
-                    setIsDropDownOpen={setIsDropDownOpen}
-                    isDropDownOpen={isDropDownOpen}
-                    addOrDeleteMember={addOrDeleteMember}
 
-                />} */}
 
             <div className="board-header full">
 
@@ -127,6 +123,10 @@ export function BoardHeader() {
                     <button className="board-header-btn-icon invite-icon" onClick={(e) => onSetType(e, 'members')} >
                         <MdPersonAddAlt />
                       Invite
+                    </button>
+
+                    <button className="board-header-btn-icon undo-icon" onClick={() => undoBoardUpdate(lastUpdatedBoard)}>
+                        Undo
                     </button>
                 </section>
 

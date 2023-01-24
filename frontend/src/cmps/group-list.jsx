@@ -11,7 +11,8 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service";
 
 export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
-    const board = useSelector(storeState => storeState.boardModule.currBoard)
+    let board = useSelector(storeState => storeState.boardModule.currBoard)
+    board = {...board}
     const [editMode, setEditMode] = useState(false)
     const [groupToEdit, setGroupToEdit] = useState(boardService.getEmptyGroup())
 
@@ -79,6 +80,7 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
             else if (g.id === newEndColumn.id) return newEndColumn
             else return g
         })
+        // console.log('board in list = ', board)
 
         const savedBoard = await updateBoard(board)
         socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
