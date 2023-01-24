@@ -17,6 +17,7 @@ import { updateBoard } from "../store/board.actions"
 import { CardHeader } from "../cmps/card-header"
 import { CardSelectDropDown } from "../cmps/card/card-select-dropdown"
 import { utilService } from "../services/util.service"
+import { CheckAttachments } from "../cmps/card/card-attachment"
 
 
 
@@ -116,6 +117,18 @@ export function CardDetails() {
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }
+    }
+
+    async function onChangeAttachment(attachments) {
+        console.log('card: ', card)
+
+        try {
+            card.attachments = attachments
+            updateBoard(board)
+        } catch (err) {
+            console.log('Cant Add the labels ', err)
+        }
+
     }
 
 
@@ -225,20 +238,30 @@ export function CardDetails() {
                                             onClick={(e) => onSetType(e, 'labels')}></div>
                                     </article>
                                 </div>}
-
                         </section>
 
                         <section className="card-description">
                             <div className="section-header">
                                 <span><BsTextLeft /></span>
                                 <h3>Description</h3>
-                                {!isDescriptionEdit && <button onClick={setIsDescriptionEdit}>Edit</button>}
+                                {(!isDescriptionEdit && card.desc) && <button onClick={setIsDescriptionEdit}>Edit</button>}
                             </div>
-                            <CardDescription card={card}
+
+                            <CardDescription
+                                card={card}
                                 onSaveDesc={onSaveDesc}
                                 isDescriptionEdit={isDescriptionEdit}
                                 setIsDescriptionEdit={setIsDescriptionEdit} />
                         </section>
+
+
+                        {card &&
+                            <CheckAttachments
+                                onSetType={onSetType}
+                                attachments={card.attachments}
+                                onChangeAttachment={onChangeAttachment}
+                            />
+                        }
 
                         {card.checklists &&
                             <CheckListList
@@ -262,6 +285,7 @@ export function CardDetails() {
                         onSetType={onSetType}
                         card={card} pos={pos} type={dropdownType}
                         isDropDownOpen={isDropDownOpen}
+
                         setIsDropDownOpen={setIsDropDownOpen}
                         addOrDeleteMember={addOrDeleteMember}
                         addOrDeleteLabel={addOrDeleteLabel}

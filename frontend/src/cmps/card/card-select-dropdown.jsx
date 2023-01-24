@@ -2,10 +2,11 @@ import { LabelsSelect } from "../label-selector";
 import { MembersSelect } from "../members-selector";
 import { CardCoverSelector } from "../card-cover-selector";
 import { DateSelector } from "../date-selector";
+import { AttachmentAdder } from "../attachment-adder";
 
 export function CardSelectDropDown({ type, card, pos, isDropDownOpen, setIsDropDownOpen,
     addOrDeleteLabel, addOrDeleteMember, onSaveCover, }) {
-        console.log('pos = ', pos.x)
+    console.log('pos = ', pos.x)
 
     switch (type) {
         case 'labels':
@@ -29,6 +30,12 @@ export function CardSelectDropDown({ type, card, pos, isDropDownOpen, setIsDropD
                 onSaveCover={onSaveCover} />
         case 'date':
             return <DateSelector
+                pos={pos}
+                isDropDownOpen={isDropDownOpen}
+                setIsDropDownOpen={setIsDropDownOpen}
+            />
+        case 'attachment':
+            return <AttachmentAdder
                 pos={pos}
                 isDropDownOpen={isDropDownOpen}
                 setIsDropDownOpen={setIsDropDownOpen}

@@ -59,7 +59,13 @@
                 cursor: pointer;
 
                 &:hover {
-                    background-color: #091e420a;
+                    div.clr-box {
+                        opacity: .8;
+                    }
+                    span.un-checked{
+                        background-color:  #ebecf0
+                    }
+                    // background-color: #091e420a;
                 }
 
 
