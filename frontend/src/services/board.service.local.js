@@ -344,6 +344,15 @@ function _createDemoBoards() {
                                     }
                                 ],
                                 labels: [],
+                                attachments: [
+                                    {
+                                        id: 'a101',
+                                        imgUrl: `https://res.cloudinary.com/djr3esqjq/video/upload/v1674491166/samples/sea-turtle.mp4`,
+                                        title: 'sea',
+                                        createAt: 1365466464,
+                                        format: 'mp4'
+                                    },
+                                ]
                             },
                             {
                                 "id": "c105",

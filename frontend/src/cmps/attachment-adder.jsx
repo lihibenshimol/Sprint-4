@@ -30,6 +30,8 @@ export function AttachmentAdder({ card, pos, isDropDownOpen, setIsDropDownOpen,
         try {
             let fileToSave = boardService.getEmptyAttachment()
             const file = await uploadService.uploadImg(ev)
+            console.log('file: ', file)
+
             fileToSave.title = file.original_filename
             fileToSave.imgUrl = file.url
             fac.getColorAsync(file.url)
@@ -49,11 +51,12 @@ export function AttachmentAdder({ card, pos, isDropDownOpen, setIsDropDownOpen,
     }
 
     async function onGetImg() {
+        if (urlToSave === '') return
         if (!card.attachments) card.attachments = []
         try {
             let fileToSave = boardService.getEmptyAttachment()
             fileToSave.imgUrl = urlToSave
-            fileToSave.title = urlToSave.substring(0, 20)
+            fileToSave.title = urlToSave.substring(8, 100)
             fac.getColorAsync(urlToSave)
                 .then(color => {
                     fileToSave.bg = color.hex

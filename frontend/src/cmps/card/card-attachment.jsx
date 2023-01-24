@@ -7,6 +7,17 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
         return clr
     }
 
+    function checkImgOrVideo(attach) {
+
+        if (attach.format === 'mp4') {
+            return <iframe width="100%" height={"100%"}
+                src={attach.imgUrl}
+                autoPlay muted />
+        } else {
+            return <img src={`${attach.imgUrl}`} alt={`${attach.title}`} />
+        }
+    }
+
     return (
         <section className="card-attachment">
             <div className="section-header">
@@ -19,7 +30,12 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
                     return (
                         <div className="attachment" key={a.id} >
                             <div className="attachment-img" style={{ backgroundColor: getClr(a) }}>
-                                <img src={`${a.imgUrl}`} alt={`${a.title}`} />
+                                {checkImgOrVideo(a)}
+                                {/* <iframe width="100%" height={"100%"}
+                                    src={a.imgUrl}
+                                    autoPlay muted />
+
+                                <img src={`${a.imgUrl}`} alt={`${a.title}`} /> */}
                             </div>
                             <p>
                                 <span className="title"> {a.title}</span>

@@ -79,6 +79,12 @@
                 z-index: 1;
                 background-color: #091e420a;
 
+                iframe {
+                    border: 0;
+
+                    background-color: rgba(0, 0, 0, 0);
+                }
+
                 img {
                     background-repeat: no-repeat;
                     height: 100%;
@@ -117,7 +123,8 @@
 
     button.btn-add-attach {
         margin: 8px 0;
-        &:hover{
+
+        &:hover {
             background-color: #091e4214;
         }
     }
