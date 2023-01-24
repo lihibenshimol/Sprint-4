@@ -41,6 +41,7 @@
 }
 
 .homepage-header.main-layout {
+
     @include for-narrow-layout {
         grid-template-columns:
             minmax(1rem, 1fr) minmax(auto, $mobile-breakpoint + 140px) minmax(1rem, 1fr);
