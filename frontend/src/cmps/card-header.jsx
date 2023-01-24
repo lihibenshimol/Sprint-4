@@ -1,8 +1,11 @@
 
 
 export function CardHeader({ card, getGroup, onChangeTitle }) {
+    console.log('card: ', card)
 
+    function handleChange() {
 
+    }
 
 
     return <div className="card-header">
@@ -10,7 +13,7 @@ export function CardHeader({ card, getGroup, onChangeTitle }) {
         <input className="title"
             suppressContentEditableWarning={true}
             contentEditable={true}
-            value={'Ola'}
+            value={card.title}
             onChange={onChangeTitle} />
 
         <div>

@@ -5,7 +5,7 @@ import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
 import { undoBoardUpdate, updateBoard } from "../store/board.actions"
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-import { BsFilter } from 'react-icons/bs'
+import { BsFilter, BsThreeDots } from 'react-icons/bs'
 import { TfiDashboard } from 'react-icons/tfi'
 import { MdPersonAddAlt } from 'react-icons/md'
 import { utilService } from "../services/util.service"
@@ -14,7 +14,7 @@ import { BoardMemberSelect } from "./board-member-select"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
 
 
-export function BoardHeader() {
+export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const lastUpdatedBoard = useSelector(storeState => storeState.boardModule.lastUpdatedBoard)
     const [editMode, setEditMode] = useState(false)
@@ -23,7 +23,7 @@ export function BoardHeader() {
     const [dropdownType, setDropdownType] = useState(null)
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
 
-    console.log(' lastUpdatedBoard = ',  lastUpdatedBoard)
+    console.log(' lastUpdatedBoard = ', lastUpdatedBoard)
 
     useEffect(() => {
         setBoardNewTitle(board.title)
@@ -36,7 +36,7 @@ export function BoardHeader() {
         try {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
-        } catch(err) {
+        } catch (err) {
             console.log('Failed to save board ', err)
         }
     }
@@ -48,7 +48,7 @@ export function BoardHeader() {
         try {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
-        } catch(err) {
+        } catch (err) {
             console.log('Failed to save board ', err)
         }
     }
@@ -91,13 +91,13 @@ export function BoardHeader() {
     return (
         <>
             {isDropDownOpen && <BoardMemberSelect
-                    type={dropdownType}
-                    pos={pos}
-                    setIsDropDownOpen={setIsDropDownOpen}
-                    isDropDownOpen={isDropDownOpen}
-                    addOrDeleteMember={addOrDeleteMember}
+                type={dropdownType}
+                pos={pos}
+                setIsDropDownOpen={setIsDropDownOpen}
+                isDropDownOpen={isDropDownOpen}
+                addOrDeleteMember={addOrDeleteMember}
 
-                />}
+            />}
 
 
             <div className="board-header full">
@@ -122,7 +122,7 @@ export function BoardHeader() {
 
                     <button className="board-header-btn-icon invite-icon" onClick={(e) => onSetType(e, 'members')} >
                         <MdPersonAddAlt />
-                      Invite
+                        Invite
                     </button>
 
                     <button className="board-header-btn-icon undo-icon" onClick={() => undoBoardUpdate(lastUpdatedBoard)}>
@@ -139,6 +139,13 @@ export function BoardHeader() {
                         <TfiDashboard />
                         Dashboard
                     </button>
+                    <span className="line">
+                       
+                    </span>
+                    {!isOpenMenu && (<button className="board-header-btn-icon dashboard-icon menu"
+                        onClick={() => setIsOpenMenu(!isOpenMenu)}                    >
+                        <BsThreeDots />
+                    </button>)}
                 </section>
 
             </div>

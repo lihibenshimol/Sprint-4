@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { useParams, Outlet, useNavigate} from 'react-router-dom'
+import { useParams, Outlet, } from 'react-router-dom'
 import { BoardHeader } from '../cmps/board-header.jsx'
+import { BoardMenu } from '../cmps/board-menu.jsx'
 import { GroupList } from '../cmps/group-list.jsx'
 import { Loader } from '../cmps/loader.jsx'
 import { boardService } from "../services/board.service"
@@ -10,7 +10,8 @@ import { socketService, SOCKET_EMIT_BOARD_UPDATED, SOCKET_EMIT_SET_TOPIC, SOCKET
 import { setCurrBoard, updateBoard } from '../store/board.actions.js'
 
 export function BoardDetails() {
- 
+    const [isOpenMenu, setIsOpenMenu] = useState(false)
+
     const { boardId } = useParams()
     let board = useSelector(storeState => storeState.boardModule.currBoard)
     // board = JSON.parse(JSON.stringify(board))
@@ -61,7 +62,7 @@ export function BoardDetails() {
         }
     }
 
-    async function onAddCard(group ,newCard) {
+    async function onAddCard(group, newCard) {
         if (!newCard.title) return
         try {
             await boardService.addNewItem(group, newCard, 'cards')
@@ -77,20 +78,28 @@ export function BoardDetails() {
     if (!board) return <Loader />
     return (
         <>
-        <Outlet />
-        
-            <section className='board-details  full' style={board.style}>
-                <BoardHeader />
-                <div className="group-container">
-                    <GroupList 
-                    groups={board.groups}
-                    onAddGroup={onAddGroup}
-                    onAddCard={onAddCard}
-                    onRemoveGroup={onRemoveGroup}
+            <Outlet />
+            <section className='board-details' style={board.style}>
+                <section className={`board-menu ${isOpenMenu ? 'open' : ''}`}>
+                    <BoardMenu />
+                </section >
+
+                <section className={isOpenMenu ? 'board-content-open' : 'board-content'}>
+                    <BoardHeader
+                        isOpenMenu={isOpenMenu}
+                        setIsOpenMenu={setIsOpenMenu}
                     />
-                </div>
+                    <div className="group-container">
+                        <GroupList
+                            groups={board.groups}
+                            onAddGroup={onAddGroup}
+                            onAddCard={onAddCard}
+                            onRemoveGroup={onRemoveGroup}
+                        />
+                    </div>
+                </section>
             </section>
-          
+
         </>
     )
 }
