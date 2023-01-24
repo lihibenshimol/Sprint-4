@@ -13,6 +13,7 @@ import { LabelsSelect } from "./label-selector"
 import { IoMdCheckboxOutline } from 'react-icons/io'
 import { CardSelectDropDown } from "./card/card-select-dropdown"
 import { utilService } from "../services/util.service"
+import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
 
 
 export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quickEditorPos, doneInCheckList, isTasksDone }) {
@@ -72,10 +73,15 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
         setCardToEdit((prevCard) => ({ ...prevCard, title: value }))
     }
 
-    function onSaveCard(ev) {
+    async function onSaveCard(ev) {
         ev.preventDefault()
         card.title = cardToEdit.title
-        updateBoard(board)
+        try {
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
+        } catch(err) {
+            console.log('Failed to save board ', err)
+        }
         openQuickEditor(ev, !quickEditor)
     }
 
@@ -83,7 +89,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
         try {
             const updateCard = { ...card, members }
             boardService.saveCard(board, groupId, updateCard)
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the members ', err)
         }
@@ -104,7 +111,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
     async function onSaveMembers(members) {
         try {
             card.members = members
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the members ', err)
         }
@@ -113,7 +121,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
     async function onSaveLabels(labels) {
         try {
             card.labels = labels
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }
@@ -122,7 +131,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
     async function onSaveCover(clr) {
         try {
             card.cover = clr
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }

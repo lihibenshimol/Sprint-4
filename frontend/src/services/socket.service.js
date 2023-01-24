@@ -8,6 +8,8 @@ export const SOCKET_EMIT_USER_WATCH = 'user-watch'
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
 export const SOCKET_EMIT_CREATE_BOARD = 'board-created'
 export const SOCKET_EVENT_NEW_BOARD = 'board-add'
+export const SOCKET_EMIT_BOARD_UPDATED = 'board-updated'
+export const SOCKET_EVENT_BOARD_UPDATED = 'board-updated'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
