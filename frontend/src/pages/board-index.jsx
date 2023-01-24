@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { BoardList } from "../cmps/board-list";
-import { loadBoards, loadStarredBoards } from "../store/board.actions";
+import { socketService, SOCKET_EVENT_NEW_BOARD } from "../services/socket.service";
+import { getActionAddBoard, loadBoards, loadStarredBoards } from "../store/board.actions";
 
 export function BoardIndex() {
 
+    const dispatch = useDispatch()
     const {boards, starredBoards} = useSelector(storeState => storeState.boardModule)
     const [recentBoards, setRecentBoards] = useState([])
     const dayInMilliseconds = 1000 * 60 * 60 * 24
@@ -15,6 +18,9 @@ export function BoardIndex() {
     }, [boards])
 
     useEffect(() => {
+        socketService.on(SOCKET_EVENT_NEW_BOARD, (board) => {
+            dispatch(getActionAddBoard(board))
+        })
         getBoards()
     }, [])
 

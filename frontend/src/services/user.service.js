@@ -1,6 +1,7 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
 import userImg from '../assets/img/u0.png'
+import { socketService } from './socket.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 const STORAGE_KEY = 'userDB'
@@ -53,7 +54,7 @@ async function login(userCred) {
     // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
     const user = await httpService.post('auth/login', userCred)
     if (user) {
-        // socketService.login(user._id)
+        socketService.login(user._id)
         return saveLocalUser(user)
     }
     else throw new Error('Invalid credentials')
@@ -63,13 +64,13 @@ async function signup(userCred) {
     if (!userCred.imgUrl) userCred.imgUrl = userImg
     // const user = await storageService.post(STORAGE_KEY, userCred)
     const user = await httpService.post('auth/signup', userCred)
-    // socketService.login(user._id)
+    socketService.login(user._id)
     return saveLocalUser(user)
 }
 
 async function logout() {
     // sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    // socketService.logout()
+    socketService.logout()
     const res = await httpService.post('auth/logout')
     sessionStorage.clear()
     return res

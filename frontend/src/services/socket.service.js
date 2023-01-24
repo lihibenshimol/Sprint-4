@@ -6,16 +6,16 @@ export const SOCKET_EMIT_SEND_MSG = 'chat-send-msg'
 export const SOCKET_EMIT_SET_TOPIC = 'chat-set-topic'
 export const SOCKET_EMIT_USER_WATCH = 'user-watch'
 export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
-export const SOCKET_EVENT_REVIEW_ADDED = 'review-added'
-export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
+export const SOCKET_EMIT_CREATE_BOARD = 'board-created'
+export const SOCKET_EVENT_NEW_BOARD = 'board-add'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
 
 
 const baseUrl = (process.env.NODE_ENV === 'production') ? '' : '//localhost:3030'
-// export const socketService = createSocketService()
-export const socketService = createDummySocketService()
+export const socketService = createSocketService()
+// export const socketService = createDummySocketService()
 
 // for debugging from console
 window.socketService = socketService
@@ -24,11 +24,11 @@ socketService.setup()
 
 
 function createSocketService() {
-  var socket = null;
+  let socket = null
   const socketService = {
     setup() {
       socket = io(baseUrl)
-      setTimeout(()=>{
+      setTimeout(() => {
         const user = userService.getLoggedinUser()
         if (user) this.login(user._id)
       }, 500)
@@ -37,7 +37,7 @@ function createSocketService() {
       socket.on(eventName, cb)
     },
     off(eventName, cb = null) {
-      if (!socket) return;
+      if (!socket) return
       if (!cb) socket.removeAllListeners(eventName)
       else socket.off(eventName, cb)
     },
@@ -60,7 +60,7 @@ function createSocketService() {
 
 // eslint-disable-next-line
 function createDummySocketService() {
-  var listenersMap = {}
+  let listenersMap = {}
   const socketService = {
     listenersMap,
     setup() {
@@ -69,9 +69,9 @@ function createDummySocketService() {
     terminate() {
       this.setup()
     },
-    login() {   
+    login() {
     },
-    logout() {   
+    logout() {
     },
     on(eventName, cb) {
       listenersMap[eventName] = [...(listenersMap[eventName]) || [], cb]
@@ -92,7 +92,7 @@ function createDummySocketService() {
       this.emit(SOCKET_EVENT_ADD_MSG, { from: 'Someone', txt: 'Aha it worked!' })
     },
     testUserUpdate() {
-      this.emit(SOCKET_EVENT_USER_UPDATED, {...userService.getLoggedinUser(), score: 555})
+      this.emit(SOCKET_EVENT_USER_UPDATED, { ...userService.getLoggedinUser(), score: 555 })
     }
   }
   window.listenersMap = listenersMap;
