@@ -48,7 +48,7 @@
         font-weight: 700;
         border-radius: 0.3em;
         transition: background-color 0.1s ease-in-out;
-        margin-block-end: 0;
+        margin-block-end: 1.5em;
 
         &:hover {
             background-color: lighten($clr16, 6%);
@@ -79,5 +79,38 @@
     @include for-narrow-layout {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    a {
+        margin-block-start: 1em;
+        color: #0052cc;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    hr {
+        width: 100%;
+        max-width: 320px;
+        border-top: 1px solid hsl(0,0%,80%);
+    }
+
+    img {
+        display: none;
+        position: absolute;
+        width: 30%;
+        min-width: 192px;
+        max-width: 400px;
+        bottom: 0;
+        right: 0;
+
+        @include for-narrow-layout {
+            display: block;
+        }
+
+        &:nth-of-type(2) {
+            left: 0;
+            right: initial;
+        }
     }
 }

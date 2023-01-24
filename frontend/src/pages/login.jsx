@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { userService } from "../services/user.service"
 import { login } from "../store/user.actions"
+import { Link } from 'react-router-dom'
 
 export function Login() {
 
@@ -32,6 +33,8 @@ export function Login() {
                 <input name="password" value={user.password} onChange={handleChange} type="password" placeholder="Enter password" />
                 <button>Login</button>
             </form>
+            <hr />
+            <Link to='/signup'>Sign up for an account</Link>
         </section>
     )
 }
