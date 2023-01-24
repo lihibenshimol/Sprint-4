@@ -168,7 +168,8 @@ async function saveCard(board, groupId, updatedCard) {
     board.groups = board.groups.map(g => (g.id === group.id) ? group : g)
     console.log('board: ', board)
 
-    save(board)
+    const savedBoard = await save(board)
+    return savedBoard
 }
 
 async function removeCard(board, groupId, cardId) {
@@ -176,8 +177,8 @@ async function removeCard(board, groupId, cardId) {
     const cardIndex = group.cards.findIndex(c => c.id === cardId)
     try {
         group.cards.splice(cardIndex, 1)
-        save(board)
-        return board
+        const savedBoard = await save(board)
+        return savedBoard
     } catch (err) {
         console.log('Cannot remove card = ', err)
     }

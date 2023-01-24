@@ -3,6 +3,7 @@ import { boardService } from "../services/board.service"
 import { store } from './store.js'
 // import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { ADD_BOARD, REMOVE_BOARD, SET_BOARD, SET_BOARDS, SET_STARRED_BOARDS, UNDO_REMOVE_BOARD, UNDO_UPDATE_BOARD, UPDATE_BOARD, UPDATE_STARRED_BOARDS } from "./board.reducer.js";
+import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service";
 
 // Action Creators:
 export function getActionRemoveBoard(boardId) {
@@ -121,7 +122,8 @@ export async function undoBoardUpdate(prevBoard) {
         })
         
         console.log('prevBoard = ', prevBoard)
-        updateBoard(prevBoard)
+        const savedBoard = await updateBoard(prevBoard)
+        socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         // const savedBoard = await boardService.save(prevBoard)
         // return savedBoard
     } catch (err) {

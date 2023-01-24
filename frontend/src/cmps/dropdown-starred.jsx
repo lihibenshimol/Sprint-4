@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { loadBoards, loadStarredBoards, starBoard, updateBoard } from "../store/board.actions"
 
 import starredImg from '../assets/img/starred-img.svg'
+import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
 
 export function DropdownStarred({ setDropDown }) {
 
@@ -34,10 +35,15 @@ export function DropdownStarred({ setDropDown }) {
         setDropDown({})
     }
 
-    function onStarBoard(ev, board) {
+    async function onStarBoard(ev, board) {
         ev.stopPropagation()
         ev.preventDefault()
-        starBoard(board)
+        try {
+            const savedBoard = await starBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
+        } catch(err) {
+            console.log('Failed to star board ', err)
+        }
         // updateBoard(board)
     }
 

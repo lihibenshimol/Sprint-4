@@ -10,6 +10,7 @@ export function Login() {
 
     async function onLogin(ev) {
         ev.preventDefault()
+        if (!user.password || !user.username) return
         try {
             await login(user)
             navigate('/board')
@@ -26,6 +27,7 @@ export function Login() {
     return (
         <section className="login-signup">
             <form onSubmit={onLogin}>
+                <h2>Log in to Trello</h2>
                 <input name="username" value={user.username} onChange={handleChange} type="text" placeholder="Enter username" />
                 <input name="password" value={user.password} onChange={handleChange} type="password" placeholder="Enter password" />
                 <button>Login</button>
