@@ -11,8 +11,6 @@ export function BoardMemberSelect({ pos, addOrDeleteMember, setIsDropDownOpen, i
     const users = useSelector(storeState => storeState.userModule.users)
     const dropdownRef = useRef(null)
 
-    console.log('users = ', users)
-
     useEffect(() => {
         loadUsers()
     }, [])
@@ -48,7 +46,7 @@ export function BoardMemberSelect({ pos, addOrDeleteMember, setIsDropDownOpen, i
                     title='not available right now'
                     disabled />
 
-                <h4>Board members</h4>
+                <h4>Invite members</h4>
 
                 <ul className='member-selector' >
                     {users?.map(m => {

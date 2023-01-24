@@ -16,7 +16,7 @@ export const boardService = {
     addNewItem,
     getEmptyGroup,
     getBoardColors,
-    
+
     //Cards
     getCardById,
     getEmptyCard,
@@ -24,7 +24,7 @@ export const boardService = {
     removeCard,
     getEmptyTodo,
     getCardCoverColors,
-    
+
     // getEmptyMember,
     getEmptyChecklist,
 
@@ -33,7 +33,7 @@ window.cs = boardService
 
 async function query(filterBy = {}) {
     let boards = await storageService.query(STORAGE_KEY)
-    if(filterBy.isStarred) {
+    if (filterBy.isStarred) {
         boards = boards.filter(board => board.isStarred).sort((b1, b2) => b1.starredAt - b2.starredAt)
     }
     // if (filterBy.txt) {
@@ -278,14 +278,9 @@ function _createDemoBoards() {
                                         "fullname": "Lihi Ben Shimol",
                                         "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512",
                                         isChecked: true
-                                    },
-                                    // {
-                                    //     "_id": "u102",
-                                    //     "fullname": "Aviad Malikan",
-                                    //     "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
-                                    //     isChecked: true
-                                    // },
+                                    }
                                 ],
+                                cover: "#f5dd29",
                                 checklists: [],
                                 labels: [],
                             },
@@ -387,6 +382,7 @@ function _createDemoBoards() {
                                     }
                                 ],
                                 labels: [],
+                                cover: "#5ba4cf"
                             },
                             {
                                 "id": "c107",
@@ -448,7 +444,8 @@ function _createDemoBoards() {
                                     }
                                 ],
                                 labels: [],
-                                checklists: []
+                                checklists: [],
+                                cover: "#ef7564"
                             }
                         ],
                         "style": {}

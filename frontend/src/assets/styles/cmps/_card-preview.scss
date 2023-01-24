@@ -23,6 +23,7 @@
         background-clip: content-box;
     }
 
+
 }
 
 a:hover {
@@ -157,8 +158,10 @@ a:hover {
             border-radius: 3px;
             align-items: center;
             justify-content: center;
-            padding: 2px;
+            padding: 0 2px;
             margin: 0 4px 4px 0;
+            font-size: 12px;
+
 
             .preview-details-checklist-icon {
                 font-size: 15px;

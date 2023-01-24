@@ -55,7 +55,7 @@ export function CardPreview({ card, idx, groupId }) {
         if (checklist.todos.length / doneTasks === 1) {
             return {backgroundColor: '#61bd4f', color: '#ffffff'}
         } else {
-            return {backgroundColor: '#ffffff'}
+            return {backgroundColor: 'transparent'}
         }
     }
 
@@ -117,7 +117,7 @@ export function CardPreview({ card, idx, groupId }) {
                                 {!!card.checklists.length &&
                                     <div style={isTasksDone(card.checklists[0])} className="preview-details-checklist" >
                                         <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
-                                        {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length}
+                                       <span> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} </span>
                                     </div>}
                                 {card.members &&
                                     <span className="preview-details-members"> {card.members.map(member => <span key={member._id}> <img className="member-img" src={member.imgUrl} alt="" /></span>)} </span>}
