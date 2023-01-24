@@ -10,6 +10,7 @@ export function Signup() {
 
     async function onSignUp(ev) {
         ev.preventDefault()
+        if (areInputsEmpty()) return
         try {
             await signup(user)
             navigate('/board')
@@ -23,13 +24,18 @@ export function Signup() {
         setUser(prevUser => ({ ...prevUser, [field]: value }))
     }
 
+    function areInputsEmpty() {
+        return !user.fullname || !user.username || !user.password
+    }
+
     return (
         <section className="login-signup">
             <form onSubmit={onSignUp}>
+                <h2>Sign up for your account</h2>
                 <input name="fullname" value={user.fullname} onChange={handleChange} type="text" placeholder="Enter full name" />
                 <input name="username" value={user.username} onChange={handleChange} type="text" placeholder="Enter username" />
                 <input name="password" value={user.password} onChange={handleChange} type="password" placeholder="Enter password" />
-                <button>Sign up</button>
+                <button className={areInputsEmpty() ? 'disabled' : ''}>Sign up</button>
             </form>
         </section>
     )
