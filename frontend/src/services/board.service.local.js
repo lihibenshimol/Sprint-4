@@ -288,14 +288,9 @@ function _createDemoBoards() {
                                         "fullname": "Lihi Ben Shimol",
                                         "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U047SNB2ZJ7-80770c376ebd-512",
                                         isChecked: true
-                                    },
-                                    // {
-                                    //     "_id": "u102",
-                                    //     "fullname": "Aviad Malikan",
-                                    //     "imgUrl": "https://ca.slack-edge.com/T043N4KE97B-U049KFQF1CH-a47ef54f9294-512",
-                                    //     isChecked: true
-                                    // },
+                                    }
                                 ],
+                                cover: "#f5dd29",
                                 checklists: [],
                                 labels: [],
                                 attachments: [
@@ -411,6 +406,7 @@ function _createDemoBoards() {
                                     }
                                 ],
                                 labels: [],
+                                cover: "#5ba4cf"
                             },
                             {
                                 "id": "c107",
@@ -472,7 +468,8 @@ function _createDemoBoards() {
                                     }
                                 ],
                                 labels: [],
-                                checklists: []
+                                checklists: [],
+                                cover: "#ef7564"
                             }
                         ],
                         "style": {}
