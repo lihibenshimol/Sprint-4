@@ -35,7 +35,7 @@
         color: $clr6;
         padding: 8em;
         height: 100%;
-      
+
         display: flex;
         flex-wrap: wrap;
         background: url('../../img/white-wave-bg.svg') center bottom -0.5px / 100% 14% no-repeat scroll padding-box border-box, linear-gradient(60deg, rgb(82, 67, 170), rgb(237, 80, 180)) 0% 0% / auto repeat scroll padding-box border-box rgb(82, 67, 170);
@@ -108,7 +108,7 @@
         display: flex;
         flex-wrap: wrap;
         padding: 2em 6em;
-        gap: 50px;
+        // gap: 50px;
         justify-content: center;
         font-size: 16px;
         background: linear-gradient(0deg, rgb(230, 252, 255), rgb(255, 255, 255)) 0% 0% / auto repeat scroll padding-box border-box rgb(178, 212, 255);
@@ -147,6 +147,9 @@
             }
         }
 
+        .dyn-img {
+            width: 60%;
+        }
 
     }
 }
