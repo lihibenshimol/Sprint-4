@@ -38,7 +38,7 @@ export function HomePage() {
 
             <div className='boards-desc'>
                 <div className='tabs'>
-                    <button selected onClick={() => setDynImg(asset1)} className='tab tab1'>
+                    <button onClick={() => setDynImg(asset1)} className='tab tab1'>
                         <h4>Boards</h4>
                         <p>Trello boards keep tasks organized and work moving forward. In a glance, see everything from “things to do” to “aww yeah, we did it!”</p>
                     </button>

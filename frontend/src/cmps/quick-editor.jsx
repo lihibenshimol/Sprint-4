@@ -174,6 +174,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
             <div className="quick-editor" onClick={e => e.preventDefault()}>
 
                 <div className="quick-editor-textarea" ref={quickEditorTextareaRef} onClick={(e) => e.preventDefault()}>
+                {card.cover && <div className="card-preview-cover" style={{ backgroundColor: card.cover, height:'32px', width:'256px' }}> </div>}
                     <form onSubmit={onSaveCard}>
                         <textarea
                             ref={textAreaRef}

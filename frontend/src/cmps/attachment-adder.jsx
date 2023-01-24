@@ -1,16 +1,21 @@
 import { useEffect, useRef } from "react"
 import { RxCross2 } from "react-icons/rx"
+import { boardService } from "../services/board.service.local"
 import { uploadService } from "../services/upload.service"
+import { FastAverageColor } from 'fast-average-color'
+import { useState } from "react"
 
 
-export function AttachmentAdder({ pos, isDropDownOpen, setIsDropDownOpen }) {
+export function AttachmentAdder({ card, pos, isDropDownOpen, setIsDropDownOpen,
+    onSaveAttachment }) {
+
+    const [urlToSave, setUrlToSave] = useState('')
     const dropdownRef = useRef(null)
+    const fac = new FastAverageColor();
 
     useEffect(() => {
         if (dropdownRef.current) {
             const rect = dropdownRef.current.getBoundingClientRect()
-            console.log('rect: ', rect)
-
             if (rect.width + pos.right >= window.innerWidth) {
                 dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
             } else {
@@ -19,6 +24,57 @@ export function AttachmentAdder({ pos, isDropDownOpen, setIsDropDownOpen }) {
         }
     }, [dropdownRef])
 
+
+    async function onUploadImg(ev) {
+        if (!card.attachments) card.attachments = []
+        try {
+            let fileToSave = boardService.getEmptyAttachment()
+            const file = await uploadService.uploadImg(ev)
+            fileToSave.title = file.original_filename
+            fileToSave.imgUrl = file.url
+            fac.getColorAsync(file.url)
+                .then(color => {
+                    fileToSave.bg = color.hex
+                    card.attachments.push(fileToSave)
+                    onSaveAttachment(card.attachments)
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+
+        } catch (err) {
+            console.log('Cant Upload the file', err)
+
+        }
+    }
+
+    async function onGetImg() {
+        if (!card.attachments) card.attachments = []
+        try {
+            let fileToSave = boardService.getEmptyAttachment()
+            fileToSave.imgUrl = urlToSave
+            fileToSave.title = urlToSave.substring(0, 20)
+            fac.getColorAsync(urlToSave)
+                .then(color => {
+                    fileToSave.bg = color.hex
+                    card.attachments.push(fileToSave)
+                    onSaveAttachment(card.attachments)
+                    setIsDropDownOpen(!isDropDownOpen)
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+
+        } catch (err) {
+            console.log('Cant Upload the file', err)
+        }
+    }
+
+    function handleChange({ target }) {
+        const { value } = target
+        console.log('value: ', value)
+        setUrlToSave(prevUrl => value)
+    }
 
 
     return (<div className="extras-menu flex" ref={dropdownRef}>
@@ -29,13 +85,12 @@ export function AttachmentAdder({ pos, isDropDownOpen, setIsDropDownOpen }) {
             <span className='close-btn hover' onClick={() => setIsDropDownOpen(!isDropDownOpen)}><RxCross2 /></span>
         </span>
         <div className="extras-content-attachment">
-            
+
             <div className="from-computer">
                 <div className="upload-fake-btn">
                     Computer
-
                 </div>
-                <input onChange={(ev) => uploadService.uploadImg(ev)} title={''} type="file" />
+                <input onChange={(ev) => onUploadImg(ev)} title={''} type="file" />
             </div>
 
 
@@ -52,11 +107,12 @@ export function AttachmentAdder({ pos, isDropDownOpen, setIsDropDownOpen }) {
                 <h4>Attach a link</h4>
                 <input type="text" className='search-input'
                     placeholder='Paste any link here...'
+                    value={urlToSave}
+                    onChange={handleChange}
                     autoFocus
                 />
             </label>
-            <button className="btn btn-add-attach" onClick={(e) => setIsDropDownOpen(!isDropDownOpen)}>
-                {/* <input onChange={(ev) => uploadService.uploadImg(ev)} title={''} type="file" /> */}
+            <button className="btn btn-add-attach" onClick={onGetImg}>
                 Attach
             </button>
         </div>
