@@ -28,6 +28,7 @@ export function CardDetails() {
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
+    const [attachToView, setAttachToView] = useState('')
 
     const [dropdownType, setDropdownType] = useState(null)
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
@@ -57,14 +58,12 @@ export function CardDetails() {
             setCard(card)
         } catch (err) {
             console.log('Cant load card')
-            // navigate('/')
             throw err
         }
     }
 
     async function onChangeTitle({ target }) {
         let { innerText } = target
-
         try {
             const updateCard = { ...card, title: innerText }
             boardService.saveCard(board, groupId, updateCard)
@@ -80,7 +79,6 @@ export function CardDetails() {
             const updatedBoard = await boardService.saveCard(board, groupId, updateCard)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, updatedBoard)
             setIsDescriptionEdit(!isDescriptionEdit)
-
         } catch (err) {
             console.log('Cant edit the description ', err)
         }
@@ -150,9 +148,8 @@ export function CardDetails() {
             member.isChecked = false
             card.members.splice(memberIdx, 1)
         }
-
         const newMembers = card.members
-        onSaveMembers(newMembers) // TO CHECK IF WE CAN REMOVE THE FUNC
+        onSaveMembers(newMembers)
     }
 
     function addOrDeleteLabel(label) {
@@ -163,7 +160,7 @@ export function CardDetails() {
         else card.labels.splice(labelIdx, 1)
 
         const newLabels = card.labels
-        onSaveLabels(newLabels) // TO CHECK IF WE CAN REMOVE THE FUNC
+        onSaveLabels(newLabels)
     }
 
     function addOrDeleteAttachment(attach) {
@@ -201,7 +198,9 @@ export function CardDetails() {
                 </a>
 
                 {isDropDownOpen && <CardSelectDropDown
-                    type={dropdownType} card={card} pos={pos}
+                    type={dropdownType}
+                    attach={attachToView}
+                    card={card} pos={pos}
                     setIsDropDownOpen={setIsDropDownOpen}
                     isDropDownOpen={isDropDownOpen}
                     addOrDeleteMember={addOrDeleteMember}
@@ -212,7 +211,6 @@ export function CardDetails() {
 
 
                 {card.cover && <div className="card-cover" style={{ backgroundColor: card.cover }}>
-
                     <div className="cover-btn hover" onClick={(e) => onSetType(e, 'cover')}>
                         <span><BiWindow /></span>
                         {' Cover'}
@@ -246,6 +244,8 @@ export function CardDetails() {
                             <CheckAttachments
                                 onSetType={onSetType}
                                 attachments={card.attachments}
+                                attachToView={attachToView}
+                                setAttachToView={setAttachToView}
                             />
                         }
 

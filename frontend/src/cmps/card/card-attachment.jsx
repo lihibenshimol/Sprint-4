@@ -1,8 +1,10 @@
-import { BsArrowUpRight, BsArrowUpShort } from "react-icons/bs";
+import { useState } from "react";
+import { BsArrowUpShort } from "react-icons/bs";
 import { GrAttachment } from "react-icons/gr";
+import Moment from 'react-moment';
 
-export function CheckAttachments({ onChangeAttachment, attachments, onSetType }) {
-
+export function CheckAttachments({ onChangeAttachment,
+    setAttachToView, attachments, onSetType }) {
     function getClr(attach) {
         const clr = attach.bg ? attach.bg : '#091e420a'
         return clr
@@ -18,6 +20,12 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
         }
     }
 
+
+    function onClickAttachment(e, attach) {
+        onSetType(e, 'attachment-view')
+        setAttachToView(prevAttach => attach)
+    }
+
     return (
         <section className="card-attachment">
             <div className="section-header">
@@ -28,7 +36,7 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
                 {attachments.map(a => {
 
                     return (
-                        <div className="attachment" key={a.id} onClick={(e) => onSetType(e, 'attachment-view')}>
+                        <div className="attachment" key={a.id} onClick={(e) => onClickAttachment(e, a)}>
                             <div className="attachment-img" style={{ backgroundColor: getClr(a) }}>
                                 {checkImgOrVideo(a)}
                             </div>
@@ -38,9 +46,13 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
                                     <span className="arrow"><BsArrowUpShort /></span>
                                 </span>
                                 <span className="line">
-                                    <span className="activity"></span>
-                                    <span> • </span>  <span className="action">Delete</span>
-                                    <span> • </span>  <span className="action">Comment</span>
+                                    <span className="activity">
+                                        Added <Moment interval={10000} fromNow>{a.createAt}</Moment>
+                                    </span>
+                                    <span> • </span>
+                                    <span className="action">Delete</span>
+                                    <span> • </span>
+                                    <span className="action">Comment</span>
                                 </span>
                             </p>
                         </div>
