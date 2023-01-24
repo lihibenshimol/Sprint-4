@@ -20,8 +20,6 @@ export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen,
         }
     }, [dropdownRef])
 
-    console.log('board.members = ', board.members)
-
 
     return (
         <div className="extras-menu flex" ref={dropdownRef} >

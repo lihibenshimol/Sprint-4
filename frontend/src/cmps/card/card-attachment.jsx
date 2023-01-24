@@ -1,12 +1,11 @@
 import { GrAttachment } from "react-icons/gr";
-import { FastAverageColor } from 'fast-average-color'
-import { useEffect } from "react";
-import { useState } from "react";
-
 
 export function CheckAttachments({ onChangeAttachment, attachments, onSetType }) {
-    console.log('attachments: ', attachments)
 
+    function getClr(attach) {
+        const clr = attach.bg ? attach.bg : '#091e420a'
+        return clr
+    }
 
     return (
         <section className="card-attachment">
@@ -19,21 +18,17 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
 
                     return (
                         <div className="attachment" key={a.id} >
-                            <div className="attachment-img" >
+                            <div className="attachment-img" style={{ backgroundColor: getClr(a) }}>
                                 <img src={`${a.imgUrl}`} alt={`${a.title}`} />
                             </div>
                             <p>
                                 <span className="title"> {a.title}</span>
                             </p>
-
                         </div>
                     )
                 })}
 
-
-
                 <button className="btn btn-add-attach" onClick={(e) => onSetType(e, 'attachment')}>
-                    {/* <input onChange={(ev) => uploadService.uploadImg(ev)} title={''} type="file" /> */}
                     Add an item
                 </button>
             </div>

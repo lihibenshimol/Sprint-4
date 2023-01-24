@@ -5,7 +5,7 @@ import { DateSelector } from "../date-selector";
 import { AttachmentAdder } from "../attachment-adder";
 
 export function CardSelectDropDown({ type, card, pos, isDropDownOpen, setIsDropDownOpen,
-    addOrDeleteLabel, addOrDeleteMember, onSaveCover, }) {
+    addOrDeleteLabel, addOrDeleteMember, onSaveCover, onSaveAttachment }) {
     console.log('pos = ', pos.x)
 
     switch (type) {
@@ -36,10 +36,18 @@ export function CardSelectDropDown({ type, card, pos, isDropDownOpen, setIsDropD
             />
         case 'attachment':
             return <AttachmentAdder
-                pos={pos}
+                pos={pos} card={card}
                 isDropDownOpen={isDropDownOpen}
                 setIsDropDownOpen={setIsDropDownOpen}
+                onSaveAttachment={onSaveAttachment}
             />
+        // case 'delete':
+        //     return <DeleteItem/>
+        //         pos={pos} card={card}
+        //         isDropDownOpen={isDropDownOpen}
+        //         setIsDropDownOpen={setIsDropDownOpen}
+        //         onSaveAttachment={onSaveAttachment}
+        //     />
         default:
             return
 

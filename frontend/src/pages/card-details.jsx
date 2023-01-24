@@ -119,16 +119,13 @@ export function CardDetails() {
         }
     }
 
-    async function onChangeAttachment(attachments) {
-        console.log('card: ', card)
-
+    async function onSaveAttachment(attachments) {
         try {
             card.attachments = attachments
             updateBoard(board)
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }
-
     }
 
 
@@ -161,6 +158,17 @@ export function CardDetails() {
         onSaveLabels(newLabels) // TO CHECK IF WE CAN REMOVE THE FUNC
     }
 
+    function addOrDeleteAttachment(attach) {
+        if (!card.attachments) card.attachments = []
+        const attachIdx = card.attachments.findInx(a => a.id === attach.a)
+
+        if (attachIdx) card.attachments.push(attach)
+        else card.attachments.splice(attachIdx, 1)
+
+        const newAttachments = card.attachments
+        onSaveAttachment(newAttachments)
+    }
+
     function onSetType(ev, typeToSet) {
         const position = utilService.getPosToDisplay(ev)
 
@@ -169,9 +177,7 @@ export function CardDetails() {
 
         if (isDropDownOpen && typeToSet !== dropdownType) return
         setIsDropDownOpen(!isDropDownOpen)
-
     }
-
 
 
 
@@ -193,6 +199,7 @@ export function CardDetails() {
                     addOrDeleteMember={addOrDeleteMember}
                     addOrDeleteLabel={addOrDeleteLabel}
                     onSaveCover={onSaveCover}
+                    onSaveAttachment={onSaveAttachment}
                 />}
 
 
@@ -255,11 +262,10 @@ export function CardDetails() {
                         </section>
 
 
-                        {card &&
+                        {card.attachments &&
                             <CheckAttachments
                                 onSetType={onSetType}
                                 attachments={card.attachments}
-                                onChangeAttachment={onChangeAttachment}
                             />
                         }
 
@@ -283,15 +289,9 @@ export function CardDetails() {
 
                     <SideBar
                         onSetType={onSetType}
-                        card={card} pos={pos} type={dropdownType}
-                        isDropDownOpen={isDropDownOpen}
+                        card={card}
 
-                        setIsDropDownOpen={setIsDropDownOpen}
-                        addOrDeleteMember={addOrDeleteMember}
-                        addOrDeleteLabel={addOrDeleteLabel}
-                        onSaveCover={onSaveCover}
                         onSaveCheckList={onSaveCheckList}
-
                     />
                 </div >
             </>)}
