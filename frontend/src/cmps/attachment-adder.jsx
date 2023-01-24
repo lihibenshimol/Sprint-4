@@ -8,7 +8,7 @@ import { useState } from "react"
 
 export function AttachmentAdder({ card, pos, isDropDownOpen, setIsDropDownOpen,
     onSaveAttachment }) {
-
+    const [isAttachViewer, setIsAttachViewer] = useState(false)
     const [urlToSave, setUrlToSave] = useState('')
     const dropdownRef = useRef(null)
     const fac = new FastAverageColor();
@@ -96,16 +96,13 @@ export function AttachmentAdder({ card, pos, isDropDownOpen, setIsDropDownOpen,
                 <input onChange={(ev) => onUploadImg(ev)} title={''} type="file" />
             </div>
 
-
             <div className="upload-from-btn" title="Not available right now">
                 Google Drive
             </div>
             <div className="upload-from-btn" title="Not available right now">
                 Dropbox
             </div>
-
             <hr />
-
             <label >
                 <h4>Attach a link</h4>
                 <input type="text" className='search-input'

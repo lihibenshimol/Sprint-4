@@ -1,3 +1,4 @@
+import { BsArrowUpRight, BsArrowUpShort } from "react-icons/bs";
 import { GrAttachment } from "react-icons/gr";
 
 export function CheckAttachments({ onChangeAttachment, attachments, onSetType }) {
@@ -8,7 +9,6 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
     }
 
     function checkImgOrVideo(attach) {
-
         if (attach.format === 'mp4') {
             return <iframe width="100%" height={"100%"}
                 src={attach.imgUrl}
@@ -28,18 +28,23 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
                 {attachments.map(a => {
 
                     return (
-                        <div className="attachment" key={a.id} >
+                        <div className="attachment" key={a.id} onClick={(e) => onSetType(e, 'attachment-view')}>
                             <div className="attachment-img" style={{ backgroundColor: getClr(a) }}>
                                 {checkImgOrVideo(a)}
-                                {/* <iframe width="100%" height={"100%"}
-                                    src={a.imgUrl}
-                                    autoPlay muted />
-
-                                <img src={`${a.imgUrl}`} alt={`${a.title}`} /> */}
                             </div>
                             <p>
-                                <span className="title"> {a.title}</span>
+                                <span className="line">
+                                    <span className="title">{a.title}</span>
+                                    <span className="arrow"><BsArrowUpShort /></span>
+                                </span>
+                                <span className="line">
+                                    <span className="activity"></span>
+
+                                </span>
                             </p>
+
+
+
                         </div>
                     )
                 })}

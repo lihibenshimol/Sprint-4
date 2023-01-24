@@ -7,7 +7,6 @@ import { CardDescription } from "../cmps/card/card-description"
 import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 
 import { RxCross1 } from 'react-icons/rx';
-import { BsTextLeft } from 'react-icons/bs';
 import { BiWindow } from 'react-icons/bi';
 
 import { boardService } from "../services/board.service.local"
@@ -18,6 +17,8 @@ import { CardHeader } from "../cmps/card-header"
 import { CardSelectDropDown } from "../cmps/card/card-select-dropdown"
 import { utilService } from "../services/util.service"
 import { CheckAttachments } from "../cmps/card/card-attachment"
+import { AttachmentViewer } from "../cmps/attachment-viewer"
+import { LabelPreview } from "../cmps/label-preview"
 
 
 
@@ -26,6 +27,7 @@ export function CardDetails() {
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
+    const [isAttachViewer, setIsAttachViewer] = useState(false)
 
     const [dropdownType, setDropdownType] = useState(null)
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
@@ -55,7 +57,6 @@ export function CardDetails() {
             setCard(card)
         } catch (err) {
             console.log('Cant load card')
-            // navigate('/')
             throw err
         }
     }
@@ -101,7 +102,7 @@ export function CardDetails() {
         }
     }
 
-    async function onSaveLabels(labels) {
+    async function onSaveLabels(labels ) {
         try {
             card.labels = labels
             updateBoard(board)
@@ -191,7 +192,7 @@ export function CardDetails() {
                 <a onClick={() => navigate(`/board/${board._id}`)} className={`close-btn ${card.cover ? 'with-cover' : ''}`}>
                     <RxCross1 />
                 </a>
-
+                {/* <AttachmentViewer /> */}
                 {isDropDownOpen && <CardSelectDropDown
                     type={dropdownType} card={card} pos={pos}
                     setIsDropDownOpen={setIsDropDownOpen}
@@ -204,10 +205,8 @@ export function CardDetails() {
 
 
                 {card.cover && <div className="card-cover" style={{ backgroundColor: card.cover }}>
-
                     <div className="cover-btn hover" onClick={(e) => onSetType(e, 'cover')}>
-                        <span><BiWindow /></span>
-                        {' Cover'}
+                        <span><BiWindow /></span>{' Cover'}
                     </div>
                 </div>}
 
@@ -218,49 +217,27 @@ export function CardDetails() {
 
                 <div className="card-content flex">
                     <div className="main-content">
+
                         <section className="card-details">
                             {(card.members && card.members.length !== 0) &&
-                                <div className="details">
-                                    <h5>Members</h5>
-                                    <article className="members-container">
-                                        <UserAvatarPreview users={card.members} />
-                                        <div className="member add-btn fa add"
-                                            onClick={(e) => onSetType(e, 'members')}></div>
-                                    </article>
-                                </div>}
+                                <UserAvatarPreview users={card.members} onSetType={onSetType} />}
 
                             {(card.labels && card.labels.length !== 0) &&
-                                <div className="details">
-                                    <h5>labels</h5>
-                                    <article className="labels-container">
-                                        {card.labels.map(label => {
-                                            return <div className="label hover" style={{ backgroundColor: label.color + '40' }}
-                                                key={label.id}
-                                                onClick={(e) => onSetType(e, 'labels')}>
-                                                <span className=" circle-label" style={{ backgroundColor: label.color }}></span>
-                                                {label.title}
-                                            </div>
-                                        })}
-                                        <div className="label fa add hover"
-                                            onClick={(e) => onSetType(e, 'labels')}></div>
-                                    </article>
-                                </div>}
+                                <LabelPreview labels={card.labels} onSetType={onSetType} />}
                         </section>
 
-                        <section className="card-description">
-                            <div className="section-header">
-                                <span><BsTextLeft /></span>
-                                <h3>Description</h3>
-                                {(!isDescriptionEdit && card.desc) && <button onClick={setIsDescriptionEdit}>Edit</button>}
-                            </div>
+                        <CardDescription
+                            card={card}
+                            onSaveDesc={onSaveDesc}
+                            isDescriptionEdit={isDescriptionEdit}
+                            setIsDescriptionEdit={setIsDescriptionEdit} />
 
-                            <CardDescription
-                                card={card}
-                                onSaveDesc={onSaveDesc}
-                                isDescriptionEdit={isDescriptionEdit}
-                                setIsDescriptionEdit={setIsDescriptionEdit} />
-                        </section>
 
+                        {/* {isAttachViewer && (
+                            <AttachmentViewer
+                                isAttachViewer={isAttachViewer}
+                                setIsAttachViewer={setIsAttachViewer}
+                            />)} */}
 
                         {card.attachments &&
                             <CheckAttachments
@@ -278,13 +255,6 @@ export function CardDetails() {
                             />
                         }
 
-                        {/* <section className="card-activity">
-                            <div className="activity-header">
-                                <span><RxActivityLog /></span>
-                                <h3>Activity</h3>
-                            </div>
-                            <p>routable, smart cmp</p>
-                        </section> */}
                     </div >
 
                     <SideBar
