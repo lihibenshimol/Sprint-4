@@ -18,7 +18,7 @@ import { CardHeader } from "../cmps/card-header"
 import { CardSelectDropDown } from "../cmps/card/card-select-dropdown"
 import { utilService } from "../services/util.service"
 import { CheckAttachments } from "../cmps/card/card-attachment"
-import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
+import { socketService, SOCKET_EMIT_BOARD_UPDATED, SOCKET_EVENT_BOARD_UPDATED } from "../services/socket.service"
 import { LabelPreview } from "../cmps/label-preview"
 
 
@@ -77,7 +77,8 @@ export function CardDetails() {
         try {
             card.desc = desc
             const updateCard = { ...card, desc }
-            boardService.saveCard(board, groupId, updateCard)
+            const updatedBoard = await boardService.saveCard(board, groupId, updateCard)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, updatedBoard)
             setIsDescriptionEdit(!isDescriptionEdit)
 
         } catch (err) {
