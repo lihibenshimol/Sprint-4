@@ -1,4 +1,4 @@
-import { boardService } from "../services/board.service.local";
+import { boardService } from "../services/board.service"
 import { updateBoard } from "../store/board.actions";
 import { GroupDetails } from "./group-details";
 import { useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { RxCross2 } from 'react-icons/rx'
 
 
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service";
 
 export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
@@ -27,8 +28,7 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
         setGroupToEdit((prevGroup) => ({ ...prevGroup, title: value }))
     }
 
-    function onDragEnd(res) {
-        // TODO: reorder our columns
+    async function onDragEnd(res) {
         const { destination, source, draggableId, type } = res
         if (!destination) return
         if (destination.droppableId === source.droppableId &&
@@ -41,7 +41,8 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
             newColumns.splice(destination.index, 0, column)
 
             board.groups = newColumns
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         }
 
 
@@ -59,7 +60,8 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
             const newColumn = { ...startColumn, cards: newCards }
             board.groups = board.groups.map(g => (g.id === newColumn.id) ? newColumn : g)
             console.log(board.groups)
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
             return
         }
 
@@ -78,7 +80,8 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
             else return g
         })
 
-        updateBoard(board)
+        const savedBoard = await updateBoard(board)
+        socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
     }
 
     return (

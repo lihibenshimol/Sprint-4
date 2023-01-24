@@ -11,6 +11,7 @@ import { MdPersonAddAlt } from 'react-icons/md'
 import { utilService } from "../services/util.service"
 import { CardSelectDropDown } from "./card/card-select-dropdown"
 import { BoardMemberSelect } from "./board-member-select"
+import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
 
 
 export function BoardHeader() {
@@ -25,18 +26,28 @@ export function BoardHeader() {
         setBoardNewTitle(board.title)
     }, [board])
 
-    function onStarBoard(ev) {
+    async function onStarBoard(ev) {
         ev.stopPropagation()
         board.isStarred = !board.isStarred
         board.starredAt = Date.now()
-        updateBoard(board)
+        try {
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
+        } catch(err) {
+            console.log('Failed to save board ', err)
+        }
     }
 
-    function changeBoardTitle(ev) {
+    async function changeBoardTitle(ev) {
         ev.preventDefault()
         setEditMode(!editMode)
         board.title = boardNewTitle
-        updateBoard(board)
+        try {
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
+        } catch(err) {
+            console.log('Failed to save board ', err)
+        }
     }
 
     function handleChange({ target }) {
@@ -66,7 +77,8 @@ export function BoardHeader() {
     async function onSaveMembers(members) {
         try {
             board.members = members
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the members ', err)
         }

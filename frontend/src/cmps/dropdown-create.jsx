@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { useNavigate } from 'react-router-dom'
 import { addBoard } from '../store/board.actions'
 import { DropDown } from './dropdown'
@@ -11,6 +11,7 @@ import bgImg3 from '../assets/img/bg-img-3.jpg'
 import bgImg4 from '../assets/img/bg-img-4.jpg'
 import { useEffect } from 'react'
 import { useRef } from 'react'
+import { socketService, SOCKET_EMIT_CREATE_BOARD } from '../services/socket.service'
 
 export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
 
@@ -43,6 +44,7 @@ export function DropdownCreate({ setAddingBoard, fromNavbar, setDropDown }) {
         if (!board.title) return
         try {
             const savedBoard = await addBoard(board)
+            socketService.emit(SOCKET_EMIT_CREATE_BOARD, savedBoard)
             setAddingBoard(false)
             if (setDropDown) setDropDown({})
             navigate(`/board/${savedBoard._id}`)

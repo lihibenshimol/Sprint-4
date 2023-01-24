@@ -1,19 +1,27 @@
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useParams, Outlet, useNavigate} from 'react-router-dom'
 import { BoardHeader } from '../cmps/board-header.jsx'
 import { GroupList } from '../cmps/group-list.jsx'
 import { Loader } from '../cmps/loader.jsx'
-import { boardService } from '../services/board.service.local.js'
+import { boardService } from "../services/board.service"
+import { socketService, SOCKET_EMIT_BOARD_UPDATED, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_BOARD_UPDATED } from '../services/socket.service.js'
 import { setCurrBoard, updateBoard } from '../store/board.actions.js'
 
 export function BoardDetails() {
+ 
+    const dispatch = useDispatch()
     const { boardId } = useParams()
     const navigate = useNavigate()
     const board = useSelector(storeState => storeState.boardModule.currBoard)
 
 
     useEffect(() => {
+        socketService.emit(SOCKET_EMIT_SET_TOPIC, boardId)
+        socketService.on(SOCKET_EVENT_BOARD_UPDATED, (board) => {
+            setCurrBoard(board)
+        })
         loadBoard()
     }, [boardId])
 
@@ -33,8 +41,8 @@ export function BoardDetails() {
         try {
             const idx = board.groups.findIndex(g => g.id === groupId)
             board.groups.splice(idx, 1)
-            updateBoard(board)
-
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cannot remove group = ', err)
         }
@@ -44,7 +52,8 @@ export function BoardDetails() {
         if (!newGroup.title) newGroup.title = 'New List'
         try {
             await boardService.addNewItem(board, newGroup, 'groups')
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
             // newGroup.title = ''
         } catch (err) {
             console.log('Cannot add group = ', err)
@@ -56,7 +65,8 @@ export function BoardDetails() {
         if (!newCard.title) return
         try {
             await boardService.addNewItem(group, newCard, 'cards')
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cannot add group = ', err)
             throw err

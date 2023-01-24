@@ -1,9 +1,11 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
 import userImg from '../assets/img/u0.png'
+import { socketService } from './socket.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 const STORAGE_KEY = 'userDB'
+const BASE_URL = 'user/'
 
 export const userService = {
     login,
@@ -21,38 +23,38 @@ export const userService = {
 window.userService = userService
 
 function getUsers() {
-    return storageService.query(STORAGE_KEY)
-    // return httpService.get(`user`)
+    // return storageService.query(STORAGE_KEY)
+    return httpService.get(BASE_URL)
 }
 
 async function getById(userId) {
-    const user = await storageService.get(STORAGE_KEY, userId)
-    // const user = await httpService.get(`user/${userId}`)
+    // const user = await storageService.get(STORAGE_KEY, userId)
+    const user = await httpService.get(`${BASE_URL}${userId}`)
     return user
 }
 
 function remove(userId) {
-    return storageService.remove(STORAGE_KEY, userId)
-    // return httpService.delete(`user/${userId}`)
+    // return storageService.remove(STORAGE_KEY, userId)
+    return httpService.delete(`${BASE_URL}${userId}`)
 }
 
-async function update({ _id, score }) {
-    const user = await storageService.get(STORAGE_KEY, _id)
-    user.score = score
-    await storageService.put(STORAGE_KEY, user)
+async function update({ _id }) {
+    // const user = await storageService.get(STORAGE_KEY, _id)
+    // user.score = score
+    // await storageService.put(STORAGE_KEY, user)
 
-    // const user = await httpService.put(`user/${_id}`, {_id, score})
+    const user = await httpService.put(`${BASE_URL}${_id}`, { _id })
     // Handle case in which admin updates other user's details
     if (getLoggedinUser()._id === user._id) saveLocalUser(user)
     return user
 }
 
 async function login(userCred) {
-    const users = await storageService.query(STORAGE_KEY)
-    const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
-    // const user = await httpService.post('auth/login', userCred)
+    // const users = await storageService.query(STORAGE_KEY)
+    // const user = users.find(user => user.username === userCred.username && user.password === userCred.password)
+    const user = await httpService.post('auth/login', userCred)
     if (user) {
-        // socketService.login(user._id)
+        socketService.login(user._id)
         return saveLocalUser(user)
     }
     else throw new Error('Invalid credentials')
@@ -60,16 +62,18 @@ async function login(userCred) {
 
 async function signup(userCred) {
     if (!userCred.imgUrl) userCred.imgUrl = userImg
-    const user = await storageService.post(STORAGE_KEY, userCred)
-    // const user = await httpService.post('auth/signup', userCred)
-    // socketService.login(user._id)
+    // const user = await storageService.post(STORAGE_KEY, userCred)
+    const user = await httpService.post('auth/signup', userCred)
+    socketService.login(user._id)
     return saveLocalUser(user)
 }
 
 async function logout() {
-    sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-    // socketService.logout()
-    // return await httpService.post('auth/logout')
+    // sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
+    socketService.logout()
+    const res = await httpService.post('auth/logout')
+    sessionStorage.clear()
+    return res
 }
 
 function saveLocalUser(user) {
@@ -82,7 +86,7 @@ function getLoggedinUser() {
     return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
 }
 
-function getEmptyUser(){
+function getEmptyUser() {
     return {
         fullname: '',
         username: '',

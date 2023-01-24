@@ -297,13 +297,13 @@ function _createDemoBoards() {
                                     {
                                         id: 'a101',
                                         imgUrl: `https://images.unsplash.com/photo-1674405509776-00a3cf19720e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80`,
-                                        title: 'Dog smile',
+                                        title: 'Sand',
                                         createAt: 1365466464,
                                     },
                                     {
                                         id: 'a102',
                                         imgUrl: `https://images.unsplash.com/photo-1608096299210-db7e38487075?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80`,
-                                        title: 'sand',
+                                        title: 'smile-cute-dog',
                                         createAt: 1365466464,
                                     },
                                 ]
@@ -344,6 +344,15 @@ function _createDemoBoards() {
                                     }
                                 ],
                                 labels: [],
+                                attachments: [
+                                    {
+                                        id: 'a101',
+                                        imgUrl: `https://res.cloudinary.com/djr3esqjq/video/upload/v1674491166/samples/sea-turtle.mp4`,
+                                        title: 'sea',
+                                        createAt: 1365466464,
+                                        format: 'mp4'
+                                    },
+                                ]
                             },
                             {
                                 "id": "c105",

@@ -1,4 +1,4 @@
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 
 export function DropdownBackgroundColor({ setBgMenuOpen, setBoardBackground, isSelectedColor, setColorsMenuOpen }) {
 
