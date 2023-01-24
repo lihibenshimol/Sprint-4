@@ -70,7 +70,8 @@ export function boardReducer(state = initialState, action) {
             const starredBoard = starredBoards.findIndex(board => board._id === action.board._id)
             if(starredBoard === -1 && action.board.isStarred) starredBoards.push(action.board) 
             boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            return { ...state, starredBoards, boards }
+            currBoard = state.currBoard._id === action.board._id ? action.board : state.currBoard
+            return { ...state, starredBoards, boards, currBoard }
 
         default:
             return state
