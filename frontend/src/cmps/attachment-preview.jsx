@@ -1,6 +1,10 @@
+import Moment from 'react-moment';
 
 
-export function AttachmentViewer(attach, isAttachViewer, setIsAttachViewer) {
+export function AttachmentPreview({ attach, setIsDropDownOpen, isDropDownOpen }) {
+
+    console.log('attach: ', attach)
+
     function checkImgOrVideo(attach) {
         if (attach.format === 'mp4') {
             return <iframe width="100%" height={"100%"}
@@ -14,20 +18,16 @@ export function AttachmentViewer(attach, isAttachViewer, setIsAttachViewer) {
 
     return (
         <section className="window full">
-            <div className="black-bg full" onClick={() => setIsAttachViewer(!isAttachViewer)}></div>
-            <section className="content">
-                <header></header>
+            <section className="attachment-content" onClick={() => setIsDropDownOpen(!isDropDownOpen)}>
+                <section className='header'></section>
 
-
-                <main>
-                    <img src="https://images.unsplash.com/photo-1674560435460-c266654fdc56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" />
-                    {/* {checkImgOrVideo(attach)} */}
-                </main>
-
+                <section className='main'>
+                    {checkImgOrVideo(attach)}
+                </section>
 
                 <footer>
                     <h2>{attach.title}</h2>
-                    <p>Create at</p>
+                    <p> Added <Moment interval={60000} fromNow>{attach.createAt}</Moment></p>
                     <p>
                         <span>remove</span>
                         <span>add</span>
