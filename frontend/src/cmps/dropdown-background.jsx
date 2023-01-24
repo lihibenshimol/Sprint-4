@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { DropdownBackgroundColor } from "./dropdown-background-color"
 import bgImg1 from '../assets/img/bg-img-1.jpg'
 import bgImg2 from '../assets/img/bg-img-2.jpg'

@@ -1,4 +1,4 @@
-import { boardService } from "../services/board.service.local";
+import { boardService } from "../services/board.service"
 import { updateBoard } from "../store/board.actions";
 import { GroupDetails } from "./group-details";
 import { useSelector } from "react-redux";

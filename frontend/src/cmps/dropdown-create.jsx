@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { useNavigate } from 'react-router-dom'
 import { addBoard } from '../store/board.actions'
 import { DropDown } from './dropdown'

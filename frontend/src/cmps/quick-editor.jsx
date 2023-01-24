@@ -6,7 +6,7 @@ import { RiBankCard2Line } from 'react-icons/ri'
 import { RxClock, RxCross2 } from 'react-icons/rx'
 import { FiArchive } from 'react-icons/fi'
 import { updateBoard } from "../store/board.actions"
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { useEffect, useRef, useState } from "react"
 import { MembersSelect } from "./members-selector"
 import { LabelsSelect } from "./label-selector"

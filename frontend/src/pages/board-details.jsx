@@ -4,7 +4,7 @@ import { useParams, Outlet, useNavigate} from 'react-router-dom'
 import { BoardHeader } from '../cmps/board-header.jsx'
 import { GroupList } from '../cmps/group-list.jsx'
 import { Loader } from '../cmps/loader.jsx'
-import { boardService } from '../services/board.service.local.js'
+import { boardService } from "../services/board.service"
 import { setCurrBoard, updateBoard } from '../store/board.actions.js'
 
 export function BoardDetails() {

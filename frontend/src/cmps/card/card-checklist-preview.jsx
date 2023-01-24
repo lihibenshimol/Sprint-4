@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { boardService } from "../../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { TfiTrash } from "react-icons/tfi"
 
 

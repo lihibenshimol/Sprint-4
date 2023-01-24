@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { updateBoard } from "../store/board.actions"
 import { CardList } from "./card-list"
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { RxCross2 } from 'react-icons/rx'
 import { FiPlus } from 'react-icons/fi'
 import { BsThreeDots } from 'react-icons/bs'

@@ -10,7 +10,7 @@ import { RxCross1 } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
 import { BiWindow } from 'react-icons/bi';
 
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { useSelector } from "react-redux"
 import { CheckListList } from "../cmps/card/card-checklist-list"
 import { updateBoard } from "../store/board.actions"
