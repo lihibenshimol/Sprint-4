@@ -10,16 +10,16 @@ export function HomePage() {
     const [dynImg, setDynImg] = useState(asset1)
 
     return (
-        <section className='home-page '>
+        <section className='home-page'>
 
-            <div className='main-hero full main-layout'>
+            <div className='main-hero'>
                 <section className='signup-intro'>
                     <span>
 
                         <h2>Trello brings all your tasks, teammates, and tools together</h2>
                         <h3>Keep everything in the same place—even if your team isn’t.</h3>
                     </span>
-                    <button className='start-demo-btn'><Link to="/board">Start demo</Link></button>
+                    <Link className='start-demo-btn' to="/board">Start demo</Link>
 
                 </section>
                 <section className='collage1'>

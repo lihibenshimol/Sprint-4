@@ -18,7 +18,7 @@ export function MemberOption({ card, board, member, handleChange, addOrDeleteMem
         return true
     }
 
-    if (member.isChecked === true) return
+    // if (member.isChecked === true) return
     return (
         <li className="flex " onClick={handleChange}>
             <label>
@@ -28,7 +28,7 @@ export function MemberOption({ card, board, member, handleChange, addOrDeleteMem
 
                 </div>
                 {card && <span>{memberIsCheck(card) ? '' : <BsCheck />}</span>}
-                {!card && <span>{memberIsCheck(board) ? '' : <BsCheck />}</span>}
+                {!card && board.members && <span>{memberIsCheck(board) ? '' : <BsCheck />}</span>}
             </label>
         </li>
     )

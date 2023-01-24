@@ -23,7 +23,6 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
     const [dropdownType, setDropdownType] = useState(null)
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
 
-    console.log(' lastUpdatedBoard = ', lastUpdatedBoard)
 
     useEffect(() => {
         setBoardNewTitle(board.title)
@@ -96,7 +95,6 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                 setIsDropDownOpen={setIsDropDownOpen}
                 isDropDownOpen={isDropDownOpen}
                 addOrDeleteMember={addOrDeleteMember}
-
             />}
 
 

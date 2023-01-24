@@ -31,6 +31,20 @@ async function getById(boardId) {
     }
 }
 
+async function getCardById(boardId, groupId, cardId) {
+   
+    try {
+        const board = await getById(boardId)
+        const group = board.groups.find(g => g.id === groupId)
+        const card = group.cards.find(c => c.id === cardId)
+        return card
+
+    } catch (err) {
+        logger.error(`while finding card ${cardId}`, err)
+        throw err
+    }
+}
+
 async function remove(boardId) {
     try {
         const collection = await dbService.getCollection(BOARD_COLLECTION)
@@ -67,18 +81,6 @@ async function update(board) {
     }
 }
 
-async function addBoardMsg(boardId, msg) {
-    try {
-        msg.id = utilService.makeId()
-        const collection = await dbService.getCollection(BOARD_COLLECTION)
-        await collection.updateOne({ _id: ObjectId(boardId) }, { $push: { msgs: msg } })
-        return msg
-    } catch (err) {
-        logger.error(`cannot add board msg ${boardId}`, err)
-        throw err
-    }
-}
-
 async function removeBoardMsg(boardId, msgId) {
     try {
         const collection = await dbService.getCollection(BOARD_COLLECTION)
@@ -94,8 +96,9 @@ module.exports = {
     remove,
     query,
     getById,
+    getCardById,
     add,
     update,
-    addBoardMsg,
+    // addBoardMsg,
     removeBoardMsg
 }

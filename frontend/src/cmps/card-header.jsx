@@ -3,10 +3,7 @@
 export function CardHeader({ card, getGroup, onChangeTitle }) {
     console.log('card: ', card)
 
-    function handleChange() {
-
-    }
-
+    const group = getGroup()
 
     return <div className="card-header">
         <span className="icon fa card-icon"></span>
@@ -17,7 +14,7 @@ export function CardHeader({ card, getGroup, onChangeTitle }) {
             onChange={onChangeTitle} />
 
         <div>
-            <p className="group-show">in group: {getGroup()}</p>
+            <p className="group-show">in group: {group.title}</p>
         </div>
     </div>
 }
