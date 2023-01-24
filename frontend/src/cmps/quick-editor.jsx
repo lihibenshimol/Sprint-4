@@ -174,7 +174,10 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
             <div className="quick-editor" onClick={e => e.preventDefault()}>
 
                 <div className="quick-editor-textarea" ref={quickEditorTextareaRef} onClick={(e) => e.preventDefault()}>
-                {card.cover && <div className="card-preview-cover" style={{ backgroundColor: card.cover, height:'32px', width:'256px' }}> </div>}
+                {card.attachments && <div className="card-preview-img" style={{ backgroundColor: card.attachments[0].bg}}>
+                            <img src={card.attachments[0].imgUrl} alt="" />
+                        </div>}
+                {card.cover && !card.attachments && <div className="card-preview-cover" style={{ backgroundColor: card.cover, height:'32px', width:'256px' }}> </div>}
                     <form onSubmit={onSaveCard}>
                         <textarea
                             ref={textAreaRef}
@@ -193,12 +196,6 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                                     <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
                                     {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length}
                                 </div>}
-                            {/* {card.checklists &&
-                                    card.checklists.map(checklist =>
-                                        <div className="preview-details-checklist" key={checklist.id}>
-                                            <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
-                                            {doneInCheckList(checklist)}/{checklist.todos.length}
-                                        </div>)} */}
                             {card.members && <span className="preview-details-members">{card.members.map(member => <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
                         </section>
                         <button className="save-btn">Save</button>

@@ -356,6 +356,15 @@ function _createDemoBoards() {
                                     }
                                 ],
                                 labels: [],
+                                attachments: [
+                                    {
+                                        bg: "#8b7b74",
+                                        createAt: 1674556410628,
+                                        id: "M2bGhl",
+                                        title: "data:image/jpeg;base",
+                                        imgUrl: "https://trello.com/1/cards/63c6a2024b30c00225726c5b/attachments/63c6a2a36f784c02d3e098b4/previews/63c6a2a36f784c02d3e098d0/download/server_spaghetti_2.jpg"
+                                    }
+                                ],
                                 checklists: [
                                     {
                                         id: 'YEhmF',

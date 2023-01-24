@@ -96,33 +96,36 @@ export function CardPreview({ card, idx, groupId }) {
                         isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
                     >
                         <div className="card-preview-container">
-                            {card.cover && <div className="card-preview-cover" style={{ backgroundColor: card.cover, padding: 0, width: '100%' }}> </div>}
+                        {card.attachments && <div className="card-preview-img" style={{ backgroundColor: card.attachments[0].bg}}>
+                            <img src={card.attachments[0].imgUrl} alt="" />
+                        </div>}
+                            {card.cover && !card.attachments && <div className="card-preview-cover" style={{ backgroundColor: card.cover, padding: 0, width: '100%' }}> </div>}
                             <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
-                        <div className="card-preview-body">
-                            {!!card.labels.length && <section className="card-preview-labels">
-                                {card.labels?.map(label => <div className={`card-preview-label ${labelsExpanded ? 'expanded' : ''} `} key={label.id}
-                                    style={{ backgroundColor: label.color }}
-                                    onClick={expandLabels}>
-                                    <span className="circle-label" style={{ backgroundColor: label.color }}></span>
-                                    {labelsExpanded ? label.title : ''}
-                                </div>)}
-                            </section>}
+                            <div className="card-preview-body">
+                                {!!card.labels.length && <section className="card-preview-labels">
+                                    {card.labels?.map(label => <div className={`card-preview-label ${labelsExpanded ? 'expanded' : ''} `} key={label.id}
+                                        style={{ backgroundColor: label.color }}
+                                        onClick={expandLabels}>
+                                        <span className="circle-label" style={{ backgroundColor: label.color }}></span>
+                                        {labelsExpanded ? label.title : ''}
+                                    </div>)}
+                                </section>}
 
-                            <section className="card-title flex">
-                                <span>{card.title}</span>
+                                <section className="card-title flex">
+                                    <span>{card.title}</span>
 
-                            </section>
+                                </section>
 
-                            <section className="card-preview-details">
-                                {!!card.checklists.length &&
-                                    <div style={isTasksDone(card.checklists[0])} className="preview-details-checklist" >
-                                        <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
-                                        <span> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} </span>
-                                    </div>}
-                                {card.members &&
-                                    <span className="preview-details-members"> {card.members.map(member => <span key={member._id}> <img className="member-img" src={member.imgUrl} alt="" /></span>)} </span>}
-                            </section>
-                        </div>
+                                <section className="card-preview-details">
+                                    {!!card.checklists.length &&
+                                        <div style={isTasksDone(card.checklists[0])} className="preview-details-checklist" >
+                                            <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
+                                            <span> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} </span>
+                                        </div>}
+                                    {card.members &&
+                                        <span className="preview-details-members"> {card.members.map(member => <span key={member._id}> <img className="member-img" src={member.imgUrl} alt="" /></span>)} </span>}
+                                </section>
+                            </div>
                         </div>
                     </Container>
                 )}

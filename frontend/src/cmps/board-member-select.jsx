@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux"
 import { MemberOption } from "./member-option"
 import { RxCross2 } from 'react-icons/rx';
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { userService } from "../services/user.service";
 import { loadUsers } from "../store/user.actions";
 
