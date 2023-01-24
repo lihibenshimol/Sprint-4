@@ -39,8 +39,8 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
                                 </span>
                                 <span className="line">
                                     <span className="activity"></span>
-                                    <span className="delete">• Delete</span>
-                                    <span className="comment">• Comment</span>
+                                    <span> • </span>  <span className="action">Delete</span>
+                                    <span> • </span>  <span className="action">Comment</span>
                                 </span>
                             </p>
                         </div>
@@ -53,12 +53,3 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
             </div>
         </section >)
 }
-
-
-
-
-// attachment = {
-//     img: 'www.imgUrl.com',
-//     updaloadAt: 1365466464,
-//     title,
-// }

@@ -19,6 +19,7 @@ import { CardSelectDropDown } from "../cmps/card/card-select-dropdown"
 import { utilService } from "../services/util.service"
 import { CheckAttachments } from "../cmps/card/card-attachment"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
+import { LabelPreview } from "../cmps/label-preview"
 
 
 
@@ -226,46 +227,18 @@ export function CardDetails() {
                     <div className="main-content">
                         <section className="card-details">
                             {(card.members && card.members.length !== 0) &&
-                                <div className="details">
-                                    <h5>Members</h5>
-                                    <article className="members-container">
-                                        <UserAvatarPreview users={card.members} />
-                                        <div className="member add-btn fa add"
-                                            onClick={(e) => onSetType(e, 'members')}></div>
-                                    </article>
-                                </div>}
+                                <UserAvatarPreview users={card.members} onSetType={onSetType} />}
 
                             {(card.labels && card.labels.length !== 0) &&
-                                <div className="details">
-                                    <h5>labels</h5>
-                                    <article className="labels-container">
-                                        {card.labels.map(label => {
-                                            return <div className="label hover" style={{ backgroundColor: label.color + '40' }}
-                                                key={label.id}
-                                                onClick={(e) => onSetType(e, 'labels')}>
-                                                <span className=" circle-label" style={{ backgroundColor: label.color }}></span>
-                                                {label.title}
-                                            </div>
-                                        })}
-                                        <div className="label fa add hover"
-                                            onClick={(e) => onSetType(e, 'labels')}></div>
-                                    </article>
-                                </div>}
+                                <LabelPreview labels={card.labels} onSetType={onSetType} />}
                         </section>
 
-                        <section className="card-description">
-                            <div className="section-header">
-                                <span><BsTextLeft /></span>
-                                <h3>Description</h3>
-                                {(!isDescriptionEdit && card.desc) && <button onClick={setIsDescriptionEdit}>Edit</button>}
-                            </div>
 
-                            <CardDescription
-                                card={card}
-                                onSaveDesc={onSaveDesc}
-                                isDescriptionEdit={isDescriptionEdit}
-                                setIsDescriptionEdit={setIsDescriptionEdit} />
-                        </section>
+                        <CardDescription
+                            card={card}
+                            onSaveDesc={onSaveDesc}
+                            isDescriptionEdit={isDescriptionEdit}
+                            setIsDescriptionEdit={setIsDescriptionEdit} />
 
 
                         {card.attachments &&
