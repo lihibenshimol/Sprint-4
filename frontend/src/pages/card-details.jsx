@@ -30,6 +30,7 @@ export function CardDetails() {
     const activities = useSelector(storeState => storeState.activityModule.activities)
     const { cardId, groupId } = useParams()
     const [card, setCard] = useState(null)
+
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
     const [attachToView, setAttachToView] = useState('')
@@ -48,8 +49,8 @@ export function CardDetails() {
 
 
     useEffect(() => {
-        loadActivities({cardId})
-        console.log('activities.length = ', activities.length)
+        loadActivities({ cardId })
+        // console.log('activities.length = ', activities.length)
     }, [])
 
 
@@ -73,10 +74,10 @@ export function CardDetails() {
         }
     }
 
-    async function onChangeTitle({ target }) {
-        let { innerText } = target
+    async function onChangeTitle(title, ev) {
+        if (ev) ev.preventDefault()
         try {
-            const updateCard = { ...card, title: innerText }
+            const updateCard = { ...card, title }
             boardService.saveCard(board, groupId, updateCard)
         } catch (err) {
             console.log('Cant edit the Title ', err)
@@ -156,14 +157,14 @@ export function CardDetails() {
             member.isChecked = true
             card.members.push(member)
             const txt = `${member.fullname} joined ${card.title}`
-            addActivity({txt, boardId: board._id, groupId, cardId})
+            addActivity({ txt, boardId: board._id, groupId, cardId })
 
         }
         else {
             member.isChecked = false
             card.members.splice(memberIdx, 1)
             const txt = `${member.fullname} left ${card.title}`
-            addActivity({txt, boardId: board._id, groupId, cardId})
+            addActivity({ txt, boardId: board._id, groupId, cardId })
         }
         const newMembers = card.members
         onSaveMembers(newMembers)
@@ -276,7 +277,7 @@ export function CardDetails() {
                         }
 
                         <ActivitiesViewer
-                        activities={activities}
+                            activities={activities}
                             card={card}
                         />
 

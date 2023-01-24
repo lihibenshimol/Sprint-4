@@ -1,17 +1,27 @@
+import { useState } from "react"
 
 
 export function CardHeader({ card, getGroup, onChangeTitle }) {
-    console.log('card: ', card)
+    const [title, setTitle] = useState(card.title)
+
+    function handleChange({ target }) {
+        let { value } = target
+        setTitle(prevTitle => value)
+    }
 
     const group = getGroup()
 
     return <div className="card-header">
         <span className="icon fa card-icon"></span>
-        <input className="title"
-            suppressContentEditableWarning={true}
-            contentEditable={true}
-            value={card.title}
-            onChange={onChangeTitle} />
+
+        <form onSubmit={(ev) => onChangeTitle(title, ev)}>
+            <input className="title"
+                suppressContentEditableWarning={true}
+                contentEditable={true}
+                value={title}
+                onBlur={() => onChangeTitle(title)}
+                onChange={handleChange} />
+        </form>
 
         <div>
             <p className="group-show">in group: {group.title}</p>

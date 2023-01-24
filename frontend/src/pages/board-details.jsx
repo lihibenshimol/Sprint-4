@@ -81,7 +81,10 @@ export function BoardDetails() {
             <Outlet />
             <section className='board-details' style={board.style}>
                 <section className={`board-menu ${isOpenMenu ? 'open' : ''}`}>
-                    <BoardMenu />
+                    <BoardMenu
+                        isOpenMenu={isOpenMenu}
+                        setIsOpenMenu={setIsOpenMenu}
+                    />
                 </section >
 
                 <section className={isOpenMenu ? 'board-content-open' : 'board-content'}>
