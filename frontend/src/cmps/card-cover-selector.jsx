@@ -5,7 +5,7 @@ import bgImg1 from '../assets/img/bg-img-1.jpg'
 import bgImg2 from '../assets/img/bg-img-2.jpg'
 import bgImg3 from '../assets/img/bg-img-3.jpg'
 import bgImg4 from '../assets/img/bg-img-4.jpg'
-import { boardService } from "../services/board.service"
+import {boardService} from "../services/board.service.js"
 import { useEffect , useRef } from 'react'
 
 export function CardCoverSelector({ pos, onSaveCover, setIsDropDownOpen, isDropDownOpen }) {

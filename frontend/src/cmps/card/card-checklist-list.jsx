@@ -1,7 +1,7 @@
 import { CheckListPreview } from "./card-checklist-preview";
 import { IoMdCheckboxOutline } from 'react-icons/io';
 import { useState } from "react";
-import { boardService } from "../services/board.service"
+import {boardService} from "../../services/board.service.js"
 
 export function CheckListList({ checklists, onSaveCheckList, }) {
     // isEditAddTodo, setIsEditAddTodo // }) {

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import { RxCross2 } from "react-icons/rx"
-import { boardService } from "../services/board.service"
+import { boardService } from "../services/board.service.js"
 import { uploadService } from "../services/upload.service"
 import { FastAverageColor } from 'fast-average-color'
 import { useState } from "react"
