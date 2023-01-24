@@ -26,6 +26,7 @@ export function AttachmentAdder({ card, pos, isDropDownOpen, setIsDropDownOpen,
 
 
     async function onUploadImg(ev) {
+        if (!card.attachments) card.attachments = []
         try {
             let fileToSave = boardService.getEmptyAttachment()
             const file = await uploadService.uploadImg(ev)
@@ -48,6 +49,7 @@ export function AttachmentAdder({ card, pos, isDropDownOpen, setIsDropDownOpen,
     }
 
     async function onGetImg() {
+        if (!card.attachments) card.attachments = []
         try {
             let fileToSave = boardService.getEmptyAttachment()
             fileToSave.imgUrl = urlToSave
