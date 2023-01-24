@@ -3,7 +3,7 @@ import { MembersSelect } from "../members-selector";
 import { CardCoverSelector } from "../card-cover-selector";
 import { DateSelector } from "../date-selector";
 import { AttachmentAdder } from "../attachment-adder";
-import { AttachmentViewer } from "../attachment-viewer";
+import { AttachmentPreview } from "../attachment-preview";
 
 export function CardSelectDropDown({ type, card, pos, attach, isDropDownOpen, setIsDropDownOpen,
     addOrDeleteLabel, addOrDeleteMember, onSaveCover, onSaveAttachment }) {
@@ -41,13 +41,14 @@ export function CardSelectDropDown({ type, card, pos, attach, isDropDownOpen, se
                 setIsDropDownOpen={setIsDropDownOpen}
                 onSaveAttachment={onSaveAttachment}
             />
-        // case 'attachment-view':
-        //     return <AttachmentViewer
-        //         pos={pos} card={card}
-        //         isDropDownOpen={isDropDownOpen}
-        //         setIsDropDownOpen={setIsDropDownOpen}
-        //         onSaveAttachment={onSaveAttachment}
-        //     />
+        case 'attachment-view':
+            return <AttachmentPreview
+                pos={pos} card={card}
+                attach={attach}
+                isDropDownOpen={isDropDownOpen}
+                setIsDropDownOpen={setIsDropDownOpen}
+                onSaveAttachment={onSaveAttachment}
+            />
         // case 'delete':
         //     return <DeleteItem/>
         //         pos={pos} card={card}

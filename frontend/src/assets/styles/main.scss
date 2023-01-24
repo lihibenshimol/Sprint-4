@@ -20,6 +20,7 @@
 @import "views/board-details";
 @import "views/card-details";
 @import "views/board-index";
+@import "views/login-signup";
 
 
 // Components
@@ -48,7 +49,7 @@
 @import "cmps/cover-selector";
 @import "cmps/date-selector";
 @import "cmps/attachment-adder";
-@import "cmps/attachment-viewer";
+@import "cmps/attachment-preview";
 @import "cmps/card-header";
 @import "cmps/card-header";
 @import "cmps/dropdown-user";

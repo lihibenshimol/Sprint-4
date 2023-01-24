@@ -1,0 +1,116 @@
+.login-signup {
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    background-color: $clr6;
+    padding: 2.3rem 2rem;
+    border-radius: 0.3em;
+    min-height: 100vh;
+    margin: 0 auto;
+
+    @include for-narrow-layout {
+        min-width: 400px;
+        max-width: 400px;
+        min-height: initial;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+        padding: 2.3rem 0;
+        margin-top: 4rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: rem(16px);
+        color: $clr12;
+        margin-block-end: 2.3em;
+    }
+
+    input,
+    button {
+        width: 100%;
+        max-width: 320px;
+        margin-block-end: 1.5em;
+    }
+
+    button {
+        background-color: $clr16;
+        color: $clr6;
+        padding: 0.6em 1.3em;
+        font-size: rem(14px);
+        margin: 0;
+        font-weight: 700;
+        border-radius: 0.3em;
+        transition: background-color 0.1s ease-in-out;
+        margin-block-end: 1.5em;
+
+        &:hover {
+            background-color: lighten($clr16, 6%);
+        }
+
+        &.disabled {
+            cursor: not-allowed;
+            background-color: #E2E4E6;
+            color: hsl(0,0%,55%);
+        }
+    }
+
+    input {
+        background-color: #fafbfc;
+        border: 2px solid #dfe1e6;
+        border-radius: 0.2em;
+        padding: 0.525em;
+        color: rgb(77, 77, 77);
+        font-size: rem(14px);
+        outline: none;
+        transition: border-color 0.1s ease-in-out;
+
+        &:focus {
+            border-color: $clr14;
+        }
+    }
+
+    @include for-narrow-layout {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    a {
+        margin-block-start: 1em;
+        color: #0052cc;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    hr {
+        width: 100%;
+        max-width: 320px;
+        border-top: 1px solid hsl(0,0%,80%);
+    }
+
+    img {
+        display: none;
+        position: absolute;
+        width: 30%;
+        min-width: 192px;
+        max-width: 400px;
+        bottom: 0;
+        right: 0;
+
+        @include for-narrow-layout {
+            display: block;
+        }
+
+        &:nth-of-type(2) {
+            left: 0;
+            right: initial;
+        }
+    }
+}
