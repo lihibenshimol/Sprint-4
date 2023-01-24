@@ -24,6 +24,8 @@ export const boardService = {
     removeCard,
     getEmptyTodo,
     getCardCoverColors,
+    getEmptyAttachment,
+
 
     // getEmptyMember,
     getEmptyChecklist,
@@ -92,7 +94,15 @@ function getEmptyChecklist() {
         todos: [],
     }
 }
-
+function getEmptyAttachment() {
+    return {
+        id: utilService.makeId(),
+        title: '',
+        createAt: Date.now(),
+        imgUrl: '',
+        bg: '',
+    }
+}
 // async function addNewCard(group, card, arr) {
 //     try {
 //         card.id = utilService.makeId()
