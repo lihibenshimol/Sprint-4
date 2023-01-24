@@ -36,6 +36,7 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
     function onSaveCard(ev) {
         ev.preventDefault()
         // setAddMode(!addMode)
+        if (!cardToEdit.title) setAddMode(!addMode)
         onAddCard(group, cardToEdit)
         setCardToEdit(boardService.getEmptyCard())
     }

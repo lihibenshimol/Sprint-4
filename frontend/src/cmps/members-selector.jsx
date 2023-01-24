@@ -39,8 +39,8 @@ export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen,
 
                 {board.members && <ul className='member-selector' >
                     {board.members?.map(m => {
+    
                         return <MemberOption
-                            
                             card={card}
                             addOrDeleteMember={addOrDeleteMember}
                             member={m}

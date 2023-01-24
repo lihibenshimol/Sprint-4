@@ -20,10 +20,14 @@ import { utilService } from "../services/util.service"
 import { CheckAttachments } from "../cmps/card/card-attachment"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED, SOCKET_EVENT_BOARD_UPDATED } from "../services/socket.service"
 import { LabelPreview } from "../cmps/label-preview"
+import { ActivitiesViewer } from "../cmps/activities-viewer"
+import { activityService } from "../services/activity.service"
+import { addActivity, loadActivities } from "../store/activity.actions"
 
 
 
 export function CardDetails() {
+    const activities = useSelector(storeState => storeState.activityModule.activities)
     const { cardId, groupId } = useParams()
     const [card, setCard] = useState(null)
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
@@ -41,6 +45,13 @@ export function CardDetails() {
         loadCard()
     }, [cardId, isDescriptionEdit])
 
+
+    useEffect(() => {
+        loadActivities({cardId})
+        console.log('activities.length = ', activities.length)
+    }, [])
+
+
     function closeAddTodoEdit() {
         if (!isEditAddTodo) return
         setIsEditAddTodo(!isEditAddTodo)
@@ -48,7 +59,7 @@ export function CardDetails() {
 
     function getGroup() {
         const group = board.groups.find(g => g.id === groupId)
-        return group.title
+        return group
     }
 
     async function loadCard() {
@@ -140,15 +151,21 @@ export function CardDetails() {
     //ADD FUNCTION 
 
     function addOrDeleteMember(member) {
+        if (card.activities) card.activities = []
         if (!card.members) card.members = []
         const memberIdx = card.members.findIndex(m => m._id === member._id)
         if (memberIdx === -1) {
             member.isChecked = true
             card.members.push(member)
+            const txt = `${member.fullname} joined ${card.title}`
+            addActivity({txt, boardId: board._id, groupId, cardId})
+
         }
         else {
             member.isChecked = false
             card.members.splice(memberIdx, 1)
+            const txt = `${member.fullname} left ${card.title}`
+            addActivity({txt, boardId: board._id, groupId, cardId})
         }
 
         const newMembers = card.members
@@ -258,13 +275,12 @@ export function CardDetails() {
                             />
                         }
 
-                        {/* <section className="card-activity">
-                            <div className="activity-header">
-                                <span><RxActivityLog /></span>
-                                <h3>Activity</h3>
-                            </div>
-                            <p>routable, smart cmp</p>
-                        </section> */}
+                        <ActivitiesViewer
+                        activities={activities}
+                            card={card}
+                        />
+
+
                     </div >
 
                     <SideBar
