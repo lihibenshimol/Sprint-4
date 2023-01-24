@@ -39,12 +39,10 @@ export function CheckAttachments({ onChangeAttachment, attachments, onSetType })
                                 </span>
                                 <span className="line">
                                     <span className="activity"></span>
-
+                                    <span className="delete">• Delete</span>
+                                    <span className="comment">• Comment</span>
                                 </span>
                             </p>
-
-
-
                         </div>
                     )
                 })}
