@@ -58,10 +58,12 @@ export function boardReducer(state = initialState, action) {
             boards = [...state.boards, action.board]
             return { ...state, boards }
 
-        case UPDATE_BOARD:
-            lastUpdatedBoard = state.boards.find(b => (b._id === action.board._id) ? action.board : b)
+        case UPDATE_BOARD: 
+            // lastUpdatedBoard = state.boards.find(b => b._id === action.board._id)
+            lastUpdatedBoard = {...state.currBoard }
+            console.log('lastUpdatedBoard from reducer = ', lastUpdatedBoard)
             boards = state.boards.map(board => (board._id === action.board._id) ? action.board : board)
-            return { ...state, currBoard: action.board, boards }
+            return { ...state, currBoard: action.board, boards, lastUpdatedBoard }
 
         case UPDATE_STARRED_BOARDS:
             starredBoards = state.starredBoards.map(board => (board._id === action.board._id) ? action.board : board).filter(board => board.isStarred)

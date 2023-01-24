@@ -17,7 +17,8 @@ import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.ser
 
 
 export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quickEditorPos, doneInCheckList, isTasksDone }) {
-    const board = useSelector(storeState => storeState.boardModule.currBoard)
+    let board = useSelector(storeState => storeState.boardModule.currBoard)
+    board = {...board}
     const [cardToEdit, setCardToEdit] = useState(card)
     const [pos, setPos] = useState({})
     const [dropdownType, setDropdownType] = useState(null)
@@ -58,10 +59,10 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
     }
 
     async function onRemoveCard(ev) {
-
         try {
             const updatedBoard = await boardService.removeCard(board, groupId, card.id)
-            updateBoard(updatedBoard)
+            const savedBoard = await updateBoard(updatedBoard)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
             openQuickEditor(ev, !quickEditor)
         } catch (err) {
             console.log('err = ', err)
