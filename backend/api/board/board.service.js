@@ -5,9 +5,11 @@ const ObjectId = require('mongodb').ObjectId
 
 const BOARD_COLLECTION = 'board'
 
-async function query() {
+async function query(filterBy) {
     try {
+        if(filterBy.isStarred === 'true') filterBy.isStarred = true
         const criteria = {}
+        if(filterBy.isStarred) criteria.isStarred = filterBy.isStarred
 
         const collection = await dbService.getCollection(BOARD_COLLECTION)
         const boards = await collection.find(criteria).toArray()

@@ -2,7 +2,7 @@ import { BiWindow } from 'react-icons/bi';
 import { TbTag } from 'react-icons/tb';
 import { AiOutlineClockCircle, AiOutlineUser } from 'react-icons/ai';
 import { IoMdCheckboxOutline } from 'react-icons/io';
-import { boardService } from '../../services/board.service.local';
+import {boardService} from "../../services/board.service.js"
 import { useState } from 'react';
 import { utilService } from '../../services/util.service';
 import { CardSelectDropDown } from './card-select-dropdown';

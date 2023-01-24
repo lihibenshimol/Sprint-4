@@ -9,7 +9,7 @@ import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 import { RxCross1 } from 'react-icons/rx';
 import { BiWindow } from 'react-icons/bi';
 
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { useSelector } from "react-redux"
 import { CheckListList } from "../cmps/card/card-checklist-list"
 import { updateBoard } from "../store/board.actions"
@@ -17,8 +17,12 @@ import { CardHeader } from "../cmps/card-header"
 import { CardSelectDropDown } from "../cmps/card/card-select-dropdown"
 import { utilService } from "../services/util.service"
 import { CheckAttachments } from "../cmps/card/card-attachment"
+<<<<<<< HEAD
 import { AttachmentViewer } from "../cmps/attachment-viewer"
 import { LabelPreview } from "../cmps/label-preview"
+=======
+import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
+>>>>>>> b72cec9d9da8e4a2a2376717460cb3a7c5c84b18
 
 
 
@@ -87,7 +91,8 @@ export function CardDetails() {
     async function onSaveCheckList(checklists) {
         try {
             card.checklists = checklists
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant save the checklist ', err)
         }
@@ -96,7 +101,8 @@ export function CardDetails() {
     async function onSaveMembers(members) {
         try {
             card.members = members
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the members ', err)
         }
@@ -105,7 +111,8 @@ export function CardDetails() {
     async function onSaveLabels(labels ) {
         try {
             card.labels = labels
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }
@@ -114,7 +121,8 @@ export function CardDetails() {
     async function onSaveCover(clr) {
         try {
             card.cover = clr
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }
@@ -123,7 +131,8 @@ export function CardDetails() {
     async function onSaveAttachment(attachments) {
         try {
             card.attachments = attachments
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }

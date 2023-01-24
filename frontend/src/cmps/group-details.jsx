@@ -2,12 +2,13 @@ import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { updateBoard } from "../store/board.actions"
 import { CardList } from "./card-list"
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { RxCross2 } from 'react-icons/rx'
 import { FiPlus } from 'react-icons/fi'
 import { BsThreeDots } from 'react-icons/bs'
 import { Droppable, Draggable } from "react-beautiful-dnd"
 import { QuickEditor } from "./quick-editor"
+import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
 
 
 export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
@@ -19,11 +20,16 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
     const [cardToEdit, setCardToEdit] = useState(boardService.getEmptyCard())
     const groupTitleRef = useRef(null)
    
-    function changeGroupTitle(ev) {
+    async function changeGroupTitle(ev) {
         ev.preventDefault()
         setEditMode(!editMode)
         group.title = groupNewTitle
-        updateBoard(board)
+        try {
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
+        } catch(err) {
+            console.log('Failed to save board ', err)
+        }
     }
 
     function onSaveCard(ev) {

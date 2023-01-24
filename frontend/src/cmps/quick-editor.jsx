@@ -6,13 +6,14 @@ import { RiBankCard2Line } from 'react-icons/ri'
 import { RxClock, RxCross2 } from 'react-icons/rx'
 import { FiArchive } from 'react-icons/fi'
 import { updateBoard } from "../store/board.actions"
-import { boardService } from "../services/board.service.local"
+import { boardService } from "../services/board.service"
 import { useEffect, useRef, useState } from "react"
 import { MembersSelect } from "./members-selector"
 import { LabelsSelect } from "./label-selector"
 import { IoMdCheckboxOutline } from 'react-icons/io'
 import { CardSelectDropDown } from "./card/card-select-dropdown"
 import { utilService } from "../services/util.service"
+import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
 
 
 export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quickEditorPos, doneInCheckList, isTasksDone }) {
@@ -72,10 +73,15 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
         setCardToEdit((prevCard) => ({ ...prevCard, title: value }))
     }
 
-    function onSaveCard(ev) {
+    async function onSaveCard(ev) {
         ev.preventDefault()
         card.title = cardToEdit.title
-        updateBoard(board)
+        try {
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
+        } catch(err) {
+            console.log('Failed to save board ', err)
+        }
         openQuickEditor(ev, !quickEditor)
     }
 
@@ -83,7 +89,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
         try {
             const updateCard = { ...card, members }
             boardService.saveCard(board, groupId, updateCard)
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the members ', err)
         }
@@ -104,7 +111,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
     async function onSaveMembers(members) {
         try {
             card.members = members
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the members ', err)
         }
@@ -113,7 +121,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
     async function onSaveLabels(labels) {
         try {
             card.labels = labels
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }
@@ -122,7 +131,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
     async function onSaveCover(clr) {
         try {
             card.cover = clr
-            updateBoard(board)
+            const savedBoard = await updateBoard(board)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cant Add the labels ', err)
         }
@@ -174,7 +184,10 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
             <div className="quick-editor" onClick={e => e.preventDefault()}>
 
                 <div className="quick-editor-textarea" ref={quickEditorTextareaRef} onClick={(e) => e.preventDefault()}>
-                {card.cover && <div className="card-preview-cover" style={{ backgroundColor: card.cover, height:'32px', width:'256px' }}> </div>}
+                {card.attachments && <div className="card-preview-img" style={{ backgroundColor: card.attachments[0].bg}}>
+                            <img src={card.attachments[0].imgUrl} alt="" />
+                        </div>}
+                {card.cover && !card.attachments && <div className="card-preview-cover" style={{ backgroundColor: card.cover, height:'32px', width:'256px' }}> </div>}
                     <form onSubmit={onSaveCard}>
                         <textarea
                             ref={textAreaRef}
@@ -193,12 +206,6 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                                     <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
                                     {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length}
                                 </div>}
-                            {/* {card.checklists &&
-                                    card.checklists.map(checklist =>
-                                        <div className="preview-details-checklist" key={checklist.id}>
-                                            <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
-                                            {doneInCheckList(checklist)}/{checklist.todos.length}
-                                        </div>)} */}
                             {card.members && <span className="preview-details-members">{card.members.map(member => <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
                         </section>
                         <button className="save-btn">Save</button>
