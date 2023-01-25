@@ -82,8 +82,6 @@ export function BoardDetails() {
         }
     }
 
-
-
     if (!board) return <Loader />
     return (
         <>
