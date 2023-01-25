@@ -75,33 +75,33 @@ export function BoardDetails() {
 
 
 
-if (!board) return <Loader />
-return (
-    <>
-        <Outlet />
-        <section className='board-details' style={board.style}>
-            <section className={`board-menu ${isOpenMenu ? 'open' : ''}`}>
-                <BoardMenu
-                    isOpenMenu={isOpenMenu}
-                    setIsOpenMenu={setIsOpenMenu}
-                />
-            </section >
-
-            <section className={isOpenMenu ? 'board-content-open' : 'board-content'}>
-                <BoardHeader
-                    isOpenMenu={isOpenMenu}
-                    setIsOpenMenu={setIsOpenMenu}
-                />
-                <div className="group-container">
-                    <GroupList
-                        groups={board.groups}
-                        onAddGroup={onAddGroup}
-                        onAddCard={onAddCard}
-                        onRemoveGroup={onRemoveGroup}
+    if (!board) return <Loader />
+    return (
+        <>
+            <Outlet />
+            <section className='board-details' style={board.style}>
+                <section className={`board-menu ${isOpenMenu ? 'open' : ''}`}>
+                    <BoardMenu
+                        isOpenMenu={isOpenMenu}
+                        setIsOpenMenu={setIsOpenMenu}
                     />
-                </div>
+                </section >
+
+                <section className={`board-content ${isOpenMenu ? 'open' : ''}`}>
+                    <BoardHeader
+                        isOpenMenu={isOpenMenu}
+                        setIsOpenMenu={setIsOpenMenu}
+                    />
+                    <div className="group-container">
+                        <GroupList
+                            groups={board.groups}
+                            onAddGroup={onAddGroup}
+                            onAddCard={onAddCard}
+                            onRemoveGroup={onRemoveGroup}
+                        />
+                    </div>
+                </section>
             </section>
-        </section>
-    </>
-)
+        </>
+    )
 }
