@@ -34,7 +34,6 @@ export function BoardDetails() {
             setCurrBoard(board)
         } catch (err) {
             console.log('Cannot load board')
-            throw err
         }
     }
 

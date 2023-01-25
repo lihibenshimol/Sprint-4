@@ -70,7 +70,6 @@ export function CardDetails() {
             setCard(card)
         } catch (err) {
             console.log('Cant load card')
-            throw err
         }
     }
 
@@ -112,7 +111,7 @@ export function CardDetails() {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
-            console.log('Cant Add the members ', err)
+            console.log('Cant add the members ', err)
         }
     }
 
@@ -122,7 +121,7 @@ export function CardDetails() {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
-            console.log('Cant Add the labels ', err)
+            console.log('Cant add the labels ', err)
         }
     }
 
@@ -132,7 +131,7 @@ export function CardDetails() {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
-            console.log('Cant Add the labels ', err)
+            console.log('Cant add the cover ', err)
         }
     }
 
@@ -142,7 +141,7 @@ export function CardDetails() {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
-            console.log('Cant Add the labels ', err)
+            console.log('Cant add the attachments ', err)
         }
     }
 
@@ -152,20 +151,24 @@ export function CardDetails() {
     function addOrDeleteMember(member) {
         if (card.activities) card.activities = []
         if (!card.members) card.members = []
+
         const memberIdx = card.members.findIndex(m => m._id === member._id)
+        let msg
+
         if (memberIdx === -1) {
+            msg = 'joined'
             member.isChecked = true
             card.members.push(member)
-            const txt = `${member.fullname} joined ${card.title}`
-            addActivity({ txt, boardId: board._id, groupId, cardId })
 
         }
         else {
+            msg = 'left'
             member.isChecked = false
             card.members.splice(memberIdx, 1)
-            const txt = `${member.fullname} left ${card.title}`
-            addActivity({ txt, boardId: board._id, groupId, cardId })
         }
+
+        const txt = `${member.fullname} ${msg} ${card.title}`
+        addActivity({ txt, boardId: board._id, groupId, cardId })
         const newMembers = card.members
         onSaveMembers(newMembers)
     }
@@ -281,13 +284,11 @@ export function CardDetails() {
                             card={card}
                         />
 
-
                     </div >
 
                     <SideBar
                         onSetType={onSetType}
                         card={card}
-
                         onSaveCheckList={onSaveCheckList}
                     />
                 </div >
