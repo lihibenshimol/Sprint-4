@@ -71,7 +71,7 @@ export async function starBoard(board) {
         const savedBoard = await boardService.save(board)
         return savedBoard
     } catch (err) {
-        console.log('Cannot save board', err)
+        console.log('Cannot star board', err)
         throw err
     }
 }
