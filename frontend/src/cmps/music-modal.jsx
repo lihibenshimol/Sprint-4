@@ -5,14 +5,27 @@ import YouTube from 'react-youtube';
 import { CiPlay1 } from 'react-icons/ci'
 import { CiPause1 } from 'react-icons/ci'
 import { useEffect } from 'react';
+import axios from 'axios';
+import { utilService } from '../services/util.service';
+import { MusicModalDropdown } from './music-modal-dropdown';
 
 export function MusicModal({ setMusicModalOpen, className }) {
+
+    const API_URL = 'https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=AIzaSyCEFG2JDgO7LGdMP5uxbugjkAVhACSf60I&q='
 
     const [video, setVideo] = useState(null)
     const [videoCurrTime, setVideoCurrTime] = useState(0)
     const [isVideoPlaying, setVideoPlaying] = useState(false)
     const videoIntervalRef = useRef(null)
     const [isFirstClick, setFirstClick] = useState(true)
+    const [searchStr, setSearchStr] = useState('')
+    const [isDropdownOpen, setDropdownOpen] = useState(false)
+    const [songs, setSongs] = useState([])
+    const [currSong, setCurrSong] = useState({ vidId: 'yvlP4KYW7BE', title: 'V (Cyberpunk 2077 Soundtrack)' })
+    const searchInputRef = useRef(null)
+    const sliderRef = useRef(null)
+
+    const handleSearchChangeRef = useRef(utilService.debounce(handleSearchChange))
 
     useEffect(() => {
         return () => {
@@ -20,23 +33,25 @@ export function MusicModal({ setMusicModalOpen, className }) {
         }
     }, [])
 
+    // useEffect(() => {
+
+    // }, [searchStr])
+
+    async function getVids(query) {
+        const res = await axios.get(API_URL + query)
+        return res.data.items
+    }
 
     const opts = {
         height: '390',
         width: '640',
         playerVars: {
-            // https://developers.google.com/youtube/player_parameters
-            autoplay: 0,
-        },
+            autoplay: 0
+        }
     }
 
-
-    console.log(videoCurrTime)
-
     function _onReady(event) {
-        // access to player in all event handlers via event.target
         setVideo(event.target)
-        // event.target.pauseVideo();
         console.log(event.target.getCurrentTime())
         videoIntervalRef.current = setInterval(() => {
             setVideoCurrTime(event.target.getCurrentTime())
@@ -45,12 +60,6 @@ export function MusicModal({ setMusicModalOpen, className }) {
                 setFirstClick(true)
             }
         }, 1000)
-        // console.log(event.target.getDuration())
-
-        // sliderRef.current.attr('max', event.target.getDuration())
-
-        // console.log(event.target.getDuration())
-        // console.log(video?.getDuration())
     }
 
     function handleChange({ target }) {
@@ -63,28 +72,66 @@ export function MusicModal({ setMusicModalOpen, className }) {
         }
     }
 
+    async function handleSearchChange({ target }) {
+        const { value } = target
+        if (!value) {
+            setDropdownOpen(false)
+            return
+        }
+        setSearchStr(value)
+        let vids = await getVids(value)
+        vids = vids.map(vid => ({ vidId: vid.id.videoId, title: vid.snippet.title }))
+        setSongs(vids)
+        setDropdownOpen(true)
+        console.log(vids)
+    }
+
     function onToggleVideo() {
         if (isVideoPlaying) {
             video.pauseVideo()
-            // isVideoPlaying.current = false
             setVideoPlaying(false)
         } else {
             video.playVideo()
-            // isVideoPlaying.current = true
             setVideoPlaying(true)
         }
     }
 
+    function onSetSong(song) {
+        setCurrSong(song)
+        setDropdownOpen(false)
+        setVideoCurrTime(0)
+        setFirstClick(true)
+        searchInputRef.current.value = ''
+        sliderRef.current.value = 0
+        if (videoIntervalRef.current) clearInterval(videoIntervalRef.current)
+    }
+
+    function handleModalClick() {
+        setDropdownOpen(false)
+        searchInputRef.current.value = ''
+    }
+
+    function handleBgClick() {
+        setDropdownOpen(false)
+        setMusicModalOpen(false)
+        searchInputRef.current.value = ''
+    }
+
+
+
     return (
         <div className={className}>
-            <section className="music-modal">
-                <input type="text" placeholder='Search song' />
-                <h2>MUSIC MODAL</h2>
-                <YouTube className='hidden' videoId="yvlP4KYW7BE" opts={opts} onReady={_onReady} controls />
+            <section className="music-modal" onClick={handleModalClick}>
+                <div className='input-container'>
+                    <input ref={searchInputRef} onChange={handleSearchChangeRef.current} type="text" placeholder='Search song' />
+                    {isDropdownOpen && <MusicModalDropdown onSetSong={onSetSong} songs={songs} />}
+                </div>
+                <h2>{currSong?.title}</h2>
+                <YouTube className='hidden' videoId={currSong.vidId} opts={opts} onReady={_onReady} controls />
                 <button onClick={onToggleVideo} className='play-pause-btn'>{isVideoPlaying ? <CiPause1 /> : <CiPlay1 />}</button>
-                <input defaultValue="0" value={videoCurrTime} step={0.1} max={video?.getDuration()} type="range" onChange={handleChange} />
+                <input ref={sliderRef} defaultValue="0" value={videoCurrTime} step={0.1} max={video?.getDuration()} type="range" onChange={handleChange} />
             </section>
-            <div onClick={() => setMusicModalOpen(false)} className="black-bg"></div>
+            <div onClick={handleBgClick} className="black-bg"></div>
         </div>
 
     )

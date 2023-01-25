@@ -5,12 +5,21 @@
     transform: translate(-50%, -50%);
     background-color: $clr6;
     color: $clr12;
-    min-width: 320px;
-    min-height: 200px;
+    min-width: 95%;
+    min-height: 400px;
     border-radius: 0.3em;
     z-index: 3001;
     box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
     padding: 1em;
+
+    .input-container {
+        position: relative;
+    }
+
+    @include for-narrow-layout {
+        min-width: 420px;
+        min-height: 300px;
+    }
 
     h2 {
         margin: 0;
@@ -19,5 +28,54 @@
     .play-pause-btn {
         font-size: 2rem;
         color: $clr12;
+    }
+
+    input[type="text"] {
+        background-color: #fafbfc;
+        border: 2px solid #dfe1e6;
+        border-radius: 0.2em;
+        padding: 0.525em;
+        color: rgb(77, 77, 77);
+        font-size: rem(14px);
+        outline: none;
+        transition: border-color 0.1s ease-in-out;
+        width: 100%;
+
+        &:focus {
+            border-color: $clr14;
+        }
+    }
+}
+
+.music-modal-dropdown {
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    left: 0;
+    width: 100%;
+    // background-color: red;
+    padding: 0.525em;
+    border: 2px solid #dfe1e6;
+    background-color: #fafbfc;
+    overflow: hidden;
+    border-top: none;
+    border-radius: 0.2em;
+    max-height: 240px;
+    overflow-y: auto;
+
+    li {
+        padding: 0.73em 0;
+        line-height: 1.2;
+        border-bottom: 1px solid #dfe1e6;
+        cursor: pointer;
+        transition: background-color 0.1s ease-in-out;
+
+        &:hover {
+            background-color: $clr8;
+        }
+
+        &:last-of-type {
+            border-bottom: none;
+        }
     }
 }
