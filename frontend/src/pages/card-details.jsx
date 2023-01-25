@@ -159,7 +159,8 @@ export function CardDetails() {
             member.isChecked = true
             card.members.push(member)
         }
-        
+
+
         else {
             msg = 'left'
             member.isChecked = false
@@ -304,12 +305,12 @@ export function CardDetails() {
 
                             </div >
 
-                            <SideBar
-                                onSetType={onSetType}
-                                card={card}
-                                onSaveCheckList={onSaveCheckList}
-                            />
                         </div >
+                        <SideBar
+                            onSetType={onSetType}
+                            card={card}
+                            onSaveCheckList={onSaveCheckList}
+                        />
                     </div>
                 </>
             }

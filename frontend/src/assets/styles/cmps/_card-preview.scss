@@ -77,8 +77,10 @@ a:hover {
     .card-preview-img {
         display: flex;
         align-items: center;
+        border-radius: 3px;
 
         img {
+            border-radius: 3px;
             height: 100%;
         }
     }
