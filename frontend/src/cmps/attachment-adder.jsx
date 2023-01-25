@@ -80,7 +80,8 @@ export function AttachmentAdder({ card, pos, isDropDownOpen, setIsDropDownOpen,
     }
 
 
-    return (<div className="extras-menu flex" ref={dropdownRef}>
+    return (
+    <div className="extras-menu flex" ref={dropdownRef}>
         <span className="title-container">
             <p>
                 Attachment
@@ -117,5 +118,6 @@ export function AttachmentAdder({ card, pos, isDropDownOpen, setIsDropDownOpen,
             </button>
         </div>
 
-    </div>)
+    </div>
+    )
 }
