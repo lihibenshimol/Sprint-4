@@ -30,6 +30,7 @@ export function CardDetails() {
     const activities = useSelector(storeState => storeState.activityModule.activities)
     const { cardId, groupId } = useParams()
     const [card, setCard] = useState(null)
+
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
     const [attachToView, setAttachToView] = useState('')
@@ -49,7 +50,7 @@ export function CardDetails() {
 
     useEffect(() => {
         loadActivities({ cardId })
-        console.log('activities.length = ', activities.length)
+        // console.log('activities.length = ', activities.length)
     }, [])
 
 
@@ -69,14 +70,13 @@ export function CardDetails() {
             setCard(card)
         } catch (err) {
             console.log('Cant load card')
-            throw err
         }
     }
 
-    async function onChangeTitle({ target }) {
-        let { innerText } = target
+    async function onChangeTitle(title, ev) {
+        if (ev) ev.preventDefault()
         try {
-            const updateCard = { ...card, title: innerText }
+            const updateCard = { ...card, title }
             boardService.saveCard(board, groupId, updateCard)
         } catch (err) {
             console.log('Cant edit the Title ', err)
@@ -111,7 +111,7 @@ export function CardDetails() {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
-            console.log('Cant Add the members ', err)
+            console.log('Cant add the members ', err)
         }
     }
 
@@ -121,7 +121,7 @@ export function CardDetails() {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
-            console.log('Cant Add the labels ', err)
+            console.log('Cant add the labels ', err)
         }
     }
 
@@ -131,7 +131,7 @@ export function CardDetails() {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
-            console.log('Cant Add the labels ', err)
+            console.log('Cant add the cover ', err)
         }
     }
 
@@ -141,7 +141,7 @@ export function CardDetails() {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
-            console.log('Cant Add the labels ', err)
+            console.log('Cant add the attachments ', err)
         }
     }
 
@@ -151,8 +151,12 @@ export function CardDetails() {
     function addOrDeleteMember(member) {
         if (card.activities) card.activities = []
         if (!card.members) card.members = []
+
         const memberIdx = card.members.findIndex(m => m._id === member._id)
+        let msg
+
         if (memberIdx === -1) {
+            msg = 'joined'
             member.isChecked = true
             card.members.push(member)
             // const txt = `${member.fullname} joined ${card.title}`
@@ -162,11 +166,15 @@ export function CardDetails() {
 
         }
         else {
+            msg = 'left'
             member.isChecked = false
             card.members.splice(memberIdx, 1)
             const txt = `${member.fullname} left ${card.title}`
-            addActivity({ txt, boardId: board._id, groupId, cardId })
+            addActivity({txt, boardId: board._id, groupId, cardId})
         }
+
+        const txt = `${member.fullname} ${msg} ${card.title}`
+        addActivity({ txt, boardId: board._id, groupId, cardId })
         const newMembers = card.members
         onSaveMembers(newMembers)
     }
@@ -285,22 +293,28 @@ export function CardDetails() {
 
                             {activities.map(activity => <div key={activity._id} className='activities-details'>
 
-                                <ActivitiesViewer
-                                    activity={activity}
-                                    card={card}
-                                />
+                        <div className="card-activities">
+                            <section className="activities-header">
+                                <span>  <RxActivityLog /> </span>
+                                Activity
+                            </section>
 
-                            </div>)
-                            }
-                        </div>
+                            {activities.map(activity => <div key={activity._id} className='activities-details'>
 
+                        <ActivitiesViewer
+                        activities={activities}
+                            card={card}
+                        />
+
+                            </div>)}
+                            
+                    
 
                     </div >
 
                     <SideBar
                         onSetType={onSetType}
                         card={card}
-
                         onSaveCheckList={onSaveCheckList}
                     />
                 </div >
