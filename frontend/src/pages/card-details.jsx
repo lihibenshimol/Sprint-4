@@ -6,7 +6,7 @@ import { SideBar } from "../cmps/card/card-side-bar"
 import { CardDescription } from "../cmps/card/card-description"
 import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 
-import { RxCross1 } from 'react-icons/rx';
+import { RxCross1, RxActivityLog } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
 import { BiWindow } from 'react-icons/bi';
 
@@ -159,12 +159,18 @@ export function CardDetails() {
             msg = 'joined'
             member.isChecked = true
             card.members.push(member)
+            // const txt = `${member.fullname} joined ${card.title}`
+            const txt = ` joined ${card.title}`
+            // addActivity({ txt, boardId: board._id, groupId, cardId })
+            addActivity({ txt, boardId: board._id, groupId, cardId, memberId: member.id })
 
         }
         else {
             msg = 'left'
             member.isChecked = false
             card.members.splice(memberIdx, 1)
+            const txt = `${member.fullname} left ${card.title}`
+            addActivity({ txt, boardId: board._id, groupId, cardId })
         }
 
         const txt = `${member.fullname} ${msg} ${card.title}`
@@ -210,90 +216,101 @@ export function CardDetails() {
     return <div className="window full">
         <div className="black-bg full" onClick={() => navigate(`/board/${board._id}`)}></div>
         <section className="card" onClick={closeAddTodoEdit}>
+
             {!card && <Loader className="flex align-center" />}
+            {card &&
+                <>
+                    <a onClick={() => navigate(`/board/${board._id}`)} className={`close-btn ${card.cover ? 'with-cover' : ''}`}>
+                        <RxCross1 />
+                    </a>
+
+                    {isDropDownOpen && <CardSelectDropDown
+                        type={dropdownType}
+                        attach={attachToView}
+                        card={card} pos={pos}
+                        setIsDropDownOpen={setIsDropDownOpen}
+                        isDropDownOpen={isDropDownOpen}
+                        addOrDeleteMember={addOrDeleteMember}
+                        addOrDeleteLabel={addOrDeleteLabel}
+                        onSaveCover={onSaveCover}
+                        onSaveAttachment={onSaveAttachment}
+                    />}
 
 
-            {card && (<>
-                <a onClick={() => navigate(`/board/${board._id}`)} className={`close-btn ${card.cover ? 'with-cover' : ''}`}>
-                    <RxCross1 />
-                </a>
+                    {card.cover && <div className="card-cover" style={{ backgroundColor: card.cover }}>
+                        <div className="cover-btn hover" onClick={(e) => onSetType(e, 'cover')}>
+                            <span><BiWindow /></span>
+                            {' Cover'}
+                        </div>
+                    </div>}
 
-                {isDropDownOpen && <CardSelectDropDown
-                    type={dropdownType}
-                    attach={attachToView}
-                    card={card} pos={pos}
-                    setIsDropDownOpen={setIsDropDownOpen}
-                    isDropDownOpen={isDropDownOpen}
-                    addOrDeleteMember={addOrDeleteMember}
-                    addOrDeleteLabel={addOrDeleteLabel}
-                    onSaveCover={onSaveCover}
-                    onSaveAttachment={onSaveAttachment}
-                />}
-
-
-                {card.cover && <div className="card-cover" style={{ backgroundColor: card.cover }}>
-                    <div className="cover-btn hover" onClick={(e) => onSetType(e, 'cover')}>
-                        <span><BiWindow /></span>
-                        {' Cover'}
-                    </div>
-                </div>}
-
-                <CardHeader
-                    card={card}
-                    getGroup={getGroup}
-                    onChangeTitle={onChangeTitle} />
-
-                <div className="card-content flex">
-                    <div className="main-content">
-                        <section className="card-details">
-                            {(card.members && card.members.length !== 0) &&
-                                <UserAvatarPreview users={card.members} onSetType={onSetType} />}
-
-                            {(card.labels && card.labels.length !== 0) &&
-                                <LabelPreview labels={card.labels} onSetType={onSetType} />}
-                        </section>
-
-
-                        <CardDescription
-                            card={card}
-                            onSaveDesc={onSaveDesc}
-                            isDescriptionEdit={isDescriptionEdit}
-                            setIsDescriptionEdit={setIsDescriptionEdit} />
-
-
-                        {card.attachments &&
-                            <CheckAttachments
-                                onSetType={onSetType}
-                                attachments={card.attachments}
-                                attachToView={attachToView}
-                                setAttachToView={setAttachToView}
-                            />
-                        }
-
-                        {card.checklists &&
-                            <CheckListList
-                                onSaveCheckList={onSaveCheckList}
-                                checklists={card.checklists}
-                                isEditAddTodo={isEditAddTodo}
-                                setIsEditAddTodo={setIsEditAddTodo}
-                            />
-                        }
-
-                        <ActivitiesViewer
-                            activities={activities}
-                            card={card}
-                        />
-
-                    </div >
-
-                    <SideBar
-                        onSetType={onSetType}
+                    <CardHeader
                         card={card}
-                        onSaveCheckList={onSaveCheckList}
-                    />
-                </div >
-            </>)}
-        </section >
-    </div >
-}
+                        getGroup={getGroup}
+                        onChangeTitle={onChangeTitle} />
 
+                    <div className="card-content flex">
+                        <div className="main-content">
+                            <section className="card-details">
+                                {(card.members && card.members.length !== 0) &&
+                                    <UserAvatarPreview users={card.members} onSetType={onSetType} />}
+
+                                {(card.labels && card.labels.length !== 0) &&
+                                    <LabelPreview labels={card.labels} onSetType={onSetType} />}
+                            </section>
+
+
+                            <CardDescription
+                                card={card}
+                                onSaveDesc={onSaveDesc}
+                                isDescriptionEdit={isDescriptionEdit}
+                                setIsDescriptionEdit={setIsDescriptionEdit} />
+
+
+                            {card.attachments &&
+                                <CheckAttachments
+                                    onSetType={onSetType}
+                                    attachments={card.attachments}
+                                    attachToView={attachToView}
+                                    setAttachToView={setAttachToView}
+                                />
+                            }
+
+                            {card.checklists &&
+                                <CheckListList
+                                    onSaveCheckList={onSaveCheckList}
+                                    checklists={card.checklists}
+                                    isEditAddTodo={isEditAddTodo}
+                                    setIsEditAddTodo={setIsEditAddTodo}
+                                />
+                            }
+
+                            <div className="card-activities">
+                                <section className="activities-header">
+                                    <span>  <RxActivityLog /> </span>
+                                    Activity
+                                </section>
+
+                                {activities.map(activity => <div key={activity._id} className='activities-details'>
+                                    <ActivitiesViewer
+                                        activities={activities}
+                                        card={card}
+                                    />
+
+                                </div>
+                                )}
+
+                            </div >
+
+                            <SideBar
+                                onSetType={onSetType}
+                                card={card}
+                                onSaveCheckList={onSaveCheckList}
+                            />
+                        </div >
+                    </div>
+                </>
+            }
+        </section>
+    </div>
+}

@@ -59,7 +59,6 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
 
     function onSetType(ev, typeToSet) {
         const position = utilService.getPosToDisplay(ev)
-
         setPos(prevPos => position)
         setDropdownType(prevType => typeToSet)
         if (typeToSet === dropdownType || !dropdownType) setIsDropDownOpen(!isDropDownOpen)

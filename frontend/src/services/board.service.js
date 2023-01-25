@@ -13,7 +13,6 @@ export const boardService = {
     save,
     remove,
     getEmptyBoard,
-    addNewItem,
     getEmptyGroup,
     getBoardColors,
 
@@ -25,6 +24,10 @@ export const boardService = {
     getEmptyTodo,
     getCardCoverColors,
     getEmptyAttachment,
+    addNewCard,
+
+    //groups
+    addNewGroup,
 
 
     // getEmptyMember,
@@ -86,38 +89,33 @@ function getEmptyAttachment() {
         bg: '',
     }
 }
-// async function addNewCard(group, card, arr) {
-//     try {
-//         card.id = utilService.makeId()
-//         group.cards.push(card)
-//         // const collection = await dbService.getCollection('toy')
-//         // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
-//         return card
-//     } catch (err) {
-//         console.log('failed');
-//         // logger.error(`cannot add toy msg ${toyId}`, err)
-//         throw err
-//     }
-// }
+
 
 // async function updateCard(boardId, card, content, key) {
 //     card[key] = content
 //     save(boardId)
 // }
 
-async function addNewItem(parent, entityToAdd, entityType) {
+
+
+async function addNewCard(boardId, groupId, cardToAdd) {
     try {
-        entityToAdd.id = utilService.makeId()
-        parent[entityType].push(entityToAdd)
-        // const collection = await dbService.getCollection('toy')
-        // await collection.updateOne({ _id: ObjectId(toyId) }, { $push: { msgs: msg } })
-        return entityToAdd
+        return httpService.post(BASE_URL + `${boardId}/g/${groupId}`, { boardId, groupId, cardToAdd })
     } catch (err) {
-        console.log('failed');
-        // logger.error(`cannot add toy msg ${toyId}`, err)
+        console.log('failed')
         throw err
     }
 }
+
+async function addNewGroup(boardId, groupToAdd) {
+    try {
+        return httpService.post(BASE_URL + `${boardId}/g`, { boardId, groupToAdd })
+    } catch (err) {
+        console.log('failed')
+        throw err
+    }
+}
+
 
 function getEmptyBoard() {
     return {

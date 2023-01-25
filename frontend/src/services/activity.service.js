@@ -39,8 +39,8 @@ async function remove(activityId) {
 //   return { toyId: ''}
 // }
 
-async function add({txt, boardId, groupId, cardId}) {
+async function add({txt, boardId, groupId, cardId, memberId}) {
     
-  const addedActivity = await httpService.post(`activity`, {txt, boardId, groupId, cardId})
+  const addedActivity = await httpService.post(`activity`, {txt, boardId, groupId, cardId, memberId})
   return addedActivity
 }
