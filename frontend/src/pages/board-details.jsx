@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useParams, Outlet,  } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams, Outlet, } from 'react-router-dom'
 import { BoardHeader } from '../cmps/board-header.jsx'
 import { BoardMenu } from '../cmps/board-menu.jsx'
 import { GroupList } from '../cmps/group-list.jsx'
@@ -15,10 +15,8 @@ export function BoardDetails() {
     const [isOpenMenu, setIsOpenMenu] = useState(false)
 
     const { boardId } = useParams()
-    let board = useSelector(storeState => storeState.boardModule.currBoard)
+    const board = useSelector(storeState => storeState.boardModule.currBoard)
     const dispatch = useDispatch()
-    // board = JSON.parse(JSON.stringify(board))
-    // console.log('board = ', board)
 
 
     useEffect(() => {
@@ -62,7 +60,7 @@ export function BoardDetails() {
         }
     }
 
-    async function onAddCard(group, newCard) {
+
     async function onAddCard(group, newCard) {
         if (!newCard.title) return
         try {
@@ -76,34 +74,34 @@ export function BoardDetails() {
     }
 
 
-    if (!board) return <Loader />
-    return (
-        <>
-            <Outlet />
-            <section className='board-details' style={board.style}>
-                <section className={`board-menu ${isOpenMenu ? 'open' : ''}`}>
-                    <BoardMenu
-                        isOpenMenu={isOpenMenu}
-                        setIsOpenMenu={setIsOpenMenu}
-                    />
-                </section >
 
-                <section className={isOpenMenu ? 'board-content-open' : 'board-content'}>
-                    <BoardHeader
-                        isOpenMenu={isOpenMenu}
-                        setIsOpenMenu={setIsOpenMenu}
+if (!board) return <Loader />
+return (
+    <>
+        <Outlet />
+        <section className='board-details' style={board.style}>
+            <section className={`board-menu ${isOpenMenu ? 'open' : ''}`}>
+                <BoardMenu
+                    isOpenMenu={isOpenMenu}
+                    setIsOpenMenu={setIsOpenMenu}
+                />
+            </section >
+
+            <section className={isOpenMenu ? 'board-content-open' : 'board-content'}>
+                <BoardHeader
+                    isOpenMenu={isOpenMenu}
+                    setIsOpenMenu={setIsOpenMenu}
+                />
+                <div className="group-container">
+                    <GroupList
+                        groups={board.groups}
+                        onAddGroup={onAddGroup}
+                        onAddCard={onAddCard}
+                        onRemoveGroup={onRemoveGroup}
                     />
-                    <div className="group-container">
-                        <GroupList
-                            groups={board.groups}
-                            onAddGroup={onAddGroup}
-                            onAddCard={onAddCard}
-                            onRemoveGroup={onRemoveGroup}
-                        />
-                    </div>
-                </section>
+                </div>
             </section>
-
-        </>
-    )
+        </section>
+    </>
+)
 }
