@@ -52,9 +52,9 @@ async function query(filterBy = {}) {
         ]).toArray()
         activities = activities.map(activity => {
             activity.txt
-            activity.byUser = { id: activity.byUser._id, fullname: activity.byUser.fullname }
+            activity.byUser = { id: activity.byUser._id, fullname: activity.byUser.fullname, imgUrl: activity.byUser.imgUrl }
             activity.onBoard = { id: activity.onBoard._id, title: activity.onBoard.title }
-            activity.onMember = { id: activity.onMember._id, fullname: activity.onMember.fullname }
+            activity.onMember = { id: activity.onMember._id, fullname: activity.onMember.fullname, imgUrl: activity.onMember.imgUrl }
             delete activity.byUserId
             delete activity.onBoardId
             delete activity.onMemberId

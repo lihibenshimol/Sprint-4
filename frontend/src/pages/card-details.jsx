@@ -160,6 +160,7 @@ export function CardDetails() {
             card.members.push(member)
         }
 
+
         else {
             msg = 'left'
             member.isChecked = false
@@ -293,6 +294,15 @@ export function CardDetails() {
 
                                 </div>
                                 )}
+                                {/* {activities?.map(activity => <div key={activity._id} className='activities-details'>
+                                    <ActivitiesViewer
+                                        activities={activities}
+                                        card={card}
+                                    />
+
+                                </div>
+                                )} */}
+
                             </div >
 
                         </div >
