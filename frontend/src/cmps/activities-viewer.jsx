@@ -1,26 +1,30 @@
+import { useEffect, useState } from 'react';
 import { RxActivityLog } from 'react-icons/rx';
+import { userService } from '../services/user.service';
 
-export function ActivitiesViewer({ card, activities }) {
+export function ActivitiesViewer({ activity }) {
+    const [user, setUser] = useState(null)
 
-    console.log('activities = ', activities)
-  
+
+    useEffect(() => {
+        getUser(activity.byUserId)
+    }, [])
+
+    async function getUser(userId) {
+        try {
+          const user =  await userService.getById(userId)
+            setUser(user)
+        } catch (err) {
+            console.log('err = ', err)
+        }
+    }
+
+
     return (
-        <div className="card-activities">
-            <section className="activities-header">
-                <span>  <RxActivityLog /> </span>
-                Activity
-            </section>
-        
-
-            <div className='activities-details'>
-                {activities && 
-                activities.map(activity => <section key={activity._id}>
-                    <h1>{activity.txt}</h1>
-                </section>)
-                }
-            </div>
-        </div>
-
+        <>
+                {/* {user?.fullname} */}
+            {activity.txt}
+        </>
     )
 }
 

@@ -7,9 +7,9 @@ const BOARD_COLLECTION = 'board'
 
 async function query(filterBy) {
     try {
-        if(filterBy.isStarred === 'true') filterBy.isStarred = true
+        if (filterBy.isStarred === 'true') filterBy.isStarred = true
         const criteria = {}
-        if(filterBy.isStarred) criteria.isStarred = filterBy.isStarred
+        if (filterBy.isStarred) criteria.isStarred = filterBy.isStarred
 
         const collection = await dbService.getCollection(BOARD_COLLECTION)
         const boards = await collection.find(criteria).toArray()
@@ -32,7 +32,7 @@ async function getById(boardId) {
 }
 
 async function getCardById(boardId, groupId, cardId) {
-   
+
     try {
         const board = await getById(boardId)
         const group = board.groups.find(g => g.id === groupId)
@@ -69,9 +69,9 @@ async function add(board) {
 
 async function update(board) {
     try {
-        const boardToSave = {...board}
+        const boardToSave = { ...board }
         delete boardToSave._id
-        
+
         const collection = await dbService.getCollection(BOARD_COLLECTION)
         await collection.updateOne({ _id: ObjectId(board._id) }, { $set: boardToSave })
         return board
@@ -92,6 +92,39 @@ async function removeBoardMsg(boardId, msgId) {
     }
 }
 
+
+async function addCard(req, res) {
+    const { boardId, groupId, cardToAdd } = req.body
+    try {
+        cardToAdd.id = utilService.makeId()
+        const board = await getById(boardId)
+        const group = board.groups.find(g => g.id === groupId)
+        group.cards.push(cardToAdd)
+        const updatedBoard = await update(board)
+        res.send(updatedBoard)
+    } catch (err) {
+        logger.error('cannot insert board', err)
+        throw err
+    }
+}
+
+async function addGroup(req, res) {
+    const { boardId, groupToAdd } = req.body
+
+    try {
+        groupToAdd.id = utilService.makeId()
+        const board = await getById(boardId)
+        if (!board.groups) board.groups = []
+        board.groups.push(groupToAdd)
+        const updatedBoard = await update(board)
+        res.send(updatedBoard)
+    } catch (err) {
+        logger.error('cannot insert board', err)
+        throw err
+    }
+}
+
+
 module.exports = {
     remove,
     query,
@@ -100,5 +133,7 @@ module.exports = {
     add,
     update,
     // addBoardMsg,
-    removeBoardMsg
+    removeBoardMsg,
+    addCard,
+    addGroup
 }

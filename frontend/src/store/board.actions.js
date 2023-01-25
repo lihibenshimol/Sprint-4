@@ -120,8 +120,6 @@ export async function undoBoardUpdate(prevBoard) {
         store.dispatch({
             type: UNDO_UPDATE_BOARD
         })
-        
-        console.log('prevBoard = ', prevBoard)
         const savedBoard = await updateBoard(prevBoard)
         socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         // const savedBoard = await boardService.save(prevBoard)
@@ -131,6 +129,17 @@ export async function undoBoardUpdate(prevBoard) {
         throw err
     }
 }
+
+// export async function addCard(card, groupId) {
+//     try {
+//         store.dispatch({
+//             type: ADD_CARD
+//         })
+//     } catch(err) {
+
+//     }
+    
+// }
 
 export async function updateCard(board, card, content, key) {
     card[key] = content

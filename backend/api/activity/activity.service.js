@@ -10,21 +10,21 @@ async function query(filterBy = {}) {
         const collection = await dbService.getCollection(activityCollection)
         const activities = await collection.find(filterBy).toArray()
         // var activities = await collection.aggregate([
-        //     {
-        //         $match: criteria
-        //     },
-        //     {
-        //         $lookup:
-        //         {
-        //             localField: 'byUserId',
-        //             from: 'user',
-        //             foreignField: '_id',
-        //             as: 'byUser'
-        //         }
-        //     },
-        //     {
-        //         $unwind: '$byUser'
-        //     },
+            // {
+            //     $match: filterBy
+            // },
+            // {
+            //     $lookup:
+            //     {
+            //         localField: 'onMemberId',
+            //         from: 'user',
+            //         foreignField: '_id',
+            //         as: 'onMember'
+            //     }
+            // },
+            // {
+            //     $unwind: '$onMember'
+            // },
         //     {
         //         $lookup:
         //         {
@@ -37,13 +37,16 @@ async function query(filterBy = {}) {
         //     {
         //         $unwind: '$onBoard'
         //     }
-        // ]).toArray()
+        // ])
+        // .toArray()
         // activities = activities.map(activity => {
         //     activity.txt 
         //     activity.byUser = { id: activity.byUser._id, fullname: activity.byUser.fullname }
         //     activity.onBoard = { id: activity.onBoard._id, fullname: activity.onBoard.title }
+        //     activity.onMember = { id: activity.onMember._id, fullname: activity.onMember.fullname }
         //     delete activity.byUserId
         //     delete activity.onBoardId
+        //     delete activity.onMemberId
         //     return activity
         // })
         console.log('activities = ', activities.length)
@@ -78,6 +81,7 @@ async function add(activity) {
             byUserId: ObjectId(activity.byUserId),
             onBoardId: ObjectId(activity.boardId),
             onCardId: activity.cardId,
+            onMamber: activity.memberId,
             txt: activity.txt
         }
         const collection = await dbService.getCollection('activity')
@@ -91,7 +95,7 @@ async function add(activity) {
 
 function _buildCriteria(filterBy) {
     const criteria = {}
-    if (filterBy.byUserId) criteria.byUserId = filterBy.byUserId
+    if (filterBy.onCardId) criteria.onCardId = filterBy.onCardId
     return criteria
 }
 

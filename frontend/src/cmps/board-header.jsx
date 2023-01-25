@@ -59,7 +59,6 @@ export function BoardHeader() {
 
     function onSetType(ev, typeToSet) {
         const position = utilService.getPosToDisplay(ev)
-
         setPos(prevPos => position)
         setDropdownType(prevType => typeToSet)
         if (typeToSet === dropdownType || !dropdownType) setIsDropDownOpen(!isDropDownOpen)
@@ -95,6 +94,7 @@ export function BoardHeader() {
                     setIsDropDownOpen={setIsDropDownOpen}
                     isDropDownOpen={isDropDownOpen}
                     addOrDeleteMember={addOrDeleteMember}
+
                 />}
 
 

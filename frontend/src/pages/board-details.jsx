@@ -1,18 +1,21 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { useParams, Outlet, useNavigate} from 'react-router-dom'
+import { useParams, Outlet, useNavigate } from 'react-router-dom'
 import { BoardHeader } from '../cmps/board-header.jsx'
 import { GroupList } from '../cmps/group-list.jsx'
 import { Loader } from '../cmps/loader.jsx'
 import { boardService } from "../services/board.service"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_BOARD_UPDATED } from '../services/socket.service.js'
-import { setCurrBoard, updateBoard } from '../store/board.actions.js'
+import { getActionUpdateBoard, setCurrBoard, updateBoard } from '../store/board.actions.js'
+import { UPDATE_BOARD } from '../store/board.reducer.js'
+import { store } from '../store/store.js'
 
 export function BoardDetails() {
- 
+
     const { boardId } = useParams()
     let board = useSelector(storeState => storeState.boardModule.currBoard)
+    const dispatch = useDispatch()
     // board = JSON.parse(JSON.stringify(board))
     // console.log('board = ', board)
 
@@ -51,24 +54,22 @@ export function BoardDetails() {
     async function onAddGroup(newGroup) {
         if (!newGroup.title) newGroup.title = 'New List'
         try {
-            await boardService.addNewItem(board, newGroup, 'groups')
-            const savedBoard = await updateBoard(board)
+            const savedBoard = await boardService.addNewGroup(boardId, newGroup)
+            dispatch(getActionUpdateBoard(savedBoard))
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
-            // newGroup.title = ''
         } catch (err) {
             console.log('Cannot add group = ', err)
-            throw err
         }
     }
 
-    async function onAddCard(group ,newCard) {
+    async function onAddCard(group, newCard) {
         if (!newCard.title) return
         try {
-            await boardService.addNewItem(group, newCard, 'cards')
-            const savedBoard = await updateBoard(board)
+            const savedBoard = await boardService.addNewCard(boardId, group.id, newCard)
+            dispatch(getActionUpdateBoard(savedBoard))
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
-            console.log('Cannot add group = ', err)
+            console.log('Cannot add card = ', err)
             throw err
         }
     }
@@ -77,20 +78,20 @@ export function BoardDetails() {
     if (!board) return <Loader />
     return (
         <>
-        <Outlet />
-        
+            <Outlet />
+
             <section className='board-details  full' style={board.style}>
                 <BoardHeader />
                 <div className="group-container">
-                    <GroupList 
-                    groups={board.groups}
-                    onAddGroup={onAddGroup}
-                    onAddCard={onAddCard}
-                    onRemoveGroup={onRemoveGroup}
+                    <GroupList
+                        groups={board.groups}
+                        onAddGroup={onAddGroup}
+                        onAddCard={onAddCard}
+                        onRemoveGroup={onRemoveGroup}
                     />
                 </div>
             </section>
-          
+
         </>
     )
 }

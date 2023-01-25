@@ -40,6 +40,7 @@ async function addActivity(req, res) {
         activity.byUserId = loggedinUser._id
         activity.onBoard = await boardService.getById(activity.boardId)
         activity.onCard = await boardService.getCardById(activity.boardId, activity.groupId, activity.cardId)
+        activity.onMember = activity.memberId
         activity = await activityService.add(activity)
 
         // // prepare the updated activity for sending out

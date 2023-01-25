@@ -6,7 +6,7 @@ import { SideBar } from "../cmps/card/card-side-bar"
 import { CardDescription } from "../cmps/card/card-description"
 import { UserAvatarPreview } from "../cmps/user-avatar-preview"
 
-import { RxCross1 } from 'react-icons/rx';
+import { RxCross1, RxActivityLog } from 'react-icons/rx';
 import { BsTextLeft } from 'react-icons/bs';
 import { BiWindow } from 'react-icons/bi';
 
@@ -48,7 +48,7 @@ export function CardDetails() {
 
 
     useEffect(() => {
-        loadActivities({cardId})
+        loadActivities({ cardId })
         console.log('activities.length = ', activities.length)
     }, [])
 
@@ -155,15 +155,17 @@ export function CardDetails() {
         if (memberIdx === -1) {
             member.isChecked = true
             card.members.push(member)
-            const txt = `${member.fullname} joined ${card.title}`
-            addActivity({txt, boardId: board._id, groupId, cardId})
+            // const txt = `${member.fullname} joined ${card.title}`
+            const txt = ` joined ${card.title}`
+            // addActivity({ txt, boardId: board._id, groupId, cardId })
+            addActivity({ txt, boardId: board._id, groupId, cardId, memberId: member.id })
 
         }
         else {
             member.isChecked = false
             card.members.splice(memberIdx, 1)
             const txt = `${member.fullname} left ${card.title}`
-            addActivity({txt, boardId: board._id, groupId, cardId})
+            addActivity({ txt, boardId: board._id, groupId, cardId })
         }
         const newMembers = card.members
         onSaveMembers(newMembers)
@@ -275,10 +277,22 @@ export function CardDetails() {
                             />
                         }
 
-                        <ActivitiesViewer
-                        activities={activities}
-                            card={card}
-                        />
+                        <div className="card-activities">
+                            <section className="activities-header">
+                                <span>  <RxActivityLog /> </span>
+                                Activity
+                            </section>
+
+                            {activities.map(activity => <div key={activity._id} className='activities-details'>
+
+                                <ActivitiesViewer
+                                    activity={activity}
+                                    card={card}
+                                />
+
+                            </div>)
+                            }
+                        </div>
 
 
                     </div >
