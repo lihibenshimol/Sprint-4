@@ -185,7 +185,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
             <div className="quick-editor" onClick={e => e.preventDefault()}>
 
                 <div className="quick-editor-textarea" ref={quickEditorTextareaRef} onClick={(e) => e.preventDefault()}>
-                {card.attachments && <div className="card-preview-img" style={{ backgroundColor: card.attachments[0].bg}}>
+                {card.attachments && <div className="quick-editor-img" style={{ backgroundColor: card.attachments[0].bg}}>
                             <img src={card.attachments[0].imgUrl} alt="" />
                         </div>}
                 {card.cover && !card.attachments && <div className="card-preview-cover" style={{ backgroundColor: card.cover, height:'32px', width:'256px' }}> </div>}
@@ -209,8 +209,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                                 </div>}
                             {card.members && <span className="preview-details-members">{card.members.map(member => <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
                         </section>
-                        <button className="save-btn">Save</button>
                     </form>
+                        <button onClick={onSaveCard} className="save-btn">Save</button>
                 </div>
 
                 {console.log('quickEditorPos.right = ', quickEditorPos.right)}

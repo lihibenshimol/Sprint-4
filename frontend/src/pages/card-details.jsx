@@ -159,7 +159,7 @@ export function CardDetails() {
             member.isChecked = true
             card.members.push(member)
         }
-        
+
         else {
             msg = 'left'
             member.isChecked = false
@@ -284,23 +284,15 @@ export function CardDetails() {
                                     <span>  <RxActivityLog /> </span>
                                     Activity
                                 </section>
-
-                                {activities?.map(activity => <div key={activity._id} className='activities-details'>
-                                    <ActivitiesViewer
-                                        activity={activity}
-                                        card={card}
-                                    />
-
+                                <div className="activities-container">
+                                    {activities?.map(activity => <div key={activity._id} className='activity-details'>
+                                        <ActivitiesViewer
+                                            activity={activity}
+                                            card={card}
+                                        />
+                                    </div>
+                                    )}
                                 </div>
-                                )}
-                                {/* {activities?.map(activity => <div key={activity._id} className='activities-details'>
-                                    <ActivitiesViewer
-                                        activities={activities}
-                                        card={card}
-                                    />
-
-                                </div>
-                                )} */}
 
                             </div >
 
