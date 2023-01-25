@@ -5,13 +5,14 @@ import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
 import { undoBoardUpdate, updateBoard } from "../store/board.actions"
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-import { BsFilter, BsThreeDots } from 'react-icons/bs'
+import { BsFilter, BsMusicNoteBeamed, BsThreeDots } from 'react-icons/bs'
 import { TfiDashboard } from 'react-icons/tfi'
 import { MdPersonAddAlt } from 'react-icons/md'
 import { utilService } from "../services/util.service"
 import { CardSelectDropDown } from "./card/card-select-dropdown"
 import { BoardMemberSelect } from "./board-member-select"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
+import { MusicModal } from "./music-modal"
 
 
 export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
@@ -22,6 +23,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
     const [pos, setPos] = useState({})
     const [dropdownType, setDropdownType] = useState(null)
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
+    const [isMusicModalOpen, setMusicModalOpen] = useState(false)
 
 
     useEffect(() => {
@@ -85,9 +87,15 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
         }
     }
 
+    function onOpenMusicModal() {
+        setIsOpenMenu(false)
+        setMusicModalOpen(prevModalOpen => !prevModalOpen)
+    }
+
     if (!board) return <h1>Loading...</h1>
     return (
         <>
+            <MusicModal className={isMusicModalOpen ? '' : 'hidden'} setMusicModalOpen={setMusicModalOpen} />
             {isDropDownOpen && <BoardMemberSelect
                 type={dropdownType}
                 pos={pos}
@@ -128,6 +136,9 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                 </section>
 
                 <section className="right">
+                    <button onClick={onOpenMusicModal} className="board-header-btn-icon">
+                        <BsMusicNoteBeamed />
+                    </button>
                     <button className="board-header-btn-icon filter-icon">
                         <BsFilter />
                         Filter
@@ -137,7 +148,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                         Dashboard
                     </button>
                     <span className="line">
-                       
+
                     </span>
                     {!isOpenMenu && (<button className="board-header-btn-icon dashboard-icon menu"
                         onClick={() => setIsOpenMenu(!isOpenMenu)}                    >
