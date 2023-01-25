@@ -40,7 +40,7 @@ async function remove(activityId) {
 // }
 
 async function add({txt, boardId, groupId, cardId, memberId}) {
-    
+    console.log('memberId = ', memberId)
   const addedActivity = await httpService.post(`activity`, {txt, boardId, groupId, cardId, memberId})
   return addedActivity
 }

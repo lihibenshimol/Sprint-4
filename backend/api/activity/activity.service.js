@@ -6,50 +6,60 @@ const activityCollection = 'activity'
 
 async function query(filterBy = {}) {
     try {
-        // const criteria = _buildCriteria(filterBy)
+        const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection(activityCollection)
-        const activities = await collection.find(filterBy).toArray()
-        // var activities = await collection.aggregate([
-            // {
-            //     $match: filterBy
-            // },
-            // {
-            //     $lookup:
-            //     {
-            //         localField: 'onMemberId',
-            //         from: 'user',
-            //         foreignField: '_id',
-            //         as: 'onMember'
-            //     }
-            // },
-            // {
-            //     $unwind: '$onMember'
-            // },
-        //     {
-        //         $lookup:
-        //         {
-        //             localField: 'onBoard',
-        //             from: 'board',
-        //             foreignField: '_id',
-        //             as: 'onBoard'
-        //         }
-        //     },
-        //     {
-        //         $unwind: '$onBoard'
-        //     }
-        // ])
-        // .toArray()
-        // activities = activities.map(activity => {
-        //     activity.txt 
-        //     activity.byUser = { id: activity.byUser._id, fullname: activity.byUser.fullname }
-        //     activity.onBoard = { id: activity.onBoard._id, fullname: activity.onBoard.title }
-        //     activity.onMember = { id: activity.onMember._id, fullname: activity.onMember.fullname }
-        //     delete activity.byUserId
-        //     delete activity.onBoardId
-        //     delete activity.onMemberId
-        //     return activity
-        // })
-        console.log('activities = ', activities.length)
+        // const activities = await collection.find(filterBy).toArray()
+        var activities = await collection.aggregate([
+            {
+                $match: criteria
+            },
+            {
+                $lookup:
+                {
+                    localField: 'onMemberId',
+                    from: 'user',
+                    foreignField: '_id',
+                    as: 'onMember'
+                }
+            },
+            {
+                $unwind: '$onMember'
+            },
+            {
+                $lookup:
+                {
+                    localField: 'byUserId',
+                    from: 'user',
+                    foreignField: '_id',
+                    as: 'byUser'
+                }
+            },
+            {
+                $unwind: '$byUser'
+            },
+                {
+                    $lookup:
+                    {
+                        localField: 'onBoardId',
+                        from: 'board',
+                        foreignField: '_id',
+                        as: 'onBoard'
+                    }
+                },
+                {
+                    $unwind: '$onBoard'
+                }
+        ]).toArray()
+        activities = activities.map(activity => {
+            activity.txt
+            activity.byUser = { id: activity.byUser._id, fullname: activity.byUser.fullname }
+            activity.onBoard = { id: activity.onBoard._id, title: activity.onBoard.title }
+            activity.onMember = { id: activity.onMember._id, fullname: activity.onMember.fullname }
+            delete activity.byUserId
+            delete activity.onBoardId
+            delete activity.onMemberId
+            return activity
+        })
         return activities
     } catch (err) {
         logger.error('cannot find activities', err)
@@ -66,7 +76,7 @@ async function remove(activityId) {
         // remove only if user is owner/admin
         const criteria = { _id: ObjectId(activityId) }
         if (!loggedinUser.isAdmin) criteria.byUserId = ObjectId(loggedinUser._id)
-        const {deletedCount} = await collection.deleteOne(criteria)
+        const { deletedCount } = await collection.deleteOne(criteria)
         return deletedCount
     } catch (err) {
         logger.error(`cannot remove activity ${activityId}`, err)
@@ -76,12 +86,13 @@ async function remove(activityId) {
 
 
 async function add(activity) {
+
     try {
         const activityToAdd = {
             byUserId: ObjectId(activity.byUserId),
-            onBoardId: ObjectId(activity.boardId),
+            onBoardId: ObjectId(activity.onBoardId),
             onCardId: activity.cardId,
-            onMamber: activity.memberId,
+            onMemberId: ObjectId(activity.memberId),
             txt: activity.txt
         }
         const collection = await dbService.getCollection('activity')

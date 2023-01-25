@@ -50,7 +50,6 @@ export function CardDetails() {
 
     useEffect(() => {
         loadActivities({ cardId })
-        // console.log('activities.length = ', activities.length)
     }, [])
 
 
@@ -159,22 +158,17 @@ export function CardDetails() {
             msg = 'joined'
             member.isChecked = true
             card.members.push(member)
-            // const txt = `${member.fullname} joined ${card.title}`
-            const txt = ` joined ${card.title}`
-            // addActivity({ txt, boardId: board._id, groupId, cardId })
-            addActivity({ txt, boardId: board._id, groupId, cardId, memberId: member.id })
-
         }
+        
         else {
             msg = 'left'
             member.isChecked = false
             card.members.splice(memberIdx, 1)
-            const txt = `${member.fullname} left ${card.title}`
-            addActivity({ txt, boardId: board._id, groupId, cardId })
         }
 
         const txt = `${member.fullname} ${msg} ${card.title}`
-        addActivity({ txt, boardId: board._id, groupId, cardId })
+        addActivity({ txt, boardId: board._id, groupId, cardId, memberId: member._id })
+
         const newMembers = card.members
         onSaveMembers(newMembers)
     }
@@ -291,14 +285,22 @@ export function CardDetails() {
                                     Activity
                                 </section>
 
-                                {activities.map(activity => <div key={activity._id} className='activities-details'>
+                                {activities?.map(activity => <div key={activity._id} className='activities-details'>
+                                    <ActivitiesViewer
+                                        activity={activity}
+                                        card={card}
+                                    />
+
+                                </div>
+                                )}
+                                {/* {activities?.map(activity => <div key={activity._id} className='activities-details'>
                                     <ActivitiesViewer
                                         activities={activities}
                                         card={card}
                                     />
 
                                 </div>
-                                )}
+                                )} */}
 
                             </div >
 

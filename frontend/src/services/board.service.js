@@ -28,6 +28,7 @@ export const boardService = {
 
     //groups
     addNewGroup,
+    removeGroup,
 
 
     // getEmptyMember,
@@ -96,7 +97,7 @@ function getEmptyAttachment() {
 //     save(boardId)
 // }
 
-
+//CARDS
 
 async function addNewCard(boardId, groupId, cardToAdd) {
     try {
@@ -116,6 +117,19 @@ async function addNewGroup(boardId, groupToAdd) {
     }
 }
 
+async function removeGroup(board, groupId) {
+
+        const groupIndex = board.groups.findIndex(g => g.id === groupId)
+
+        try {
+            board.groups.splice(groupIndex, 1)
+            const savedBoard = await save(board)
+            return savedBoard
+        } catch (err) {
+            console.log('Cannot remove card = ', err)
+        }
+
+}
 
 function getEmptyBoard() {
     return {

@@ -40,9 +40,8 @@ export function BoardDetails() {
 
     async function onRemoveGroup(groupId) {
         try {
-            const idx = board.groups.findIndex(g => g.id === groupId)
-            board.groups.splice(idx, 1)
-            const savedBoard = await updateBoard(board)
+            const updatedBoard = await boardService.removeGroup(board, groupId)
+            const savedBoard = await updateBoard(updatedBoard)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cannot remove group = ', err)
