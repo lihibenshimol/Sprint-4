@@ -96,6 +96,19 @@
                     border-radius: 3px;
                 }
             }
+
         }
+
+        .activity-container {
+            .activity-desc {
+
+                h4,
+                p {
+                    display: inline-block;
+                    margin: 0;
+                }
+            }
+        }
+
     }
 }
