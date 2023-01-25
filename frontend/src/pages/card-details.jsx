@@ -159,7 +159,7 @@ export function CardDetails() {
             member.isChecked = true
             card.members.push(member)
         }
-        
+
         else {
             msg = 'left'
             member.isChecked = false
@@ -293,23 +293,14 @@ export function CardDetails() {
 
                                 </div>
                                 )}
-                                {/* {activities?.map(activity => <div key={activity._id} className='activities-details'>
-                                    <ActivitiesViewer
-                                        activities={activities}
-                                        card={card}
-                                    />
-
-                                </div>
-                                )} */}
-
                             </div >
 
-                            <SideBar
-                                onSetType={onSetType}
-                                card={card}
-                                onSaveCheckList={onSaveCheckList}
-                            />
                         </div >
+                        <SideBar
+                            onSetType={onSetType}
+                            card={card}
+                            onSaveCheckList={onSaveCheckList}
+                        />
                     </div>
                 </>
             }
