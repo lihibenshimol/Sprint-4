@@ -18,9 +18,7 @@
 
 .quick-editor-textarea {
     position: fixed;
-    background-color: #ffffff;
     width: 256px;
-    height: 150px;
     box-shadow: rgba(9, 30, 66, .251);
     border-radius: 3px;
 
@@ -53,10 +51,6 @@
         font-size: 14px;
         overflow-y: visible;
         overflow-x: hidden;
-
-        // &:focus {
-        //     box-shadow: inset 0 0 0 2px $focus-input;
-        // }
 
         &::selection {
             color: black;

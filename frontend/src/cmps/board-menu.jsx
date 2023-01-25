@@ -2,7 +2,7 @@ import { RxCross2 } from "react-icons/rx";
 
 
 export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
-    console.log('board: ', board)
+    // console.log('board: ', board)
 
 
     return (

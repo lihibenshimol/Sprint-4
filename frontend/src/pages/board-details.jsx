@@ -7,6 +7,7 @@ import { GroupList } from '../cmps/group-list.jsx'
 import { Loader } from '../cmps/loader.jsx'
 import { boardService } from "../services/board.service"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_BOARD_UPDATED } from '../services/socket.service.js'
+import { addActivity } from '../store/activity.actions.js'
 import { getActionUpdateBoard, setCurrBoard, updateBoard } from '../store/board.actions.js'
 import { UPDATE_BOARD } from '../store/board.reducer.js'
 import { store } from '../store/store.js'
@@ -39,6 +40,7 @@ export function BoardDetails() {
     }
 
     async function onRemoveGroup(groupId) {
+        // let msg = 'removed'
         try {
             const updatedBoard = await boardService.removeGroup(board, groupId)
             const savedBoard = await updateBoard(updatedBoard)
@@ -46,9 +48,14 @@ export function BoardDetails() {
         } catch (err) {
             console.log('Cannot remove group = ', err)
         }
+
+
+        // const txt = ` ${msg} ${group}`
+        // addActivity({ txt, boardId: board._id, groupId, cardId: card.id, memberId: member._id })
     }
 
     async function onAddGroup(newGroup) {
+        let msg = 'added'
         if (!newGroup.title) newGroup.title = 'New List'
         try {
             const savedBoard = await boardService.addNewGroup(boardId, newGroup)
@@ -57,6 +64,9 @@ export function BoardDetails() {
         } catch (err) {
             console.log('Cannot add group = ', err)
         }
+
+        const txt = ` ${msg} list - ${newGroup.title}`
+        addActivity({ txt, boardId: board._id})
     }
 
 

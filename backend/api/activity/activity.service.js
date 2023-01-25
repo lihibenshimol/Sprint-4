@@ -37,18 +37,18 @@ async function query(filterBy = {}) {
             {
                 $unwind: '$byUser'
             },
+            {
+                $lookup:
                 {
-                    $lookup:
-                    {
-                        localField: 'onBoardId',
-                        from: 'board',
-                        foreignField: '_id',
-                        as: 'onBoard'
-                    }
-                },
-                {
-                    $unwind: '$onBoard'
+                    localField: 'onBoardId',
+                    from: 'board',
+                    foreignField: '_id',
+                    as: 'onBoard'
                 }
+            },
+            {
+                $unwind: '$onBoard'
+            }
         ]).toArray()
         activities = activities.map(activity => {
             activity.txt
@@ -86,17 +86,28 @@ async function remove(activityId) {
 
 
 async function add(activity) {
-
+    let activityToAdd
     try {
-        const activityToAdd = {
-            byUserId: ObjectId(activity.byUserId),
-            onBoardId: ObjectId(activity.onBoardId),
-            onCardId: activity.cardId,
-            onMemberId: ObjectId(activity.memberId),
-            txt: activity.txt
+        if (activity.cardId || activity.memberId) {
+            activityToAdd = {
+                byUserId: ObjectId(activity.byUserId),
+                onBoardId: ObjectId(activity.onBoardId),
+                onCardId: activity.cardId,
+                onMemberId: ObjectId(activity.memberId),
+                txt: activity.txt
+            }
+
+        } else {
+            activityToAdd = {
+                byUserId: ObjectId(activity.byUserId),
+                onBoardId: ObjectId(activity.onBoardId),
+                txt: activity.txt
+            }
         }
+
         const collection = await dbService.getCollection('activity')
         await collection.insertOne(activityToAdd)
+        // await collection.updateOne({$push: activityToAdd,  $position: 0 })
         return activityToAdd
     } catch (err) {
         logger.error('cannot insert activity', err)
