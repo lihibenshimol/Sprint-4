@@ -34,13 +34,13 @@ async function deleteActivity(req, res) {
 async function addActivity(req, res) {
 
     var { loggedinUser } = req
-
+    
     try {
         var activity = req.body
         activity.byUserId = loggedinUser._id
-        activity.onBoard = await boardService.getById(activity.boardId)
+        activity.onBoardId = activity.boardId
         activity.onCard = await boardService.getCardById(activity.boardId, activity.groupId, activity.cardId)
-        activity.onMember = activity.memberId
+        activity.onMemberId = activity.memberId
         activity = await activityService.add(activity)
 
         // // prepare the updated activity for sending out

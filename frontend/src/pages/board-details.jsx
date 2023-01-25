@@ -40,9 +40,8 @@ export function BoardDetails() {
 
     async function onRemoveGroup(groupId) {
         try {
-            const idx = board.groups.findIndex(g => g.id === groupId)
-            board.groups.splice(idx, 1)
-            const savedBoard = await updateBoard(board)
+            const updatedBoard = await boardService.removeGroup(board, groupId)
+            const savedBoard = await updateBoard(updatedBoard)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
         } catch (err) {
             console.log('Cannot remove group = ', err)
@@ -75,33 +74,33 @@ export function BoardDetails() {
 
 
 
-if (!board) return <Loader />
-return (
-    <>
-        <Outlet />
-        <section className='board-details' style={board.style}>
-            <section className={`board-menu ${isOpenMenu ? 'open' : ''}`}>
-                <BoardMenu
-                    isOpenMenu={isOpenMenu}
-                    setIsOpenMenu={setIsOpenMenu}
-                />
-            </section >
-
-            <section className={isOpenMenu ? 'board-content-open' : 'board-content'}>
-                <BoardHeader
-                    isOpenMenu={isOpenMenu}
-                    setIsOpenMenu={setIsOpenMenu}
-                />
-                <div className="group-container">
-                    <GroupList
-                        groups={board.groups}
-                        onAddGroup={onAddGroup}
-                        onAddCard={onAddCard}
-                        onRemoveGroup={onRemoveGroup}
+    if (!board) return <Loader />
+    return (
+        <>
+            <Outlet />
+            <section className='board-details' style={board.style}>
+                <section className={`board-menu ${isOpenMenu ? 'open' : ''}`}>
+                    <BoardMenu
+                        isOpenMenu={isOpenMenu}
+                        setIsOpenMenu={setIsOpenMenu}
                     />
-                </div>
+                </section >
+
+                <section className={isOpenMenu ? 'board-content-open' : 'board-content'}>
+                    <BoardHeader
+                        isOpenMenu={isOpenMenu}
+                        setIsOpenMenu={setIsOpenMenu}
+                    />
+                    <div className="group-container">
+                        <GroupList
+                            groups={board.groups}
+                            onAddGroup={onAddGroup}
+                            onAddCard={onAddCard}
+                            onRemoveGroup={onRemoveGroup}
+                        />
+                    </div>
+                </section>
             </section>
-        </section>
-    </>
-)
+        </>
+    )
 }

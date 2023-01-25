@@ -12,9 +12,12 @@ export function getActionSetWatchedUser(user) {
   return { type: 'SET_WATCHED_USER', user }
 }
 
+
+
 export async function loadActivities(filterBy = {}) {
   try {
     const activities = await activityService.query(filterBy)
+    console.log('activities in actions = ', activities)
     store.dispatch({ type: 'SET_ACTIVITIES', activities })
     return activities
   } catch (err) {
@@ -24,6 +27,7 @@ export async function loadActivities(filterBy = {}) {
 }
 
 export async function addActivity(activity) {
+
   try {
     const addedActivity = await activityService.add(activity)
     store.dispatch(getActionAddActivity(addedActivity))
