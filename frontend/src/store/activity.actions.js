@@ -15,6 +15,7 @@ export function getActionSetWatchedUser(user) {
 
 
 export async function loadActivities(filterBy = {}) {
+  console.log('working');
   try {
     const activities = await activityService.query(filterBy)
     console.log('activities in actions = ', activities)
@@ -27,11 +28,9 @@ export async function loadActivities(filterBy = {}) {
 }
 
 export async function addActivity(activity) {
-
   try {
     const addedActivity = await activityService.add(activity)
     store.dispatch(getActionAddActivity(addedActivity))
-    
   } catch (err) {
     console.log('ActivityActions: err in addActivity', err)
     throw err

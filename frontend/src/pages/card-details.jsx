@@ -33,6 +33,7 @@ export function CardDetails() {
 
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
+    const [activitiesDisplay, toggleActivitiesDisplay] = useState(false)
     const [attachToView, setAttachToView] = useState('')
 
     const [dropdownType, setDropdownType] = useState(null)
@@ -160,14 +161,13 @@ export function CardDetails() {
             card.members.push(member)
         }
 
-
         else {
             msg = 'left'
             member.isChecked = false
             card.members.splice(memberIdx, 1)
         }
 
-        const txt = `${member.fullname} ${msg} ${card.title}`
+        const txt = ` ${msg} ${card.title}`
         addActivity({ txt, boardId: board._id, groupId, cardId, memberId: member._id })
 
         const newMembers = card.members
@@ -282,27 +282,22 @@ export function CardDetails() {
 
                             <div className="card-activities">
                                 <section className="activities-header">
-                                    <span>  <RxActivityLog /> </span>
-                                    Activity
+                                    <span className="title">
+                                        <span className="activities-icon">  <RxActivityLog /> </span>
+                                        <h3> Activity </h3>
+                                    </span>
+                                    <button className="btn" onClick={() => toggleActivitiesDisplay(!activitiesDisplay)}>{activitiesDisplay ? 'Hide Details' : 'Show Details'}</button>
                                 </section>
 
-                                {activities?.map(activity => <div key={activity._id} className='activities-details'>
-                                    <ActivitiesViewer
-                                        activity={activity}
-                                        card={card}
-                                    />
-
-                                </div>
-                                )}
-                                {/* {activities?.map(activity => <div key={activity._id} className='activities-details'>
-                                    <ActivitiesViewer
-                                        activities={activities}
-                                        card={card}
-                                    />
-
-                                </div>
-                                )} */}
-
+                                {activitiesDisplay && <section className="activities-container">
+                                    {activities.map(activity => <div key={activity._id} className='activity-details'>
+                                        <ActivitiesViewer
+                                            activity={activity}
+                                            card={card}
+                                        />
+                                    </div>
+                                    )}
+                                </section>}
                             </div >
 
                         </div >
