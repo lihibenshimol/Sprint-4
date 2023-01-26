@@ -19,8 +19,10 @@
             height: 28px;
         }
 
-        img{
+        img {
             border-radius: 50%;
+            height: 100%;
+            object-fit: cover
         }
     }
 }

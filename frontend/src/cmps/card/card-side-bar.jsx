@@ -6,6 +6,7 @@ import { boardService } from "../../services/board.service.js"
 import { useState } from 'react';
 import { utilService } from '../../services/util.service';
 import { CardSelectDropDown } from './card-select-dropdown';
+import { GrAttachment } from 'react-icons/gr';
 
 export function SideBar({ card, onSaveCheckList, onSetType, }) {
 
@@ -57,7 +58,7 @@ export function SideBar({ card, onSaveCheckList, onSetType, }) {
                 </button>
 
                 <button className="label-btn" onClick={(e) => onSetType(e, 'attachment')}>
-                    <span className="tag-label"><AiOutlineClockCircle /></span>
+                    <span className="tag-label"><GrAttachment  /></span>
                     <span>Attachment</span>
                 </button>
 

@@ -12,6 +12,7 @@ import bgImg1 from '../assets/img/bg-img-1.jpg'
 import bgImg2 from '../assets/img/bg-img-2.jpg'
 import bgImg3 from '../assets/img/bg-img-3.jpg'
 import { ActivitiesViewer } from "./activities-viewer";
+import mongoose from "mongoose";
 
 export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
     const [isPickClrMode, setIsPickClrMode] = useState(false)
@@ -42,6 +43,12 @@ export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
         } catch (err) {
             console.log('Cant update board color')
         }
+    }
+
+    function getActivityCreatedAt(activityId) {
+        const objectId = mongoose.Types.ObjectId(activityId)
+        const timestamp = objectId.getTimestamp().toISOString()
+        return timestamp
     }
 
     return (
@@ -89,16 +96,23 @@ export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
                         <span className="icon"><RxActivityLog /> </span>
                         Activities
                     </label>
+                    {activities?.map(a => {
+                        return (
+                            <article className="activity-container" key={a._id}>
+                                <div className="user-activity-img">
+                                    <img src={`${a.byUser.imgUrl}`} alt="" />
+                                </div>
+                                <div className="activity-desc">
+                                    <h4>{a.byUser.fullname} </h4>
+                                    <p>{a.txt}</p>
+                                </div>
+                                <div>
+                                    <Moment format="MMM DD hh:mm A">{getActivityCreatedAt(a._id)}</Moment>
+                                </div>
+                            </article>)
+                    })}
 
-
-                    <ActivitiesViewer
-                        activities={activities}
-                    />
-
-
-
-                </>
-                }
+                </>}
 
 
 

@@ -10,13 +10,17 @@ export function BoardMemberSelect({ pos, addOrDeleteMember, setIsDropDownOpen, i
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const users = useSelector(storeState => storeState.userModule.users)
     const dropdownRef = useRef(null)
+    const [members, setMembers] = useState(board.members)
+    const [filterBy, setFilterBy] = useState('')
+
 
     useEffect(() => {
         loadUsers()
     }, [])
 
-
-
+    useEffect(() => {
+        onLoadUsers()
+    }, [filterBy])
 
     useEffect(() => {
         if (dropdownRef.current) {
@@ -29,6 +33,16 @@ export function BoardMemberSelect({ pos, addOrDeleteMember, setIsDropDownOpen, i
         }
     }, [dropdownRef])
 
+    function onLoadUsers() {
+        const regex = new RegExp(filterBy, 'i')
+        const membersToSet = users.filter(m => regex.test(m.fullname))
+        setMembers(membersToSet)
+    }
+
+    function onChange({ target }) {
+        const { value } = target
+        setFilterBy(value)
+    }
 
 
 
@@ -44,12 +58,14 @@ export function BoardMemberSelect({ pos, addOrDeleteMember, setIsDropDownOpen, i
                 <input type="text" className='search-input'
                     placeholder='Search members'
                     title='not available right now'
-                    disabled />
+                    value={filterBy}
+                    onChange={onChange}
+                />
 
                 <h4>Invite members</h4>
 
                 <ul className='member-selector' >
-                    {users?.map(m => {
+                    {members?.map(m => {
                         return <MemberOption
                             addOrDeleteMember={addOrDeleteMember}
                             member={m}
