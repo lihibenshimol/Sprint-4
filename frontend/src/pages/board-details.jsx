@@ -70,7 +70,7 @@ export function BoardDetails() {
         }
 
         const txt = ` ${msg} list - ${newGroup.title}`
-        addActivity({ txt, boardId: board._id})
+        addActivity({ txt, boardId: board._id })
     }
 
 
@@ -104,13 +104,16 @@ export function BoardDetails() {
                         isOpenMenu={isOpenMenu}
                         setIsOpenMenu={setIsOpenMenu}
                     />
-                    <div className="group-container">
-                        <GroupList
-                            groups={board.groups}
-                            onAddGroup={onAddGroup}
-                            onAddCard={onAddCard}
-                            onRemoveGroup={onRemoveGroup}
-                        />
+                    <div className='group-container-dad'>
+
+                        <div className="group-container">
+                            <GroupList
+                                groups={board.groups}
+                                onAddGroup={onAddGroup}
+                                onAddCard={onAddCard}
+                                onRemoveGroup={onRemoveGroup}
+                            />
+                        </div>
                     </div>
                 </section>
             </section>

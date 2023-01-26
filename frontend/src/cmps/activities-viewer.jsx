@@ -5,7 +5,7 @@ import { userService } from '../services/user.service';
 const mongoose = require('mongoose')
 
 export function ActivitiesViewer({ activities }) {
-    const [activitiesDisplay, toggleActivitiesDisplay] = useState(false)
+    const [activitiesDisplay, toggleActivitiesDisplay] = useState(true)
 
     function getActivityCreatedAt(activityId) {
         const objectId = mongoose.Types.ObjectId(activityId)

@@ -2,23 +2,23 @@
     max-height: 60vh;
     overflow-y: auto;
 
-    &::-webkit-scrollbar {
-        width: 12px;
-    }
+    // &::-webkit-scrollbar {
+    //     width: 12px;
+    // }
 
-    &::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 10px 10px $clr11;
-        border: solid 6px transparent;
-        border-radius: 3px;
-        border-left: 0px;
-    }
+    // &::-webkit-scrollbar-track {
+    //     box-shadow: inset 0 0 10px 10px $clr11;
+    //     border: solid 6px transparent;
+    //     border-radius: 3px;
+    //     border-left: 0px;
+    // }
 
-    &::-webkit-scrollbar-thumb {
-        box-shadow: inset 0 0 10px 10px rgba(9, 30, 66, 0.12);
-        border: solid 6px transparent;
-        border-radius: 3px;
-        border-left: 0px;
-    }
+    // &::-webkit-scrollbar-thumb {
+    //     box-shadow: inset 0 0 10px 10px rgba(9, 30, 66, 0.12);
+    //     border: solid 6px transparent;
+    //     border-radius: 3px;
+    //     border-left: 0px;
+    // }
 
     label {
         margin: 0;
