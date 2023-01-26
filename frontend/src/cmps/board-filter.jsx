@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { RxCross2 } from "react-icons/rx"
 import { useSelector } from "react-redux"
 import { MemberOption } from "./member-option"
+import { FilterByUser } from "./filter-by-user"
 
 
 export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
@@ -22,6 +23,7 @@ export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
     }, [dropdownRef])
 
 
+
     return (
         <div className="extras-menu flex" ref={dropdownRef} >
             <span className="title-container">
@@ -38,17 +40,13 @@ export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
 
                 <h4>Board members</h4>
 
-                {board.members && <ul className='member-selector' >
-                    {board.members?.map(m => {
-
-                        return <MemberOption
-                            // card={card}
-                            // addOrDeleteMember={addOrDeleteMember}
+                {board.members && <ul className='filter-by-user' >
+                    {board.members?.map(m =>  <FilterByUser
                             member={m}
                             key={m._id}
                             board={board}
                         />
-                    })}
+                    )}
                 </ul>}
             </div>
         </div >
