@@ -96,7 +96,7 @@ export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
                                 </div>
                                 <div className="activity-desc">
                                     <h4>{a.byUser.fullname} </h4>
-                                    <p>{a.txt} {a.onMember && <h4>{a.onMember.fullname}</h4>}</p>
+                                    <span>{a.txt} {a.onMember && <h4>{a.onMember.fullname}</h4>}</span>
                                 </div>
 
                                 <div className="activity-time">
