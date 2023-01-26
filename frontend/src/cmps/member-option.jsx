@@ -18,7 +18,6 @@ export function MemberOption({ card, board, member, handleChange, addOrDeleteMem
         return true
     }
 
-    // if (member.isChecked === true) return
     return (
         <li className="flex " onClick={handleChange}>
             <label>

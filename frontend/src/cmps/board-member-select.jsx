@@ -50,7 +50,6 @@ export function BoardMemberSelect({ pos, addOrDeleteMember, setIsDropDownOpen, i
 
                 <ul className='member-selector' >
                     {users?.map(m => {
-                      
                         return <MemberOption
                             addOrDeleteMember={addOrDeleteMember}
                             member={m}

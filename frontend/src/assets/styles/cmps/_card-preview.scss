@@ -9,18 +9,17 @@
 
     &::-webkit-scrollbar {
         width: 8px;
+        background-color: transparent;
     }
-
+    
     &::-webkit-scrollbar-track {
-        background-color: #dcdee3;
         border-radius: 10px;
     }
-
+    
     &::-webkit-scrollbar-thumb {
-        background-color: #c5c8d0;
+        background-color: #c5c8d0ad;
         border-radius: 20px;
         border: 0px solid transparent;
-        background-clip: content-box;
     }
 
     //     .quick-edit-btn {

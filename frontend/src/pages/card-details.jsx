@@ -33,7 +33,6 @@ export function CardDetails() {
 
     const [isDescriptionEdit, setIsDescriptionEdit] = useState(false)
     const [isEditAddTodo, setIsEditAddTodo] = useState(false)
-    const [activitiesDisplay, toggleActivitiesDisplay] = useState(false)
     const [attachToView, setAttachToView] = useState('')
 
     const [dropdownType, setDropdownType] = useState(null)
@@ -280,25 +279,10 @@ export function CardDetails() {
                                 />
                             }
 
-                            <div className="card-activities">
-                                <section className="activities-header">
-                                    <span className="title">
-                                        <span className="activities-icon">  <RxActivityLog /> </span>
-                                        <h3> Activity </h3>
-                                    </span>
-                                    <button className="btn" onClick={() => toggleActivitiesDisplay(!activitiesDisplay)}>{activitiesDisplay ? 'Hide Details' : 'Show Details'}</button>
-                                </section>
-
-                                {activitiesDisplay && <section className="activities-container">
-                                    {activities.map(activity => <div key={activity._id} className='activity-details'>
-                                        <ActivitiesViewer
-                                            activity={activity}
-                                            card={card}
-                                        />
-                                    </div>
-                                    )}
-                                </section>}
-                            </div >
+                            <ActivitiesViewer
+                                activities={activities}
+                                card={card}
+                            />
 
                         </div >
                         <SideBar

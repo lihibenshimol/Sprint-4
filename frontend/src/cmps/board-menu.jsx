@@ -11,6 +11,7 @@ import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.ser
 import bgImg1 from '../assets/img/bg-img-1.jpg'
 import bgImg2 from '../assets/img/bg-img-2.jpg'
 import bgImg3 from '../assets/img/bg-img-3.jpg'
+import { ActivitiesViewer } from "./activities-viewer";
 
 export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
     const [isPickClrMode, setIsPickClrMode] = useState(false)
@@ -20,7 +21,7 @@ export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
 
     useEffect(() => {
         loadActivities()
-    }, [])
+    }, [isOpenMenu])
 
     async function onSetClr(clr) {
         try {
@@ -88,23 +89,14 @@ export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
                         <span className="icon"><RxActivityLog /> </span>
                         Activities
                     </label>
-                    {activities?.map(a => {
-                        return (
-                            <article className="activity-container" key={a._id}>
-                                <div className="user-activity-img">
-                                    <img src={`${a.byUser.imgUrl}`} alt="" />
-                                </div>
-                                <div className="activity-desc">
-                                    <h4>{a.byUser.fullname} </h4>
-                                    <span>{a.txt} {a.onMember && <h4>{a.onMember.fullname}</h4>}</span>
-                                </div>
 
-                                <div className="activity-time">
-                                    {/* <Moment interval={10000} fromNow>{Date.now()}</Moment> */}
-                                </div>
-                            </article>
-                        )
-                    })}
+
+                    <ActivitiesViewer
+                        activities={activities}
+                    />
+
+
+
                 </>
                 }
 
