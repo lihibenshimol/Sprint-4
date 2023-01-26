@@ -135,13 +135,15 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                         Invite
                     </button>
 
-                    <button className="board-header-btn-icon undo-icon" onClick={() => undoBoardUpdate(lastUpdatedBoard)}>
+                    <button className="board-header-btn-icon undo-icon"
+                        style={{ display: 'none' }}
+                        onClick={() => undoBoardUpdate(lastUpdatedBoard)}>
                         Undo
                     </button>
                 </section>
 
                 <section className="right">
-                    <button onClick={onOpenMusicModal} className="board-header-btn-icon">
+                    <button onClick={onOpenMusicModal} className="board-header-btn-icon" style={{ display: 'none' }}>
                         <BsMusicNoteBeamed />
                     </button>
                     <button className="board-header-btn-icon filter-icon"

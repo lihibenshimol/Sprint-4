@@ -26,27 +26,27 @@ export function ActivitiesViewer({ activities }) {
 
                 <div className='activities-container'>
 
-            {activitiesDisplay && activities?.map(activity => <div key={activity._id} className='activity-details'>
-                <span className='activity-user-img'>
-                    <img src={activity.onMember?.imgUrl} alt="" />
-                </span>
+                    {activitiesDisplay && activities?.map(activity => <div key={activity._id} className='activity-details'>
+                        <span className='activity-user-img'>
+                            <img src={activity.onMember?.imgUrl} alt="" />
+                        </span>
 
-                <section className='activity-msg'>
-                    <div>
-                        <span className='activity-member'>
-                            {activity.onMember?.fullname}
-                        </span>
-                        <span>
-                            {activity.txt}
-                        </span>
+                        <section className='activity-msg'>
+                            <div>
+                                <span className='activity-member'>
+                                    {activity.onMember?.fullname }
+                                </span>
+                                <span>
+                                    {activity.txt}
+                                </span>
+                            </div>
+                            <span className='activity-timestamp'>
+                                <Moment format="MMM DD hh:mm A">{getActivityCreatedAt(activity._id)}</Moment>
+                            </span>
+                        </section>
                     </div>
-                    <span className='activity-timestamp'>
-                        <Moment format="MMM DD hh:mm A">{getActivityCreatedAt(activity._id)}</Moment>
-                    </span>
-                </section>
-            </div>
-            )}
-            </div>
+                    )}
+                </div>
             </div>
         </>
     )

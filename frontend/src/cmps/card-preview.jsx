@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { BsPencil } from 'react-icons/bs'
+import { BsPencil, BsTextLeft } from 'react-icons/bs'
+import { GrAttachment } from 'react-icons/gr'
 import { IoMdCheckboxOutline } from 'react-icons/io'
 import { useDispatch, useSelector } from "react-redux";
 import { utilService } from "../services/util.service";
@@ -96,9 +97,9 @@ export function CardPreview({ card, idx, groupId }) {
                         isDragging={snapshot.isDragging && !snapshot.isDropAnimating}
                     >
                         <div className="card-preview-container">
-                        {card.attachments && <div className="card-preview-img" style={{ backgroundColor: card.attachments[0].bg}}>
-                            <img src={card.attachments[0].imgUrl} alt="" />
-                        </div>}
+                            {card.attachments && <div className="card-preview-img" style={{ backgroundColor: card.attachments[0].bg }}>
+                                <img src={card.attachments[0].imgUrl} alt="" />
+                            </div>}
                             {card.cover && !card.attachments && <div className="card-preview-cover" style={{ backgroundColor: card.cover, padding: 0, width: '100%' }}> </div>}
                             <button onClick={(ev) => openQuickEditor(ev)} className="quick-edit-btn"> <BsPencil /> </button>
                             <div className="card-preview-body">
@@ -119,9 +120,26 @@ export function CardPreview({ card, idx, groupId }) {
                                 <section className="card-preview-details">
                                     {!!card.checklists.length &&
                                         <div style={isTasksDone(card.checklists[0])} className="preview-details-checklist" >
-                                            <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
-                                            <span> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} </span>
+
+                                            <span className="icon-container">
+                                                <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
+                                                <span> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} </span>
+                                            </span>
+
+                                            {card.attachments &&
+                                                <span className="icon-container">
+                                                    <span className="preview-details-attach-icon"><GrAttachment /> </span>
+                                                    <span>{card.attachments.length}</span>
+                                                </span>}
+
+                                            {card.desc &&
+                                                <span className="icon-container">
+                                                    <span className="preview-details-checklist-icon"><BsTextLeft /> </span>
+                                                </span>}
+
                                         </div>}
+
+
                                     {card.members &&
                                         <span className="preview-details-members"> {card.members.map(member => <span key={member._id}> <img className="member-img" src={member.imgUrl} alt="" /></span>)} </span>}
                                 </section>
