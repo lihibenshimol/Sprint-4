@@ -8,21 +8,6 @@
     position: relative;
     min-height: 44px;
 
-    // .extras-menu {
-    //     z-index: 3;
-    //     left: 266px;
-    //     top: 135px;
-    //     flex-direction: column;
-    //     background-color: white;
-    //     color: black;
-    //     position: absolute;
-    //     left: 5px;
-    //     min-height: 100px px;
-    //     min-width: 270px;
-    //     border-radius: 3px;
-    //     z-index: 2;
-    //     box-shadow: 0 8px 16px -4px rgb(9 30 66 / 25%), 0 0 0 1px rgb(9 30 66 / 8%);
-    // }
 
     .board-header-btn-icon {
         display: flex;
@@ -169,7 +154,7 @@
 .extras-menu {
     flex-direction: column;
     background-color: white;
-    color: black;
+    color: #172b4d;
     position: fixed;
     top: 55px;
     left: 5px;

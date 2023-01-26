@@ -13,6 +13,7 @@ import { CardSelectDropDown } from "./card/card-select-dropdown"
 import { BoardMemberSelect } from "./board-member-select"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
 import { MusicModal } from "./music-modal"
+import { BoardFilter } from "./board-filter"
 
 
 export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
@@ -24,7 +25,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
     const [dropdownType, setDropdownType] = useState(null)
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
     const [isMusicModalOpen, setMusicModalOpen] = useState(false)
-
+    const [isFilterMode, setIsFilterMode] = useState(false)
 
     useEffect(() => {
         setBoardNewTitle(board.title)
@@ -104,9 +105,13 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                 addOrDeleteMember={addOrDeleteMember}
             />}
 
+            {isFilterMode && <BoardFilter
+                pos={pos}
+                isFilterMode={isFilterMode}
+                setIsFilterMode={setIsFilterMode}
+            />}
 
             <div className="board-header full">
-
 
                 <section className="left">
                     <h1 onClick={() => setEditMode(!editMode)} className={"board-header-text" + (editMode ? ' edit-mode' : '')}>{board.title}</h1>
@@ -139,7 +144,8 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                     <button onClick={onOpenMusicModal} className="board-header-btn-icon">
                         <BsMusicNoteBeamed />
                     </button>
-                    <button className="board-header-btn-icon filter-icon">
+                    <button className="board-header-btn-icon filter-icon"
+                        onClick={() => setIsFilterMode(!isFilterMode)}>
                         <BsFilter />
                         Filter
                     </button>
