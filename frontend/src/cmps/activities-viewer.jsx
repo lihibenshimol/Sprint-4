@@ -15,7 +15,7 @@ export function ActivitiesViewer({ activities }) {
 
     return (
         <>
-            <div className="activities-container">
+            <div className="activities-viewer">
                 <section className="activities-header">
                     <span className="title">
                         <span className="activities-icon">  <RxActivityLog /> </span>
@@ -23,6 +23,8 @@ export function ActivitiesViewer({ activities }) {
                     </span>
                     <button className="btn" onClick={() => toggleActivitiesDisplay(!activitiesDisplay)}> {activitiesDisplay ? 'Hide Details' : 'Show Details'}</button>
                 </section>
+
+                <div className='activities-container'>
 
             {activitiesDisplay && activities?.map(activity => <div key={activity._id} className='activity-details'>
                 <span className='activity-user-img'>
@@ -44,6 +46,7 @@ export function ActivitiesViewer({ activities }) {
                 </section>
             </div>
             )}
+            </div>
             </div>
         </>
     )

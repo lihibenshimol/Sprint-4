@@ -6,7 +6,7 @@ const socketService = require('../../services/socket.service')
 const activityService = require('./activity.service')
 
 async function getActivities(req, res) {
-    console.log('req.query = ', req.query)
+    // console.log('req.query = ', req.query)
     try {
         const activities = await activityService.query(req.query)
         res.send(activities)

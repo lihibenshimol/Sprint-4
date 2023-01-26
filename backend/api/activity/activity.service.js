@@ -5,50 +5,50 @@ const asyncLocalStorage = require('../../services/als.service')
 const activityCollection = 'activity'
 
 async function query(filterBy = {}) {
+    console.log('filterBy = ', filterBy)
     try {
         const criteria = _buildCriteria(filterBy)
         const collection = await dbService.getCollection(activityCollection)
         // const activities = await collection.find(filterBy).toArray()
-        var activities = await collection.aggregate([
+        var activities = await collection.aggregate([{ $sort: { _id: -1 } }, {
+            $match: criteria
+        },
+        {
+            $lookup:
             {
-                $match: criteria
-            },
-            {
-                $lookup:
-                {
-                    localField: 'onMemberId',
-                    from: 'user',
-                    foreignField: '_id',
-                    as: 'onMember'
-                }
-            },
-            {
-                $unwind: '$onMember'
-            },
-            {
-                $lookup:
-                {
-                    localField: 'byUserId',
-                    from: 'user',
-                    foreignField: '_id',
-                    as: 'byUser'
-                }
-            },
-            {
-                $unwind: '$byUser'
-            },
-            {
-                $lookup:
-                {
-                    localField: 'onBoardId',
-                    from: 'board',
-                    foreignField: '_id',
-                    as: 'onBoard'
-                }
-            },
-            {
-                $unwind: '$onBoard'
+                localField: 'onMemberId',
+                from: 'user',
+                foreignField: '_id',
+                as: 'onMember'
             }
+        },
+        {
+            $unwind: '$onMember'
+        },
+        {
+            $lookup:
+            {
+                localField: 'byUserId',
+                from: 'user',
+                foreignField: '_id',
+                as: 'byUser'
+            }
+        },
+        {
+            $unwind: '$byUser'
+        },
+        {
+            $lookup:
+            {
+                localField: 'onBoardId',
+                from: 'board',
+                foreignField: '_id',
+                as: 'onBoard'
+            }
+        },
+        {
+            $unwind: '$onBoard'
+        }
         ]).toArray()
         activities = activities.map(activity => {
             activity.txt
@@ -117,6 +117,7 @@ async function add(activity) {
 
 function _buildCriteria(filterBy) {
     const criteria = {}
+    if (filterBy.onCardId === 'undefined') filterBy.onCardId = undefined
     if (filterBy.onCardId) criteria.onCardId = filterBy.onCardId
     return criteria
 }
