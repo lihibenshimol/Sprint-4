@@ -4,6 +4,7 @@ import { useState } from 'react';
 import YouTube from 'react-youtube';
 import { CiPlay1 } from 'react-icons/ci'
 import { CiPause1 } from 'react-icons/ci'
+import { AiOutlineSound } from 'react-icons/ai'
 import { useEffect } from 'react';
 import axios from 'axios';
 import { utilService } from '../services/util.service';
@@ -24,6 +25,9 @@ export function MusicModal({ setMusicModalOpen, className }) {
     const [currSong, setCurrSong] = useState({ vidId: 'yvlP4KYW7BE', title: 'V (Cyberpunk 2077 Soundtrack)' })
     const searchInputRef = useRef(null)
     const sliderRef = useRef(null)
+    const [volume, setVolume] = useState(12)
+    const [videoLength, setVideoLength] = useState(0)
+    const [songImg, setSongImg] = useState('https://i.ytimg.com/vi/yvlP4KYW7BE/hqdefault.jpg')
 
     const handleSearchChangeRef = useRef(utilService.debounce(handleSearchChange))
 
@@ -32,10 +36,6 @@ export function MusicModal({ setMusicModalOpen, className }) {
             clearInterval(videoIntervalRef.current)
         }
     }, [])
-
-    // useEffect(() => {
-
-    // }, [searchStr])
 
     async function getVids(query) {
         const res = await axios.get(API_URL + query)
@@ -52,7 +52,8 @@ export function MusicModal({ setMusicModalOpen, className }) {
 
     function _onReady(event) {
         setVideo(event.target)
-        console.log(event.target.getCurrentTime())
+        event.target.setVolume(volume)
+        setVideoLength(event.target.getDuration())
         videoIntervalRef.current = setInterval(() => {
             setVideoCurrTime(event.target.getCurrentTime())
             if (+event.target.getCurrentTime() >= +event.target.getDuration()) {
@@ -80,10 +81,9 @@ export function MusicModal({ setMusicModalOpen, className }) {
         }
         setSearchStr(value)
         let vids = await getVids(value)
-        vids = vids.map(vid => ({ vidId: vid.id.videoId, title: vid.snippet.title }))
+        vids = vids.map(vid => ({ vidId: vid.id.videoId, title: vid.snippet.title, thumbnail: vid.snippet.thumbnails?.high.url || vid.snippet.thumbnails?.default.url }))
         setSongs(vids)
         setDropdownOpen(true)
-        console.log(vids)
     }
 
     function onToggleVideo() {
@@ -101,6 +101,8 @@ export function MusicModal({ setMusicModalOpen, className }) {
         setDropdownOpen(false)
         setVideoCurrTime(0)
         setFirstClick(true)
+        setVideoPlaying(false)
+        setSongImg(song.thumbnail)
         searchInputRef.current.value = ''
         sliderRef.current.value = 0
         if (videoIntervalRef.current) clearInterval(videoIntervalRef.current)
@@ -117,7 +119,12 @@ export function MusicModal({ setMusicModalOpen, className }) {
         searchInputRef.current.value = ''
     }
 
-
+    function handleVolumeChange({ target }) {
+        const { value } = target
+        if (!video) return
+        setVolume(value)
+        video.setVolume(value)
+    }
 
     return (
         <div className={className}>
@@ -127,11 +134,22 @@ export function MusicModal({ setMusicModalOpen, className }) {
                     {isDropdownOpen && <MusicModalDropdown onSetSong={onSetSong} songs={songs} />}
                 </div>
                 <h2>{currSong?.title}</h2>
+                <div className='img-container'><img src={songImg} /></div>
                 <YouTube className='hidden' videoId={currSong.vidId} opts={opts} onReady={_onReady} controls />
-                <button onClick={onToggleVideo} className='play-pause-btn'>{isVideoPlaying ? <CiPause1 /> : <CiPlay1 />}</button>
-                <input ref={sliderRef} defaultValue="0" value={videoCurrTime} step={0.1} max={video?.getDuration()} type="range" onChange={handleChange} />
+
+                <section className='song-controls'>
+                    <button onClick={onToggleVideo} className='play-pause-btn'>{isVideoPlaying ? <CiPause1 /> : <CiPlay1 />}</button>
+                    <span>{utilService.formatTime(+videoCurrTime)}</span>
+                    <input ref={sliderRef} defaultValue="0" value={videoCurrTime} step={0.1} max={video?.getDuration()} type="range" onChange={handleChange} />
+                    <span>{utilService.formatTime(+videoLength)}</span>
+                    <div className='volume-container'>
+                        <AiOutlineSound />
+                        <input defaultValue={12} max="100" step="1" onChange={handleVolumeChange} type="range" />
+                    </div>
+                </section>
+
             </section>
-            <div onClick={handleBgClick} className="black-bg"></div>
+            <div style={{backgroundColor: 'rgba(0,0,0,0.6)'}} onClick={handleBgClick} className="black-bg"></div>
         </div>
 
     )
