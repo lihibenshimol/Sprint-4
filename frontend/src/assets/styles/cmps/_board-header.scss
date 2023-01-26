@@ -108,10 +108,12 @@
                 object-fit: cover;
                 width: 32px;
                 border-radius: 25em;
-                border: .1px solid white;
+                border: .1px solid #ffffff5e;
 
                 img {
                     border-radius: 25em;
+                    height: 100%;
+                    object-fit: cover;
                 }
             }
         }

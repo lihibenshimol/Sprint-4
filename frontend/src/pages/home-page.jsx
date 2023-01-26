@@ -7,7 +7,7 @@ import asset3 from '../assets/img/asset3.png'
 import { useState } from 'react'
 
 export function HomePage() {
-    const [dynImg, setDynImg] = useState(asset1)
+    const [dynImg, setDynImg] = useState(asset2)
 
     return (
         <section className='home-page'>

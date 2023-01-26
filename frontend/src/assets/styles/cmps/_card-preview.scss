@@ -11,11 +11,11 @@
         width: 8px;
         background-color: transparent;
     }
-    
+
     &::-webkit-scrollbar-track {
         border-radius: 10px;
     }
-    
+
     &::-webkit-scrollbar-thumb {
         background-color: #c5c8d0ad;
         border-radius: 20px;
@@ -111,7 +111,8 @@ a:hover {
             margin: 4px 0 4px 0;
             font-size: 12px;
             line-height: 16px;
-            transition: .4s ease-in;
+            // transition: all .4s ease-in;
+            transition: padding .2s, height .4s ease-in, width .4s ease-in, margin .4s ease-in;
 
 
             &:hover {
@@ -170,6 +171,9 @@ a:hover {
             align-self: flex-end;
             grid-column: 2 / 3;
 
+            span {
+                margin-right: 4px;
+            }
 
             .member-img {
                 height: 28px;
@@ -182,8 +186,9 @@ a:hover {
 
         .preview-details-checklist {
             grid-column: 1 / 2;
+
             display: flex;
-            gap: 6px;
+            gap: 10px;
             padding-bottom: 3px;
             width: 50px;
             border-radius: 3px;
@@ -196,8 +201,16 @@ a:hover {
 
             .icon-container {
                 margin-inline-end: 8px;
+                display: flex;
+                align-items: center;
+                gap: 5px
             }
 
+            .preview-details-attach-icon {
+                padding-top: 5px;
+
+                color: #5e6c84;
+            }
 
             .preview-details-checklist-icon {
                 padding-top: 5px;

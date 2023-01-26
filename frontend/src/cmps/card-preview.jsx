@@ -120,14 +120,15 @@ export function CardPreview({ card, idx, groupId }) {
                                 <section className="card-preview-details">
                                     {!!card.checklists.length &&
                                         <div style={isTasksDone(card.checklists[0])} className="preview-details-checklist" >
-                                            {/* <span className="icon-container"> */}
+
+                                            <span className="icon-container">
                                                 <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
                                                 <span> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} </span>
-                                            {/* </span> */}
+                                            </span>
 
                                             {card.attachments &&
                                                 <span className="icon-container">
-                                                    <span className="preview-details-checklist-icon"><GrAttachment /> </span>
+                                                    <span className="preview-details-attach-icon"><GrAttachment /> </span>
                                                     <span>{card.attachments.length}</span>
                                                 </span>}
 

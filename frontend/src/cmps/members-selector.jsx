@@ -3,11 +3,19 @@ import { MemberOption } from "./member-option"
 import { RxCross2 } from 'react-icons/rx';
 import { utilService } from "../services/util.service";
 import { useRef, useEffect } from "react";
+import { useState } from "react";
 
 
 export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen, isDropDownOpen }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+    const [members, setMembers] = useState(board.members)
+    const [filterBy, setFilterBy] = useState('')
+
     const dropdownRef = useRef(null)
+
+    useEffect(() => {
+        loadMember()
+    }, [filterBy])
 
     useEffect(() => {
         if (dropdownRef.current) {
@@ -19,6 +27,17 @@ export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen,
             }
         }
     }, [dropdownRef])
+
+    function loadMember() {
+        const regex = new RegExp(filterBy, 'i')
+        const membersToSet = board.members.filter(m => regex.test(m.fullname))
+        setMembers(membersToSet)
+    }
+
+    function onChange({ target }) {
+        const { value } = target
+        setFilterBy(value)
+    }
 
 
     return (
@@ -33,12 +52,14 @@ export function MembersSelect({ card, pos, addOrDeleteMember, setIsDropDownOpen,
                 <input type="text" className='search-input'
                     placeholder='Search members'
                     title='not available right now'
-                    disabled />
+                    value={filterBy}
+                    onChange={onChange}
+                />
 
                 <h4>Board members</h4>
 
-                {board.members && <ul className='member-selector' >
-                    {board.members?.map(m => {
+                {members && <ul className='member-selector' >
+                    {members?.map(m => {
                         return <MemberOption
                             card={card}
                             addOrDeleteMember={addOrDeleteMember}
