@@ -34,39 +34,49 @@ async function deleteActivity(req, res) {
 async function addActivity(req, res) {
 
     var { loggedinUser } = req
-    
+
     try {
         var activity = req.body
         activity.byUserId = loggedinUser._id
         activity.onBoardId = activity.boardId
-        activity.onCard = await boardService.getCardById(activity.boardId, activity.groupId, activity.cardId)
-        activity.onMemberId = activity.memberId
+        if (activity.cardId) activity.onCard = await boardService.getCardById(activity.boardId, activity.groupId, activity.cardId)
+        if (activity.memberId) activity.onMemberId = activity.memberId
+
         activity = await activityService.add(activity)
 
-        // // prepare the updated activity for sending out
 
-        // Give the user credit for adding a activity
-        // var user = await userService.getById(activity.byUserId)
-        // user.score += 10
-       
+        //after saving
+        let activityToSend
+        
+        const byUser = { fullname: loggedinUser.fullname, imgUrl: loggedinUser.imgUrl}
 
-        // loggedinUser = await userService.update(loggedinUser)
-        // activity.byUser = loggedinUser
+        if (activity.onMemberId || activity.cardId) {
+            let onMember = await userService.getById(activity.onMemberId)
+            onMember = { fullname: onMember.fullname, imgUrl: onMember.imgUrl }
+            activityToSend = {
+                byUser,
+                onMember,
+                boardId: activity.onBoardId,
+                cardId: activity.onCardId,
+                txt: activity.txt
+            }
 
-        // User info is saved also in the login-token, update it
-        // const loginToken = authService.getLoginToken(loggedinUser)
-        // res.cookie('loginToken', loginToken)
+        } else {
+            activityToSend = {
+                byUser,
+                boardId: activity.onBoardId,
+                txt: activity.txt
+            }
+        }
 
-        // delete activity.aboutUserId
-        // delete activity.byUserId
 
         // socketService.broadcast({ type: 'activity-added', data: activity, userId: loggedinUser._id })
         // socketService.emitToUser({ type: 'activity-about-you', data: activity, userId: activity.aboutUser._id })
 
         // const fullUser = await userService.getById(loggedinUser._id)
         // socketService.emitTo({ type: 'user-updated', data: fullUser, label: fullUser._id })
-       
-        res.send(activity)
+
+        res.send(activityToSend)
 
     } catch (err) {
         logger.error('Failed to add activity', err)

@@ -68,7 +68,7 @@ export function GroupDetails({ group, onAddCard, onRemoveGroup, idx }) {
                                     <BsThreeDots />
                                 </button>
 
-                                {extrasMenu && <div className="extras-menu flex">
+                                {extrasMenu && <div className="group-extras-menu flex">
                                     <span className="title-container">
                                         <p>
                                             List actions

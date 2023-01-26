@@ -14,11 +14,12 @@ import { IoMdCheckboxOutline } from 'react-icons/io'
 import { CardSelectDropDown } from "./card/card-select-dropdown"
 import { utilService } from "../services/util.service"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
+import { addActivity } from "../store/activity.actions"
 
 
 export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quickEditorPos, doneInCheckList, isTasksDone }) {
     let board = useSelector(storeState => storeState.boardModule.currBoard)
-    board = {...board}
+    board = { ...board }
     const [cardToEdit, setCardToEdit] = useState(card)
     const [pos, setPos] = useState({})
     const [dropdownType, setDropdownType] = useState(null)
@@ -80,7 +81,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
         try {
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
-        } catch(err) {
+        } catch (err) {
             console.log('Failed to save board ', err)
         }
         openQuickEditor(ev, !quickEditor)
@@ -144,15 +145,21 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
 
     function addOrDeleteMember(member) {
         if (!card.members) card.members = []
+        let msg
         const memberIdx = card.members.findIndex(m => m._id === member._id)
         if (memberIdx === -1) {
+            msg = 'joined'
             member.isChecked = true
             card.members.push(member)
         }
         else {
+            msg = 'left'
             member.isChecked = false
             card.members.splice(memberIdx, 1)
         }
+
+        const txt = ` ${msg} ${card.title}`
+        addActivity({ txt, boardId: board._id, groupId, cardId: card.id, memberId: member._id })
 
         const newMembers = card.members
         onSaveMembers(newMembers) // TO CHECK IF WE CAN REMOVE THE FUNC
@@ -185,10 +192,10 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
             <div className="quick-editor" onClick={e => e.preventDefault()}>
 
                 <div className="quick-editor-textarea" ref={quickEditorTextareaRef} onClick={(e) => e.preventDefault()}>
-                {card.attachments && <div className="quick-editor-img" style={{ backgroundColor: card.attachments[0].bg}}>
-                            <img src={card.attachments[0].imgUrl} alt="" />
-                        </div>}
-                {card.cover && !card.attachments && <div className="card-preview-cover" style={{ backgroundColor: card.cover, height:'32px', width:'256px' }}> </div>}
+                    {card.attachments && <div className="quick-editor-img" style={{ backgroundColor: card.attachments[0].bg }}>
+                        <img src={card.attachments[0].imgUrl} alt="" />
+                    </div>}
+                    {card.cover && !card.attachments && <div className="card-preview-cover" style={{ backgroundColor: card.cover, height: '32px', width: '256px' }}> </div>}
                     <form onSubmit={onSaveCard}>
                         <textarea
                             ref={textAreaRef}
@@ -210,7 +217,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                             {card.members && <span className="preview-details-members">{card.members.map(member => <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
                         </section>
                     </form>
-                        <button onClick={onSaveCard} className="save-btn">Save</button>
+                    <button onClick={onSaveCard} className="save-btn">Save</button>
                 </div>
 
                 {console.log('quickEditorPos.right = ', quickEditorPos.right)}

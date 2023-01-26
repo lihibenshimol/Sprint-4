@@ -7,6 +7,7 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     getPosToDisplay,
+    formatTime
 }
 
 function getPosToDisplay(ev) {
@@ -56,7 +57,7 @@ function randomPastTime() {
     return Date.now() - pastTime
 }
 
-function debounce(func, timeout = 300) {
+function debounce(func, timeout = 500) {
     let timer
     return (...args) => {
         clearTimeout(timer)
@@ -71,4 +72,20 @@ function saveToStorage(key, value) {
 function loadFromStorage(key) {
     const data = localStorage.getItem(key)
     return (data) ? JSON.parse(data) : undefined
+}
+
+function formatTime(time) {
+    // Hours, minutes and seconds
+    time = Math.floor(time)
+    let hrs = ~~(time / 3600)
+    let mins = ~~((time % 3600) / 60)
+    let secs = ~~time % 60
+
+    let ret = ""
+    if (hrs > 0) {
+        ret += "" + hrs + ":" + (mins < 10 ? "0" : "")
+    }
+    ret += "" + String(mins).padStart(2, '0') + ":" + (secs < 10 ? "0" : "")
+    ret += "" + secs
+    return ret
 }

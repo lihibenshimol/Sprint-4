@@ -1,0 +1,71 @@
+.card-activities {
+    margin: 20px 0px 4px 4px;
+
+    h3 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .activities-header {
+        display: flex;
+        font-size: 16px;
+        align-items: flex-end;
+        margin-bottom: 15px;
+        justify-content: space-between;
+
+        .activities-icon {
+            font-size: rem(20px);
+        }
+    }
+
+    .title {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .btn {
+        margin: 0;
+        background-color: #EAEBEF;
+        color: black;
+        margin-inline-start: 9px;
+        border-radius: 3px;
+        padding: 6px 12px;
+        display: inline-flex;
+        font-size: 14px;
+        font-weight: 100;
+        font-weight: 400;
+        justify-content: center;
+        line-height: 20px;
+        align-items: center;
+    }
+
+    .activity-details {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+
+        .activity-user-img {
+            img {
+                border: 1px solid rgba(224, 224, 224, 0.281);
+                border-radius: 25em;
+                width: 32px;
+            }
+        }
+
+        .activity-msg {
+            line-height: 20px;
+
+            .activity-member {
+                font-weight: 700;
+            }
+
+            .activity-timestamp {
+                color: #5e6c84;
+                font-size: 12px;
+            }
+
+        }
+    }
+}
