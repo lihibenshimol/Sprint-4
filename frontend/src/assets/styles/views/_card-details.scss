@@ -19,6 +19,7 @@
 }
 
 .card {
+  color: #172b4d;
   background-color: #f4f5f7;
   z-index: 999;
   background-color: $clr11;
@@ -88,7 +89,7 @@
 
   }
 
-  
+
 
   .card-content {
 
@@ -128,7 +129,7 @@
             margin: 0 8px 8px 0;
 
             &>:last-child {
-              color: black;
+              color: #172b4d;
               font-size: 16px;
               padding: 2px 0;
               background-color: #eaecf0;
@@ -185,7 +186,7 @@
               min-width: 0;
               width: 32px;
               padding: 0 8px;
-              color: black;
+              color: #172b4d;
               font-size: 16px;
               background-color: #eaecf0;
             }
@@ -241,7 +242,7 @@
       button {
         margin: 0;
         background-color: #EAEBEF;
-        color: black;
+        color: #172b4d;
         margin-inline-start: 9px;
         border-radius: 3px;
         padding: 6px 12px;

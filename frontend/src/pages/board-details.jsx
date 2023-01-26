@@ -7,6 +7,7 @@ import { GroupList } from '../cmps/group-list.jsx'
 import { Loader } from '../cmps/loader.jsx'
 import { boardService } from "../services/board.service"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED, SOCKET_EMIT_SET_TOPIC, SOCKET_EVENT_BOARD_UPDATED } from '../services/socket.service.js'
+import { loadActivities } from '../store/activity.actions.js'
 import { getActionUpdateBoard, setCurrBoard, updateBoard } from '../store/board.actions.js'
 import { UPDATE_BOARD } from '../store/board.reducer.js'
 import { store } from '../store/store.js'
@@ -18,6 +19,9 @@ export function BoardDetails() {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const dispatch = useDispatch()
 
+    useEffect(() => {
+        loadActivities()
+    }, [])
 
     useEffect(() => {
         socketService.emit(SOCKET_EMIT_SET_TOPIC, boardId)
