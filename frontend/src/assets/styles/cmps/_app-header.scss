@@ -99,6 +99,19 @@
             background-color: $clr10 !important;
         }
     }
+    nav > * {
+        display: none;
+    }
+
+    nav > *:first-child, nav > *:last-child {
+        display: block;
+    }
+
+    @include for-normal-layout {
+        nav > * {
+            display: block;
+        }
+    }
 }
 
 .homepage-header {
