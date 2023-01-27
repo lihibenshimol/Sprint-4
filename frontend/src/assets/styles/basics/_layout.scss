@@ -40,7 +40,8 @@
     }
 }
 
-.homepage-header.main-layout {
+.homepage-header.main-layout,
+.homepage-header span.main-layout {
 
     @include for-narrow-layout {
         grid-template-columns:

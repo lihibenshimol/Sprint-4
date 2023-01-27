@@ -14,7 +14,7 @@
         margin-left: auto;
         padding: 0;
         background-color: rgba(0, 0, 0, 0.15);
-        
+
         margin-inline-end: 0;
         border: 1px solid rgba(0, 0, 0, 0.5);
 
@@ -76,7 +76,7 @@
                 background-color: $clr10;
             }
         }
-    } 
+    }
 
     a {
         padding-left: 0;
@@ -103,6 +103,8 @@
 
 .homepage-header {
     background-color: $clr6;
+    padding: 1em 0;
+    position: relative;
 
     h1 {
         margin: 0;
@@ -133,9 +135,85 @@
             background-color: $clr14;
             color: $clr6;
         }
+
+        span {
+            opacity: 0;
+            pointer-events: none;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            transform: translateY(100%);
+            background-color: $clr6;
+            flex-direction: column;
+            transition: max-height 0.4s ease-in-out;
+            max-height: 0;
+            align-content: center;
+
+            .cta-btn {
+                background: none;
+                padding-left: 0;
+                padding-right: 0;
+                color: $clr14;
+            }
+
+            >* {
+                background: none;
+                padding-left: 0;
+                padding-right: 0;
+                color: $clr2;
+            }
+
+            &.open {
+                opacity: 1;
+                pointer-events: all;
+                max-height: 100vh;
+            }
+        }
     }
 
     nav>*:not(:last-of-type) {
         margin-inline-end: 1.5em;
     }
+
+    @include for-normal-layout {
+        nav span {
+            display: block;
+            opacity: 1;
+            pointer-events: all;
+            position: static;
+            transform: translateY(0%) scale(1);
+            background-color: initial;
+            margin-left: auto;
+            width: initial;
+            flex: initial !important;
+            max-height: initial;
+
+            .cta-btn {
+                background-color: $clr14;
+                color: $clr6;
+                padding: 0.906em 1.365em;
+            }
+
+            >* {
+                padding: 0.906em 1.365em;
+            }
+        }
+
+        .hamburger {
+            display: none;
+        }
+
+        padding: 0;
+    }
+}
+
+.hamburger {
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $clr9;
+    user-select: none;
+    cursor: pointer;
 }
