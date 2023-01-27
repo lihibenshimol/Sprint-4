@@ -31,10 +31,11 @@ export function ActivitiesViewer({ activities }) {
                             <img src={activity.onMember?.imgUrl} alt="" />
                         </span>
 
+
                         <section className='activity-msg'>
                             <div>
                                 <span className='activity-member'>
-                                    {activity.onMember?.fullname }
+                                    {activity.onMember?.fullname}
                                 </span>
                                 <span>
                                     {activity.txt}
