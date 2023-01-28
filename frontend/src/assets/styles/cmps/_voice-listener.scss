@@ -1,0 +1,50 @@
+.miri-section {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    z-index: 1001;
+    transform: translate(-50%, -50%);
+}
+
+.miri-container {
+    z-index: 1001;
+    background-color: white;
+    z-index: 1000;
+    padding: 10px;
+    transition: all .2s cubic-bezier(0.33, 0.42, 1, 1);
+    color: black;
+
+    &.speaking {
+        background-color: #f9f9f9;
+    }
+
+    div.miri-response {
+        width: 250px;
+        height: 250px;
+    }
+
+    P {
+        text-align: center;
+        color: #172b4d;
+    }
+
+    .btn-container {
+        display: flex;
+        justify-content: space-around;
+
+        button {
+            border-radius: 3px;
+            padding: 6px 21px;
+            // border: 1px black solid;
+            color: #172b4d;
+            background-color: #eaecf0;
+
+            &:hover {
+
+                color: #172b4d;
+                background-color: rgba(9, 30, 66, 0.0784313725);
+            }
+        }
+    }
+
+}

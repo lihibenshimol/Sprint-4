@@ -14,9 +14,10 @@ import { BoardMemberSelect } from "./board-member-select"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
 import { MusicModal } from "./music-modal"
 import { BoardFilter } from "./board-filter"
+import { VoiceListener } from "./voice-listener"
 
 
-export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
+export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const lastUpdatedBoard = useSelector(storeState => storeState.boardModule.lastUpdatedBoard)
     const [editMode, setEditMode] = useState(false)
@@ -26,6 +27,8 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
     const [isDropDownOpen, setIsDropDownOpen] = useState(false)
     const [isMusicModalOpen, setMusicModalOpen] = useState(false)
     const [isFilterMode, setIsFilterMode] = useState(false)
+    const [isVoiceMode, setIsVoiceMode] = useState(false)
+
 
     useEffect(() => {
         setBoardNewTitle(board.title)
@@ -89,6 +92,8 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
     }
 
     function onOpenMusicModal() {
+        console.log('OPENING')
+
         setIsOpenMenu(false)
         setMusicModalOpen(prevModalOpen => !prevModalOpen)
     }
@@ -103,6 +108,14 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                 setIsDropDownOpen={setIsDropDownOpen}
                 isDropDownOpen={isDropDownOpen}
                 addOrDeleteMember={addOrDeleteMember}
+            />}
+
+            {isVoiceMode && <VoiceListener
+                board={board}
+                onOpenMusicModal={onOpenMusicModal}
+                onAddGroup={onAddGroup}
+                setIsVoiceMode={setIsVoiceMode}
+                isVoiceMode={isVoiceMode}
             />}
 
             {isFilterMode && <BoardFilter
@@ -136,15 +149,18 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                     </button>
 
                     <button className="board-header-btn-icon undo-icon"
-                        style={{ display: 'none' }}
                         onClick={() => undoBoardUpdate(lastUpdatedBoard)}>
                         Undo
                     </button>
                 </section>
 
                 <section className="right">
-                    <button onClick={onOpenMusicModal} className="board-header-btn-icon" style={{ display: 'none' }}>
+                    <button onClick={onOpenMusicModal} className="board-header-btn-icon" >
                         <BsMusicNoteBeamed />
+                    </button>
+                    <button className="board-header-btn-icon filter-icon"
+                        onClick={() => setIsVoiceMode(!isVoiceMode)}>
+                        Tommy
                     </button>
                     <button className="board-header-btn-icon filter-icon"
                         onClick={() => setIsFilterMode(!isFilterMode)}>

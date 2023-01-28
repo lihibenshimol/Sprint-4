@@ -101,8 +101,10 @@ export function BoardDetails() {
 
                 <section className={`board-content ${isOpenMenu ? 'open' : ''}`}>
                     <BoardHeader
+                        board={board}
                         isOpenMenu={isOpenMenu}
                         setIsOpenMenu={setIsOpenMenu}
+                        onAddGroup={onAddGroup}
                     />
                     <div className='group-container-dad'>
 
