@@ -10,6 +10,7 @@ import { HomepageHeader } from './cmps/homepage-header'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 import { CardDetails } from './pages/card-details'
+import { Dashboard } from './pages/dashboard'
 
 export function RootCmp() {
 
@@ -25,6 +26,7 @@ export function RootCmp() {
                         <Route element={<BoardDetails />} path='/board/:boardId'>
                             <Route element={<CardDetails />} path='/board/:boardId/g/:groupId/c/:cardId' />
                         </Route>
+                        <Route element={<Dashboard />} path='/board/:boardId/dashboard' />
                     </Routes>
                 </main>
             </Provider>

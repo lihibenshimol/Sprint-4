@@ -14,6 +14,7 @@ import { BoardMemberSelect } from "./board-member-select"
 import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service"
 import { MusicModal } from "./music-modal"
 import { BoardFilter } from "./board-filter"
+import { Link } from "react-router-dom"
 
 
 export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
@@ -136,14 +137,14 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                     </button>
 
                     <button className="board-header-btn-icon undo-icon"
-                        style={{ display: 'none' }}
+                        style={{ display: 'block' }}
                         onClick={() => undoBoardUpdate(lastUpdatedBoard)}>
                         Undo
                     </button>
                 </section>
 
                 <section className="right">
-                    <button onClick={onOpenMusicModal} className="board-header-btn-icon" style={{ display: 'none' }}>
+                    <button onClick={onOpenMusicModal} className="board-header-btn-icon" style={{ display: 'block' }}>
                         <BsMusicNoteBeamed />
                     </button>
                     <button className="board-header-btn-icon filter-icon"
@@ -151,10 +152,13 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu }) {
                         <BsFilter />
                         Filter
                     </button>
+
+                    <Link to={`dashboard`}>
                     <button className="board-header-btn-icon dashboard-icon">
                         <TfiDashboard />
                         Dashboard
                     </button>
+                    </Link>
                     <span className="line">
 
                     </span>

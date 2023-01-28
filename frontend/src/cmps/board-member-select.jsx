@@ -28,6 +28,7 @@ export function BoardMemberSelect({ pos, addOrDeleteMember, setIsDropDownOpen, i
             if (rect.width + pos.right >= window.innerWidth) {
                 dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
             } else {
+                console.log('pos = ', pos)
                 dropdownRef.current.style = `left:${pos.right + 10}px`
             }
         }

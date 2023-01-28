@@ -133,11 +133,13 @@ export function MusicModal({ setMusicModalOpen, className }) {
                     {isDropdownOpen && <MusicModalDropdown onSetSong={onSetSong} songs={songs} />}
                 </div>
                 <h2>{currSong?.title}</h2>
+
+
                 <div className='img-container'><img src={songImg} /></div>
                 <YouTube className='hidden' videoId={currSong.vidId} opts={opts} onReady={_onReady} controls />
 
                 <section className='song-controls'>
-                    {/* <button onClick={onToggleVideo} className='play-pause-btn'>{isVideoPlaying ? <CiPause1 /> : <CiPlay1 />}</button> */}
+                    <button onClick={onToggleVideo} className='play-pause-btn'>{isVideoPlaying ? <CiPause1 /> : <CiPlay1 />}</button>
                     <span>{utilService.formatTime(+videoCurrTime)}</span>
                     <input ref={sliderRef} defaultValue="0" value={videoCurrTime} step={0.1} max={video?.getDuration()} type="range" onChange={handleChange} />
                     <span>{utilService.formatTime(+videoLength)}</span>
