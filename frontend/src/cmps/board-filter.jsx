@@ -17,7 +17,7 @@ export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
             if (rect.width + pos.right >= window.innerWidth) {
                 dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
             } else {
-                dropdownRef.current.style = `left:${pos.right + 10}px`
+                dropdownRef.current.style = `left:${pos.right + 330}px; top:${pos.top + 30}px`
             }
         }
     }, [dropdownRef])
@@ -28,7 +28,7 @@ export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
         <div className="extras-menu flex" ref={dropdownRef} >
             <span className="title-container">
                 <p>
-                    Members
+                    Filter Tasks
                 </p>
                 <span className='close-btn hover' onClick={() => setIsFilterMode(!isFilterMode)}><RxCross2 /></span>
             </span>
@@ -38,7 +38,7 @@ export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
                     title='not available right now'
                     disabled />
 
-                <h4>Board members</h4>
+                <h4>By members</h4>
 
                 {board.members && <ul className='filter-by-user' >
                     {board.members?.map(m =>  <FilterByUser

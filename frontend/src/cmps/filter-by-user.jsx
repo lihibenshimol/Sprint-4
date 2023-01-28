@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-export function FilterByUser({ card, board, member }) {
+export function FilterByUser({ member }) {
+    const board = useSelector(storeState => storeState.boardModule.currBoard)
     const [userCards, setUserCards] = useState([])
     const [resultsPopup, setResultsPopup] = useState(false)
     const navigate = useNavigate()
@@ -11,7 +13,7 @@ export function FilterByUser({ card, board, member }) {
         board.groups.forEach(group => {
             group.cards.forEach(card => {
                 if (card.members.filter(member => member._id === userId).length > 0)
-                    filteredCards.push(card)
+                filteredCards.push(card)
             })
         })
         setUserCards(filteredCards)
@@ -33,11 +35,14 @@ export function FilterByUser({ card, board, member }) {
                 <span>{member.fullname}</span>
             </div>
 
-            {resultsPopup && <span> {userCards?.map(card => <button key={card.id} onClick={() => goToCard(card.id)} style={{ color: 'black' }}>
-                {card.title}
-            </button>
-            )}
-            </span>
+            {resultsPopup && <div className="assigned-cards">
+                <span className="title">Cards assigned to {member.fullname}</span>
+                <ul> {userCards?.map(card => <li key={card.id} onClick={() => goToCard(card.id)} style={{ color: 'black' }}>
+                    {card.title}
+                </li>
+                )}
+                </ul>
+            </div>
             }
         </>
     )

@@ -31,11 +31,9 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
         if (quickEditorBtnsRef.current) {
             const rect = quickEditorBtnsRef.current.getBoundingClientRect()
             if (rect.width + quickEditorPos.right >= window.innerWidth) {
-                console.log('here');
                 quickEditorBtnsRef.current.style = `left:${quickEditorPos.left - rect.width - 20}px; top:${quickEditorPos.top}; direction: rtl `
             } else {
-                console.log('there');
-                quickEditorBtnsRef.current.style = `left:${quickEditorPos.right + 10}px; `
+                quickEditorBtnsRef.current.style = `left:${quickEditorPos.right + 10}px;`
             }
         }
     }, [quickEditorBtnsRef])
@@ -220,7 +218,6 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                     <button onClick={onSaveCard} className="save-btn">Save</button>
                 </div>
 
-                {console.log('quickEditorPos.right = ', quickEditorPos.right)}
                 {isDropDownOpen && <CardSelectDropDown
                     type={dropdownType} card={card}
                     pos={quickEditorPos}

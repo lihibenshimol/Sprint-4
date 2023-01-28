@@ -50,12 +50,13 @@ export function CardSelectDropDown({ type, card, pos, attach, isDropDownOpen, se
                 onSaveAttachment={onSaveAttachment}
             />
         // case 'delete':
-        //     return <DeleteItem/>
+        //     return <DeleteItem
         //         pos={pos} card={card}
         //         isDropDownOpen={isDropDownOpen}
         //         setIsDropDownOpen={setIsDropDownOpen}
         //         onSaveAttachment={onSaveAttachment}
         //     />
+            
         default:
             return
 
