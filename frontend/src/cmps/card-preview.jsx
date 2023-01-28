@@ -136,8 +136,6 @@ export function CardPreview({ card, idx, groupId }) {
 
                                         {!!card.checklists.length &&
                                             <div style={isTasksDone(card.checklists[0])} className="preview-details-checklist" >
-
-
                                                 <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
                                                 <span> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} </span>
 

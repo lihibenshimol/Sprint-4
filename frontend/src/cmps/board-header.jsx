@@ -143,7 +143,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                         )}
                     </div>}
 
-
+                  
                     <button className="board-header-btn-icon invite-icon" onClick={(e) => onSetType(e, 'members')} >
                         <MdPersonAddAlt />
                         Invite

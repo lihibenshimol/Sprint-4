@@ -60,7 +60,6 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
 
             const newColumn = { ...startColumn, cards: newCards }
             board.groups = board.groups.map(g => (g.id === newColumn.id) ? newColumn : g)
-            console.log(board.groups)
             const savedBoard = await updateBoard(board)
             socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
             return
