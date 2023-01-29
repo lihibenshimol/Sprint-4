@@ -9,8 +9,8 @@ import { socketService, SOCKET_EMIT_BOARD_UPDATED } from '../services/socket.ser
 
 export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
     setIsVoiceMode, isVoiceMode }) {
-        console.log('onAddGroup: ',onAddGroup)
-        
+    console.log('onAddGroup: ', onAddGroup)
+
 
     async function onSetClr(clr) {
         try {
@@ -26,11 +26,11 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
 
     const commands = [
         {
-            command: '* say *',
-            callback: (sentence, txt) => console.log(txt)
+            command: '* change color to *',
+            callback: (sentence, clr) => onSetClr(clr)
         },
         {
-            command: '* change color to *',
+            command: 'change color to *',
             callback: (sentence, clr) => onSetClr(clr)
         },
         {
@@ -39,14 +39,6 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
         },
         {
             command: '* open music *',
-            callback: () => onOpenMusicModal()
-        },
-        {
-            command: '* play music',
-            callback: () => onOpenMusicModal()
-        },
-        {
-            command: '* play music *',
             callback: () => onOpenMusicModal()
         },
         {
@@ -65,6 +57,7 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
                 const groupToAdd = boardService.getEmptyGroup()
                 groupToAdd.title = txt
                 onAddGroup(groupToAdd)
+                setIsVoiceMode(!isVoiceMode)
             }
         },
         {
@@ -73,6 +66,7 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
                 const groupToAdd = boardService.getEmptyGroup()
                 groupToAdd.title = txt
                 onAddGroup(groupToAdd)
+                setIsVoiceMode(!isVoiceMode)
             }
         },
         {
@@ -81,6 +75,7 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
                 const groupToAdd = boardService.getEmptyGroup()
                 groupToAdd.title = txt
                 onAddGroup(groupToAdd)
+                setIsVoiceMode(!isVoiceMode)
             }
         },
         {
@@ -89,6 +84,7 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
                 const groupToAdd = boardService.getEmptyGroup()
                 groupToAdd.title = txt
                 onAddGroup(groupToAdd)
+                setIsVoiceMode(!isVoiceMode)
             }
         },
 
