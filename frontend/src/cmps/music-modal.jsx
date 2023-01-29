@@ -168,7 +168,6 @@ export function MusicModal({ setMusicModalOpen, className }) {
 
 
             </section>
-            <div style={{backgroundColor: 'rgba(0,0,0,0.6)'}} onClick={handleBgClick} className="black-bg"></div>
         </div>
 
     )

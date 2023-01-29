@@ -1,5 +1,5 @@
 .music-modal {
-    position: absolute;
+    position: fixed;
     bottom: 30px;
     right: 20px;
     // transform: translate(-50%, -50%);
@@ -8,7 +8,7 @@
     min-width: 440px;
     height: 120px;
     border-radius: 0.3em;
-    z-index: 5;
+    z-index: 1;
     padding: 1em;
     display: grid;
     gap: 15px;
