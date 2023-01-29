@@ -9,6 +9,8 @@ import { socketService, SOCKET_EMIT_BOARD_UPDATED } from '../services/socket.ser
 
 export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
     setIsVoiceMode, isVoiceMode }) {
+        console.log('onAddGroup: ',onAddGroup)
+        
 
     async function onSetClr(clr) {
         try {

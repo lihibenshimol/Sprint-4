@@ -16,7 +16,7 @@ export function HomePage() {
                 <section className='signup-intro'>
                     <span>
 
-                        <h2>Taskello brings all your tasks, teammates, and tools together</h2>
+                        <h2>Trellofy brings all your tasks, teammates, and tools together</h2>
                         <h3>Keep everything in the same place—even if your team isn’t.</h3>
                     </span>
                     <Link className='start-demo-btn' to="/board">Start demo</Link>
@@ -40,11 +40,11 @@ export function HomePage() {
                 <div className='tabs'>
                     <button onClick={() => setDynImg(asset1)} className='tab tab1'>
                         <h4>Boards</h4>
-                        <p>Taskello boards keep tasks organized and work moving forward. In a glance, see everything from “things to do” to “aww yeah, we did it!”</p>
+                        <p>Trellofy boards keep tasks organized and work moving forward. In a glance, see everything from “things to do” to “aww yeah, we did it!”</p>
                     </button>
                     <button onClick={() => setDynImg(asset2)} className='tab tab2'>
                         <h4>Lists</h4>
-                        <p>The different stages of a task. Start as simple as To Do, Doing or Done—or build a workflow custom fit to your team’s needs. There’s no wrong way to Taskello.</p>
+                        <p>The different stages of a task. Start as simple as To Do, Doing or Done—or build a workflow custom fit to your team’s needs. There’s no wrong way to Trellofy.</p>
                     </button>
                     <button onClick={() => setDynImg(asset3)} className='tab tab3'>
                         <h4>Cards</h4>

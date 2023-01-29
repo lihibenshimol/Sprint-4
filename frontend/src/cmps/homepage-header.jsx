@@ -14,10 +14,10 @@ export function HomepageHeader() {
     return (
         <header className="homepage-header full flex space-between align-center main-layout">
             <nav className='flex align-center'>
-                <Link to="/"><h1>Taskello</h1></Link>
+                <Link to="/"><h1>Trellofy</h1></Link>
                 <span className={menuOpen ? 'main-layout full open' : 'main-layout full'}>
                     <Link to="/login">Log in</Link>
-                    <Link className='cta-btn' to="/signup">Get Taskello for free</Link>
+                    <Link className='cta-btn' to="/signup">Get Trellofy for free</Link>
                 </span>
                 <div onClick={handleOpeningMenu} className="hamburger">{menuOpen ? <GrClose /> : <GiHamburgerMenu />}</div>
             </nav>
