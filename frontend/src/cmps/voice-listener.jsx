@@ -89,24 +89,7 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
                 setTimeout(() => clearVoice(), 0)
             }
         },
-        // {
-        //     command: 'create new list *',
-        //     callback: (txt) => {
-        //         const groupToAdd = boardService.getEmptyGroup()
-        //         groupToAdd.title = txt
-        //         onAddGroup(groupToAdd)
-        //         setTimeout(() => clearVoice(), 0)
-        //     }
-        // },
-        // {
-        //     command: '* create new list',
-        //     callback: () => {
-        //         const groupToAdd = boardService.getEmptyGroup()
-        //         groupToAdd.title = 'New group'
-        //         onAddGroup(groupToAdd)
-        //         setTimeout(() => clearVoice(), 1000)
-        //     }
-        // },
+    
         {
             command: '* new list',
             callback: (sentence) => {
@@ -125,35 +108,7 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
                 setTimeout(() => clearVoice(), 1000)
             }
         },
-        // {
-        //     command: '* create new list *',
-        //     callback: (sentence, txt) => {
-        //         const groupToAdd = boardService.getEmptyGroup()
-        //         groupToAdd.title = txt
-        //         onAddGroup(groupToAdd)
-        //         setTimeout(() => clearVoice(), 1000)
-        //     }
-        // },
-        // {
-        //     command: 'open new list *',
-        //     callback: (txt) => {
-        //         const groupToAdd = boardService.getEmptyGroup()
-        //         groupToAdd.title = txt
-        //         onAddGroup(groupToAdd)
-        //         setTimeout(() => clearVoice(), 1000)
-        //     }
-        // },
-        // {
-        //     command: '* open new list *',
-        //     callback: (sentence, txt) => {
-        //         const groupToAdd = boardService.getEmptyGroup()
-        //         groupToAdd.title = txt
-        //         onAddGroup(groupToAdd)
-        //         setTimeout(() => clearVoice(), 1000)
-        //     }
-        // },
-
-    ]
+      ]
 
     const {
         transcript,
