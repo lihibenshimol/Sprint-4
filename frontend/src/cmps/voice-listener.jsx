@@ -94,7 +94,7 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
             command: '* new list',
             callback: (sentence) => {
                 const groupToAdd = boardService.getEmptyGroup()
-                groupToAdd.title = 'New group'
+                groupToAdd.title = 'New list'
                 onAddGroup(groupToAdd)
                 setTimeout(() => clearVoice(), 1000)
             }

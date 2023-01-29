@@ -193,10 +193,11 @@ a:hover {
             .attach-container {
                 // grid-column: 2 / 3;
                 margin-inline-end: 8px;
-                padding-bottom: 5px;
                 display: flex;
                 align-items: center;
                 gap: 5px;
+                align-self: end;
+                margin: 0 4px 4px 0;
 
                 .preview-details-attach-icon {
                     padding-top: 5px;
