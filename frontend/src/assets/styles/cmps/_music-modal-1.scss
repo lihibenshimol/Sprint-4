@@ -1,43 +1,46 @@
 .music-modal {
     position: fixed;
-    top: 91%;
-    left: 86%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.593);
+    background-color: $clr6;
     color: $clr12;
-    min-width: 440px;
-    height: 120px;
+    min-width: 95%;
+    min-height: 400px;
     border-radius: 0.3em;
     z-index: 3001;
     padding: 1em;
-    display: grid;
-    gap: 15px;
+    display: flex;
+    // display: grid;
+    flex-direction: column;
     align-items: center;
+    min-height: 485px;
     box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
-    grid-template-columns: 20px 70px;
-    grid-template-rows: 14px 20px 20px;
+    background-color: rgb(232, 232, 232);
 
-
-    // svg {
-    //     color: $clr12;
-    // }
+    svg {
+        color: $clr12;
+    }
 
     input[type="range"] {
         cursor: pointer;
-        width: 70%;
-        grid-column: 1 / 4;
-        grid-row: 2 / 3;
     }
 
     .song-controls {
-        grid-column: 1 / 2;
-        grid-row: 2 / 3;
-        align-self: baseline;
-        justify-self: flex-start;
-        overflow: hidden;
         display: flex;
-        flex-direction: column;
-
+        align-items: center;
+        justify-content: center;
+        margin-top: auto;
+        gap: 0.9em;
+        // border: 1px solid #dfe1e6;
+        box-shadow: inset 0px 0px 5px 0px black;
+        background-color: rgb(243, 243, 243);
+        color: rgb(45, 45, 45);
+        padding: 0 10px;
+        border-radius: 0.3em;
+        overflow: hidden;
+        width: 392px;
+        max-width: 392px;
 
         // >* {
         //     display: block;
@@ -60,101 +63,74 @@
         }
     }
 
-    .song-bar {
-        grid-column: 3 / 5;
-        grid-row: 3 / 4;
-        justify-self: center;
-        align-self: flex-start;
-        width: 80%;
-        align-items: center;
-        margin-top: 5px;
-    }
-
-    .close-btn {
-        position: absolute;
-        top: 2px;
-        right: 0;
-        color: black;
-    }
-
     .img-container {
         height: min-content;
-        height: 60px;
-        width: 130px;
-        border-radius: .3em;
+        max-height: 300px;
+        border-radius: 0.3em;
         overflow: hidden;
-        grid-column: 1 / 2;
-        grid-row: 2 / 4;
 
         img {
             object-fit: cover;
             height: 100%;
+            width: 100%;
+            border-radius: 0.3em;
         }
     }
 
     .input-container {
         position: relative;
+        margin-block-end: 1em;
         width: 100%;
-        grid-column: 1 / 4;
-        grid-row: 1 / 2;
-        display: flex;
-        align-items: baseline;
-        justify-self: baseline;
-        align-items: center;
-        gap: 10px;
-
-        .search-icon {
-            font-size: 20px;
-        }
+      
     }
 
     @include for-narrow-layout {
-        // min-width: 420px;
-        // max-width: 420px;
-        // min-height: 456.28px;
-        max-width: 400px;
+        min-width: 420px;
+        max-width: 420px;
+        min-height: 456.28px;
     }
 
     h2 {
         margin: 0;
-        height: 5px;
         font-size: rem(18px);
         text-align: center;
         margin-block-end: 1em;
         color: rgb(35, 35, 35);
         font-family: 'charlie-display-bold';
-        grid-column: 3 / 5;
-        grid-row: 2 / 3;
-        justify-self: center;
-        align-self: flex-start;
-        padding-left: 30px;
     }
 
     .play-pause-btn {
-        font-size: 1.8rem;
+        font-size: 2rem;
         color: $clr12;
         margin: 0;
         padding: 0;
         line-height: 1;
-        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $clr8;
+        padding: 0.15em;
         transition: background-color 0.1s ease-in-out;
-        border-radius: 10em;
 
         &:hover {
-            background-color: rgba(43, 43, 43, 0.1);
+            background-color: rgba(0, 0, 0, 0.1);
         }
     }
 
     input[type="text"] {
-        color: rgb(0, 0, 0);
+        // background-color: #fafbfc;
+        // border: 2px solid #dfe1e6;
+        border-radius: 0.5em;
+        padding: 0.525em;
+        color: rgb(155, 155, 155);
         font-size: rem(14px);
         outline: none;
         transition: border-color 0.1s ease-in-out;
-        width: 50%;
+        width: 100%;
+        box-shadow: inset 0px 0px 2px 1px rgb(75, 75, 75);
         border: none;
-        border-bottom: .3px solid rgba(45, 44, 44, 0.514);
-        background-color: transparent;
-
+        // background-color: rgb(71, 71, 71);
+        background-color: rgb(243, 243, 243);
         &:focus {
             border-color: $clr14;
         }
@@ -163,8 +139,8 @@
 
 .music-modal-dropdown {
     position: absolute;
-    bottom: 70px;
-    transform: translateY(13%);
+    bottom: 0;
+    transform: translateY(100%);
     left: 0;
     width: 100%;
     padding: 0.525em;
