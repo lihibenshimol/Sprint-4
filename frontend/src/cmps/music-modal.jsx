@@ -150,9 +150,9 @@ export function MusicModal({ setMusicModalOpen, className }) {
 
 
                 <div className='input-container'>
-                    <label for="search" className='search-icon'>
+                    {/* <label for="search" className='search-icon'>
                         < BiSearch />
-                    </label>
+                    </label> */}
                     <input id='search' ref={searchInputRef} onChange={handleSearchChangeRef.current} type="text" placeholder='Search...' />
                     {isDropdownOpen && <MusicModalDropdown onSetSong={onSetSong} songs={songs} />}
                 </div>
