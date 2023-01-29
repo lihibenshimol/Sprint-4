@@ -58,7 +58,7 @@ export function AppHeader() {
         <header style={isInBoardDetails() ? { backgroundColor: navColor, color: 'red' } : {}} className="app-header full flex space-between align-center main-container">
 
             <nav className='flex align-center main-nav'>
-                <Link to="/board"><h1 className='brand'><i className="fa-brands trello"></i>Taskello</h1></Link>
+                <Link to="/board"><h1 className='brand'><i className="fa-brands trello"></i>Trellofy</h1></Link>
                 <button className={dropdown.type === 'boards' ? 'active' : ''} onClick={() => onShowDropdown('boards')}>Boards<i className="fa down-arrow"></i>
                     {dropdown.type === 'boards' && <DropDown setDropDown={setDropDown} type={dropdown.type} />}
                 </button>
