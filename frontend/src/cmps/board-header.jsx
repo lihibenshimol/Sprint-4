@@ -5,6 +5,7 @@ import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
 import { undoBoardUpdate, updateBoard } from "../store/board.actions"
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
+import { HiOutlineMicrophone } from 'react-icons/hi'
 import { BsFilter, BsMusicNoteBeamed, BsThreeDots } from 'react-icons/bs'
 import { TfiDashboard } from 'react-icons/tfi'
 import { MdPersonAddAlt } from 'react-icons/md'
@@ -164,6 +165,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                     </button>
                     <button className="board-header-btn-icon filter-icon"
                         onClick={() => setIsVoiceMode(!isVoiceMode)}>
+                            < HiOutlineMicrophone />
                         Tommy
                     </button>
                     <button className="board-header-btn-icon filter-icon"
