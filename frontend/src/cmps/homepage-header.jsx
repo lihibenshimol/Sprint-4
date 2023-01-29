@@ -12,7 +12,7 @@ export function HomepageHeader() {
     }
 
     return (
-        <header className="homepage-header full flex space-between align-center main-layout">
+        <header className="homepage-header full space-between align-center ">
             <nav className='flex align-center'>
                 <Link to="/"><h1>Trellofy</h1></Link>
                 <span className={menuOpen ? 'main-layout full open' : 'main-layout full'}>

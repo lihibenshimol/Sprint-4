@@ -103,7 +103,9 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
     if (!board) return <h1>Loading...</h1>
     return (
         <>
-            <MusicModal className={isMusicModalOpen ? '' : 'hidden'} setMusicModalOpen={setMusicModalOpen} />
+            <MusicModal className={isMusicModalOpen ? '' : 'hidden'} 
+            setMusicModalOpen={setMusicModalOpen} />
+
             {isDropDownOpen && <BoardMemberSelect
                 type={dropdownType}
                 pos={pos}
