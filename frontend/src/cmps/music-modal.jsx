@@ -102,6 +102,8 @@ export function MusicModal({ setMusicModalOpen, className }) {
     }
 
     function onSetSong(song) {
+        console.log('song: ', song)
+
         setCurrSong(song)
         setDropdownOpen(false)
         setVideoCurrTime(0)
@@ -166,7 +168,7 @@ export function MusicModal({ setMusicModalOpen, className }) {
 
 
             </section>
-            {/* <div style={{ backgroundColor: 'rgba(0,0,0,0.6)' }} onClick={handleBgClick} className="black-bg"></div> */}
+            <div style={{backgroundColor: 'rgba(0,0,0,0.6)'}} onClick={handleBgClick} className="black-bg"></div>
         </div>
 
     )
