@@ -102,7 +102,9 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
     if (!board) return <h1>Loading...</h1>
     return (
         <>
-            <MusicModal className={isMusicModalOpen ? '' : 'hidden'} setMusicModalOpen={setMusicModalOpen} />
+            <MusicModal className={isMusicModalOpen ? '' : 'hidden'} 
+            setMusicModalOpen={setMusicModalOpen} />
+
             {isDropDownOpen && <BoardMemberSelect
                 type={dropdownType}
                 pos={pos}
@@ -143,7 +145,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                         )}
                     </div>}
 
-                  
+
                     <button className="board-header-btn-icon invite-icon" onClick={(e) => onSetType(e, 'members')} >
                         <MdPersonAddAlt />
                         Invite
@@ -171,10 +173,10 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                     </button>
 
                     <Link to={`dashboard`}>
-                    <button className="board-header-btn-icon dashboard-icon">
-                        <TfiDashboard />
-                        Dashboard
-                    </button>
+                        <button className="board-header-btn-icon dashboard-icon">
+                            <TfiDashboard />
+                            Dashboard
+                        </button>
                     </Link>
                     <span className="line">
 
