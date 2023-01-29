@@ -3,7 +3,11 @@ import { useRef } from 'react';
 import { useState } from 'react';
 import YouTube from 'react-youtube';
 import { CiPlay1, CiPause1 } from 'react-icons/ci'
+import { BsFillPlayFill } from 'react-icons/bs'
+import { CgPlayPause } from 'react-icons/cg'
+import { RxCross2 } from 'react-icons/rx'
 import { AiOutlineSound } from 'react-icons/ai'
+import { BiSearch } from 'react-icons/bi'
 import { useEffect } from 'react';
 import axios from 'axios';
 import { utilService } from '../services/util.service';
@@ -21,12 +25,14 @@ export function MusicModal({ setMusicModalOpen, className }) {
     const [searchStr, setSearchStr] = useState('')
     const [isDropdownOpen, setDropdownOpen] = useState(false)
     const [songs, setSongs] = useState([])
-    const [currSong, setCurrSong] = useState({ vidId: 'yvlP4KYW7BE', title: 'V (Cyberpunk 2077 Soundtrack)' })
+    // const [currSong, setCurrSong] = useState({ vidId: 'yvlP4KYW7BE', title: 'V (Cyberpunk 2077 Soundtrack)' })
+    const [currSong, setCurrSong] = useState({ vidId: 'QKPxNQfrtzU?t=65s', title: 'Rihanna - Work ft. Drake' })
     const searchInputRef = useRef(null)
     const sliderRef = useRef(null)
     const [volume, setVolume] = useState(12)
     const [videoLength, setVideoLength] = useState(0)
-    const [songImg, setSongImg] = useState('https://i.ytimg.com/vi/yvlP4KYW7BE/hqdefault.jpg')
+    // const [songImg, setSongImg] = useState('https://i.ytimg.com/vi/yvlP4KYW7BE/hqdefault.jpg')
+    const [songImg, setSongImg] = useState('https://i.ytimg.com/vi/QKPxNQfrtzU/maxresdefault.jpg')
 
     const handleSearchChangeRef = useRef(utilService.debounce(handleSearchChange))
 
@@ -130,29 +136,39 @@ export function MusicModal({ setMusicModalOpen, className }) {
     return (
         <div className={className}>
             <section className="music-modal" onClick={handleModalClick}>
-                <div className='input-container'>
-                    <input ref={searchInputRef} onChange={handleSearchChangeRef.current} type="text" placeholder='Search song' />
-                    {isDropdownOpen && <MusicModalDropdown onSetSong={onSetSong} songs={songs} />}
-                </div>
-                <h2>{currSong?.title}</h2>
-
 
                 <div className='img-container'><img src={songImg} /></div>
                 <YouTube className='hidden' videoId={currSong.vidId} opts={opts} onReady={_onReady} controls />
 
-                <section className='song-controls'>
-                    <button onClick={onToggleVideo} className='play-pause-btn'>{isVideoPlaying ? <CiPause1 /> : <CiPlay1 />}</button>
+                <h2>{currSong?.title}</h2>
+
+                <div className="song-bar flex">
+                    <button onClick={onToggleVideo} className='play-pause-btn'>{isVideoPlaying ? <CgPlayPause /> : <BsFillPlayFill />}</button>
+                    {/* <button onClick={onToggleVideo} className='play-pause-btn'>{isVideoPlaying ? <CiPause1 /> : <CiPlay1 />}</button> */}
                     <span>{utilService.formatTime(+videoCurrTime)}</span>
                     <input ref={sliderRef} defaultValue="0" value={videoCurrTime} step={0.1} max={video?.getDuration()} type="range" onChange={handleChange} />
                     <span>{utilService.formatTime(+videoLength)}</span>
-                    <div className='volume-container'>
+                </div>
+
+
+                <div className='input-container'>
+                    <label for="search" className='search-icon'>
+                        < BiSearch />
+                    </label>
+                    <input id='search' ref={searchInputRef} onChange={handleSearchChangeRef.current} type="text" placeholder='Search...' />
+                    {isDropdownOpen && <MusicModalDropdown onSetSong={onSetSong} songs={songs} />}
+                </div>
+                <button className='close-btn' onClick={handleBgClick}>< RxCross2 /> </button>
+                {/* <section className='song-controls'> */}
+                {/* <div className='volume-container'>
                         <AiOutlineSound />
                         <input defaultValue={12} max="100" step="1" onChange={handleVolumeChange} type="range" />
-                    </div>
-                </section>
+                    </div> */}
+                {/* </section> */}
+
 
             </section>
-            <div style={{ backgroundColor: 'rgba(0,0,0,0.6)' }} onClick={handleBgClick} className="black-bg"></div>
+            <div style={{backgroundColor: 'rgba(0,0,0,0.6)'}} onClick={handleBgClick} className="black-bg"></div>
         </div>
 
     )
