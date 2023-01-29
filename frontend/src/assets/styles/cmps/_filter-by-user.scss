@@ -8,6 +8,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: pointer;
+
+        // &:hover {
+        //     background-color: #b1b1b150;
+        //     border-radius: 25em;
+        // }
     }
 
     .assigned-cards {

@@ -15,6 +15,7 @@ import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.ser
 import { MusicModal } from "./music-modal"
 import { BoardFilter } from "./board-filter"
 import { VoiceListener } from "./voice-listener"
+import { Link } from "react-router-dom"
 
 
 export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
@@ -142,20 +143,21 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                         )}
                     </div>}
 
-
+                  
                     <button className="board-header-btn-icon invite-icon" onClick={(e) => onSetType(e, 'members')} >
                         <MdPersonAddAlt />
                         Invite
                     </button>
 
                     <button className="board-header-btn-icon undo-icon"
+                        style={{ display: 'block' }}
                         onClick={() => undoBoardUpdate(lastUpdatedBoard)}>
                         Undo
                     </button>
                 </section>
 
                 <section className="right">
-                    <button onClick={onOpenMusicModal} className="board-header-btn-icon" >
+                    <button onClick={onOpenMusicModal} className="board-header-btn-icon" style={{ display: 'block' }}>
                         <BsMusicNoteBeamed />
                     </button>
                     <button className="board-header-btn-icon filter-icon"
@@ -167,10 +169,13 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                         <BsFilter />
                         Filter
                     </button>
+
+                    <Link to={`dashboard`}>
                     <button className="board-header-btn-icon dashboard-icon">
                         <TfiDashboard />
                         Dashboard
                     </button>
+                    </Link>
                     <span className="line">
 
                     </span>

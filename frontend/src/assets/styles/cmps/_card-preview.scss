@@ -170,6 +170,7 @@ a:hover {
             justify-self: end;
             align-self: flex-end;
             grid-column: 2 / 3;
+            grid-row: 1/ 1;
 
             span {
                 margin-right: 4px;
@@ -184,40 +185,57 @@ a:hover {
             }
         }
 
-        .preview-details-checklist {
-            grid-column: 1 / 2;
 
+        .left {
+            grid-column: 1 / 2;
+            grid-row: 1 / 1;
             display: flex;
             gap: 10px;
-            padding-bottom: 3px;
-            width: 50px;
-            border-radius: 3px;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 0 2px;
-            margin: 0 4px 4px 0;
-            font-size: 12px;
-            line-height: 20px;
+            align-items: baseline;
 
-            .icon-container {
+            .preview-details-checklist {
+                display: flex;
+                gap: 5px;
+                padding-bottom: 3px;
+                width: 50px;
+                border-radius: 3px;
+                align-items: center;
+                justify-content: center;
+                padding: 0 2px;
+                margin: 0 4px 4px 0;
+                font-size: 12px;
+                line-height: 20px;
+
+                .preview-details-checklist-icon {
+                    margin-top: 3px;
+                    font-size: 15px;
+                }
+            }
+
+            .attach-container {
+                // grid-column: 2 / 3;
                 margin-inline-end: 8px;
+                padding-bottom: 5px;
                 display: flex;
                 align-items: center;
-                gap: 5px
+                gap: 5px;
+
+                .preview-details-attach-icon {
+                    padding-top: 5px;
+                    color: #5e6c84;
+                    font-size: 12px;
+                }
             }
 
-            .preview-details-attach-icon {
-                padding-top: 5px;
 
-                color: #5e6c84;
-            }
 
-            .preview-details-checklist-icon {
+            .preview-details-desc-icon {
+                // grid-column: 2 / 3;
                 padding-top: 5px;
                 font-size: 15px;
             }
-        }
 
+        }
 
     }
 

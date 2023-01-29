@@ -7,7 +7,6 @@ import { FilterByUser } from "./filter-by-user"
 
 
 export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
-
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const dropdownRef = useRef(null)
 
@@ -17,7 +16,8 @@ export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
             if (rect.width + pos.right >= window.innerWidth) {
                 dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
             } else {
-                dropdownRef.current.style = `left:${pos.right + 330}px; top:${pos.top + 30}px`
+                console.log('pos = ', pos)
+                dropdownRef.current.style = `left:${pos.right + 400}px; top:${pos.top + 30}px`
             }
         }
     }, [dropdownRef])

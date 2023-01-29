@@ -106,7 +106,7 @@ export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
                                     <h4>{a.byUser.fullname} </h4>
                                     <p>{a.txt}</p>
                                 </div>
-                                <div>
+                                <div className="timestamp">
                                     <Moment format="MMM DD hh:mm A">{getActivityCreatedAt(a._id)}</Moment>
                                 </div>
                             </article>)

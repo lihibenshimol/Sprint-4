@@ -118,30 +118,30 @@ export function CardPreview({ card, idx, groupId }) {
                                 </section>
 
                                 <section className="card-preview-details">
-                                    {!!card.checklists.length &&
-                                        <div style={isTasksDone(card.checklists[0])} className="preview-details-checklist" >
-
-                                            <span className="icon-container">
-                                                <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
-                                                <span> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} </span>
-                                            </span>
-
-                                            {card.attachments &&
-                                                <span className="icon-container">
-                                                    <span className="preview-details-attach-icon"><GrAttachment /> </span>
-                                                    <span>{card.attachments.length}</span>
-                                                </span>}
-
-                                            {card.desc &&
-                                                <span className="icon-container">
-                                                    <span className="preview-details-checklist-icon"><BsTextLeft /> </span>
-                                                </span>}
-
-                                        </div>}
-
 
                                     {card.members &&
                                         <span className="preview-details-members"> {card.members.map(member => <span key={member._id}> <img className="member-img" src={member.imgUrl} alt="" /></span>)} </span>}
+
+                                    <div className="left">
+
+                                        {card.attachments &&
+                                            <span className="attach-container">
+                                                <span className="preview-details-attach-icon"><GrAttachment /> </span>
+                                                <span>{card.attachments.length}</span>
+                                            </span>}
+
+                                        {card.desc &&
+                                            <span className="preview-details-desc-icon"><BsTextLeft /> </span>
+                                        }
+
+                                        {!!card.checklists.length &&
+                                            <div style={isTasksDone(card.checklists[0])} className="preview-details-checklist" >
+                                                <span className="preview-details-checklist-icon"> <IoMdCheckboxOutline /> </span>
+                                                <span> {doneInCheckList(card.checklists[0])}/{card.checklists[0].todos.length} </span>
+
+                                            </div>}
+                                    </div>
+
                                 </section>
                             </div>
                         </div>

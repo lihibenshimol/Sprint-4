@@ -1,5 +1,6 @@
 import { BiWindow } from 'react-icons/bi';
 import { TbTag } from 'react-icons/tb';
+import { TiTag } from 'react-icons/ti';
 import { AiOutlineClockCircle, AiOutlineUser } from 'react-icons/ai';
 import { IoMdCheckboxOutline } from 'react-icons/io';
 import { boardService } from "../../services/board.service.js"
@@ -36,7 +37,7 @@ export function SideBar({ card, onSaveCheckList, onSetType, }) {
 
 
                 <button className="label-btn" onClick={(e) => onSetType(e, 'labels')}>
-                    <span className="tag-label labels"><TbTag /></span>
+                    <span className="tag-label labels"><TiTag /></span>
                     <span>labels</span>
                 </button>
 
