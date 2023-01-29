@@ -4,6 +4,8 @@
     left: 50%;
     z-index: 1001;
     transform: translate(-50%, -50%);
+    max-width: 303px;
+    text-align: center;
 }
 
 .miri-container {
@@ -12,25 +14,26 @@
     z-index: 1000;
     padding: 10px;
     transition: all .2s cubic-bezier(0.33, 0.42, 1, 1);
-    color: black;
+    color: #172b4d;
 
     &.speaking {
         background-color: #f9f9f9;
     }
 
     div.miri-response {
-        width: 250px;
-        height: 250px;
+        width: auto;
+        height: auto;
     }
 
     P {
         text-align: center;
         color: #172b4d;
+        padding: 0 5px;
     }
 
     .btn-container {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
 
         button {
             border-radius: 3px;

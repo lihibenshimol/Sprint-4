@@ -1,6 +1,7 @@
 export const utilService = {
     makeId,
     makeLorem,
+    makeClr,
     getRandomIntInclusive,
     debounce,
     randomPastTime,
@@ -30,6 +31,9 @@ function makeId(length = 10) {
     }
 
     return txt
+}
+function makeClr() {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0').toUpperCase();
 }
 
 function makeLorem(size = 100) {
