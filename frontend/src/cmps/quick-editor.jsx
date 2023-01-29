@@ -61,8 +61,8 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
     async function onRemoveCard(ev) {
         try {
             const updatedBoard = await boardService.removeCard(board, groupId, card.id)
-            const savedBoard = await updateBoard(updatedBoard)
-            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
+            updateBoard(updatedBoard)
+            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, updatedBoard)
             openQuickEditor(ev, !quickEditor)
         } catch (err) {
             console.log('err = ', err)
@@ -210,7 +210,7 @@ export function QuickEditor({ groupId, card, openQuickEditor, quickEditor, quick
                         <section className="quick-editor-card-details">
 
                             {card.members && <span className="preview-details-members">{card.members.map(member => <img key={member._id} className="member-img" src={member.imgUrl} alt="" />)}</span>}
-                          
+
                             <div className="left">
                                 {card.attachments &&
                                     <span className="attach-container">

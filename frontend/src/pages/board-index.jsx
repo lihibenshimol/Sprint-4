@@ -14,7 +14,7 @@ export function BoardIndex() {
     const dayInMilliseconds = 1000 * 60 * 60 * 24
 
     useEffect(() => {
-        setRecentBoards(boards?.filter(board => Date.now() - board.lastViewed < dayInMilliseconds).sort((b1, b2) => b1.lastViewed - b2.lastViewed))
+        setRecentBoards(boards?.filter(board => Date.now() - board.lastViewed < dayInMilliseconds).sort((b1, b2) => b2.lastViewed - b1.lastViewed).splice(0, 4))
     }, [boards])
 
     useEffect(() => {

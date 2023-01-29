@@ -21,27 +21,6 @@
         border-radius: 20px;
         border: 0px solid transparent;
     }
-
-    //     .quick-edit-btn {
-    //     position: absolute;
-    //     top: 1px;
-    //     right: 8px;
-    //     font-size: 12px;
-    //     z-index: 3;
-    //     color: #42526e;
-    //     opacity: 0;
-    //     padding: 0;
-    //     margin: 0;
-    // }
-
-    // &:hover .quick-edit-btn {
-    //     background-color: rgba(255, 255, 255, 0.612);
-    //     border-radius: 3px;
-    //     padding: 7px;
-    //     opacity: 1;
-    // }
-
-
 }
 
 a:hover {
@@ -55,7 +34,6 @@ a:hover {
 
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
-    // margin-bottom: 5px;
 }
 
 .card-preview {
@@ -173,7 +151,7 @@ a:hover {
             grid-row: 1/ 1;
 
             span {
-                margin-right: 4px;
+                margin-right: 3px;
             }
 
             .member-img {

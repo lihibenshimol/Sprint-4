@@ -140,6 +140,10 @@
         color: black;
         transition: background-color 0.1s ease-in-out;
         border-radius: 10em;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        margin-inline-end: 3px;
 
         &:hover {
             background-color: rgba(43, 43, 43, 0.1);

@@ -138,13 +138,14 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                             {board.isStarred ? < AiFillStar /> : < AiOutlineStar />}
                         </button>
                     </span>
+                    <span className="line"> </span>
                     {board && <div className="board-members">
                         {board.members?.map(member =>
                             <div key={member._id} className="member-img"> <img src={member.imgUrl} alt={member.fullname} /></div>
                         )}
                     </div>}
 
-                  
+
                     <button className="board-header-btn-icon invite-icon" onClick={(e) => onSetType(e, 'members')} >
                         <MdPersonAddAlt />
                         Invite
@@ -163,7 +164,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                     </button>
                     <button className="board-header-btn-icon filter-icon"
                         onClick={() => setIsVoiceMode(!isVoiceMode)}>
-                            < HiOutlineMicrophone />
+                        < HiOutlineMicrophone />
                         Tommy
                     </button>
                     <button className="board-header-btn-icon filter-icon"
@@ -173,10 +174,10 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                     </button>
 
                     <Link to={`dashboard`}>
-                    <button className="board-header-btn-icon dashboard-icon">
-                        <TfiDashboard />
-                        Dashboard
-                    </button>
+                        <button className="board-header-btn-icon dashboard-icon">
+                            <TfiDashboard />
+                            Dashboard
+                        </button>
                     </Link>
                     <span className="line">
 

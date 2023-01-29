@@ -27,20 +27,13 @@ export const activityService = {
 function query(filterBy) {
   var queryStr = (!filterBy) ? '' : `?onCardId=${filterBy.cardId}`
   return httpService.get(`activity${queryStr}`)
-  // return storageService.query('activity')
 }
 
 async function remove(activityId) {
   await httpService.delete(`activity/${activityId}`)
-  // await storageService.remove('activity', activityId)
 }
 
-// function getDefaultFilter() {
-//   return { toyId: ''}
-// }
-
 async function add({txt, boardId, groupId, cardId, memberId}) {
-    console.log('memberId = ', memberId)
   const addedActivity = await httpService.post(`activity`, {txt, boardId, groupId, cardId, memberId})
   return addedActivity
 }

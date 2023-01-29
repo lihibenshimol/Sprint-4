@@ -49,6 +49,13 @@
         align-items: flex-start;
         gap: 2px;
 
+        span.line {
+            border-left: 1px solid #ffffff29;
+            float: left;
+            height: 16px;
+            margin: 8px 0px 5px 10px;
+        }
+
         .star-icon-box {
             display: flex;
             align-items: center;
@@ -113,7 +120,7 @@
             display: flex;
             justify-content: center;
             margin-right: 11px;
-            margin-left: 20px;
+            margin-left: 10px;
 
 
             .member-img {
