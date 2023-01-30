@@ -20,7 +20,7 @@
     padding: 12px 4px 0px 12px;
     position: relative;
     min-height: 44px;
-
+    flex-wrap: wrap;
 
 
     .board-header-btn-icon {
@@ -45,9 +45,11 @@
 
     .left {
         display: flex;
-        margin-bottom: 2px;
+        margin-bottom: 5px;
         align-items: flex-start;
         gap: 2px;
+        flex-wrap: wrap;
+
 
         span.line {
             border-left: 1px solid #ffffff29;
@@ -142,6 +144,12 @@
         .invite-icon {
             margin-inline-end: 5px;
         }
+
+
+
+        @include for-narrow-layout {
+            margin-bottom: 2px;
+        }
     }
 
     .right {
@@ -149,6 +157,7 @@
         margin-bottom: 11px;
         align-items: flex-start;
         gap: 5px;
+        flex-wrap: wrap;
 
         span.line {
             border-left: 1px solid #ffffff29;
