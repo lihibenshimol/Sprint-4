@@ -161,7 +161,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                 </section>
 
                 <section className="right">
-                    <button onClick={onOpenMusicModal} className="board-header-btn-icon" style={{ display: 'block' }}>
+                    <button onClick={onOpenMusicModal} className="board-header-btn-icon music-icon" style={{ display: 'block' }}>
                         <BsMusicNoteBeamed />
                     </button>
                     <button className="board-header-btn-icon filter-icon"
