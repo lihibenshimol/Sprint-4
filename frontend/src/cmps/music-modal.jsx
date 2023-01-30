@@ -26,13 +26,13 @@ export function MusicModal({ setMusicModalOpen, className }) {
     const [isDropdownOpen, setDropdownOpen] = useState(false)
     const [songs, setSongs] = useState([])
     // const [currSong, setCurrSong] = useState({ vidId: 'yvlP4KYW7BE', title: 'V (Cyberpunk 2077 Soundtrack)' })
-    const [currSong, setCurrSong] = useState({ vidId: 'QKPxNQfrtzU?t=65s', title: 'Rihanna - Work ft. Drake' })
+    const [currSong, setCurrSong] = useState({ vidId: 'eDfcyn5jLII', title: 'Tuna - Hey Babe' })
     const searchInputRef = useRef(null)
     const sliderRef = useRef(null)
-    const [volume, setVolume] = useState(12)
+    const [volume, setVolume] = useState(100)
     const [videoLength, setVideoLength] = useState(0)
     // const [songImg, setSongImg] = useState('https://i.ytimg.com/vi/yvlP4KYW7BE/hqdefault.jpg')
-    const [songImg, setSongImg] = useState('https://i.ytimg.com/vi/QKPxNQfrtzU/maxresdefault.jpg')
+    const [songImg, setSongImg] = useState('https://i.ytimg.com/vi/eDfcyn5jLII/hqdefault.jpg')
 
     const handleSearchChangeRef = useRef(utilService.debounce(handleSearchChange))
 
