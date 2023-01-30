@@ -11,6 +11,7 @@ import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.ser
 import bgImg1 from '../assets/img/bg-img-1.jpg'
 import bgImg2 from '../assets/img/bg-img-2.jpg'
 import bgImg3 from '../assets/img/bg-img-3.jpg'
+import bgImg5 from '../assets/img/bg-img-5.jpg'
 import { ActivitiesViewer } from "./activities-viewer";
 import mongoose from "mongoose";
 
@@ -82,6 +83,11 @@ export function BoardMenu({ isOpenMenu, setIsOpenMenu, board }) {
                         onClick={() => onSetImg(bgImg3)}
                         style={{ backgroundImage: bgImg3 }}>
                         <img src={bgImg3} alt="" />
+                    </div>
+                    <div className="clr-btn-large"
+                        onClick={() => onSetImg(bgImg5)}
+                        style={{ backgroundImage: bgImg5 }}>
+                        <img src={bgImg5} alt="" />
                     </div>
 
                 </section>}
