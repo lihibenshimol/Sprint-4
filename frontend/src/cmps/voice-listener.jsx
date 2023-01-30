@@ -17,14 +17,13 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
 
     async function onSetClr(clr = utilService.makeClr()) {
         console.log('clr: ', clr)
-
-        try {
-            board.style = { backgroundColor: clr, backgroundImage: null }
-            const savedBoard = await updateBoard(board)
-            socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
-        } catch (err) {
-            console.log('Cant update board color')
-        }
+            try {
+                board.style = { backgroundColor: clr, backgroundImage: null }
+                const savedBoard = await updateBoard(board)
+                socketService.emit(SOCKET_EMIT_BOARD_UPDATED, savedBoard)
+            } catch (err) {
+                console.log('Cant update board color')
+            }
     }
 
     function clearVoice() {
@@ -34,14 +33,14 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
 
     const commands = [
         {
-            command: 'change color',
+            command: 'color',
             callback: () => {
                 onSetClr()
                 setTimeout(() => clearVoice(), 0)
             }
         },
         {
-            command: '* change color',
+            command: '* color',
             callback: (sentence) => {
                 onSetClr()
                 setTimeout(() => clearVoice(), 0)
@@ -89,12 +88,12 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
                 setTimeout(() => clearVoice(), 0)
             }
         },
-    
+
         {
             command: '* new list',
             callback: (sentence) => {
                 const groupToAdd = boardService.getEmptyGroup()
-                groupToAdd.title = 'New group'
+                groupToAdd.title = 'New list'
                 onAddGroup(groupToAdd)
                 setTimeout(() => clearVoice(), 1000)
             }
@@ -108,7 +107,7 @@ export function VoiceListener({ onOpenMusicModal, onAddGroup, board,
                 setTimeout(() => clearVoice(), 1000)
             }
         },
-      ]
+    ]
 
     const {
         transcript,

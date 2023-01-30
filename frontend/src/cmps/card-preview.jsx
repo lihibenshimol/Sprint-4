@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { BsPencil, BsTextLeft } from 'react-icons/bs'
 import { GrAttachment } from 'react-icons/gr'
+import { ImAttachment } from 'react-icons/im'
 import { IoMdCheckboxOutline } from 'react-icons/io'
 import { useDispatch, useSelector } from "react-redux";
 import { utilService } from "../services/util.service";
@@ -126,7 +127,7 @@ export function CardPreview({ card, idx, groupId }) {
 
                                         {card.attachments &&
                                             <span className="attach-container">
-                                                <span className="preview-details-attach-icon"><GrAttachment /> </span>
+                                                <span className="preview-details-attach-icon"><ImAttachment /> </span>
                                                 <span>{card.attachments.length}</span>
                                             </span>}
 
