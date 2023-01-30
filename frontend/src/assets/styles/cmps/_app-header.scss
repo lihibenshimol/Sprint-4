@@ -99,16 +99,18 @@
             background-color: $clr10 !important;
         }
     }
-    nav > * {
+
+    nav>* {
         display: none;
     }
 
-    nav > *:first-child, nav > *:last-child {
+    nav>*:first-child,
+    nav>*:last-child {
         display: block;
     }
 
     @include for-normal-layout {
-        nav > * {
+        nav>* {
             display: block;
         }
     }
@@ -118,10 +120,19 @@
     background-color: $clr6;
     padding: 1em 0;
     position: relative;
-    
+
     h1 {
         margin: 0;
         font-size: 2rem;
+    }
+
+    .main-img {
+        width: 115px;
+        height: auto;
+
+        img {
+            width: 100%;
+        }
     }
 
     a {
@@ -129,12 +140,12 @@
         font-size: 1.1rem;
         padding: 0.906em 1.365em;
         display: inline-block;
-        
+
         &:hover {
             text-decoration: none;
         }
     }
-    
+
     nav {
         padding: 0 1.25em;
         display: flex;
@@ -191,9 +202,10 @@
     }
 
     @include for-normal-layout {
-        nav{
+        nav {
             padding: 0 3.5em;
         }
+
         nav span {
             display: block;
             opacity: 1;
