@@ -6,7 +6,7 @@ import { MemberOption } from "./member-option"
 import { FilterByUser } from "./filter-by-user"
 
 
-export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
+export function BoardFilter({ pos, isFilterMode, setIsFilterMode, setGroupsToDisplay }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const dropdownRef = useRef(null)
 
@@ -22,6 +22,22 @@ export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
         }
     }, [dropdownRef])
 
+
+    function getUserCards(userId) {
+        let filteredCards = []
+        let newGroups = []
+        board.groups.forEach(group => {
+            let newG = { ...group, cards: [] }
+            group.cards.map(card => {
+                if (card.members.filter(member => member._id === userId).length > 0) {
+                    newG.cards.push(card)
+                }
+            })
+
+            newGroups.push(newG)
+        })
+        setGroupsToDisplay(newGroups)
+    }
 
 
     return (
@@ -41,13 +57,22 @@ export function BoardFilter({ pos, isFilterMode, setIsFilterMode }) {
                 <h4>By members</h4>
 
                 {board.members && <ul className='filter-by-user' >
+                    <button onClick={() => setGroupsToDisplay(board.groups)}>Clear</button>
+                    {board.members?.map(member => <div key={member._id} className="member" onClick={() => getUserCards(member._id)}>
+                        <img src={`${member.imgUrl}`} alt="member" className='member-img' />
+                        <span>{member.fullname}</span>
+                    </div>
+                    )}
+                </ul>}
+                {/* {board.members && <ul className='filter-by-user' >
                     {board.members?.map(m =>  <FilterByUser
                             member={m}
                             key={m._id}
                             board={board}
+                            setGroupsToDisplay={setGroupsToDisplay}
                         />
                     )}
-                </ul>}
+                </ul>} */}
             </div>
         </div >
     )

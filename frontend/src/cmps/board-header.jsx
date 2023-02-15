@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import filterIcon from '../assets/img/filter.svg'
+// import filterIcon from '../assets/img/filter.svg'
 import starIcon from '../assets/img/star.svg'
 import dashboardIcon from '../assets/img/dashboard.svg'
 import { undoBoardUpdate, updateBoard } from "../store/board.actions"
@@ -19,7 +19,7 @@ import { VoiceListener } from "./voice-listener"
 import { Link } from "react-router-dom"
 
 
-export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
+export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup, setGroupsToDisplay }) {
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const lastUpdatedBoard = useSelector(storeState => storeState.boardModule.lastUpdatedBoard)
     const [editMode, setEditMode] = useState(false)
@@ -126,6 +126,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup }) {
                 pos={pos}
                 isFilterMode={isFilterMode}
                 setIsFilterMode={setIsFilterMode}
+                setGroupsToDisplay={setGroupsToDisplay}
             />}
 
             <div className="board-header full">

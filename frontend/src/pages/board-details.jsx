@@ -15,9 +15,10 @@ import { store } from '../store/store.js'
 
 export function BoardDetails() {
     const [isOpenMenu, setIsOpenMenu] = useState(false)
-
+    
     const { boardId } = useParams()
     const board = useSelector(storeState => storeState.boardModule.currBoard)
+    const [groupsToDisplay, setGroupsToDisplay] = useState(board?.groups)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -105,12 +106,14 @@ export function BoardDetails() {
                         isOpenMenu={isOpenMenu}
                         setIsOpenMenu={setIsOpenMenu}
                         onAddGroup={onAddGroup}
+                        setGroupsToDisplay={setGroupsToDisplay}
                     />
                     <div className='group-container-dad'>
 
                         <div className="group-container">
                             <GroupList
-                                groups={board.groups}
+                                // groups={board.groups}
+                                groups={groupsToDisplay ? groupsToDisplay : board.groups}
                                 onAddGroup={onAddGroup}
                                 onAddCard={onAddCard}
                                 onRemoveGroup={onRemoveGroup}

@@ -10,7 +10,7 @@ import { RxCross2 } from 'react-icons/rx'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { socketService, SOCKET_EMIT_BOARD_UPDATED } from "../services/socket.service";
 
-export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
+export function GroupList({ onAddGroup, onAddCard, onRemoveGroup, groups }) {
     let board = useSelector(storeState => storeState.boardModule.currBoard)
     board = {...board}
     const [editMode, setEditMode] = useState(false)
@@ -92,7 +92,8 @@ export function GroupList({ onAddGroup, onAddCard, onRemoveGroup }) {
                     <Droppable droppableId="all-columns" direction="horizontal" type="column">
                         {(provided) => (
                             <div ref={provided.innerRef} {...provided.droppableProps} className="group-list">
-                                {board.groups?.map((group, idx) =>
+                                {/* {board.groups?.map((group, idx) => */}
+                                {groups.map((group, idx) =>
                                     <GroupDetails
                                         idx={idx}
                                         key={group.id}
