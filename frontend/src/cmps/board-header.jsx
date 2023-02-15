@@ -67,6 +67,11 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup, setGroupsTo
 
     function onSetType(ev, typeToSet) {
         const position = utilService.getPosToDisplay(ev)
+        if (typeToSet === 'filter') {
+            setIsFilterMode(!isFilterMode)
+            setPos(prevPos => position)
+            return
+        }
         setPos(prevPos => position)
         setDropdownType(prevType => typeToSet)
         if (typeToSet === dropdownType || !dropdownType) setIsDropDownOpen(!isDropDownOpen)
@@ -103,8 +108,8 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup, setGroupsTo
     if (!board) return <h1>Loading...</h1>
     return (
         <>
-            <MusicModal className={isMusicModalOpen ? '' : 'hidden'} 
-            setMusicModalOpen={setMusicModalOpen} />
+            <MusicModal className={isMusicModalOpen ? '' : 'hidden'}
+                setMusicModalOpen={setMusicModalOpen} />
 
             {isDropDownOpen && <BoardMemberSelect
                 type={dropdownType}
@@ -171,10 +176,15 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup, setGroupsTo
                         Tommy
                     </button>
                     <button className="board-header-btn-icon filter-icon"
-                        onClick={() => setIsFilterMode(!isFilterMode)}>
+                        onClick={(e) => onSetType(e, 'filter')}>
                         <BsFilter />
                         Filter
                     </button>
+                    {/* <button className="board-header-btn-icon filter-icon"
+                        onClick={() => setIsFilterMode(!isFilterMode)}>
+                        <BsFilter />
+                        Filter
+                    </button> */}
 
                     <Link to={`dashboard`}>
                         <button className="board-header-btn-icon dashboard-icon">
