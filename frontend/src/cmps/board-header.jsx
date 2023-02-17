@@ -186,7 +186,7 @@ export function BoardHeader({ setIsOpenMenu, isOpenMenu, onAddGroup, setGroupsTo
 
                     </span>
                     {!isOpenMenu && (<button className="board-header-btn-icon dashboard-icon menu"
-                        onClick={() => setIsOpenMenu(!isOpenMenu)}                    >
+                        onClick={() => setIsOpenMenu(!isOpenMenu)}>
                         <BsThreeDots />
                     </button>)}
                 </section>
