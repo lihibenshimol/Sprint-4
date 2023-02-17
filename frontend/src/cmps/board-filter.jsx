@@ -10,13 +10,13 @@ export function BoardFilter({ pos, isFilterMode, setIsFilterMode, setGroupsToDis
     const board = useSelector(storeState => storeState.boardModule.currBoard)
     const dropdownRef = useRef(null)
 
+
     useEffect(() => {
         if (dropdownRef.current) {
             const rect = dropdownRef.current.getBoundingClientRect()
             if (rect.width + pos.right >= window.innerWidth) {
                 dropdownRef.current.style = `left:${pos.left - rect.width - 10}px`
             } else {
-                console.log('pos = ', pos)
                 dropdownRef.current.style = `left:${pos.right + 400}px; top:${pos.top + 30}px`
             }
         }
